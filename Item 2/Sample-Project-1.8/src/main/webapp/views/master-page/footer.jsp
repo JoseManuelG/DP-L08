@@ -9,6 +9,7 @@
  --%>
 
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -17,3 +18,8 @@
 <hr />
 
 <b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> Sample Co., Inc.</b>
+
+<div id="cookies-message">
+	<spring:message code="master.page.cookies.header" />
+	<spring:message code="master.page.cookies.body" />
+</div>

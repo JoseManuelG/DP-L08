@@ -17,3 +17,11 @@
 	color: red;
 	font-weight: bolder;
 }
+
+#cookies-message {
+    position: fixed;
+    bottom: 0;
+    left:0;
+    border: 3px solid;
+    background: white;
+}
