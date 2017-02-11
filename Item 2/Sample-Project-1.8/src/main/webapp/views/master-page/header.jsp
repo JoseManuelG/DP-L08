@@ -14,7 +14,9 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <div>
-	<img src="images/logo.png" alt="Sample Co., Inc." />
+	<a href="<spring:url value='/' />">
+		<img src="images/logo.png" alt="Sample Co., Inc." />
+	</a>
 </div>
 
 <div>

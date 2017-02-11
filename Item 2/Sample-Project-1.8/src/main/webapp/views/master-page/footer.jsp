@@ -19,7 +19,7 @@
 
 <hr />
 
-<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> Sample Co., Inc.</b>
+<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> Sample Co., Inc.</b> | <a href="<spring:url value='/about/about.do'/>"><spring:message code="footer.about" /></a>
 
 <jstl:if test="${!cookie['cookiesAccepted'].value}">
 		<div id="cookies-message">
