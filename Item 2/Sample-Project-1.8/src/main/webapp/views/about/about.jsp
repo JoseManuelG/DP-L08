@@ -18,7 +18,7 @@
 
 <div>
 	<spring:message code="about.name" />: <jstl:out value="${name}"/>
-	</br>
+	<br/>
 	<spring:message code="about.vat" />: <jstl:out value="${vat}"/>
 </div>
 
