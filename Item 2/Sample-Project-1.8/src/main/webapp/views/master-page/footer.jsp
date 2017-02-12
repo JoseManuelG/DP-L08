@@ -25,7 +25,7 @@
 		<div id="cookies-message">
 			<spring:message code="master.page.cookies.header" /><br/>
 			<spring:message code="master.page.cookies.body1" />
-			<a href="law/terms-conditions#cookies-policy"><spring:message code="master.page.cookies.bodylink" /></a>
+			<a href="law/terms-conditions.do#cookies-policy"><spring:message code="master.page.cookies.bodylink" /></a>
 			<spring:message code="master.page.cookies.body2" /> &nbsp;
 			<button type="button" onclick="acceptCookies()"><spring:message code="master.page.cookies.accept" /></button>
 		</div>
