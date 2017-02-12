@@ -17,6 +17,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <fieldset>
-	<spring:message code="law.terms" />
+	<h2><spring:message code="law.terms.header" /></h2>
+	<spring:message code="law.terms.body" />
+	<h3 id="cookies-policy"><spring:message code="law.cookies.header" /></h3>
+	<spring:message code="law.cookies.body" />
 </fieldset>
 
