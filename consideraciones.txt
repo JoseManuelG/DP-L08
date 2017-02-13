@@ -1,6 +1,7 @@
 En los UML hay que quitar {NotBlank} a los String optativos.
 En los UML la propiedad estado del book esta puesta como prioridad, y tiene una restriccion NotBlank en vez de Pattern.
 En los UML la propiedad totalAmount de book es derivada, hay que ponerle la /.
+Faltan patterns por definir en UML
 
 La base de datos debe llamarse ACME-BnB
 
