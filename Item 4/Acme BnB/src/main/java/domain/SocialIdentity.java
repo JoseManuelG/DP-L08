@@ -19,7 +19,6 @@ public class SocialIdentity extends DomainEntity {
 	private String	nick;
 	private String	socialNetwork;
 	private String	link;
-	private String	picture;
 
 
 	@NotBlank
@@ -43,13 +42,6 @@ public class SocialIdentity extends DomainEntity {
 	}
 	public void setLink(String link) {
 		this.link = link;
-	}
-	@URL
-	public String getPicture() {
-		return picture;
-	}
-	public void setPicture(String picture) {
-		this.picture = picture;
 	}
 
 

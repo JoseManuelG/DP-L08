@@ -44,6 +44,18 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccountLessor1" class="security.UserAccount">
+		<property name="username" value="lessor1" />
+		<property name="password" value="5b61d56842232fc77308dbd3e99d99d4" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="LESSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Administrator
 	
 	<bean id="" class="domain.Administrator">
@@ -128,9 +140,40 @@
 				<ref bean=""/>
 			</list>
 		</property>
+		<property name="totalFee" value=""/>
 	</bean>
 	
 	-->
+	
+	<bean id="lessor1" class="domain.Lessor">
+		<property name="name" value="Steve"/>
+		<property name="surname" value="Cooler"/>
+		<property name="email" value="stevecooler@gmail.com"/>
+		<property name="phone" value="+3478978"/>
+		<property name="picture" value="http://cdn2.dibujos.net/dibujos/pintar/cara-1.png"/>
+		<property name="socialIdentities">
+			<list>
+				<ref bean="socialIdentity1Lessor1"/>
+			</list>
+		</property>	
+		<property name="userAccount" ref="userAccountLessor1"/>
+		<property name="comments">
+			<list>
+				<ref bean="comment1Lessor1"/>
+			</list>
+		</property>	
+		<property name="postedComments">
+			<list>
+				<ref bean="comment1Lessor1"/>
+			</list>
+		</property>
+		<property name="creditCard" ref="creditCardLessor1"/>
+		<property name="properties">
+			<list>
+			</list>
+		</property>
+		<property name="totalFee" value="0.0"/>
+	</bean>
 	
 	<!-- Tenant
 	
@@ -272,22 +315,38 @@
 		<property name="postMoment" value=""/>
 		<property name="text" value=""/>
 		<property name="stars" value=""/>
-		<property name="poster" ref=""/>
-		<property name="postedFor" ref=""/>
+		<property name="sender" ref=""/>
+		<property name="recipient" ref=""/>
 	</bean>
 	
-	-->	
+	-->
+	
+	<bean id="comment1Lessor1" class="domain.Comment">
+		<property name="title" value="My first comment"/>
+		<property name="postMoment" value="01/22/2017 15:30"/>
+		<property name="text" value="first!"/>
+		<property name="stars" value="5"/>
+		<property name="sender" ref="lessor1"/>
+		<property name="recipient" ref="lessor1"/>
+	</bean>	
 	
 	<!-- SocialIdentity 
 	
 	<bean id="" class="domain.SocialIdentity">
 		<property name="nick" value=""/>
 		<property name="link" value=""/>
-		<property name="picture" value=""/>
+		<property name="socialNetwork" value=""/>
 		<property name="actor" ref=""/>
 	</bean>
 	
 	-->	
+	
+	<bean id="socialIdentity1Lessor1" class="domain.SocialIdentity">
+		<property name="nick" value="SteveC"/>
+		<property name="link" value="http://www.sample.com/"/>
+		<property name="socialNetwork" value="Sample"/>
+		<property name="actor" ref="lessor1"/>
+	</bean>
 	
 	<!-- CreditCard 
 	
@@ -300,7 +359,16 @@
 		<property name="cvvCode" value=""/>
 	</bean>
 	
-	-->	
+	-->
+	
+	<bean id="creditCardLessor1" class="domain.CreditCard">
+		<property name="holderName" value="Steve"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="4485733078654607"/>
+		<property name="expirationMonth" value="05"/>
+		<property name="expirationYear" value="2020"/>
+		<property name="cvvCode" value="788"/>
+	</bean>
 	
 	<!-- Finder 
 	
