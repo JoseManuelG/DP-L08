@@ -15,7 +15,7 @@ public class Finder extends DomainEntity {
 	private String	destination;
 	private Double	minPrice;
 	private Double	maxPrice;
-	private String	keywords;
+	private String	keyword;
 
 
 	@NotBlank
@@ -48,12 +48,12 @@ public class Finder extends DomainEntity {
 		this.maxPrice = maxPrice;
 	}
 
-	public String getKeywords() {
-		return keywords;
+	public String getKeyword() {
+		return keyword;
 	}
 
-	public void setKeywords(String keywords) {
-		this.keywords = keywords;
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 
 }

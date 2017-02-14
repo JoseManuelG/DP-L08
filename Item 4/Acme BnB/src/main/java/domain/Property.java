@@ -64,7 +64,7 @@ public class Property extends DomainEntity {
 
 	private Collection<Book>			books;
 	private Lessor						lessor;
-	private Collection<Audit>			audits;
+	//	private Collection<Audit>			audits;
 	private Collection<AttributeValue>	attributeValues;
 
 
@@ -88,15 +88,15 @@ public class Property extends DomainEntity {
 		this.lessor = lessor;
 	}
 
-	@NotNull
-	@Valid
-	@OneToMany(mappedBy = "property")
-	public Collection<Audit> getAudits() {
-		return audits;
-	}
-	public void setAudits(Collection<Audit> audits) {
-		this.audits = audits;
-	}
+	//	@NotNull
+	//	@Valid
+	//	@OneToMany(mappedBy = "property")
+	//	public Collection<Audit> getAudits() {
+	//		return audits;
+	//	}
+	//	public void setAudits(Collection<Audit> audits) {
+	//		this.audits = audits;
+	//	}
 
 	@NotNull
 	@Valid

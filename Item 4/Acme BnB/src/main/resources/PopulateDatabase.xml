@@ -56,6 +56,18 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccountTenant1" class="security.UserAccount">
+		<property name="username" value="tenant1" />
+		<property name="password" value="febe027753c1e6ce9acdbbd9c80a8407" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="TENANT" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Administrator
 	
 	<bean id="" class="domain.Administrator">
@@ -208,6 +220,32 @@
 	</bean>
 	
 	-->
+	
+	<bean id="tenant1" class="domain.Tenant">
+		<property name="name" value="Billy"/>
+		<property name="surname" value="Jean"/>
+		<property name="email" value="billyjean@gmail.com"/>
+		<property name="phone" value="+35789"/>
+		<property name="picture" value="http://www.efeeme.com/wp-content/uploads/michael-jackson-26-02-14-b.jpg"/>
+		<property name="socialIdentities">
+			<list>
+			</list>
+		</property>	
+		<property name="userAccount" ref="userAccountTenant1"/>
+		<property name="comments">
+			<list>
+			</list>
+		</property>	
+		<property name="postedComments">
+			<list>
+			</list>
+		</property>
+		<property name="finder" ref="finderTenant1"/>
+		<property name="books">
+			<list>
+			</list>
+		</property>
+	</bean>
 	
 	<!-- Property 
 	
@@ -379,7 +417,14 @@
 		<property name="keyword" value=""/>
 	</bean>
 	
-	-->	
+	-->
+	
+	<bean id="finderTenant1" class="domain.Finder">
+		<property name="destination" value="Spain"/>
+		<property name="minPrice" value=""/>
+		<property name="maxPrice" value=""/>
+		<property name="keyword" ><null/></property>
+	</bean>
 	
 	<!-- Configuration 	-->
 	
