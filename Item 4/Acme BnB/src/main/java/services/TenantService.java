@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.TenantRepository;
+import security.LoginService;
 import domain.Book;
 import domain.Tenant;
 
@@ -74,5 +75,11 @@ public class TenantService {
 		tenantRepository.delete(tenant);
 	}
 	// Other business methods --------------------------------------
+
+	public Tenant findByPrincipal() {
+		Tenant result;
+		result = tenantRepository.findByUserAccount(LoginService.getPrincipal().getId());
+		return result;
+	}
 
 }
