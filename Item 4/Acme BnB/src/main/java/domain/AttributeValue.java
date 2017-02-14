@@ -23,26 +23,26 @@ public class AttributeValue extends DomainEntity {
 
 		//Relationships
 		
-		private Collection<Attribute> attributes;
-		private Collection<Property> properties;
+		private Attribute attributes;
+		private Property properties;
 
 		
 		@ManyToOne
-		public Collection<Attribute> getAttributes() {
+		public Attribute getAttributes() {
 			return attributes;
 		}
 
-		public void setAttributes(Collection<Attribute> attributes) {
+		public void setAttributes(Attribute attributes) {
 			this.attributes = attributes;
 		}
 
 
 		@ManyToOne
-		public Collection<Property> getProperties() {
+		public Property getProperties() {
 			return this.properties;
 		}
 
-		public void setProperties(Collection<property> properties) {
+		public void setProperties(property properties) {
 			this.properties = properties;
 		}
 
