@@ -50,6 +50,20 @@
 	
 	-->
 	
+	<bean id="administrator1" class="domain.Administrator">
+		<property name="name" value="Mike"/>
+		<property name="surname" value="Smith"/>
+		<property name="email" value="mikesmith@gmail.com"/>
+		<property name="phone" value=""/>
+		<property name="picture" value=""/>
+		<property name="socialIdentities">
+			<list>
+				<ref bean=""/>
+			</list>
+		</property>	
+		<property name="userAccount" ref=""/>
+	</bean>
+	
 	<!-- Auditor
 	
 	<bean id="" class="domain.Auditor">
