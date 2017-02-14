@@ -1,3 +1,4 @@
+
 package domain;
 
 import java.util.Collection;
@@ -16,14 +17,15 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 @Access(AccessType.PROPERTY)
 public class Property extends DomainEntity {
-	
+
 	// Attributes -------------------------------------------------------------
-	
-	private String name;
-	private Double rate;
-	private String description;
-	private String address;
-	
+
+	private String	name;
+	private Double	rate;
+	private String	description;
+	private String	address;
+
+
 	@NotBlank
 	public String getName() {
 		return name;
@@ -31,7 +33,7 @@ public class Property extends DomainEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	@NotNull
 	@Min(0)
 	public Double getRate() {
@@ -40,7 +42,7 @@ public class Property extends DomainEntity {
 	public void setRate(Double rate) {
 		this.rate = rate;
 	}
-	
+
 	@NotBlank
 	public String getDescription() {
 		return description;
@@ -48,7 +50,7 @@ public class Property extends DomainEntity {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	@NotBlank
 	public String getAddress() {
 		return address;
@@ -56,51 +58,53 @@ public class Property extends DomainEntity {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+
+
 	// Relationships -------------------------------------------------------------
-	
-	private Collection<Book> books;
-	private Lessor lessor;
-	private Collection<Audit> audits;
-	private Collection<AttributeValue> attributeValues;
-	
+
+	private Collection<Book>			books;
+	private Lessor						lessor;
+	private Collection<Audit>			audits;
+	private Collection<AttributeValue>	attributeValues;
+
+
 	@NotNull
 	@Valid
 	@OneToMany(mappedBy = "property")
-	public Collection<Book> getBooks(){
+	public Collection<Book> getBooks() {
 		return books;
 	}
-	public void setBooks(Collection<Book> books){
+	public void setBooks(Collection<Book> books) {
 		this.books = books;
 	}
-	
+
 	@NotNull
 	@Valid
 	@ManyToOne(optional = false)
-	public Lessor getLessor(){
+	public Lessor getLessor() {
 		return lessor;
 	}
-	public void setLessor(Lessor lessor){
+	public void setLessor(Lessor lessor) {
 		this.lessor = lessor;
 	}
-	
+
 	@NotNull
 	@Valid
 	@OneToMany(mappedBy = "property")
-	public Collection<Audit> getAudits(){
+	public Collection<Audit> getAudits() {
 		return audits;
 	}
-	public void setAudits(Collection<Audit> audits){
+	public void setAudits(Collection<Audit> audits) {
 		this.audits = audits;
 	}
-	
+
 	@NotNull
 	@Valid
 	@OneToMany(mappedBy = "property")
-	public Collection<AttributeValue> getAttributeValues(){
+	public Collection<AttributeValue> getAttributeValues() {
 		return attributeValues;
 	}
-	public void setAttributeValues(Collection<AttributeValue> attributeValues){
+	public void setAttributeValues(Collection<AttributeValue> attributeValues) {
 		this.attributeValues = attributeValues;
 	}
 }

@@ -77,7 +77,7 @@ public class Comment extends DomainEntity {
 	public Customer getRecipient() {
 		return recipient;
 	}
-	public void setCustomer(Customer recipient) {
+	public void setRecipient(Customer recipient) {
 		this.recipient = recipient;
 	}
 
