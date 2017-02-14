@@ -10,7 +10,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Finder {
+public class Finder extends DomainEntity {
 
 	private String	destination;
 	private Double	minPrice;

@@ -18,7 +18,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Book {
+public class Book extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
 
