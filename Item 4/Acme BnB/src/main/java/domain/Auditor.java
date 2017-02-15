@@ -14,7 +14,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public abstract class Auditor extends Actor {
+public class Auditor extends Actor {
 
 	//Attributes---------
 	private String companyName;
