@@ -15,6 +15,7 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
 
 import security.UserAccount;
 
@@ -26,7 +27,7 @@ public abstract class Actor extends DomainEntity {
 	private String	surname;
 	private String	email;
 	private String	phone;
-	private String	address;
+	private String	picture;
 
 
 	//attributes------------
@@ -60,11 +61,12 @@ public abstract class Actor extends DomainEntity {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getAddress() {
-		return address;
+	@URL
+	public String getPicture() {
+		return picture;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setPicture(String picture) {
+		this.picture = picture;
 	}
 
 

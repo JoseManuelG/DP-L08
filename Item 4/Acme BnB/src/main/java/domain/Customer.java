@@ -18,7 +18,7 @@ public abstract class Customer extends Actor {
 	private Collection<Comment>	comments;
 
 
-	@OneToMany(mappedBy = "customer")
+	@OneToMany(mappedBy = "sender")
 	public Collection<Comment> getPostedComments() {
 		return postedComments;
 	}
@@ -27,7 +27,7 @@ public abstract class Customer extends Actor {
 		this.postedComments = postedComments;
 	}
 
-	@OneToMany(mappedBy = "customer")
+	@OneToMany(mappedBy = "recipient")
 	public Collection<Comment> getComments() {
 		return comments;
 	}

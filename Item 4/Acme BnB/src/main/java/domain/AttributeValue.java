@@ -1,10 +1,15 @@
 
 package domain;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+@Entity
+@Access(AccessType.PROPERTY)
 public class AttributeValue extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
@@ -27,7 +32,7 @@ public class AttributeValue extends DomainEntity {
 	private Property	property;
 
 
-	@ManyToOne
+	@ManyToOne(optional = false)
 	public Attribute getAttribute() {
 		return attribute;
 	}
@@ -36,7 +41,7 @@ public class AttributeValue extends DomainEntity {
 		this.attribute = attribute;
 	}
 
-	@ManyToOne
+	@ManyToOne(optional = false)
 	public Property getProperty() {
 		return this.property;
 	}

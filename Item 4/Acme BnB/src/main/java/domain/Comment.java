@@ -14,6 +14,7 @@ import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -48,9 +49,11 @@ public class Comment extends DomainEntity {
 	public void setStars(int stars) {
 		this.stars = stars;
 	}
+
 	@NotNull
 	@Past
-	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy hh:mm")
+	@Temporal(TemporalType.TIMESTAMP)
 	public Date getPostMoment() {
 		return postMoment;
 	}
@@ -77,7 +80,7 @@ public class Comment extends DomainEntity {
 	public Customer getRecipient() {
 		return recipient;
 	}
-	public void setCustomer(Customer recipient) {
+	public void setRecipient(Customer recipient) {
 		this.recipient = recipient;
 	}
 
