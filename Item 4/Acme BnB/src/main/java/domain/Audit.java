@@ -1,4 +1,3 @@
-
 package domain;
 
 import java.util.Collection;
@@ -26,8 +25,9 @@ public class Audit extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
 
-	private Date	writingMoment;
+	private Date writingMoment;
 	private String text;
+	private Boolean drafMode;
 
 	@NotNull
 	@Temporal(TemporalType.DATE)
@@ -39,7 +39,7 @@ public class Audit extends DomainEntity {
 	public void setWritingMoment(Date writingMoment) {
 		this.writingMoment = writingMoment;
 	}
-	
+
 	@NotBlank
 	public String getText() {
 		return text;
@@ -49,15 +49,20 @@ public class Audit extends DomainEntity {
 		this.text = text;
 	}
 
+	public Boolean getDrafMode() {
+		return drafMode;
+	}
+
+	public void setDrafMode(Boolean drafMode) {
+		this.drafMode = drafMode;
+	}
 
 	// Relationships ----------------------------------------------------------
-
-
 
 	private Auditor auditor;
 	private Property property;
 	private Collection<Attachment> attachments;
-	
+
 	@Valid
 	@NotNull
 	@ManyToOne(optional = false)
@@ -68,7 +73,7 @@ public class Audit extends DomainEntity {
 	public void setAuditor(Auditor auditor) {
 		this.auditor = auditor;
 	}
-	
+
 	@NotNull
 	@Valid
 	@ManyToOne(optional = false)
@@ -80,7 +85,8 @@ public class Audit extends DomainEntity {
 		this.property = property;
 	}
 
-	@OneToMany(mappedBy = "audit", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE})
+	@OneToMany(mappedBy = "audit", cascade = { CascadeType.DETACH,
+			CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE })
 	public Collection<Attachment> getAttachments() {
 		return attachments;
 	}
@@ -89,7 +95,4 @@ public class Audit extends DomainEntity {
 		this.attachments = attachments;
 	}
 
-
-
-	
 }
