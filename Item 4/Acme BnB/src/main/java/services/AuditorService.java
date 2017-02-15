@@ -84,9 +84,5 @@ public class AuditorService {
 	}
 
 	
-	
-	public Auditor getAuditorByAudit(Audit audit) {
-		Auditor result;
-		return null;
-	}
+
 }

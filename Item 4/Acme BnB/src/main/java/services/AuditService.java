@@ -75,7 +75,7 @@ public class AuditService {
 		Assert.notNull(audit,"El audit no puede ser nulo");
 		Assert.isTrue(audit.getId() != 0,"El audit debe estar antes en la base de datos");
 		auditRepository.exists(audit.getId());
-		Assert.isTrue(loginService.getPrincipal().equals(auditorService.getAuditorByAudit(audit).getUserAccount()));
+		Assert.isTrue(loginService.getPrincipal().equals(audit.getAuditor().getUserAccount()));
 		
 		auditRepository.delete(audit);
 		
