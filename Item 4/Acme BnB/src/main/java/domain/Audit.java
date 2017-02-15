@@ -1,3 +1,4 @@
+
 package domain;
 
 import java.util.Collection;
@@ -9,12 +10,10 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,13 +24,14 @@ public class Audit extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
 
-	private Date writingMoment;
-	private String text;
-	private Boolean drafMode;
+	private Date	writingMoment;
+	private String	text;
+	private Boolean	drafMode;
+
 
 	@NotNull
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getWritingMoment() {
 		return writingMoment;
 	}
@@ -49,6 +49,7 @@ public class Audit extends DomainEntity {
 		this.text = text;
 	}
 
+	@NotNull
 	public Boolean getDrafMode() {
 		return drafMode;
 	}
@@ -57,11 +58,13 @@ public class Audit extends DomainEntity {
 		this.drafMode = drafMode;
 	}
 
+
 	// Relationships ----------------------------------------------------------
 
-	private Auditor auditor;
-	private Property property;
-	private Collection<Attachment> attachments;
+	private Auditor					auditor;
+	private Property				property;
+	private Collection<Attachment>	attachments;
+
 
 	@Valid
 	@NotNull
@@ -85,8 +88,11 @@ public class Audit extends DomainEntity {
 		this.property = property;
 	}
 
-	@OneToMany(mappedBy = "audit", cascade = { CascadeType.DETACH,
-			CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE })
+	@NotNull
+	@Valid
+	@OneToMany(mappedBy = "audit", cascade = {
+		CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE
+	})
 	public Collection<Attachment> getAttachments() {
 		return attachments;
 	}

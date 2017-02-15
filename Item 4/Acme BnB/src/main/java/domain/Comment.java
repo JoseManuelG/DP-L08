@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
@@ -41,7 +42,6 @@ public class Comment extends DomainEntity {
 	public void setText(String text) {
 		this.text = text;
 	}
-	@NotNull
 	@Range(min = 0, max = 5)
 	public int getStars() {
 		return stars;
@@ -52,7 +52,7 @@ public class Comment extends DomainEntity {
 
 	@NotNull
 	@Past
-	@DateTimeFormat(pattern = "dd/MM/yyyy hh:mm")
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getPostMoment() {
 		return postMoment;
@@ -68,6 +68,7 @@ public class Comment extends DomainEntity {
 
 
 	@NotNull
+	@Valid
 	@ManyToOne(optional = false)
 	public Customer getSender() {
 		return this.sender;
@@ -76,6 +77,7 @@ public class Comment extends DomainEntity {
 		this.sender = sender;
 	}
 	@NotNull
+	@Valid
 	@ManyToOne(optional = false)
 	public Customer getRecipient() {
 		return recipient;

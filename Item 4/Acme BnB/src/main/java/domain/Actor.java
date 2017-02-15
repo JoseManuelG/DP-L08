@@ -39,13 +39,16 @@ public abstract class Actor extends DomainEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	@NotBlank
 	public String getSurname() {
 		return surname;
 	}
+
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
+
 	@NotBlank
 	@Email
 	public String getEmail() {
@@ -54,13 +57,14 @@ public abstract class Actor extends DomainEntity {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	@Pattern(regexp = "(^$)|(^\\+([0-9][0-9][0-9])([0-9A-Za-z])+$)")
+	@Pattern(regexp = "^\\+([0-9][0-9][0-9])([0-9A-Za-z])+$")
 	public String getPhone() {
 		return phone;
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	@NotBlank
 	@URL
 	public String getPicture() {
 		return picture;

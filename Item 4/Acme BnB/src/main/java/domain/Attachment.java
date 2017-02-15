@@ -17,10 +17,9 @@ public class Attachment extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
 	private String	name;
-	private String url;
+	private String	url;
 
 
-	@NotBlank
 	public String getName() {
 		return this.name;
 	}
@@ -29,6 +28,7 @@ public class Attachment extends DomainEntity {
 		this.name = name;
 	}
 
+	@NotBlank
 	@URL
 	public String getUrl() {
 		return url;
@@ -40,8 +40,9 @@ public class Attachment extends DomainEntity {
 
 
 	//Relationships
-	private Audit audit;
-	
+	private Audit	audit;
+
+
 	@Valid
 	@NotNull
 	@ManyToOne(optional = false)

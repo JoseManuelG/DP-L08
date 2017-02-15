@@ -1,3 +1,4 @@
+
 package domain;
 
 import java.util.Collection;
@@ -14,50 +15,47 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Access(AccessType.PROPERTY)
 public class Lessor extends Customer {
-	
+
 	// Attributes -------------------------------------------------------------
-	
-	private Double totalFee;
-	
-	@NotNull
+
+	private double	totalFee;
+
+
 	@Min(0)
-	public Double getTotalFee(){
+	public double getTotalFee() {
 		return totalFee;
 	}
-	
-	public void setTotalFee(Double totalFee){
+
+	public void setTotalFee(double totalFee) {
 		this.totalFee = totalFee;
 	}
-	
+
+
 	// Relationships ----------------------------------------------------------
-	
-	private CreditCard creditCard;
-	private Collection<Property> properties;
-	
+
+	private CreditCard				creditCard;
+	private Collection<Property>	properties;
+
+
 	@Valid
 	@OneToOne
-	public CreditCard getCreditCard(){
+	public CreditCard getCreditCard() {
 		return creditCard;
 	}
-	
-	public void setCreditCard(CreditCard creditCard){
+
+	public void setCreditCard(CreditCard creditCard) {
 		this.creditCard = creditCard;
 	}
-	
+
 	@NotNull
 	@Valid
 	@OneToMany(mappedBy = "lessor")
-	public Collection<Property> getProperties(){
+	public Collection<Property> getProperties() {
 		return properties;
 	}
-	
-	public void setProperties(Collection<Property> properties){
+
+	public void setProperties(Collection<Property> properties) {
 		this.properties = properties;
 	}
-	
-	
-	
-	
-	
 
 }

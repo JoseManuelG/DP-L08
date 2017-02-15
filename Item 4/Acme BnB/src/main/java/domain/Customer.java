@@ -7,6 +7,8 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -18,6 +20,8 @@ public abstract class Customer extends Actor {
 	private Collection<Comment>	comments;
 
 
+	@NotNull
+	@Valid
 	@OneToMany(mappedBy = "sender")
 	public Collection<Comment> getPostedComments() {
 		return postedComments;
@@ -27,6 +31,8 @@ public abstract class Customer extends Actor {
 		this.postedComments = postedComments;
 	}
 
+	@NotNull
+	@Valid
 	@OneToMany(mappedBy = "recipient")
 	public Collection<Comment> getComments() {
 		return comments;
