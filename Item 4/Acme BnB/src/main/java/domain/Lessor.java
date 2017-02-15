@@ -35,6 +35,7 @@ public class Lessor extends Customer {
 
 	private CreditCard				creditCard;
 	private Collection<Property>	properties;
+	private Collection<Book>		books;
 
 
 	@Valid
@@ -57,5 +58,17 @@ public class Lessor extends Customer {
 	public void setProperties(Collection<Property> properties) {
 		this.properties = properties;
 	}
+
+	@NotNull
+	@Valid
+	@OneToMany(mappedBy = "lessor")
+	public Collection<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(Collection<Book> books) {
+		this.books = books;
+	}
+	
 
 }

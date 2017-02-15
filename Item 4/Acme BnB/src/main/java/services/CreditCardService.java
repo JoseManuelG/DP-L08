@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.CreditCardRepository;
-import security.LoginService;
 import domain.CreditCard;
 
 @Service
@@ -23,11 +22,6 @@ public class CreditCardService {
 	
 	// Supporting Services ------------------------------------------------------------
 	
-//	@Autowired
-//	private LoginService loginService;
-//	
-//	@Autowired
-//	private LessorService lessorService;
 	
 	// Constructor --------------------------------------------------------------------
 	
@@ -62,20 +56,6 @@ public class CreditCardService {
 		result = creditCardRepository.save(creditCard);
 		return result;
 	}
-	
-//	@SuppressWarnings("static-access")
-//	public void delete(CreditCard creditCard) {
-//		Assert.isTrue(creditCard.get)
-//		Assert.notNull(creditCard,"La tarjeta de crédito no puede ser nula");
-//		Assert.isTrue(creditCard.getId() != 0,"La tarjeta de crédito debe estar antes en la base de datos");
-//		creditCardRepository.exists(creditCard.getId());
-//		Assert.isTrue(loginService.getPrincipal().equals(lessorService.getLessorByCreditCard(creditCard).getUserAccount()));
-//		Lessor lessor=lessorService.getLessorByCreditCard(creditCard);
-//		lessor.setCreditCard(null);
-//		lessorService.save(lessor);
-//		creditCardRepository.delete(creditCard);
-//		
-//	}
 	
 	// Other Bussiness Methods --------------------------------------------------------
 

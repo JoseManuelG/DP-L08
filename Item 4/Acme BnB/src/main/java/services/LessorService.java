@@ -12,7 +12,7 @@ import org.springframework.util.Assert;
 import repositories.LessorRepository;
 import security.LoginService;
 import security.UserAccount;
-import domain.CreditCard;
+import domain.Book;
 import domain.Lessor;
 import domain.Property;
 
@@ -42,6 +42,7 @@ public class LessorService {
 	public Lessor create(){
 		Lessor result=new Lessor();
 		result.setProperties(new ArrayList<Property>());
+		result.setBooks(new ArrayList<Book>());
 		return result;
 	}
 	
