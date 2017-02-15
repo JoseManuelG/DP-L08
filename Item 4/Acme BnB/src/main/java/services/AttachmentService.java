@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import repositories.CreditCardRepository;
+import repositories.AttachmentRepository;
 import security.LoginService;
-import domain.CreditCard;
+import domain.Attachment;
 
 @Service
 @Transactional
@@ -19,16 +19,14 @@ public class AttachmentService {
 	// Managed Repository -------------------------------------------------------------
 	
 	@Autowired
-	private CreditCardRepository creditCardRepository;
+	private AttachmentRepository attachmentRepository;
 	
 	// Supporting Services ------------------------------------------------------------
 	
-//	@Autowired
-//	private LoginService loginService;
-//	
-//	@Autowired
-//	private LessorService lessorService;
+	@Autowired
+	private LoginService loginService;
 	
+
 	// Constructor --------------------------------------------------------------------
 	
 	public AttachmentService(){
@@ -37,46 +35,32 @@ public class AttachmentService {
 	
 	// Simple CRUD methods ------------------------------------------------------------
 	
-	public CreditCard create(){
-		CreditCard result;
-		result = new CreditCard();
+	public Attachment create(){
+		Attachment result;
+		result = new Attachment();
 		return result;
 	}
 	
-	public Collection<CreditCard> findAll(){
-		Collection<CreditCard> result;
-		result = creditCardRepository.findAll();
+	public Collection<Attachment> findAll(){
+		Collection<Attachment> result;
+		result = attachmentRepository.findAll();
 		Assert.notNull(result);
 		return result;
 	}
 	
-	public CreditCard findOne(int creditCardId){
-		CreditCard result;
-		result = creditCardRepository.findOne(creditCardId);
+	public Attachment findOne(int attachmentId){
+		Attachment result;
+		result = attachmentRepository.findOne(attachmentId);
 		return result;
 	}
 	
-	public CreditCard save(CreditCard creditCard){
-		Assert.notNull(creditCard,"La tarjeta de crédito no puede ser nula");
-		CreditCard result;
-		result = creditCardRepository.save(creditCard);
+	public Attachment save(Attachment attachment){
+		Assert.notNull(attachment,"La tarjeta de crédito no puede ser nula");
+		Attachment result;
+		result = attachmentRepository.save(attachment);
 		return result;
 	}
-	
-//	@SuppressWarnings("static-access")
-//	public void delete(CreditCard creditCard) {
-//		Assert.isTrue(creditCard.get)
-//		Assert.notNull(creditCard,"La tarjeta de crédito no puede ser nula");
-//		Assert.isTrue(creditCard.getId() != 0,"La tarjeta de crédito debe estar antes en la base de datos");
-//		creditCardRepository.exists(creditCard.getId());
-//		Assert.isTrue(loginService.getPrincipal().equals(lessorService.getLessorByCreditCard(creditCard).getUserAccount()));
-//		Lessor lessor=lessorService.getLessorByCreditCard(creditCard);
-//		lessor.setCreditCard(null);
-//		lessorService.save(lessor);
-//		creditCardRepository.delete(creditCard);
-//		
-//	}
-	
+
 	// Other Bussiness Methods --------------------------------------------------------
 
 }
