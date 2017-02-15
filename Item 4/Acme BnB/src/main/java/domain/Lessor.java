@@ -61,7 +61,7 @@ public class Lessor extends Customer {
 
 	@NotNull
 	@Valid
-	@OneToMany(mappedBy = "lessor")
+	@OneToMany
 	public Collection<Book> getBooks() {
 		return books;
 	}
@@ -69,6 +69,5 @@ public class Lessor extends Customer {
 	public void setBooks(Collection<Book> books) {
 		this.books = books;
 	}
-	
 
 }

@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -60,6 +61,7 @@ public class Book extends DomainEntity {
 		this.smoker = smoker;
 	}
 
+	@NotBlank
 	@Pattern(regexp = "^PENDING$|^ACCEPTED$|^DENIED$")
 	public String getState() {
 		return state;

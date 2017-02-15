@@ -1,12 +1,22 @@
 
 package domain;
 
+import java.util.Collection;
+import java.util.Date;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -16,6 +26,7 @@ public class Finder extends DomainEntity {
 	private Double	minPrice;
 	private Double	maxPrice;
 	private String	keyword;
+	private Date	cacheMoment;
 
 
 	@NotBlank
@@ -54,6 +65,35 @@ public class Finder extends DomainEntity {
 
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+
+	@NotNull
+	@Past
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getCacheMoment() {
+		return cacheMoment;
+	}
+
+	public void setCacheMoment(Date cacheMoment) {
+		this.cacheMoment = cacheMoment;
+	}
+
+
+	//Relationships---------------------------
+
+	private Collection<Property>	properties;
+
+
+	@NotNull
+	@Valid
+	@ManyToMany
+	public Collection<Property> getProperties() {
+		return properties;
+	}
+
+	public void setProperties(Collection<Property> properties) {
+		this.properties = properties;
 	}
 
 }

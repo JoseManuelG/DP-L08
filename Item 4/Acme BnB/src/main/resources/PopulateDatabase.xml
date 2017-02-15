@@ -33,8 +33,8 @@
 	-->
 	
 	<bean id="userAccountAdministrator1" class="security.UserAccount">
-		<property name="username" value="administrator1" />
-		<property name="password" value="d5cee333abe432891a0de57d0ee38713" />
+		<property name="username" value="admin" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -68,6 +68,18 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccountAuditor1" class="security.UserAccount">
+		<property name="username" value="auditor1" />
+		<property name="password" value="175d2e7a63f386554a4dd66e865c3e14" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="AUDITOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Administrator
 	
 	<bean id="" class="domain.Administrator">
@@ -91,7 +103,7 @@
 		<property name="surname" value="Smith"/>
 		<property name="email" value="mikesmith@gmail.com"/>
 		<property name="phone" value="+1234"/>
-		<property name="picture" ><null/></property>
+		<property name="picture" value="http://iconizer.net/files/Seven_General_Icons/orig/administrator.png"/>
 		<property name="socialIdentities">
 			<list>
 			</list>
@@ -117,10 +129,30 @@
 			<list>
 				<ref bean=""/>
 			</list>
-		</property>	
+		</property>
+		<property name="companyName" value=""/>
 	</bean>
 	
 	-->
+	
+	<bean id="auditor1" class="domain.Auditor">
+		<property name="name" value="Al"/>
+		<property name="surname" value="Pachino"/>
+		<property name="email" value="apc@gmail.com"/>
+		<property name="phone" value="+98756"/>
+		<property name="picture" value="http://cdn.gocertify.com/images/Auditing%20team%20going%20over%20report.jpg"/>
+		<property name="socialIdentities">
+			<list>
+			</list>
+		</property>	
+		<property name="userAccount" ref="userAccountAuditor1"/>
+		<property name="audits">
+			<list>
+				<ref bean="audit1Auditor1"/>
+			</list>
+		</property>
+		<property name="companyName" value="Sample Company"/>
+	</bean>
 	
 	<!-- Lessor
 	
@@ -148,6 +180,11 @@
 		</property>
 		<property name="creditCard" ref=""/>
 		<property name="properties">
+			<list>
+				<ref bean=""/>
+			</list>
+		</property>
+		<property name="books">
 			<list>
 				<ref bean=""/>
 			</list>
@@ -182,6 +219,12 @@
 		<property name="creditCard" ref="creditCardLessor1"/>
 		<property name="properties">
 			<list>
+				<ref bean="property1Lessor1"/>
+			</list>
+		</property>
+		<property name="books">
+			<list>
+				<ref bean="book1Tenant1"/>
 			</list>
 		</property>
 		<property name="totalFee" value="0.0"/>
@@ -243,6 +286,7 @@
 		<property name="finder" ref="finderTenant1"/>
 		<property name="books">
 			<list>
+				<ref bean="book1Tenant1"/>
 			</list>
 		</property>
 	</bean>
@@ -274,11 +318,35 @@
 	
 	-->
 	
+	<bean id="property1Lessor1" class="domain.Property">
+		<property name="name" value="Property 1"/>
+		<property name="rate" value="30.0"/>
+		<property name="description" value="A small but very comfortable apartment"/>	
+		<property name="address" value="Spain Seville, C\Piruleta nº2 3ºA"/>	
+		<property name="lessor" ref="lessor1"/>		
+		<property name="audits">
+			<list>
+				<ref bean="audit1Auditor1"/>
+			</list>
+		</property>
+		<property name="attributeValues">
+			<list>
+				<ref bean="attributeValue1Property1Lessor1"/>
+			</list>
+		</property>
+		<property name="books">
+			<list>
+				<ref bean="book1Tenant1"/>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Audit 
 	
 	<bean id="" class="domain.Audit">
-		<property name="writtingMoment" value=""/>
+		<property name="writingMoment" value=""/>
 		<property name="text" value=""/>
+		<property name="draftMode" value=""/>
 		<property name="auditor" ref=""/>		
 		<property name="property" ref=""/>
 		<property name="attachments">
@@ -290,13 +358,57 @@
 	
 	-->
 	
+	<bean id="audit1Auditor1" class="domain.Audit">
+		<property name="writingMoment" value="02/12/2017 16:35"/>
+		<property name="text" value="This property has a very good decoration"/>
+		<property name="drafMode" value="false"/>
+		<property name="auditor" ref="auditor1"/>		
+		<property name="property" ref="property1Lessor1"/>
+		<property name="attachments">
+			<list>
+				<ref bean="attachment1Audit1Auditor1"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- CreditCard 
+	
+	<bean id="" class="domain.CreditCard">
+		<property name="holderName" value=""/>
+		<property name="brandName" value=""/>
+		<property name="number" value=""/>
+		<property name="expirationMonth" value=""/>
+		<property name="expirationYear" value=""/>
+		<property name="cvvCode" value=""/>
+	</bean>
+	
+	-->
+	
+	<bean id="creditCardLessor1" class="domain.CreditCard">
+		<property name="holderName" value="Steve"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="4485733078654607"/>
+		<property name="expirationMonth" value="05"/>
+		<property name="expirationYear" value="2020"/>
+		<property name="cvvCode" value="788"/>
+	</bean>
+	
+	<bean id="creditCardBook1Tenant1" class="domain.CreditCard">
+		<property name="holderName" value="Billy"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="4485733078654607"/>
+		<property name="expirationMonth" value="06"/>
+		<property name="expirationYear" value="2018"/>
+		<property name="cvvCode" value="325"/>
+	</bean>
+	
 	<!-- Book 
 	
 	<bean id="" class="domain.Book">
 		<property name="checkInDate" value=""/>
 		<property name="checkOutDate" value=""/>
 		<property name="smoker" value=""/>
-		<property name="priority" value=""/>
+		<property name="state" value=""/>
 		<property name="totalAmount" value=""/>
 		<property name="creditCard" ref=""/>
 		<property name="property" ref=""/>
@@ -306,10 +418,22 @@
 	
 	-->
 	
+	<bean id="book1Tenant1" class="domain.Book">
+		<property name="checkInDate" value="03/20/2016"/>
+		<property name="checkOutDate" value="03/22/2016"/>
+		<property name="smoker" value="false"/>
+		<property name="state" value="ACCEPTED"/>
+		<property name="totalAmount" value="60.0"/>
+		<property name="creditCard" ref="creditCardBook1Tenant1"/>
+		<property name="property" ref="property1Lessor1"/>
+		<property name="tenant" ref="tenant1"/>		
+		<property name="invoice" ref="invoiceBook1Tenant1"/>
+	</bean>
+	
 	<!-- Invoice 
 	
 	<bean id="" class="domain.Invoice">
-		<property name="createMoment" value=""/>
+		<property name="creationMoment" value=""/>
 		<property name="VAT" value=""/>
 		<property name="information" value=""/>
 		<property name="details" value=""/>
@@ -317,6 +441,14 @@
 	</bean>
 	
 	-->
+	
+	<bean id="invoiceBook1Tenant1" class="domain.Invoice">
+		<property name="creationMoment" value="03/25/2016 08:15"/>
+		<property name="VAT" value="sample VAT"/>
+		<property name="information" value="sample information"/>
+		<property name="details" value="sample details"/>
+		<property name="book" ref="book1Tenant1"/>
+	</bean>
 	
 	<!-- Attachment 
 	
@@ -328,6 +460,24 @@
 	
 	-->
 	
+	<bean id="attachment1Audit1Auditor1" class="domain.Attachment">
+		<property name="name" value="Sample Attachment"/>
+		<property name="url" value="http://www.sample.com/"/>
+		<property name="audit" ref="audit1Auditor1"/>	
+	</bean>
+	
+	<!-- Attribute
+	
+	<bean id="" class="domain.Attribute">
+		<property name="name" value=""/>
+	</bean>
+	
+	-->
+	
+	<bean id="attribute1" class="domain.Attribute">
+		<property name="name" value="Number of bedrooms"/>
+	</bean>
+	
 	<!-- AttributeValue
 	
 	<bean id="" class="domain.AttributeValue">
@@ -338,13 +488,11 @@
 	
 	-->
 	
-	<!-- Attribute
-	
-	<bean id="" class="domain.Attribute">
-		<property name="name" value=""/>
+	<bean id="attributeValue1Property1Lessor1" class="domain.AttributeValue">
+		<property name="value" value="1"/>
+		<property name="attribute" ref="attribute1"/>
+		<property name="property" ref="property1Lessor1"/>
 	</bean>
-	
-	-->
 	
 	<!-- Comment 
 	
@@ -386,28 +534,6 @@
 		<property name="actor" ref="lessor1"/>
 	</bean>
 	
-	<!-- CreditCard 
-	
-	<bean id="" class="domain.CreditCard">
-		<property name="holderName" value=""/>
-		<property name="brandName" value=""/>
-		<property name="number" value=""/>
-		<property name="expirationMonth" value=""/>
-		<property name="expirationYear" value=""/>
-		<property name="cvvCode" value=""/>
-	</bean>
-	
-	-->
-	
-	<bean id="creditCardLessor1" class="domain.CreditCard">
-		<property name="holderName" value="Steve"/>
-		<property name="brandName" value="VISA"/>
-		<property name="number" value="4485733078654607"/>
-		<property name="expirationMonth" value="05"/>
-		<property name="expirationYear" value="2020"/>
-		<property name="cvvCode" value="788"/>
-	</bean>
-	
 	<!-- Finder 
 	
 	<bean id="" class="domain.Finder">
@@ -415,6 +541,12 @@
 		<property name="minPrice" value=""/>
 		<property name="maxPrice" value=""/>
 		<property name="keyword" value=""/>
+		<property name="cacheMoment" value=""/>
+		<property name="properties">
+			<list>
+				<ref bean=""/>
+			</list>
+		</property>
 	</bean>
 	
 	-->
@@ -423,7 +555,12 @@
 		<property name="destination" value="Spain"/>
 		<property name="minPrice" value=""/>
 		<property name="maxPrice" value=""/>
-		<property name="keyword" ><null/></property>
+		<property name="keyword" ><null/></property>		
+		<property name="cacheMoment" value="11/14/2016 11:45"/>
+		<property name="properties">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<!-- Configuration 	-->
