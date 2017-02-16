@@ -28,6 +28,10 @@
 		<value>/views/customer/tiles.xml</value>
 		<value>/views/law/tiles.xml</value>
 		<value>/views/profile/tiles.xml</value>
+		
+		
+		<value>/views/socialIdentity/messages</value>		
+		
 	</util:list>
 
 </beans>

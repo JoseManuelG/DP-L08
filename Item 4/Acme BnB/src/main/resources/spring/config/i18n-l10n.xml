@@ -28,6 +28,9 @@
 		<value>/views/customer/messages</value>
 		<value>/views/law/messages</value>
 		<value>/views/profile/messages</value>		
+		
+		<value>/views/socialIdentity/messages</value>		
+		
 	</util:list>
 
 </beans>
