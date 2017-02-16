@@ -84,13 +84,14 @@ public class LessorController extends AbstractController {
 		ActorForm actorForm = new ActorForm();
 		
 		actorForm.setTypeOfActor("LESSOR");
-		actorForm.setUsername(lessor.getUserAccount().getUsername());
-		actorForm.setPassword(lessor.getUserAccount().getUsername());
-		actorForm.setName(lessor.getName());
-		actorForm.setSurname(lessor.getSurname());
-		actorForm.setEmail(lessor.getEmail());
-		actorForm.setPhone(lessor.getPhone());
-		actorForm.setPicture(lessor.getPicture());
+		actorForm.setLessor(lessor);
+		actorForm.getLessor().getUserAccount().setUsername(lessor.getUserAccount().getUsername());
+		actorForm.getLessor().getUserAccount().setPassword(lessor.getUserAccount().getUsername());
+		actorForm.getLessor().setName(lessor.getName());
+		actorForm.getLessor().setSurname(lessor.getSurname());
+		actorForm.getLessor().setEmail(lessor.getEmail());
+		actorForm.getLessor().setPhone(lessor.getPhone());
+		actorForm.getLessor().setPicture(lessor.getPicture());
 		actorForm.setConditionsAccepted(false);
 		
 		result.addObject("actorForm", actorForm);
@@ -111,14 +112,14 @@ public class LessorController extends AbstractController {
 
 				UserAccount userAccount = lessor.getUserAccount();
 
-				userAccount.setPassword(encoder.encodePassword( actorForm.getPassword(), null));
-				userAccount.setUsername(actorForm.getUsername());
+				userAccount.setPassword(encoder.encodePassword( actorForm.getLessor().getUserAccount().getPassword(), null));
+				userAccount.setUsername(actorForm.getLessor().getUserAccount().getUsername());
 
-				lessor.setName(actorForm.getName());
-				lessor.setSurname(actorForm.getSurname());
-				lessor.setEmail(actorForm.getEmail());
-				lessor.setPhone(actorForm.getPhone());
-				lessor.setPicture(actorForm.getPicture());
+				lessor.setName(actorForm.getLessor().getName());
+				lessor.setSurname(actorForm.getLessor().getSurname());
+				lessor.setEmail(actorForm.getLessor().getEmail());
+				lessor.setPhone(actorForm.getLessor().getPhone());
+				lessor.setPicture(actorForm.getLessor().getPicture());
 				Collection<Authority> authorities = new ArrayList<Authority>();
 				Authority authority = new Authority();
 				authority.setAuthority(actorForm.getTypeOfActor());
@@ -132,6 +133,23 @@ public class LessorController extends AbstractController {
 			} catch (Throwable oops) {
 				result = createEditModelAndView(actorForm, "lessor.commit.error");
 			}
+		}
+
+		return result;
+	}
+	
+	// Delete -------------------------------------------------------------
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(ActorForm actorForm, BindingResult binding) {
+		ModelAndView result;
+
+		try {			
+			lessorService.delete(actorForm.getLessor());
+			result = new ModelAndView("redirect:myRecipes.do");
+			//result.addObject("requestURI","recipe/user/delete.do");
+		} catch (Throwable oops) {
+			result = createEditModelAndView(actorForm, "lessor.commit.error");
 		}
 
 		return result;
