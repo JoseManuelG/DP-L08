@@ -58,6 +58,7 @@ public class AttributeValueService {
 		return result;
 	}
 
+	@SuppressWarnings("static-access")
 	public AttributeValue save(AttributeValue attributeValue) {
 		Assert.hasText(attributeValue.getValue(), "El atributeValue debe tener un valor");
 		UserAccount account = loginService.getPrincipal();
@@ -69,6 +70,7 @@ public class AttributeValueService {
 		return result;
 	}
 
+	@SuppressWarnings("static-access")
 	public void delete(AttributeValue attributeValue) {
 		Assert.notNull(attributeValue, "El attributeValueo no puede ser nulo");
 		Assert.isTrue(attributeValue.getId() != 0, "El attributeValueo debe estar en la base de datos");

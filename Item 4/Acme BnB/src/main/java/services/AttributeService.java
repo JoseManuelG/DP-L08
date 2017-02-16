@@ -1,7 +1,6 @@
 
 package services;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -15,7 +14,6 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Attribute;
-import domain.AttributeValue;
 
 @Service
 @Transactional
@@ -43,8 +41,8 @@ public class AttributeService {
 		Attribute result;
 
 		result = new Attribute();
-		Collection<AttributeValue> attributeValues = new ArrayList<AttributeValue>();
-		result.setAttributeValues(attributeValues);
+		//		Collection<AttributeValue> attributeValues = new ArrayList<AttributeValue>();
+		//		result.setAttributeValues(attributeValues);
 		return result;
 	}
 
@@ -66,6 +64,7 @@ public class AttributeService {
 		return result;
 	}
 
+	@SuppressWarnings("static-access")
 	public Attribute save(Attribute attribute) {
 		Assert.hasText(attribute.getName(), "El atributo debe tener un nombre");
 		UserAccount account = loginService.getPrincipal();
@@ -77,6 +76,7 @@ public class AttributeService {
 		return result;
 	}
 
+	@SuppressWarnings("static-access")
 	public void delete(Attribute attribute) {
 		Assert.notNull(attribute, "El attributeo no puede ser nulo");
 		Assert.isTrue(attribute.getId() != 0, "El attributeo debe estar en la base de datos");

@@ -1,3 +1,4 @@
+
 package services;
 
 import java.util.Collection;
@@ -12,75 +13,72 @@ import org.springframework.util.Assert;
 import repositories.AuditRepository;
 import security.LoginService;
 import domain.Audit;
-import domain.Auditor;
 
 @Service
 @Transactional
 public class AuditService {
-	
+
 	// Managed Repository -------------------------------------------------------------
-	
+
 	@Autowired
-	private AuditRepository auditRepository;
-	
+	private AuditRepository	auditRepository;
+
 	// Supporting Services ------------------------------------------------------------
-	
+
 	@Autowired
-	private LoginService loginService;
-	
-	@Autowired
-	private AuditorService auditorService;
+	private LoginService	loginService;
+
 
 	// Constructor --------------------------------------------------------------------
-	
-	public AuditService(){
+
+	public AuditService() {
 		super();
 	}
-	
+
 	// Simple CRUD methods ------------------------------------------------------------
-	
-	public Audit create(){
+
+	public Audit create() {
 		Audit result;
 		result = new Audit();
 		return result;
 	}
-	
-	public Collection<Audit> findAll(){
+
+	public Collection<Audit> findAll() {
 		Collection<Audit> result;
 		result = auditRepository.findAll();
 		Assert.notNull(result);
 		return result;
 	}
-	
-	public Audit findOne(int auditId){
+
+	public Audit findOne(int auditId) {
 		Audit result;
 		result = auditRepository.findOne(auditId);
 		return result;
 	}
-	
-	public Audit save(Audit audit){
-		Assert.notNull(audit,"La tarjeta de crédito no puede ser nula");
+
+	public Audit save(Audit audit) {
+		Assert.notNull(audit, "La tarjeta de crédito no puede ser nula");
 		Audit result;
-		if(audit.getId() == 0){
-			Date currentTime=new Date(System.currentTimeMillis());
-			audit.setWritingMoment( currentTime);
+		if (audit.getId() == 0) {
+			Date currentTime = new Date(System.currentTimeMillis());
+			audit.setWritingMoment(currentTime);
 		}
-		
+
 		result = auditRepository.save(audit);
 		return result;
 	}
-	
-	
+
+	@SuppressWarnings("static-access")
 	public void delete(Audit audit) {
-		Assert.notNull(audit,"El audit no puede ser nulo");
-		Assert.isTrue(audit.getId() != 0,"El audit debe estar antes en la base de datos");
+		Assert.notNull(audit, "El audit no puede ser nulo");
+		Assert.isTrue(audit.getId() != 0, "El audit debe estar antes en la base de datos");
 		auditRepository.exists(audit.getId());
 		Assert.isTrue(loginService.getPrincipal().equals(audit.getAuditor().getUserAccount()));
-		
+
 		auditRepository.delete(audit);
-		
+
 	}
-	
+
 	// Other Bussiness Methods --------------------------------------------------------
 
 }

@@ -2,7 +2,6 @@
 package services;
 
 import java.util.Collection;
-import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,35 +9,24 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.AuditorRepository;
-import security.Authority;
 import security.LoginService;
-import security.UserAccount;
-import domain.Actor;
-import domain.Audit;
 import domain.Auditor;
-import domain.Book;
-import domain.Comment;
-
-import domain.Property;
-import domain.Tenant;
 
 @Service
 @Transactional
 public class AuditorService {
-	
+
 	// Managed Repository --------------------------------------
 	@Autowired
 	private AuditorRepository	auditorRepository;
 
-	// Supporting Services --------------------------------------
-	@Autowired
-	private LoginService	loginService;
 
+	// Supporting Services --------------------------------------
 	// Simple CRUD methods --------------------------------------
-	
+
 	public Auditor create() {
 		Auditor result;
-		result = new Auditor();		
+		result = new Auditor();
 
 		return result;
 	}
@@ -82,7 +70,5 @@ public class AuditorService {
 		result = auditorRepository.findByUserAccountId(LoginService.getPrincipal().getId());
 		return result;
 	}
-
-	
 
 }
