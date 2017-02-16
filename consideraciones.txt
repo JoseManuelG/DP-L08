@@ -1,10 +1,12 @@
-En los UML hay que quitar {NotBlank} a los String optativos.
-En los UML la propiedad estado del book esta puesta como prioridad, y tiene una restriccion NotBlank en vez de Pattern.
-En los UML la propiedad totalAmount de book es derivada, hay que ponerle la /.
+La base de datos debe llamarse ACME-BnB
+
+------- Por solucionar ------------
 Faltan patterns por definir en UML
 a cacheMoment de finder y writingMoment de audit les falta Past en UML
 faltan cascades delete que poner
+¿Añadir {NotBlank} a los URL en UML? 
 
-La base de datos debe llamarse ACME-BnB
-
-
+-------   Solucionado  ------------
+En los UML hay que quitar {NotBlank} a los String optativos.
+En los UML la propiedad estado del book esta puesta como prioridad, y tiene una restriccion NotBlank en vez de Pattern.
+En los UML la propiedad totalAmount de book es derivada, hay que ponerle la /.

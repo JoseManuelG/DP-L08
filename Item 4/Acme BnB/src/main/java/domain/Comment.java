@@ -64,7 +64,7 @@ public class Comment extends DomainEntity {
 
 	//Relationships---------------------------
 	private Customer	sender;
-	private Customer	recipient;
+	private Comentable	recipient;
 
 
 	@NotNull
@@ -79,10 +79,10 @@ public class Comment extends DomainEntity {
 	@NotNull
 	@Valid
 	@ManyToOne(optional = false)
-	public Customer getRecipient() {
+	public Comentable getRecipient() {
 		return recipient;
 	}
-	public void setRecipient(Customer recipient) {
+	public void setRecipient(Comentable recipient) {
 		this.recipient = recipient;
 	}
 

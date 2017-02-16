@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public abstract class Customer extends Actor {
+public abstract class Customer extends Actor implements Comentable {
 
 	//Attributes---------
 	//Relationships-----
