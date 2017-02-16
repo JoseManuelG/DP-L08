@@ -30,7 +30,7 @@ public class InvoiceService {
 		Invoice result;
 
 		result = new Invoice();
-		result.setVAT(configurationService.getVAT());
+		result.setVAT(configurationService.findOne().getVAT());
 		result.setBook(book);
 		result.setDetails("??????"); //TODO: Ask for what kind of details save.
 		result.setInformation("???????"); //TODO: Ask for what kind of information save.

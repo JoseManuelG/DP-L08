@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 import repositories.PropertyRepository;
 import security.LoginService;
 import domain.AttributeValue;
+import domain.Audit;
 import domain.Book;
 import domain.Lessor;
 import domain.Property;
@@ -47,7 +48,7 @@ public class PropertyService {
 		Property result;
 		result = new Property();
 		result.setAttributeValues(new ArrayList<AttributeValue>());
-		result.setAudits(new ArrayList<Audits>());
+		result.setAudits(new ArrayList<Audit>());
 		result.setBooks(new ArrayList<Book>());
 		return result;
 	}

@@ -78,7 +78,7 @@ public class Comment extends DomainEntity {
 	}
 	@NotNull
 	@Valid
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, targetEntity = DomainEntity.class)
 	public Comentable getRecipient() {
 		return recipient;
 	}
