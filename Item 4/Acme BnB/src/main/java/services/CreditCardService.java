@@ -10,6 +10,7 @@ import org.springframework.util.Assert;
 
 import repositories.CreditCardRepository;
 import domain.CreditCard;
+import domain.Lessor;
 
 @Service
 @Transactional
@@ -22,6 +23,14 @@ public class CreditCardService {
 	
 	// Supporting Services ------------------------------------------------------------
 	
+	@Autowired
+	private BookService bookService;
+	
+	@Autowired
+	private LessorService lessorService;
+	
+	@Autowired
+	private CustomerService customerService;
 	
 	// Constructor --------------------------------------------------------------------
 	
@@ -52,6 +61,9 @@ public class CreditCardService {
 	
 	public CreditCard save(CreditCard creditCard){
 		Assert.notNull(creditCard,"La tarjeta de crédito no puede ser nula");
+		Assert.isTrue((bookService.existsCreditCardForAnyBook(creditCard) && !lessorService.existsCreditCardForAnyLessor(creditCard)) || (!bookService.existsCreditCardForAnyBook(creditCard) && lessorService.existsCreditCardForAnyLessor(creditCard)));
+		Lessor lessor = (Lessor) customerService.findActorByPrincial();
+		Assert.isTrue((creditCard.getId()!=0 &&  lessor.getCreditCard().getId()==creditCard.getId()) || creditCard.getId()==0); 
 		CreditCard result;
 		result = creditCardRepository.save(creditCard);
 		return result;

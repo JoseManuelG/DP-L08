@@ -64,7 +64,7 @@ public abstract class Actor extends DomainEntity {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	@NotBlank
+	
 	@URL
 	public String getPicture() {
 		return picture;
