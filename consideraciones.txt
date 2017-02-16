@@ -1,11 +1,12 @@
-La base de datos debe llamarse ACME-BnB
+﻿La base de datos debe llamarse ACME-BnB
 
 ------- Por solucionar ------------
-Faltan patterns por definir en UML
+Falta pattern telefono (actor) por definir en UML
 a cacheMoment de finder y writingMoment de audit les falta Past en UML
 faltan cascades delete que poner
 ¿Añadir {NotBlank} a los URL en UML? 
 Añadir min(0) a fee del configuration en UML y java.
+b+ tree y @safehtml
 
 -------   Solucionado  ------------
 En los UML hay que quitar {NotBlank} a los String optativos.
