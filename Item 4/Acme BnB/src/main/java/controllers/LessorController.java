@@ -100,8 +100,7 @@ public class LessorController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public @ResponseBody
-	ModelAndView save(@Valid ActorForm actorForm, BindingResult binding) {
+	public @ResponseBody ModelAndView save(ActorForm actorForm, BindingResult binding) {
 		ModelAndView result;
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		if (binding.hasErrors()) {

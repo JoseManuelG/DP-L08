@@ -27,7 +27,6 @@ public class ActorForm {
 		this.typeOfActor = typeOfActor;
 	}
 	
-	@Valid
 	public Lessor getLessor() {
 		return lessor;
 	}
