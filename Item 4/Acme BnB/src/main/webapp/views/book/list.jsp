@@ -28,6 +28,8 @@
 	
 	<acme:columm sorteable="true" code="book.smoker" path="smoker"/>
 	
-	<acme:columm sorteable="true" code="book.smoker" path="state"/>
+	<acme:columm sorteable="true" code="book.state" path="state"/>
+	
+	
 
 </display:table>
