@@ -31,7 +31,9 @@
 		
 		<value>/views/socialIdentity/messages</value>		
 		<value>/views/attribute/messages</value>
-		<value>/views/lessor/messages</value>	
+		<value>/views/lessor/messages</value>
+		<value>/views/finder/messages</value>
+		
 	</util:list>
 
 </beans>
