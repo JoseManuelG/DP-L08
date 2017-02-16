@@ -67,9 +67,13 @@
 		<security:intercept-url pattern="/customer/action-2.do" access="hasRole('CUSTOMER')" /> 
 
 
-	<!-- Rol3 -->
+	<!-- socialIdentity -->
 		<security:intercept-url pattern="/socialIdentity/create.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/socialIdentity/edit.do" access="isAuthenticated()" /> 
+	<!-- attribute -->
+		<security:intercept-url pattern="/attribute/administrator/create.do" access="hasRole('ADMINISTRATOR')" /> 
+		<security:intercept-url pattern="/attribute/administrator/edit.do" access="hasRole('ADMINISTRATOR')" />  
+		<security:intercept-url pattern="/attribute/administrator/list.do" access="hasRole('ADMINISTRATOR')" /> 
 	
 	
 	<!-- None -->
