@@ -10,6 +10,7 @@ import org.springframework.util.Assert;
 
 import repositories.BookRepository;
 import domain.Book;
+import domain.CreditCard;
 import domain.Property;
 import domain.Tenant;
 
@@ -71,4 +72,10 @@ public class BookService {
 	}
 
 	// Other business methods --------------------------------------
+	
+	public boolean existsCreditCardForAnyBook(CreditCard creditCard){
+		boolean result = false;
+		result = bookRepository.existsCreditCardForAnyBook(creditCard.getId());
+		return result;
+	}
 }

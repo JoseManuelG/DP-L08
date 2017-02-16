@@ -41,6 +41,15 @@
 				</ul>
 			</li>
 		</security:authorize>
+				<li><a class="fNiv"><spring:message code="master.page.lessor" /></a>
+			<ul>
+				<li class="arrow"></li>
+				<li><a href="lessor/list.do"><spring:message
+							code="master.page.lessor.list" />
+					</a>
+				</li>
+			</ul>
+		</li>
 		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>

@@ -13,6 +13,7 @@ import repositories.LessorRepository;
 import security.LoginService;
 import security.UserAccount;
 import domain.Book;
+import domain.CreditCard;
 import domain.Lessor;
 import domain.Property;
 
@@ -74,10 +75,10 @@ public class LessorService {
 	
 	// Other Bussiness Methods --------------------------------------------------------
 	
-//	public Lessor getLessorByCreditCard(CreditCard creditCard){
-//		Lessor result;
-//		result = lessorRepository.getLessorByCreditCardId(creditCard.getId());
-//		return result;
-//	}
+	public boolean existsCreditCardForAnyLessor(CreditCard creditCard){
+		boolean result = false;
+		result = lessorRepository.existsCreditCardForAnyLessor(creditCard.getId());
+		return result;
+	}
 
 }

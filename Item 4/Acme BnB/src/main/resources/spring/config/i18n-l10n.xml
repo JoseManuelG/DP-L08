@@ -30,7 +30,8 @@
 		<value>/views/profile/messages</value>		
 		
 		<value>/views/socialIdentity/messages</value>		
-		<value>/views/attribute/messages</value>	
+		<value>/views/attribute/messages</value>
+		<value>/views/lessor/messages</value>	
 	</util:list>
 
 </beans>

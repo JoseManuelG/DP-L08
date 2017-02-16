@@ -47,6 +47,9 @@
 		<security:intercept-url pattern="/law/terms-conditions.do" access="permitAll" />
 		<security:intercept-url pattern="/about/about.do" access="permitAll" />
 		
+		
+		<security:intercept-url pattern="/lessor/list.do" access="permitAll" />
+		<security:intercept-url pattern="/lessor/view.do" access="permitAll" />
 		 
 	<!-- isAuthenticated() -->
 		
@@ -70,10 +73,14 @@
 	<!-- socialIdentity -->
 		<security:intercept-url pattern="/socialIdentity/create.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/socialIdentity/edit.do" access="isAuthenticated()" /> 
+		
 	<!-- attribute -->
 		<security:intercept-url pattern="/attribute/administrator/create.do" access="hasRole('ADMINISTRATOR')" /> 
 		<security:intercept-url pattern="/attribute/administrator/edit.do" access="hasRole('ADMINISTRATOR')" />  
 		<security:intercept-url pattern="/attribute/administrator/list.do" access="hasRole('ADMINISTRATOR')" /> 
+		
+	<!-- lessor -->
+		<security:intercept-url pattern="/lessor/edit.do" access="hasRole('LESSOR')" />
 	
 	
 	<!-- None -->

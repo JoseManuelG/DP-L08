@@ -31,7 +31,8 @@
 		
 		
 		<value>/views/socialIdentity/tiles.xml</value>		
-		<value>/views/attribute/tiles.xml</value>		
+		<value>/views/attribute/tiles.xml</value>
+		<value>/views/lessor/tiles.xml</value>		
 		
 	</util:list>
 
