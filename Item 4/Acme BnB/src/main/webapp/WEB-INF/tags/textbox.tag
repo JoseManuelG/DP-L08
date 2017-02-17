@@ -32,7 +32,7 @@
 	<jstl:set var="readonly" value="false" />
 </jstl:if>
 <jstl:if test="${palceholder == null}">
-	<jstl:set var="palceholder" value="" />
+	<jstl:set var="placeholder" value="" />
 </jstl:if>
 
 <%-- Definition --%>
