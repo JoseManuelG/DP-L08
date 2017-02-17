@@ -19,10 +19,10 @@ import domain.Book;
 public class BookLessorController extends AbstractController {
 
 	@Autowired
-	LessorService lessorService ;
+	private LessorService lessorService ;
 
 	@Autowired
-	BookService bookService ;
+	private BookService bookService ;
 	
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
