@@ -31,7 +31,7 @@
 <jstl:if test="${readonly == null}">
 	<jstl:set var="readonly" value="false" />
 </jstl:if>
-<jstl:if test="${palceholder == null}">
+<jstl:if test="${placeholder == null}">
 	<jstl:set var="placeholder" value="" />
 </jstl:if>
 

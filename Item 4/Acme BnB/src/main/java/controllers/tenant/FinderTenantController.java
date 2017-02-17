@@ -41,7 +41,7 @@ public class FinderTenantController extends AbstractController {
 			results = new ArrayList<Property>();
 		}
 
-		result = new ModelAndView("finder/finder");
+		result = new ModelAndView("finder/tenant/finder");
 		result.addObject("results", results);
 		result.addObject("finder", finder);
 		result.addObject("requestURI", "finder/tenant/finder.do");
@@ -52,17 +52,26 @@ public class FinderTenantController extends AbstractController {
 	@RequestMapping(value = "/finder", method = RequestMethod.POST, params = "save")
 	public ModelAndView search(Finder finder, BindingResult binding) {
 		ModelAndView result;
+		Collection<Property> results;
 		if (binding.hasErrors()) {
-			result = new ModelAndView("finder/finder");
+			results = new ArrayList<Property>();
+
+			result = new ModelAndView("finder/tenant/finder");
 			result.addObject("finder", finder);
+			result.addObject("requestURI", "finder/tenant/finder.do");
+			result.addObject("results", results);
 		} else {
 			try {
 				finderService.save(finder);
 				result = finder();
 
 			} catch (Throwable oops) {
-				result = new ModelAndView("finder/finder");
+				results = new ArrayList<Property>();
+
+				result = new ModelAndView("finder/tenant/finder");
 				result.addObject("finder", finder);
+				result.addObject("requestURI", "finder/tenant/finder.do");
+				result.addObject("results", results);
 				result.addObject("message", "finder.commit.error");
 			}
 		}

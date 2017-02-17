@@ -12,10 +12,10 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <fieldset>
-	<form:form action="finder/finder.do" modelAttribute="finder">
+	<form:form action="finder/tenant/finder.do" modelAttribute="finder">
 		<form:hidden path="id" />
 		<form:hidden path="version" />
-		<form:hidden path="properties" />
+		<form:hidden path="results" />
 		<form:hidden path="cacheMoment" />
 
 		<acme:textbox code="finder.destination" path="destination"/>
@@ -27,7 +27,9 @@
 	</form:form>
 </fieldset>
 
-<jstl:if test="${!result.isEmpty()}">
+<br/>
+
+<jstl:if test="${!results.isEmpty()}">
 	<display:table pagesize="5" class="displaytag" name="results" requestURI="${requestURI}" id="row">
 		
 		<!-- Action links -->
@@ -56,6 +58,3 @@
 		
 	</display:table>
 </jstl:if>
-
-	
-<acme:cancel url="<spring:url value='/' />" code="finder.back"/>
