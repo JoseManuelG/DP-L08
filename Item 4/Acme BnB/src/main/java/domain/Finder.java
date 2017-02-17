@@ -82,18 +82,18 @@ public class Finder extends DomainEntity {
 
 	//Relationships---------------------------
 
-	private Collection<Property>	properties;
+	private Collection<Property>	results;
 
 
 	@NotNull
 	@Valid
 	@ManyToMany
-	public Collection<Property> getProperties() {
-		return properties;
+	public Collection<Property> getResults() {
+		return results;
 	}
 
-	public void setProperties(Collection<Property> properties) {
-		this.properties = properties;
+	public void setResults(Collection<Property> results) {
+		this.results = results;
 	}
 
 }

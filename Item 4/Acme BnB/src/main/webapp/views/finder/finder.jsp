@@ -17,7 +17,7 @@
 		<form:hidden path="version" />
 		<form:hidden path="properties" />
 		<form:hidden path="cacheMoment" />
-		
+
 		<acme:textbox code="finder.destination" path="destination"/>
 		<acme:textbox code="finder.minPrice" path="minPrice"/>
 		<acme:textbox code="finder.maxPrice" path="maxPrice"/>
@@ -28,7 +28,7 @@
 </fieldset>
 
 <jstl:if test="${!result.isEmpty()}">
-	<display:table pagesize="5" class="displaytag" name="result" requestURI="${requestURI}" id="row">
+	<display:table pagesize="5" class="displaytag" name="results" requestURI="${requestURI}" id="row">
 		
 		<!-- Action links -->
 		
@@ -48,7 +48,11 @@
 		
 		<acme:column sorteable="false" code="finder.property.address" path="address"/>
 		
-		<!-- TODO: añadir attributes y datos del propietario? -->
+		<display:column>
+			<a href="property/display.do?propertyId=${row.id}">
+				<spring:message	code="finder.display" />
+			</a>
+		</display:column>
 		
 	</display:table>
 </jstl:if>

@@ -782,7 +782,7 @@
 		<property name="maxPrice" value=""/>
 		<property name="keyword" ><null/></property>		
 		<property name="cacheMoment" value="11/14/2016 11:45"/>
-		<property name="properties">
+		<property name="results">
 			<list>
 			</list>
 		</property>
