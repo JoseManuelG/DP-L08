@@ -28,7 +28,7 @@ public class BookTenantController extends AbstractController {
 		books = tenantService.findAllBooksByPrincipal();
 		result = new ModelAndView("book/list");
 		result.addObject("books",books);
-		result.addObject("requestURI","book/lessor/list.do");
+		result.addObject("requestURI","book/tenant/list.do");
 		
 		return result;
 	}
