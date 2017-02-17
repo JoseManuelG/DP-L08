@@ -57,7 +57,7 @@
 						<li><a href="book/lessor/list.do"><spring:message code="master.page.lessor.request.books" /></a></li>
 					</security:authorize>
 					<security:authorize access="hasRole('TENANT')">
-						<li><a href="book/tenant/list.do"><spring:message code="master.page.tenat.request.books" /></a></li>
+						<li><a href="book/tenant/list.do"><spring:message code="master.page.tenant.request.books" /></a></li>
 					</security:authorize>		
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
