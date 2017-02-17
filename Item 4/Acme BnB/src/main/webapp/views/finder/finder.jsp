@@ -33,7 +33,7 @@
 		<!-- Action links -->
 		
 		<display:column>
-			<a href="book.do?propertyId=${row.id}">
+			<a href="book/tenant/book.do?propertyId=${row.id}">
 				<spring:message	code="finder.book" />
 			</a>
 		</display:column>

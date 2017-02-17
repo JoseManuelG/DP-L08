@@ -10,22 +10,14 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
-<form:form action="socialIdentity/edit.do" modelAttribute="attribute">
+<form:form action="book/tenant/edit.do" modelAttribute="bookForm">
 
-		<form:hidden path="id" />
-		<form:hidden path="version" />
+	<form:hidden path="id" />
+	<form:hidden path="version" />
+	
+	<acme:textbox code="book.checkin" path="checkInDate" placeholder="dd/mm/aaaa"/>
+	<acme:textbox code="book.checkout" path="checkOutDate" placeholder="dd/mm/aaaa"/>
+	<acme:checkbox code="book.smoker" path="smoker"/>
+	<acme:textbox code="" path=""/>
 			
-	
-
-	
-	<acme:textbox code="attribute.name" path="name"/>
-	<br />
-		
-	<acme:submit name="save" code="attribute.save"/>
-	
-	<jstl:if test="${attribute.id ne 0}">
-		<acme:submit name="delete" code="attribute.delete"/>
-	</jstl:if>
-	<acme:cancel url="javascript:window.location.href='attribute/list.do'" code="attribute.cancel"/>
-	<br>
 </form:form>
