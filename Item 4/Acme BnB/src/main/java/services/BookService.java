@@ -28,6 +28,9 @@ public class BookService {
 	// Supporting Services --------------------------------------
 	@Autowired
 	private ActorService	actorService;
+	
+	@Autowired
+	private LessorService lessorService;
 
 	// Simple CRUD methods --------------------------------------
 	public Book create(Property property, Tenant tenant) {
@@ -93,6 +96,8 @@ public class BookService {
 		
 		book.setState("ACCEPTED");
 		bookRepository.save(book);
+		lessorService.addFee();
+		
 		
 	}
 	
@@ -105,7 +110,6 @@ public class BookService {
 		
 		book.setState("DENIED");
 		bookRepository.save(book);
-		
 	}
 	
 	private void checkStateIsPending(Book book) {

@@ -30,6 +30,9 @@ public class LessorService {
 		
 	@Autowired
 	private LoginService loginService;
+	
+	@Autowired
+	private ConfigurationService configurationService;
 		
 	
 	// Constructor --------------------------------------------------------------------
@@ -94,6 +97,15 @@ public class LessorService {
 		principal = this.findByPrincipal();
 		result = lessorRepository.findAllBooksByPrincipal(principal.getId());
 		return result;
+	}
+
+	public void addFee() {
+		Lessor principal;
+		double actualFee;
+
+		principal = this.findByPrincipal();
+		actualFee = principal.getTotalFee();
+		principal.setTotalFee(actualFee + configurationService.findOne().getFee());
 	}
 
 }
