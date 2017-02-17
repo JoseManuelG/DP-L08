@@ -220,11 +220,21 @@
 		<property name="properties">
 			<list>
 				<ref bean="property1Lessor1"/>
+				<ref bean="property2Lessor1"/>
+				<ref bean="property3Lessor1"/>
+				<ref bean="property4Lessor1"/>
+				<ref bean="property5Lessor1"/>
+				<ref bean="property6Lessor1"/>
 			</list>
 		</property>
 		<property name="books">
 			<list>
 				<ref bean="book1Tenant1"/>
+				<ref bean="book2Tenant1"/>
+				<ref bean="book3Tenant1"/>
+				<ref bean="book4Tenant1"/>
+				<ref bean="book5Tenant1"/>
+				<ref bean="book6Tenant1"/>
 			</list>
 		</property>
 		<property name="totalFee" value="0.0"/>
@@ -287,6 +297,11 @@
 		<property name="books">
 			<list>
 				<ref bean="book1Tenant1"/>
+				<ref bean="book2Tenant1"/>
+				<ref bean="book3Tenant1"/>
+				<ref bean="book4Tenant1"/>
+				<ref bean="book5Tenant1"/>
+				<ref bean="book6Tenant1"/>
 			</list>
 		</property>
 	</bean>
@@ -337,6 +352,111 @@
 		<property name="books">
 			<list>
 				<ref bean="book1Tenant1"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="property2Lessor1" class="domain.Property">
+		<property name="name" value="Property 2"/>
+		<property name="rate" value="35.0"/>
+		<property name="description" value="An apartment with amazing views"/>	
+		<property name="address" value="Spain Seville, C\Estravíos nº5 6ºC"/>	
+		<property name="lessor" ref="lessor1"/>		
+		<property name="audits">
+			<list>
+			</list>
+		</property>
+		<property name="attributeValues">
+			<list>
+			</list>
+		</property>
+		<property name="books">
+			<list>
+				<ref bean="book2Tenant1"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="property3Lessor1" class="domain.Property">
+		<property name="name" value="Property 3"/>
+		<property name="rate" value="79.95"/>
+		<property name="description" value="A luxury house"/>	
+		<property name="address" value="Spain Seville, C\Bien Hallado nº14"/>	
+		<property name="lessor" ref="lessor1"/>		
+		<property name="audits">
+			<list>
+			</list>
+		</property>
+		<property name="attributeValues">
+			<list>
+			</list>
+		</property>
+		<property name="books">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="property4Lessor1" class="domain.Property">
+		<property name="name" value="Property 4"/>
+		<property name="rate" value="50.0"/>
+		<property name="description" value="A cabin at countryside"/>	
+		<property name="address" value="Spain Seville, Urb. Los pinares, C\Camorra nº10"/>	
+		<property name="lessor" ref="lessor1"/>		
+		<property name="audits">
+			<list>
+			</list>
+		</property>
+		<property name="attributeValues">
+			<list>
+			</list>
+		</property>
+		<property name="books">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="property5Lessor1" class="domain.Property">
+		<property name="name" value="Property 5"/>
+		<property name="rate" value="62.0"/>
+		<property name="description" value="The perfect flat for the whole family"/>	
+		<property name="address" value="Spain Seville, C\Amatista nº37 2ºB"/>	
+		<property name="lessor" ref="lessor1"/>		
+		<property name="audits">
+			<list>
+			</list>
+		</property>
+		<property name="attributeValues">
+			<list>
+			</list>
+		</property>
+		<property name="books">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="property6Lessor1" class="domain.Property">
+		<property name="name" value="Property 6"/>
+		<property name="rate" value="20.0"/>
+		<property name="description" value="A very romantic place"/>	
+		<property name="address" value="Spain Seville, C\Cereales nº4"/>	
+		<property name="lessor" ref="lessor1"/>		
+		<property name="audits">
+			<list>
+			</list>
+		</property>
+		<property name="attributeValues">
+			<list>
+			</list>
+		</property>
+		<property name="books">
+			<list>
+				<ref bean="book3Tenant1"/>
+				<ref bean="book4Tenant1"/>
+				<ref bean="book5Tenant1"/>
+				<ref bean="book6Tenant1"/>
 			</list>
 		</property>
 	</bean>
@@ -402,6 +522,51 @@
 		<property name="cvvCode" value="325"/>
 	</bean>
 	
+	<bean id="creditCardBook2Tenant1" class="domain.CreditCard">
+		<property name="holderName" value="Billy"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="4485733078654607"/>
+		<property name="expirationMonth" value="06"/>
+		<property name="expirationYear" value="2018"/>
+		<property name="cvvCode" value="325"/>
+	</bean>
+	
+	<bean id="creditCardBook3Tenant1" class="domain.CreditCard">
+		<property name="holderName" value="Billy"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="4485733078654607"/>
+		<property name="expirationMonth" value="06"/>
+		<property name="expirationYear" value="2018"/>
+		<property name="cvvCode" value="325"/>
+	</bean>
+	
+	<bean id="creditCardBook4Tenant1" class="domain.CreditCard">
+		<property name="holderName" value="Billy"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="4485733078654607"/>
+		<property name="expirationMonth" value="06"/>
+		<property name="expirationYear" value="2018"/>
+		<property name="cvvCode" value="325"/>
+	</bean>
+	
+	<bean id="creditCardBook5Tenant1" class="domain.CreditCard">
+		<property name="holderName" value="Billy"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="4485733078654607"/>
+		<property name="expirationMonth" value="06"/>
+		<property name="expirationYear" value="2018"/>
+		<property name="cvvCode" value="325"/>
+	</bean>
+	
+	<bean id="creditCardBook6Tenant1" class="domain.CreditCard">
+		<property name="holderName" value="Billy"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="4485733078654607"/>
+		<property name="expirationMonth" value="06"/>
+		<property name="expirationYear" value="2018"/>
+		<property name="cvvCode" value="325"/>
+	</bean>
+	
 	<!-- Book 
 	
 	<bean id="" class="domain.Book">
@@ -428,6 +593,66 @@
 		<property name="property" ref="property1Lessor1"/>
 		<property name="tenant" ref="tenant1"/>		
 		<property name="invoice" ref="invoiceBook1Tenant1"/>
+	</bean>
+	
+	<bean id="book2Tenant1" class="domain.Book">
+		<property name="checkInDate" value="05/20/2016"/>
+		<property name="checkOutDate" value="05/21/2016"/>
+		<property name="smoker" value="true"/>
+		<property name="state" value="DENIED"/>
+		<property name="totalAmount" value="60.0"/>
+		<property name="creditCard" ref="creditCardBook2Tenant1"/>
+		<property name="property" ref="property2Lessor1"/>
+		<property name="tenant" ref="tenant1"/>		
+		<property name="invoice"><null/></property>
+	</bean>
+	
+	<bean id="book3Tenant1" class="domain.Book">
+		<property name="checkInDate" value="03/04/2017"/>
+		<property name="checkOutDate" value="03/05/2017"/>
+		<property name="smoker" value="false"/>
+		<property name="state" value="PENDING"/>
+		<property name="totalAmount" value="20.0"/>
+		<property name="creditCard" ref="creditCardBook3Tenant1"/>
+		<property name="property" ref="property6Lessor1"/>
+		<property name="tenant" ref="tenant1"/>		
+		<property name="invoice"><null/></property>
+	</bean>
+	
+	<bean id="book4Tenant1" class="domain.Book">
+		<property name="checkInDate" value="04/04/2017"/>
+		<property name="checkOutDate" value="04/05/2017"/>
+		<property name="smoker" value="false"/>
+		<property name="state" value="PENDING"/>
+		<property name="totalAmount" value="20.0"/>
+		<property name="creditCard" ref="creditCardBook4Tenant1"/>
+		<property name="property" ref="property6Lessor1"/>
+		<property name="tenant" ref="tenant1"/>		
+		<property name="invoice"><null/></property>
+	</bean>
+	
+	<bean id="book5Tenant1" class="domain.Book">
+		<property name="checkInDate" value="05/04/2017"/>
+		<property name="checkOutDate" value="05/05/2017"/>
+		<property name="smoker" value="false"/>
+		<property name="state" value="PENDING"/>
+		<property name="totalAmount" value="20.0"/>
+		<property name="creditCard" ref="creditCardBook5Tenant1"/>
+		<property name="property" ref="property6Lessor1"/>
+		<property name="tenant" ref="tenant1"/>		
+		<property name="invoice"><null/></property>
+	</bean>
+	
+	<bean id="book6Tenant1" class="domain.Book">
+		<property name="checkInDate" value="06/04/2017"/>
+		<property name="checkOutDate" value="06/05/2017"/>
+		<property name="smoker" value="false"/>
+		<property name="state" value="PENDING"/>
+		<property name="totalAmount" value="20.0"/>
+		<property name="creditCard" ref="creditCardBook6Tenant1"/>
+		<property name="property" ref="property6Lessor1"/>
+		<property name="tenant" ref="tenant1"/>		
+		<property name="invoice"><null/></property>
 	</bean>
 	
 	<!-- Invoice 
