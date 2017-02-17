@@ -40,13 +40,13 @@
 		
 		<!-- Attributes -->
 		
-		<acme:columm sorteable="true" code="finder.property.name" path="name"/>
+		<acme:column sorteable="true" code="finder.property.name" path="name"/>
 		
-		<acme:columm sorteable="true" code="finder.property.rate" path="rate"/>
+		<acme:column sorteable="true" code="finder.property.rate" path="rate"/>
 		
-		<acme:columm sorteable="false" code="finder.property.description" path="description"/>
+		<acme:column sorteable="false" code="finder.property.description" path="description"/>
 		
-		<acme:columm sorteable="false" code="finder.property.address" path="address"/>
+		<acme:column sorteable="false" code="finder.property.address" path="address"/>
 		
 		<!-- TODO: añadir attributes y datos del propietario? -->
 		

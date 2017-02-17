@@ -9,8 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.BookRepository;
+import domain.Actor;
 import domain.Book;
 import domain.CreditCard;
+import domain.Lessor;
 import domain.Property;
 import domain.Tenant;
 
@@ -24,6 +26,8 @@ public class BookService {
 
 
 	// Supporting Services --------------------------------------
+	@Autowired
+	private ActorService	actorService;
 
 	// Simple CRUD methods --------------------------------------
 	public Book create(Property property, Tenant tenant) {
@@ -77,5 +81,44 @@ public class BookService {
 		boolean result = false;
 		result = bookRepository.existsCreditCardForAnyBook(creditCard.getId());
 		return result;
+	}
+	
+	public void acceptBook(int bookId) {
+		Book book;
+		
+		book = this.findOne(bookId);
+		checkOwnerIsPrincipal(book);
+		checkStateIsPending(book);
+		//TODO: ¿Checkear que las fechas sean futuras? (Qué sentido tiene aceptar un book que se ha pasado de fecha...)
+		
+		book.setState("ACCEPTED");
+		bookRepository.save(book);
+		
+	}
+	
+	public void denyBook(int bookId) {
+		Book book;
+		
+		book = this.findOne(bookId);
+		checkOwnerIsPrincipal(book);
+		checkStateIsPending(book);
+		
+		book.setState("DENIED");
+		bookRepository.save(book);
+		
+	}
+	
+	private void checkStateIsPending(Book book) {
+		Assert.isTrue(book.getState().equals("PENDING"));
+	}
+	
+	private void checkOwnerIsPrincipal(Book book) {
+		Actor principal;
+		Lessor owner;
+		
+		principal = actorService.findByPrincipal();
+		owner = book.getProperty().getLessor(); //TODO: ¿Hacer mediante query este tipo de acceso?
+		
+		Assert.isTrue(owner.equals(principal));
 	}
 }

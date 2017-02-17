@@ -18,15 +18,17 @@
 
 	<!-- Attributes -->
 	
-	<acme:columm sorteable="true" code="book.property.name" path="property.name"/>
+	<acme:column sorteable="true" code="book.property.name" path="property.name"/>
 	
-	<acme:columm sorteable="true" code="book.checkin" path="checkInDate"/>
+	<acme:column sorteable="true" code="book.checkin" path="checkInDate"/>
 	
-	<acme:columm sorteable="true" code="book.checkout" path="checkOutDate"/>
+	<acme:column sorteable="true" code="book.checkout" path="checkOutDate"/>
 	
-	<acme:columm sorteable="true" code="book.smoker" path="smoker"/>
+	<acme:column sorteable="true" code="book.smoker" path="smoker"/>
 	
-	<acme:columm sorteable="true" code="book.state" path="state"/>
+	<acme:column sorteable="true" code="book.state" path="state"/>
+	
+	<acme:column sorteable="true" code="book.amount" path="totalAmount"/>
 
 	<security:authorize access="hasRole('TENANT')">
 <!-- 	Hay que enmascarar las credit cards antes de mostrarlas -->
@@ -36,8 +38,7 @@
 		<display:column>
 			<jstl:if test="${row.state eq 'PENDING'}">
 				<a href="book/lessor/acceptBook.do?bookId=${row.id}">
-					<spring:message	code="book.accept" />
-				</a> |
+					<spring:message	code="book.accept" /></a> |
 				<a href="book/lessor/denyBook.do?bookId=${row.id}">
 					<spring:message	code="book.deny" />
 				</a>
