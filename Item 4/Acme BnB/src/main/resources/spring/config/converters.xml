@@ -21,7 +21,9 @@
 		<bean class="converters.LessorToStringConverter" /> 
  		<bean class="converters.StringToLessorConverter" /> 
  		<bean class="converters.ActorToStringConverter" /> 
- 		<bean class="converters.StringToActorConverter" /> 
+ 		<bean class="converters.StringToActorConverter" />
+ 		<bean class="converters.PropertyToStringConverter" /> 
+ 		<bean class="converters.StringToPropertyConverter" />
 	</util:list>
 	
 </beans>
