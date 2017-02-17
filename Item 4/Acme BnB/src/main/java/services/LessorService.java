@@ -81,4 +81,19 @@ public class LessorService {
 		return result;
 	}
 
+	public Lessor findByPrincipal() {
+		Lessor result;
+		result = lessorRepository.findByUserAccount(LoginService.getPrincipal().getId());
+		return result;
+	}
+
+	public Collection<Book> findAllBooksByPrincipal() {
+		Lessor principal;
+		Collection<Book> result;
+		
+		principal = this.findByPrincipal();
+		result = lessorRepository.findAllBooksByPrincipal(principal.getId());
+		return result;
+	}
+
 }

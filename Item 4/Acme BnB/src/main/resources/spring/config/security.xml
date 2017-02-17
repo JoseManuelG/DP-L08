@@ -67,6 +67,9 @@
 		
 	<!-- LESSOR -->
 	
+		<security:intercept-url pattern="/book/lessor/acceptBook.do" access="hasRole('LESSOR')" />
+		<security:intercept-url pattern="/book/lessor/denyBook.do" access="hasRole('LESSOR')" />
+		<security:intercept-url pattern="/book/lessor/list.do" access="hasRole('LESSOR')" />
 		<security:intercept-url pattern="/lessor/edit.do" access="hasRole('LESSOR')" />
 		
 		

@@ -28,11 +28,12 @@
 		<value>/views/customer/messages</value>
 		<value>/views/law/messages</value>
 		<value>/views/profile/messages</value>		
-		
-		<value>/views/socialIdentity/messages</value>		
+				
 		<value>/views/attribute/messages</value>
+		<value>/views/book/messages</value>
 		<value>/views/lessor/messages</value>
 		<value>/views/finder/messages</value>
+		<value>/views/socialIdentity/messages</value>
 		
 	</util:list>
 
