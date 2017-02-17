@@ -97,12 +97,13 @@ public class SocialIdentityController extends AbstractController {
 	public @ResponseBody ModelAndView save( SocialIdentity socialIdentity) {
 		ModelAndView result=null;
 			try {
-				socialIdentityService.delete(socialIdentity);
+			
 				Actor actor = actorService.findByPrincipal();
 				Assert.isTrue(socialIdentity.getActor().equals(actor), "No puedes cambiar una SocialIdentity que no este asignada a usted");
 				ArrayList<Authority> authorities = new ArrayList<Authority>();
 				authorities.addAll(actor.getUserAccount().getAuthorities());
 				String aux=authorities.get(0).getAuthority().toLowerCase();
+				socialIdentityService.delete(socialIdentity);
 				result = new ModelAndView("redirect:../"+aux+"/view.do");
 				
 		} catch (Throwable oops) {
