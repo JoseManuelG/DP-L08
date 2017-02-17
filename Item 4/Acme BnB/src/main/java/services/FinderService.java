@@ -66,7 +66,7 @@ public class FinderService {
 
 		result = finder;
 
-		if (!(finder.getDestination().equals(old.getDestination()) && finder.getKeyword().equals(old.getKeyword()) && finder.getMaxPrice() == old.getMaxPrice() && finder.getMinPrice() == finder.getMaxPrice())) {
+		if (!(finder.getDestination().equals(old.getDestination()) && finder.getKeyword().equals(old.getKeyword()) && finder.getMaxPrice() == old.getMaxPrice() && finder.getMinPrice() == old.getMaxPrice())) {
 			result.setCacheMoment(new Date(System.currentTimeMillis() - 100));
 			if (result.getMinPrice() == null) {
 				min = 0.0;
