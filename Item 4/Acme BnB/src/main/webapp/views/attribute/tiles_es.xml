@@ -17,17 +17,17 @@
 <tiles-definitions>
 
 
-	<definition name="attribute/list" extends="master.page">	
+	<definition name="attribute/administrator/list" extends="master.page">	
 		<put-attribute name="title" value="Listar los atributos" />
 		<put-attribute name="body" value="/views/attribute/list.jsp" />
 	</definition>
 	
-	<definition name="attribute/create" extends="master.page">	
+	<definition name="attribute/administrator/create" extends="master.page">	
 		<put-attribute name="title" value="Crear un atributo" />
 		<put-attribute name="body" value="/views/attribute/edit.jsp" />
 	</definition>
 	
-	<definition name="attribute/edit" extends="master.page">	
+	<definition name="attribute/administrator/edit" extends="master.page">	
 		<put-attribute name="title" value="Editar un atributo" />
 		<put-attribute name="body" value="/views/attribute/edit.jsp" />
 	</definition>
