@@ -59,6 +59,7 @@ public class Finder extends DomainEntity {
 		this.maxPrice = maxPrice;
 	}
 
+	@NotNull
 	public String getKeyword() {
 		return keyword;
 	}

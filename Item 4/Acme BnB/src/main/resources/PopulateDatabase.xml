@@ -80,6 +80,35 @@
 		</property>
 	</bean>
 	
+	<!-- Finder 
+	
+	<bean id="" class="domain.Finder">
+		<property name="destination" value=""/>
+		<property name="minPrice" value=""/>
+		<property name="maxPrice" value=""/>
+		<property name="keyword" value=""/>
+		<property name="cacheMoment" value=""/>
+		<property name="properties">
+			<list>
+				<ref bean=""/>
+			</list>
+		</property>
+	</bean>
+	
+	-->
+	
+	<bean id="finderTenant1" class="domain.Finder">
+		<property name="destination" value="Spain"/>
+		<property name="minPrice" value=""/>
+		<property name="maxPrice" value=""/>
+		<property name="keyword" value=""/>		
+		<property name="cacheMoment" value="11/14/2016 11:45"/>
+		<property name="results">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Administrator
 	
 	<bean id="" class="domain.Administrator">
@@ -757,35 +786,6 @@
 		<property name="link" value="http://www.sample.com/"/>
 		<property name="socialNetwork" value="Sample"/>
 		<property name="actor" ref="lessor1"/>
-	</bean>
-	
-	<!-- Finder 
-	
-	<bean id="" class="domain.Finder">
-		<property name="destination" value=""/>
-		<property name="minPrice" value=""/>
-		<property name="maxPrice" value=""/>
-		<property name="keyword" value=""/>
-		<property name="cacheMoment" value=""/>
-		<property name="properties">
-			<list>
-				<ref bean=""/>
-			</list>
-		</property>
-	</bean>
-	
-	-->
-	
-	<bean id="finderTenant1" class="domain.Finder">
-		<property name="destination" value="Spain"/>
-		<property name="minPrice" value=""/>
-		<property name="maxPrice" value=""/>
-		<property name="keyword" ><null/></property>		
-		<property name="cacheMoment" value="11/14/2016 11:45"/>
-		<property name="results">
-			<list>
-			</list>
-		</property>
 	</bean>
 	
 	<!-- Configuration 	-->

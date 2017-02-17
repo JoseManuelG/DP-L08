@@ -22,7 +22,7 @@ public class Tenant extends Customer {
 
 
 	@Valid
-	@OneToOne
+	@OneToOne(optional = false)
 	public Finder getFinder() {
 		return finder;
 	}
