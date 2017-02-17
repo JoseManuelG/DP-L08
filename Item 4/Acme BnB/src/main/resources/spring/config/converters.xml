@@ -20,6 +20,8 @@
 	<util:list id="converters">
 		<bean class="converters.LessorToStringConverter" /> 
  		<bean class="converters.StringToLessorConverter" /> 
+ 		<bean class="converters.ActorToStringConverter" /> 
+ 		<bean class="converters.StringToActorConverter" /> 
 	</util:list>
 	
 </beans>
