@@ -23,7 +23,7 @@
  		<bean class="converters.StringToLessorConverter" />
 
 		<bean class="converters.ActorToStringConverter" />
-		<bean class="converters.StringToLessorConverter" />
+		<bean class="converters.StringToActorConverter" />
  		
  		<bean class="converters.AttributeValueToStringConverter" /> 
  		<bean class="converters.StringToAttributeValueConverter" /> 
@@ -35,7 +35,7 @@
  		<bean class="converters.StringToBookConverter" />
 
 		<bean class="converters.PropertyToStringConverter" /> 
-		<bean class="converters.StringToActorConverter" />
+		<bean class="converters.StringToPropertyConverter" />
 		
 	</util:list>
 	
