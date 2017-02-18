@@ -1,6 +1,7 @@
 package forms;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import domain.Lessor;
@@ -26,11 +27,12 @@ public class ActorForm {
 	public void setTypeOfActor(String typeOfActor) {
 		this.typeOfActor = typeOfActor;
 	}
-	
+	@NotNull
+	@Valid
 	public Lessor getLessor() {
 		return lessor;
 	}
-
+	
 	public void setLessor(Lessor lessor) {
 		this.lessor = lessor;
 	}

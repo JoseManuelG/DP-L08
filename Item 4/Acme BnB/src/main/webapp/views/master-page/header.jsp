@@ -31,15 +31,22 @@
 				</ul>
 			</li>
 		</security:authorize>
-				<li><a class="fNiv"><spring:message code="master.page.lessor" /></a>
-			<ul>
-				<li class="arrow"></li>
-				<li><a href="lessor/list.do"><spring:message
-							code="master.page.lessor.list" />
-					</a>
-				</li>
-			</ul>
-		</li>
+		<li><a class="fNiv"><spring:message code="master.page.lessor" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="lessor/list.do"><spring:message code="master.page.lessor.list" />
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li><a class="fNiv"><spring:message code="master.page.property" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="property/list.do"><spring:message code="master.page.property.list" />
+						</a>
+					</li>
+				</ul>
+			</li>
 		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
@@ -55,6 +62,7 @@
 					<li class="arrow"></li>
 					<security:authorize access="hasRole('LESSOR')">
 						<li><a href="book/lessor/list.do"><spring:message code="master.page.lessor.request.books" /></a></li>
+						<li><a href="property/lessor/myProperties.do"><spring:message code="master.page.lessor.myProperties" /></a></li>
 					</security:authorize>
 					<security:authorize access="hasRole('TENANT')">
 						<li><a href="book/tenant/list.do"><spring:message code="master.page.tenant.request.books" /></a></li>

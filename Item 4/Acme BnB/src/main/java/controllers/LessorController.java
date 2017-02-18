@@ -85,6 +85,14 @@ public class LessorController extends AbstractController {
 		
 		actorForm.setTypeOfActor("LESSOR");
 		actorForm.setLessor(lessor);
+		actorForm.getLessor().setId(lessor.getId());
+		actorForm.getLessor().setTotalFee(lessor.getTotalFee());
+		actorForm.getLessor().setBooks(lessor.getBooks());
+		actorForm.getLessor().setComments(lessor.getComments());
+		actorForm.getLessor().setCreditCard(lessor.getCreditCard());
+		actorForm.getLessor().setPostedComments(lessor.getPostedComments());
+		actorForm.getLessor().setLessorProperties(lessor.getLessorProperties());
+		actorForm.getLessor().setSocialIdentities(lessor.getSocialIdentities());
 		actorForm.getLessor().getUserAccount().setUsername(lessor.getUserAccount().getUsername());
 		actorForm.getLessor().getUserAccount().setPassword(lessor.getUserAccount().getUsername());
 		actorForm.getLessor().setName(lessor.getName());
@@ -98,6 +106,8 @@ public class LessorController extends AbstractController {
 		result.addObject("typeActor", "LESSOR");
 		return result;
 	}
+	
+	// Save -------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public @ResponseBody ModelAndView save(ActorForm actorForm, BindingResult binding) {
@@ -140,13 +150,12 @@ public class LessorController extends AbstractController {
 	// Delete -------------------------------------------------------------
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(ActorForm actorForm, BindingResult binding) {
+	public ModelAndView delete(@Valid ActorForm actorForm, BindingResult binding) {
 		ModelAndView result;
 
 		try {			
 			lessorService.delete(actorForm.getLessor());
-			result = new ModelAndView("redirect:myRecipes.do");
-			//result.addObject("requestURI","recipe/user/delete.do");
+			result = new ModelAndView("redirect:list.do");
 		} catch (Throwable oops) {
 			result = createEditModelAndView(actorForm, "lessor.commit.error");
 		}

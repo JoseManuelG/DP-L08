@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 import repositories.AuditRepository;
 import security.LoginService;
 import domain.Audit;
+import domain.Property;
 
 @Service
 @Transactional
@@ -79,6 +80,12 @@ public class AuditService {
 
 	}
 
+
 	// Other Bussiness Methods --------------------------------------------------------
+	
+	public Collection<Audit> findAuditsForProperty(Property property) {
+		Collection<Audit> result = auditRepository.findAuditsForPropertyId(property.getId());
+		return result;
+	}
 
 }

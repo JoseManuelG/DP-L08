@@ -3,7 +3,10 @@ package services;
 
 import java.util.Collection;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.AttributeValueRepository;
@@ -11,7 +14,10 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.AttributeValue;
+import domain.Property;
 
+@Service
+@Transactional
 public class AttributeValueService {
 
 	//Managed Repository---------------------------—
@@ -78,6 +84,12 @@ public class AttributeValueService {
 		Assert.isTrue(account.getAuthorities().contains(Authority.ADMINISTRATOR), "Debes ser un Administrador para editar los AttributeValues");
 
 		attributeValueRepository.delete(attributeValue);
+	}
+
+	// Other bussiness methods ----------------------------------------------------------------------------------------
+	public Collection<AttributeValue> findAttributeValuesForProperty(Property property) {
+		Collection<AttributeValue> result = attributeValueRepository.findAttributeValuesForPropertyId(property.getId());
+		return result;
 	}
 
 }

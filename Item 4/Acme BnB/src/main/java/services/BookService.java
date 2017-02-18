@@ -109,11 +109,9 @@ public class BookService {
 		checkOwnerIsPrincipal(book);
 		checkStateIsPending(book);
 		//TODO: ¿Checkear que las fechas sean futuras? (Qué sentido tiene aceptar un book que se ha pasado de fecha...)
-		
 		book.setState("ACCEPTED");
 		bookRepository.save(book);
 		lessorService.addFee();
-		
 		
 	}
 	
@@ -149,6 +147,11 @@ public class BookService {
 		return book;
 	}
 	
+	public Collection<Book> findBooksForProperty(Property property) {
+		Collection<Book> result = bookRepository.findBooksForPropertyId(property.getId());
+		return result;
+	}
+	
 	private void checkStateIsPending(Book book) {
 		Assert.isTrue(book.getState().equals("PENDING"));
 	}
@@ -158,7 +161,7 @@ public class BookService {
 		Lessor owner;
 		
 		principal = actorService.findByPrincipal();
-		owner = book.getProperty().getLessor(); //TODO: ¿Hacer mediante query este tipo de acceso?
+		owner = book.getProperty().getLessor(); //TODO: ï¿½Hacer mediante query este tipo de acceso?
 		
 		Assert.isTrue(owner.equals(principal));
 	}

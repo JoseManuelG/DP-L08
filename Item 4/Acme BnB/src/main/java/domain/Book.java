@@ -86,6 +86,7 @@ public class Book extends DomainEntity {
 	private Invoice		invoice;
 	private Property	property;
 	private Tenant		tenant;
+	private Lessor 		lessor;
 
 
 	@NotNull
@@ -129,6 +130,16 @@ public class Book extends DomainEntity {
 
 	public void setTenant(Tenant tenant) {
 		this.tenant = tenant;
+	}
+	
+	@Valid
+	@ManyToOne(optional = true)
+	public Lessor getLessor() {
+		return lessor;
+	}
+
+	public void setLessor(Lessor lessor) {
+		this.lessor = lessor;
 	}
 
 }
