@@ -12,12 +12,22 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 <form:form action="book/tenant/edit.do" modelAttribute="bookForm">
 
-	<form:hidden path="id" />
-	<form:hidden path="version" />
+	<form:hidden path="propertyId" />
 	
 	<acme:textbox code="book.checkin" path="checkInDate" placeholder="dd/mm/aaaa"/>
 	<acme:textbox code="book.checkout" path="checkOutDate" placeholder="dd/mm/aaaa"/>
 	<acme:checkbox code="book.smoker" path="smoker"/>
-	<acme:textbox code="" path=""/>
-			
+	<acme:textbox code="book.amount" path="totalAmount" readonly="true"/>
+	<fieldset>
+	<label><spring:message code="book.credit.card"/></label>
+	<acme:textbox code="credit.card.brand.name" path="brandName"/>
+	<acme:textbox code="credit.card.cvv.code" path="cvvCode"/>
+	<acme:textbox code="credit.card.expiration.month" path="expirationMonth"/>
+	<acme:textbox code="credit.card.expiration.year" path="expirationYear"/>
+	<acme:textbox code="credit.card.holder.name" path="hoderName"/>
+	<acme:textbox code="credit.card.number" path="number"/>
+	</fieldset>
+	
+	<acme:submit name="book" code="book"/>
+	<acme:cancel url="finder/tenant/finder" code="book.cancel"/>
 </form:form>

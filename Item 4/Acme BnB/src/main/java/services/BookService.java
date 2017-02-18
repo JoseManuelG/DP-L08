@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.BookRepository;
 import domain.Actor;
@@ -15,6 +17,7 @@ import domain.CreditCard;
 import domain.Lessor;
 import domain.Property;
 import domain.Tenant;
+import forms.BookForm;
 
 @Service
 @Transactional
@@ -31,6 +34,18 @@ public class BookService {
 	
 	@Autowired
 	private LessorService lessorService;
+	
+	@Autowired
+	private TenantService tenantService;
+
+	@Autowired
+	private PropertyService	propertyService;
+
+	@Autowired
+	private CreditCardService cardService;
+	
+	@Autowired
+	private Validator validator;
 
 	// Simple CRUD methods --------------------------------------
 	public Book create(Property property, Tenant tenant) {
@@ -64,12 +79,13 @@ public class BookService {
 		Book result;
 
 		Assert.notNull(book, "book.error.null");
+		calculateTotalAmount(book);
 		result = bookRepository.save(book);
 		Assert.notNull(result, "book.error.commit");
 
 		return result;
 	}
-
+	
 	public void delete(Book book) {
 		Assert.notNull(book, "book.error.null");
 
@@ -112,6 +128,27 @@ public class BookService {
 		bookRepository.save(book);
 	}
 	
+	public Book reconstruct(BookForm bookForm, BindingResult bindingResult) {
+		Book book;
+		CreditCard creditCard;
+		Property property;
+		Tenant tenant;
+		
+		creditCard = cardService.create();
+		property = propertyService.findOne(bookForm.getPropertyId());
+		tenant = tenantService.findByPrincipal();
+		reconstructCreditCard(creditCard, bookForm);
+		
+		book = this.create(property, tenant);
+		book.setCheckInDate(bookForm.getCheckInDate());
+		book.setCheckOutDate(bookForm.getCheckOutDate());
+		book.setCreditCard(creditCard);
+		book.setSmoker(bookForm.getSmoker());
+		
+		validator.validate(book, bindingResult);
+		return book;
+	}
+	
 	private void checkStateIsPending(Book book) {
 		Assert.isTrue(book.getState().equals("PENDING"));
 	}
@@ -124,5 +161,26 @@ public class BookService {
 		owner = book.getProperty().getLessor(); //TODO: ¿Hacer mediante query este tipo de acceso?
 		
 		Assert.isTrue(owner.equals(principal));
+	}
+	
+	private void reconstructCreditCard(CreditCard creditCard,BookForm bookForm) {
+		creditCard.setBrandName(bookForm.getBrandName());
+		creditCard.setCvvCode(bookForm.getCvvCode());
+		creditCard.setExpirationMonth(bookForm.getExpirationMonth());
+		creditCard.setExpirationYear(bookForm.getExpirationYear());
+		creditCard.setHolderName(bookForm.getHolderName());
+		creditCard.setNumber(bookForm.getNumber());
+		
+	}
+
+	private void calculateTotalAmount(Book book) {
+		int days;
+		long out, in;
+		
+		out = book.getCheckOutDate().getTime();
+		in = book.getCheckInDate().getTime();
+		days = (int) (out-in)/(1000 * 60 * 60 * 24);
+		
+		book.setTotalAmount(days*book.getProperty().getRate());
 	}
 }
