@@ -70,6 +70,9 @@
 		
 	<!-- LESSOR -->
 	
+		<security:intercept-url pattern="/book/lessor/acceptBook.do" access="hasRole('LESSOR')" />
+		<security:intercept-url pattern="/book/lessor/denyBook.do" access="hasRole('LESSOR')" />
+		<security:intercept-url pattern="/book/lessor/list.do" access="hasRole('LESSOR')" />
 		<security:intercept-url pattern="/lessor/edit.do" access="hasRole('LESSOR')" />
 		<security:intercept-url pattern="/property/lessor/myProperties.do" access="hasRole('LESSOR')" />
 		<security:intercept-url pattern="/property/lessor/create.do" access="hasRole('LESSOR')" />
@@ -81,8 +84,8 @@
 		
 	<!-- TENANT -->
 	
-		<security:intercept-url pattern="/finder/finder.do" access="hasRole('TENANT')" />
 		<security:intercept-url pattern="/book/tenant/list.do" access="hasRole('TENANT')" />
+		<security:intercept-url pattern="/finder/tenant/finder.do" access="hasRole('TENANT')" />
 		
 	
 	<!-- AUDITOR -->

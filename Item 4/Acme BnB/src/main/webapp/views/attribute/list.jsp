@@ -32,6 +32,6 @@
 
 </display:table>
 
-<a href="attribute/administrador/create.do">
+<a href="attribute/administrator/create.do">
 	<spring:message	code="attribute.create" />
 </a>

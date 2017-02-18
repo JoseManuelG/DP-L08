@@ -12,7 +12,6 @@
 
 <%-- Taglibs --%>
 
-<%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
@@ -22,13 +21,7 @@
 <%@ attribute name="code" required="true" %>
 <%@ attribute name="sorteable" required="true" %>
 
-<%@ attribute name="readonly" required="false" %>
-
-<jstl:if test="${readonly == null}">
-	<jstl:set var="readonly" value="false" />
-</jstl:if>
-
 <%-- Definition --%>
 	
 <spring:message code="${code}" var="codeName" />
-<display:column property="path" title="${codeName}" sortable="${sorteable}" />
+<display:column property="${path}" title="${codeName}" sortable="${sorteable}" />

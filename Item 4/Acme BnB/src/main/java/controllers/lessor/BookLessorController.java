@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.BookService;
+import services.LessorService;
 import controllers.AbstractController;
 import domain.Book;
 
@@ -18,29 +19,43 @@ import domain.Book;
 public class BookLessorController extends AbstractController {
 
 	@Autowired
-	BookService bookService ;
+	private LessorService lessorService ;
+
+	@Autowired
+	private BookService bookService ;
 	
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Book> books;
-		books = bookService.findLessorPropertiesRequestByPrincipal();
+		
+		books = lessorService.findAllBooksByPrincipal();
 		result = new ModelAndView("book/list");
 		result.addObject("books",books);
+		result.addObject("requestURI","book/lessor/list.do");
+		
 		return result;
 	}
 
 	@RequestMapping(value = "/acceptBook", method = RequestMethod.GET)
 	public ModelAndView acceptBook(@RequestParam int bookId) {
-		bookService.acceptBook();
-		return list();
+		ModelAndView result;
+		
+		bookService.acceptBook(bookId);
+		result = new ModelAndView("redirect:list.do");
+		
+		return result;
 	}
 	
 	@RequestMapping(value = "/denyBook", method = RequestMethod.GET)
-	public ModelAndView denyBook() {
-		bookService.denyBook();
-		return list();
+	public ModelAndView denyBook(@RequestParam int bookId) {
+		ModelAndView result;
+		
+		bookService.denyBook(bookId);
+		result = new ModelAndView("redirect:list.do");
+		
+		return result;
 	}
 	
 

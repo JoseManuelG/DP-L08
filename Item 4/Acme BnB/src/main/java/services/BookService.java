@@ -9,8 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.BookRepository;
+import domain.Actor;
 import domain.Book;
 import domain.CreditCard;
+import domain.Lessor;
 import domain.Property;
 import domain.Tenant;
 
@@ -29,7 +31,6 @@ public class BookService {
 	
 	@Autowired
 	private LessorService lessorService;
-
 
 	// Simple CRUD methods --------------------------------------
 	public Book create(Property property, Tenant tenant) {
@@ -91,8 +92,7 @@ public class BookService {
 		book = this.findOne(bookId);
 		checkOwnerIsPrincipal(book);
 		checkStateIsPending(book);
-		//TODO: ï¿½Checkear que las fechas sean futuras? (Quï¿½ sentido tiene aceptar un book que se ha pasado de fecha...)
-		
+		//TODO: ¿Checkear que las fechas sean futuras? (Qué sentido tiene aceptar un book que se ha pasado de fecha...)
 		book.setState("ACCEPTED");
 		bookRepository.save(book);
 		lessorService.addFee();

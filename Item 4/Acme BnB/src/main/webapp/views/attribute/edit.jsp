@@ -10,7 +10,7 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
-<form:form action="socialIdentity/edit.do" modelAttribute="attribute">
+<form:form action="attribute/administrator/edit.do" modelAttribute="attribute">
 
 		<form:hidden path="id" />
 		<form:hidden path="version" />
@@ -26,6 +26,6 @@
 	<jstl:if test="${attribute.id ne 0}">
 		<acme:submit name="delete" code="attribute.delete"/>
 	</jstl:if>
-	<acme:cancel url="javascript:window.location.href='attribute/list.do'" code="attribute.cancel"/>
+	<acme:cancel url="javascript:window.location.href='attribute/administrator/list.do'" code="attribute.cancel"/>
 	<br>
 </form:form>

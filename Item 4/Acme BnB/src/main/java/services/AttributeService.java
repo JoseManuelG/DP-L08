@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -67,9 +68,10 @@ public class AttributeService {
 	@SuppressWarnings("static-access")
 	public Attribute save(Attribute attribute) {
 		Assert.hasText(attribute.getName(), "El atributo debe tener un nombre");
-		UserAccount account = loginService.getPrincipal();
-		Assert.isTrue(account.getAuthorities().contains(Authority.ADMINISTRATOR), "Debes ser un Administrador para editar los Attributes");
-
+		ArrayList<Authority>authorities=new ArrayList<Authority>();
+		authorities.addAll(loginService.getPrincipal().getAuthorities());
+		Assert.isTrue(authorities.get(0).getAuthority().equals(Authority.ADMINISTRATOR),"Para poder Guardar un Attribute debes ser admninistrador");
+		
 		Attribute result;
 		result = attributeRepository.save(attribute);
 
@@ -80,9 +82,9 @@ public class AttributeService {
 	public void delete(Attribute attribute) {
 		Assert.notNull(attribute, "El attributeo no puede ser nulo");
 		Assert.isTrue(attribute.getId() != 0, "El attributeo debe estar en la base de datos");
-		UserAccount account = loginService.getPrincipal();
-		Assert.isTrue(account.getAuthorities().contains(Authority.ADMINISTRATOR), "Debes ser un Administrador para editar los Attributes");
-
+		ArrayList<Authority>authorities=new ArrayList<Authority>();
+		authorities.addAll(loginService.getPrincipal().getAuthorities());
+		Assert.isTrue(authorities.get(0).getAuthority().equals(Authority.ADMINISTRATOR),"Para poder Guardar un Attribute debes ser admninistrador");
 		attributeRepository.delete(attribute);
 	}
 
