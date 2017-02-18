@@ -140,10 +140,11 @@ public class BookService {
 		book = this.create(property, tenant);
 		book.setCheckInDate(bookForm.getCheckInDate());
 		book.setCheckOutDate(bookForm.getCheckOutDate());
-		book.setCreditCard(creditCard);
 		book.setSmoker(bookForm.getSmoker());
-		
+
 		validator.validate(book, bindingResult);
+		book.setCreditCard(creditCard);
+		validator.validate(creditCard, bindingResult);
 		return book;
 	}
 	

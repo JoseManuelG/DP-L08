@@ -44,14 +44,17 @@ public class BookTenantController extends AbstractController {
 	@RequestMapping(value = "/book", method = RequestMethod.GET)
 	public ModelAndView book(@RequestParam int propertyId) {
 		ModelAndView result;
+		BookForm bookForm;
 		
-		result = createEditModelAndView(new BookForm());
+		bookForm = new BookForm();
+		bookForm.setPropertyId(propertyId);
+		result = createEditModelAndView(bookForm);
 		
 		return result;
 	}
 	
 
-	@RequestMapping(value = "/ecdit", method = RequestMethod.POST, params = "book")
+	@RequestMapping(value = "/book", method = RequestMethod.POST, params = "book")
 	public ModelAndView edit(BookForm bookForm, BindingResult bindingResult) {
 		ModelAndView result;
 		Book book;
@@ -62,7 +65,7 @@ public class BookTenantController extends AbstractController {
 		} else {
 			try{
 				bookService.save(book);
-				result = new ModelAndView("redirect:list()");
+				result = new ModelAndView("redirect:list.do");
 			} catch (IllegalArgumentException e) {
 				result = createEditModelAndView(bookForm, e.getMessage());
 			}
@@ -82,7 +85,7 @@ public class BookTenantController extends AbstractController {
 	protected ModelAndView createEditModelAndView(BookForm bookForm, String message) {
 		ModelAndView result;
 
-		result = new ModelAndView("book/tenant/book");
+		result = new ModelAndView("book/edit");
 		result.addObject("bookForm", bookForm);
 		result.addObject("message", message);
 

@@ -2,6 +2,8 @@ package forms;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 public class BookForm {
 
@@ -23,7 +25,8 @@ public class BookForm {
 	public void setPropertyId(int propertyId) {
 		this.propertyId = propertyId;
 	}
-	
+
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getCheckInDate() {
 		return checkInDate;
 	}
@@ -31,7 +34,8 @@ public class BookForm {
 	public void setCheckInDate(Date checkInDate) {
 		this.checkInDate = checkInDate;
 	}
-	
+
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getCheckOutDate() {
 		return checkOutDate;
 	}
