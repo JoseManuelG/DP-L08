@@ -18,13 +18,13 @@
 	<acme:textbox code="book.checkout" path="checkOutDate" placeholder="dd/mm/aaaa"/>
 	<acme:checkbox code="book.smoker" path="smoker"/>
 	<fieldset>
-	<label><spring:message code="book.credit.card"/></label>
-	<acme:textbox code="credit.card.brand.name" path="brandName"/>
-	<acme:textbox code="credit.card.cvv.code" path="cvvCode"/>
-	<acme:textbox code="credit.card.expiration.month" path="expirationMonth"/>
-	<acme:textbox code="credit.card.expiration.year" path="expirationYear"/>
-	<acme:textbox code="credit.card.holder.name" path="holderName"/>
-	<acme:textbox code="credit.card.number" path="number"/>
+	<legend><spring:message code="book.credit.card"/></legend>
+	<acme:textbox code="credit.card.brand.name" path="creditCard.brandName"/>
+	<acme:textbox code="credit.card.cvv.code" path="creditCard.cvvCode"/>
+	<acme:textbox code="credit.card.expiration.month" path="creditCard.expirationMonth"/>
+	<acme:textbox code="credit.card.expiration.year" path="creditCard.expirationYear"/>
+	<acme:textbox code="credit.card.holder.name" path="creditCard.holderName"/>
+	<acme:textbox code="credit.card.number" path="creditCard.number"/>
 	</fieldset>
 	
 	<acme:submit name="book" code="book"/>

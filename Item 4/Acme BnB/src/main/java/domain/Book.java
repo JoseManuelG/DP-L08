@@ -26,7 +26,7 @@ public class Book extends DomainEntity {
 
 	private Date	checkInDate;
 	private Date	checkOutDate;
-	private Boolean	smoker;
+	private boolean	smoker;
 	private String	state;
 	private Double	totalAmount;
 
@@ -53,8 +53,7 @@ public class Book extends DomainEntity {
 		this.checkOutDate = checkOutDate;
 	}
 
-	@NotNull
-	public Boolean getSmoker() {
+	public boolean getSmoker() {
 		return smoker;
 	}
 

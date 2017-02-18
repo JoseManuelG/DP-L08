@@ -40,9 +40,6 @@ public class BookService {
 
 	@Autowired
 	private PropertyService	propertyService;
-
-	@Autowired
-	private CreditCardService cardService;
 	
 	@Autowired
 	private Validator validator;
@@ -128,23 +125,18 @@ public class BookService {
 	
 	public Book reconstruct(BookForm bookForm, BindingResult bindingResult) {
 		Book book;
-		CreditCard creditCard;
 		Property property;
 		Tenant tenant;
 		
-		creditCard = cardService.create();
 		property = propertyService.findOne(bookForm.getPropertyId());
 		tenant = tenantService.findByPrincipal();
-		reconstructCreditCard(creditCard, bookForm);
 		
 		book = this.create(property, tenant);
 		book.setCheckInDate(bookForm.getCheckInDate());
 		book.setCheckOutDate(bookForm.getCheckOutDate());
+		book.setCreditCard(bookForm.getCreditCard());
 		book.setSmoker(bookForm.getSmoker());
-
 		validator.validate(book, bindingResult);
-		book.setCreditCard(creditCard);
-		validator.validate(creditCard, bindingResult);
 		return book;
 	}
 	
@@ -165,16 +157,6 @@ public class BookService {
 		owner = book.getProperty().getLessor(); //TODO: �Hacer mediante query este tipo de acceso?
 		
 		Assert.isTrue(owner.equals(principal));
-	}
-	
-	private void reconstructCreditCard(CreditCard creditCard,BookForm bookForm) {
-		creditCard.setBrandName(bookForm.getBrandName());
-		creditCard.setCvvCode(bookForm.getCvvCode());
-		creditCard.setExpirationMonth(bookForm.getExpirationMonth());
-		creditCard.setExpirationYear(bookForm.getExpirationYear());
-		creditCard.setHolderName(bookForm.getHolderName());
-		creditCard.setNumber(bookForm.getNumber());
-		
 	}
 
 	private void calculateTotalAmount(Book book) {
