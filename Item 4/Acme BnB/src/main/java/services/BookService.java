@@ -24,6 +24,12 @@ public class BookService {
 
 
 	// Supporting Services --------------------------------------
+	@Autowired
+	private ActorService	actorService;
+	
+	@Autowired
+	private LessorService lessorService;
+
 
 	// Simple CRUD methods --------------------------------------
 	public Book create(Property property, Tenant tenant) {
@@ -76,6 +82,50 @@ public class BookService {
 	public boolean existsCreditCardForAnyBook(CreditCard creditCard){
 		boolean result = false;
 		result = bookRepository.existsCreditCardForAnyBook(creditCard.getId());
+		return result;
+	}
+	
+	public void acceptBook(int bookId) {
+		Book book;
+		
+		book = this.findOne(bookId);
+		checkOwnerIsPrincipal(book);
+		checkStateIsPending(book);
+		//TODO: �Checkear que las fechas sean futuras? (Qu� sentido tiene aceptar un book que se ha pasado de fecha...)
+		
+		book.setState("ACCEPTED");
+		bookRepository.save(book);
+		lessorService.addFee();
+		
+		
+	}
+	
+	public void denyBook(int bookId) {
+		Book book;
+		
+		book = this.findOne(bookId);
+		checkOwnerIsPrincipal(book);
+		checkStateIsPending(book);
+		
+		book.setState("DENIED");
+		bookRepository.save(book);
+	}
+	
+	private void checkStateIsPending(Book book) {
+		Assert.isTrue(book.getState().equals("PENDING"));
+	}
+	
+	private void checkOwnerIsPrincipal(Book book) {
+		Actor principal;
+		Lessor owner;
+		
+		principal = actorService.findByPrincipal();
+		owner = book.getProperty().getLessor(); //TODO: �Hacer mediante query este tipo de acceso?
+		
+		Assert.isTrue(owner.equals(principal));
+	}
+	public Collection<Book> findBooksForProperty(Property property) {
+		Collection<Book> result = bookRepository.findBooksForPropertyId(property.getId());
 		return result;
 	}
 }

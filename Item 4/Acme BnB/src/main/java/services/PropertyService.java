@@ -82,14 +82,20 @@ public class PropertyService {
 		propertyRepository.exists(property.getId());
 		Assert.isTrue(loginService.getPrincipal().equals(property.getLessor().getUserAccount()));
 		Lessor lessor = property.getLessor();
-		Collection<Property> properties = lessor.getProperties();
+		Collection<Property> properties = lessor.getLessorProperties();
 		properties.remove(property);
-		lessor.setProperties(properties);
+		lessor.setLessorProperties(properties);
 		lessorService.save(lessor);
 		propertyRepository.delete(property);
 
 	}
 
+
 	// Other Bussiness Methods --------------------------------------------------------
+	
+	public Collection<Property> findPropertiesByLessor(Lessor lessor) {
+		Collection<Property> result = propertyRepository.findPropertiesByLessorId(lessor.getId());
+		return result;
+	}
 
 }
