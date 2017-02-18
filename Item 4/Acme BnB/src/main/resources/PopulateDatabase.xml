@@ -635,6 +635,7 @@
 		<property name="property" ref="property2Lessor1"/>
 		<property name="tenant" ref="tenant1"/>		
 		<property name="invoice"><null/></property>
+		<property name="lessor" ref="lessor1"/>
 	</bean>
 	
 	<bean id="book3Tenant1" class="domain.Book">
@@ -647,6 +648,7 @@
 		<property name="property" ref="property6Lessor1"/>
 		<property name="tenant" ref="tenant1"/>		
 		<property name="invoice"><null/></property>
+		<property name="lessor" ref="lessor1"/>
 	</bean>
 	
 	<bean id="book4Tenant1" class="domain.Book">
@@ -659,6 +661,7 @@
 		<property name="property" ref="property6Lessor1"/>
 		<property name="tenant" ref="tenant1"/>		
 		<property name="invoice"><null/></property>
+		<property name="lessor"><null/></property>
 	</bean>
 	
 	<bean id="book5Tenant1" class="domain.Book">
@@ -671,6 +674,7 @@
 		<property name="property" ref="property6Lessor1"/>
 		<property name="tenant" ref="tenant1"/>		
 		<property name="invoice"><null/></property>
+		<property name="lessor" ref="lessor1"/>
 	</bean>
 	
 	<bean id="book6Tenant1" class="domain.Book">
@@ -683,6 +687,7 @@
 		<property name="property" ref="property6Lessor1"/>
 		<property name="tenant" ref="tenant1"/>		
 		<property name="invoice"><null/></property>
+		<property name="lessor"><null/></property>
 	</bean>
 	
 	<!-- Invoice 

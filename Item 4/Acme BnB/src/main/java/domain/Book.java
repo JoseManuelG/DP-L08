@@ -132,9 +132,8 @@ public class Book extends DomainEntity {
 		this.tenant = tenant;
 	}
 	
-	@NotNull
 	@Valid
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	public Lessor getLessor() {
 		return lessor;
 	}
