@@ -30,12 +30,13 @@ public class FinderTenantController extends AbstractController {
 		ModelAndView result;
 		Collection<Property> results;
 		Finder finder;
-		Date oneHourAgo;
+		Date oneHourAgo, lastSearch;
 
 		finder = finderService.findByPrincipal();
 
-		oneHourAgo = new Date(System.currentTimeMillis() + 3600000);
-		if (finder.getCacheMoment().after(oneHourAgo)) {
+		oneHourAgo = new Date(System.currentTimeMillis() - 3600000);
+		lastSearch = new Date(finder.getCacheMoment().getTime());
+		if (lastSearch.after(oneHourAgo)) {
 			results = finder.getResults();
 		} else {
 			results = new ArrayList<Property>();

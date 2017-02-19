@@ -53,7 +53,7 @@ public class FinderService {
 
 	public Finder save(Finder finder) {
 		Finder result, old;
-		Double min;
+		Double min, max;
 		Collection<Property> results;
 
 		Assert.notNull(finder);
@@ -66,7 +66,7 @@ public class FinderService {
 
 		result = finder;
 
-		if (!(finder.getDestination().equals(old.getDestination()) && finder.getKeyword().equals(old.getKeyword()) && finder.getMaxPrice() == old.getMaxPrice() && finder.getMinPrice() == old.getMaxPrice())) {
+		if (!(finder.getDestination().equals(old.getDestination()) && finder.getKeyword().equals(old.getKeyword()) && finder.getMaxPrice() == old.getMaxPrice() && finder.getMinPrice() == old.getMinPrice())) {
 			result.setCacheMoment(new Date(System.currentTimeMillis() - 100));
 			if (result.getMinPrice() == null) {
 				min = 0.0;
