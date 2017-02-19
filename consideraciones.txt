@@ -7,6 +7,7 @@ faltan cascades delete que poner
 ¿Añadir {NotBlank} a los URL en UML? 
 Añadir min(0) a fee del configuration en UML y java.
 b+ tree y @safehtml
+En view/display de property poner datos de su lessor y de sus attributes
 
 -------   Solucionado  ------------
 En los UML hay que quitar {NotBlank} a los String optativos.

@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -29,8 +30,14 @@ public class FinderService {
 	// Simple CRUD methods --------------------------------------
 	public Finder create() {
 		Finder result;
+		Date oneHourAgo;
+
+		oneHourAgo = new Date(System.currentTimeMillis() - 3600000);
 
 		result = new Finder();
+		result.setDestination("Spain");
+		result.setCacheMoment(oneHourAgo);
+		result.setResults(new ArrayList<Property>());
 
 		return result;
 	}
@@ -53,8 +60,12 @@ public class FinderService {
 
 	public Finder save(Finder finder) {
 		Finder result, old;
-		Double min, max;
+		Double min;
 		Collection<Property> results;
+		Date oneHourAgo, lastSearch;
+
+		oneHourAgo = new Date(System.currentTimeMillis() - 3600000);
+		lastSearch = new Date(finder.getCacheMoment().getTime());
 
 		Assert.notNull(finder);
 
@@ -66,7 +77,7 @@ public class FinderService {
 
 		result = finder;
 
-		if (!(finder.getDestination().equals(old.getDestination()) && finder.getKeyword().equals(old.getKeyword()) && finder.getMaxPrice() == old.getMaxPrice() && finder.getMinPrice() == old.getMinPrice())) {
+		if (lastSearch.before(oneHourAgo) || !(finder.getDestination().equals(old.getDestination()) && finder.getKeyword().equals(old.getKeyword()) && finder.getMaxPrice() == old.getMaxPrice() && finder.getMinPrice() == old.getMinPrice())) {
 			result.setCacheMoment(new Date(System.currentTimeMillis() - 100));
 			if (result.getMinPrice() == null) {
 				min = 0.0;

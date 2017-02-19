@@ -51,7 +51,7 @@
 		<acme:column sorteable="false" code="finder.property.address" path="address"/>
 		
 		<display:column>
-			<a href="property/display.do?propertyId=${row.id}">
+			<a href="property/view.do?propertyId=${row.id}">
 				<spring:message	code="finder.display" />
 			</a>
 		</display:column>
