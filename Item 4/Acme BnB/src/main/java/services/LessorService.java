@@ -112,4 +112,13 @@ public class LessorService {
 		principal.setTotalFee(actualFee + configurationService.findOne().getFee());
 	}
 
+	public double findFeeFromPrincipal() {
+		Lessor principal;
+		
+		principal = findByPrincipal();
+		Assert.notNull(principal);
+		
+		return principal.getTotalFee();
+	}
+
 }
