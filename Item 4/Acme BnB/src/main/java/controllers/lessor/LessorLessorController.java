@@ -11,7 +11,7 @@ import controllers.AbstractController;
 
 @Controller
 @RequestMapping("/lessor")
-public class LessorController extends AbstractController {
+public class LessorLessorController extends AbstractController {
 
 	// Services -------------------------------------------------------------
 
