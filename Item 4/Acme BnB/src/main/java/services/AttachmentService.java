@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.AttachmentRepository;
+import security.LoginService;
 import domain.Attachment;
+import domain.Audit;
 
 @Service
 @Transactional
@@ -23,6 +25,10 @@ public class AttachmentService {
 
 
 	// Supporting Services ------------------------------------------------------------
+	
+	@Autowired
+	private LoginService	loginService;
+
 	// Constructor --------------------------------------------------------------------
 
 	public AttachmentService() {
@@ -51,12 +57,30 @@ public class AttachmentService {
 	}
 
 	public Attachment save(Attachment attachment) {
-		Assert.notNull(attachment, "La tarjeta de crédito no puede ser nula");
+		Assert.notNull(attachment, "El attachment no puede ser nulo");
 		Attachment result;
 		result = attachmentRepository.save(attachment);
 		return result;
 	}
+	@SuppressWarnings("static-access")
+	public void delete(Attachment attachment) {
+		Assert.notNull(attachment, "El attachment no puede ser nulo");
+		Assert.isTrue(attachment.getId() != 0, "El attachment debe estar antes en la base de datos");
+		attachmentRepository.exists(attachment.getId());
+		Assert.isTrue(loginService.getPrincipal().equals(attachment.getAudit().getAuditor().getUserAccount()));
+
+		attachmentRepository.delete(attachment);
+
+	}
+
+	
 
 	// Other Bussiness Methods --------------------------------------------------------
 
+	
+	public Collection<Attachment> findAllAttachmentsByAudit(Audit audit) {
+		Collection<Attachment> result;
+		result = attachmentRepository.findAllAttachmentsByAuditId(audit.getId());
+		return result;
+	}
 }
