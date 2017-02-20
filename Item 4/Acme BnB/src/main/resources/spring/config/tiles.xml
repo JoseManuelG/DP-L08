@@ -35,7 +35,8 @@
 		<value>/views/finder/tiles.xml</value>		
 		<value>/views/property/tiles.xml</value>
 		<value>/views/book/tiles.xml</value>			
-		<value>/views/socialIdentity/tiles.xml</value>		
+		<value>/views/socialIdentity/tiles.xml</value>	
+		<value>/views/attributeValue/tiles.xml</value>		
 		
 	</util:list>
 

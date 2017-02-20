@@ -35,6 +35,7 @@
 		<value>/views/finder/messages</value>
 		<value>/views/property/messages</value>
 		<value>/views/socialIdentity/messages</value>
+		<value>/views/attributeValue/messages</value>
 	</util:list>
 
 </beans>

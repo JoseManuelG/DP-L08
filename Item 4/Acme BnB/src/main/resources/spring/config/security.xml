@@ -78,6 +78,8 @@
 		<security:intercept-url pattern="/property/lessor/myProperties.do" access="hasRole('LESSOR')" />
 		<security:intercept-url pattern="/property/lessor/create.do" access="hasRole('LESSOR')" />
 		<security:intercept-url pattern="/property/lessor/edit.do" access="hasRole('LESSOR')" />
+		<security:intercept-url pattern="/AttributeValue/lessor/edit.do" access="hasRole('LESSOR')" />
+		<security:intercept-url pattern="/AttributeValue/lessor/create.do" access="hasRole('LESSOR')" />
 		
 		
 	<!-- TENANT -->
