@@ -18,10 +18,10 @@
 		<form:hidden path="version" />
 		<form:hidden path="property" />
 		
-		<jstl:if test="${id eq 0 }">
-		<acme:select items="attributes" itemLabel="attribute" code="attributeValue.attribute" path="attribute"/>
-		</jstl:if>	
 		<jstl:if test="${id ne 0 }">
+		<acme:select items="${attributes}" itemLabel="attribute" code="attributeValue.attribute" path="attribute"/>
+		</jstl:if>	
+		<jstl:if test="${id eq 0 }">
 		<form:hidden path="attribute" />
 		</jstl:if>
 	

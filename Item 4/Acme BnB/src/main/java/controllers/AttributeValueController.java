@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.validation.Valid;
 
@@ -53,8 +54,7 @@ public class AttributeValueController extends AbstractController {
 		AttributeValue attributeValue= attributeValueService.create();
 		Property property=propertyService.findOne(propertyId);
 		attributeValue.setProperty(property);
-		ArrayList<Attribute>attributes= new ArrayList<Attribute>();
-				attributes.addAll(attributeService.findAll());
+		Collection<Attribute>attributes= attributeService.findAll();
 		for(AttributeValue aux:property.getAttributeValues()){
 			attributes.remove(aux.getAttribute());
 		}
@@ -66,9 +66,9 @@ public class AttributeValueController extends AbstractController {
 	
 	}
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public @ResponseBody ModelAndView save(int attributeId) {
+	public @ResponseBody ModelAndView save(int attributeValueId) {
 		ModelAndView result= new ModelAndView("attributeValue/lessor/edit");
-		AttributeValue attributeValue= attributeValueService.findOne(attributeId);
+		AttributeValue attributeValue= attributeValueService.findOne(attributeValueId);
 
 		result.addObject("attributeValue",attributeValue);
 		
