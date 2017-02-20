@@ -13,6 +13,7 @@ import repositories.AttributeValueRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Actor;
 import domain.AttributeValue;
 import domain.Property;
 
@@ -27,7 +28,7 @@ public class AttributeValueService {
 
 	//Supporting services---------------------------—
 	@Autowired
-	private LoginService				loginService;
+	private ActorService actorService;
 
 
 	//Constructors------------------------------------
@@ -66,10 +67,16 @@ public class AttributeValueService {
 
 	@SuppressWarnings("static-access")
 	public AttributeValue save(AttributeValue attributeValue) {
+		Assert.notNull(attributeValue,"El attributeValue no puede ser nulo");
+		
 		Assert.hasText(attributeValue.getValue(), "El atributeValue debe tener un valor");
-		UserAccount account = loginService.getPrincipal();
-		Assert.isTrue(account.getAuthorities().contains(Authority.ADMINISTRATOR), "Debes ser un Administrador para editar los AttributeValues");
-
+		
+		Assert.notNull(attributeValue.getProperty(),"Un AttributeValue debe estar asignado a una propperty");
+		Assert.notNull(attributeValue.getAttribute(),"Un AttributeValue debe estar asignado a un attribute");
+		
+		Actor actor = actorService.findByPrincipal();
+		Assert.isTrue(actor.equals(attributeValue.getProperty().getLessor()), "Solo puedes editar tus propias propiedades");
+		
 		AttributeValue result;
 		result = attributeValueRepository.save(attributeValue);
 
@@ -80,9 +87,8 @@ public class AttributeValueService {
 	public void delete(AttributeValue attributeValue) {
 		Assert.notNull(attributeValue, "El attributeValueo no puede ser nulo");
 		Assert.isTrue(attributeValue.getId() != 0, "El attributeValueo debe estar en la base de datos");
-		UserAccount account = loginService.getPrincipal();
-		Assert.isTrue(account.getAuthorities().contains(Authority.ADMINISTRATOR), "Debes ser un Administrador para editar los AttributeValues");
-
+		Actor actor = actorService.findByPrincipal();
+		Assert.isTrue(actor.equals(attributeValue.getProperty().getLessor()), "Solo puedes editar tus propias propiedades");
 		attributeValueRepository.delete(attributeValue);
 	}
 
