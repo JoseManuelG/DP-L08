@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -22,7 +23,7 @@ public class Tenant extends Customer {
 
 
 	@Valid
-	@OneToOne
+	@OneToOne(optional = false, cascade = CascadeType.ALL)
 	public Finder getFinder() {
 		return finder;
 	}

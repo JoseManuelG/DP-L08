@@ -79,7 +79,7 @@ public class Property extends DomainEntity {
 
 	@NotNull
 	@Valid
-	@ManyToOne(optional = false)
+	@ManyToOne
 	public Lessor getLessor() {
 		return lessor;
 	}

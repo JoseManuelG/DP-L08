@@ -13,7 +13,16 @@
 
 <form:form action="lessor/edit.do" modelAttribute="actorForm">
 	
-	<form:hidden path="typeOfActor" />	
+	<form:hidden path="typeOfActor" />
+	<form:hidden path="lessor.id" />	
+	<form:hidden path="lessor.totalFee" />
+	<form:hidden path="lessor.books" />
+	<form:hidden path="lessor.comments" />
+	<form:hidden path="lessor.creditCard" />
+	<form:hidden path="lessor.postedComments" />
+	<form:hidden path="lessor.lessorProperties" />
+	<form:hidden path="lessor.socialIdentities" />
+	
 	<br />
 	
 	<acme:textbox code="lessor.username" path="lessor.userAccount.username"/>

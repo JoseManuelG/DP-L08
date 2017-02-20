@@ -7,12 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.BookRepository;
+import domain.Actor;
 import domain.Book;
 import domain.CreditCard;
+import domain.Lessor;
 import domain.Property;
 import domain.Tenant;
+import forms.BookForm;
 
 @Service
 @Transactional
@@ -24,6 +29,20 @@ public class BookService {
 
 
 	// Supporting Services --------------------------------------
+	@Autowired
+	private ActorService	actorService;
+	
+	@Autowired
+	private LessorService lessorService;
+	
+	@Autowired
+	private TenantService tenantService;
+
+	@Autowired
+	private PropertyService	propertyService;
+	
+	@Autowired
+	private Validator validator;
 
 	// Simple CRUD methods --------------------------------------
 	public Book create(Property property, Tenant tenant) {
@@ -57,12 +76,13 @@ public class BookService {
 		Book result;
 
 		Assert.notNull(book, "book.error.null");
+		calculateTotalAmount(book);
 		result = bookRepository.save(book);
 		Assert.notNull(result, "book.error.commit");
 
 		return result;
 	}
-
+	
 	public void delete(Book book) {
 		Assert.notNull(book, "book.error.null");
 
@@ -77,5 +97,76 @@ public class BookService {
 		boolean result = false;
 		result = bookRepository.existsCreditCardForAnyBook(creditCard.getId());
 		return result;
+	}
+	
+	public void acceptBook(int bookId) {
+		Book book;
+		
+		book = this.findOne(bookId);
+		checkOwnerIsPrincipal(book);
+		checkStateIsPending(book);
+		//TODO: ¿Checkear que las fechas sean futuras? (Qué sentido tiene aceptar un book que se ha pasado de fecha...)
+		book.setState("ACCEPTED");
+		bookRepository.save(book);
+		lessorService.addFee();
+		
+	}
+	
+	public void denyBook(int bookId) {
+		Book book;
+		
+		book = this.findOne(bookId);
+		checkOwnerIsPrincipal(book);
+		checkStateIsPending(book);
+		
+		book.setState("DENIED");
+		bookRepository.save(book);
+	}
+	
+	public Book reconstruct(BookForm bookForm, BindingResult bindingResult) {
+		Book book;
+		Property property;
+		Tenant tenant;
+		
+		property = propertyService.findOne(bookForm.getPropertyId());
+		tenant = tenantService.findByPrincipal();
+		
+		book = this.create(property, tenant);
+		book.setCheckInDate(bookForm.getCheckInDate());
+		book.setCheckOutDate(bookForm.getCheckOutDate());
+		book.setCreditCard(bookForm.getCreditCard());
+		book.setSmoker(bookForm.getSmoker());
+		validator.validate(book, bindingResult);
+		return book;
+	}
+	
+	public Collection<Book> findBooksForProperty(Property property) {
+		Collection<Book> result = bookRepository.findBooksForPropertyId(property.getId());
+		return result;
+	}
+	
+	private void checkStateIsPending(Book book) {
+		Assert.isTrue(book.getState().equals("PENDING"));
+	}
+	
+	private void checkOwnerIsPrincipal(Book book) {
+		Actor principal;
+		Lessor owner;
+		
+		principal = actorService.findByPrincipal();
+		owner = book.getProperty().getLessor(); //TODO: ï¿½Hacer mediante query este tipo de acceso?
+		
+		Assert.isTrue(owner.equals(principal));
+	}
+
+	private void calculateTotalAmount(Book book) {
+		int days;
+		long out, in;
+		
+		out = book.getCheckOutDate().getTime();
+		in = book.getCheckInDate().getTime();
+		days = (int) (out-in)/(1000 * 60 * 60 * 24);
+		
+		book.setTotalAmount(days*book.getProperty().getRate());
 	}
 }

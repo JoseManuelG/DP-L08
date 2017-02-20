@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -25,7 +26,7 @@ public class Book extends DomainEntity {
 
 	private Date	checkInDate;
 	private Date	checkOutDate;
-	private Boolean	smoker;
+	private boolean	smoker;
 	private String	state;
 	private Double	totalAmount;
 
@@ -52,8 +53,7 @@ public class Book extends DomainEntity {
 		this.checkOutDate = checkOutDate;
 	}
 
-	@NotNull
-	public Boolean getSmoker() {
+	public boolean getSmoker() {
 		return smoker;
 	}
 
@@ -86,11 +86,12 @@ public class Book extends DomainEntity {
 	private Invoice		invoice;
 	private Property	property;
 	private Tenant		tenant;
+	private Lessor 		lessor;
 
 
 	@NotNull
 	@Valid
-	@OneToOne(optional = false)
+	@OneToOne(optional = false, cascade = CascadeType.ALL)
 	public CreditCard getCreditCard() {
 		return creditCard;
 	}
@@ -129,6 +130,16 @@ public class Book extends DomainEntity {
 
 	public void setTenant(Tenant tenant) {
 		this.tenant = tenant;
+	}
+	
+	@Valid
+	@ManyToOne(optional = true)
+	public Lessor getLessor() {
+		return lessor;
+	}
+
+	public void setLessor(Lessor lessor) {
+		this.lessor = lessor;
 	}
 
 }

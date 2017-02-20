@@ -12,12 +12,12 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <fieldset>
-	<form:form action="finder/finder.do" modelAttribute="finder">
+	<form:form action="finder/tenant/finder.do" modelAttribute="finder">
 		<form:hidden path="id" />
 		<form:hidden path="version" />
-		<form:hidden path="properties" />
+		<form:hidden path="results" />
 		<form:hidden path="cacheMoment" />
-		
+
 		<acme:textbox code="finder.destination" path="destination"/>
 		<acme:textbox code="finder.minPrice" path="minPrice"/>
 		<acme:textbox code="finder.maxPrice" path="maxPrice"/>
@@ -27,31 +27,34 @@
 	</form:form>
 </fieldset>
 
-<jstl:if test="${!result.isEmpty()}">
-	<display:table pagesize="5" class="displaytag" name="result" requestURI="${requestURI}" id="row">
+<br/>
+
+<jstl:if test="${!results.isEmpty()}">
+	<display:table pagesize="5" class="displaytag" name="results" requestURI="${requestURI}" id="row">
 		
 		<!-- Action links -->
 		
 		<display:column>
-			<a href="book.do?propertyId=${row.id}">
+			<a href="book/tenant/book.do?propertyId=${row.id}">
 				<spring:message	code="finder.book" />
 			</a>
 		</display:column>
 		
 		<!-- Attributes -->
 		
-		<acme:columm sorteable="true" code="finder.property.name" path="name"/>
+		<acme:column sorteable="true" code="finder.property.name" path="name"/>
 		
-		<acme:columm sorteable="true" code="finder.property.rate" path="rate"/>
+		<acme:column sorteable="true" code="finder.property.rate" path="rate"/>
 		
-		<acme:columm sorteable="false" code="finder.property.description" path="description"/>
+		<acme:column sorteable="false" code="finder.property.description" path="description"/>
 		
-		<acme:columm sorteable="false" code="finder.property.address" path="address"/>
+		<acme:column sorteable="false" code="finder.property.address" path="address"/>
 		
-		<!-- TODO: añadir attributes y datos del propietario? -->
+		<display:column>
+			<a href="property/view.do?propertyId=${row.id}">
+				<spring:message	code="finder.display" />
+			</a>
+		</display:column>
 		
 	</display:table>
 </jstl:if>
-
-	
-<acme:cancel url="<spring:url value='/' />" code="finder.back"/>

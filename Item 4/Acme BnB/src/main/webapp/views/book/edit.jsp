@@ -10,22 +10,23 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
-<form:form action="socialIdentity/edit.do" modelAttribute="attribute">
+<form:form action="book/tenant/book.do" modelAttribute="bookForm">
 
-		<form:hidden path="id" />
-		<form:hidden path="version" />
-			
+	<form:hidden path="propertyId" />
 	
-
+	<acme:textbox code="book.checkin" path="checkInDate" placeholder="dd/mm/aaaa"/>
+	<acme:textbox code="book.checkout" path="checkOutDate" placeholder="dd/mm/aaaa"/>
+	<acme:checkbox code="book.smoker" path="smoker"/>
+	<fieldset>
+	<legend><spring:message code="book.credit.card"/></legend>
+	<acme:textbox code="credit.card.brand.name" path="creditCard.brandName"/>
+	<acme:textbox code="credit.card.cvv.code" path="creditCard.cvvCode"/>
+	<acme:textbox code="credit.card.expiration.month" path="creditCard.expirationMonth"/>
+	<acme:textbox code="credit.card.expiration.year" path="creditCard.expirationYear"/>
+	<acme:textbox code="credit.card.holder.name" path="creditCard.holderName"/>
+	<acme:textbox code="credit.card.number" path="creditCard.number"/>
+	</fieldset>
 	
-	<acme:textbox code="attribute.name" path="name"/>
-	<br />
-		
-	<acme:submit name="save" code="attribute.save"/>
-	
-	<jstl:if test="${attribute.id ne 0}">
-		<acme:submit name="delete" code="attribute.delete"/>
-	</jstl:if>
-	<acme:cancel url="javascript:window.location.href='attribute/list.do'" code="attribute.cancel"/>
-	<br>
+	<acme:submit name="book" code="book"/>
+	<acme:cancel url="finder/tenant/finder.do" code="book.cancel"/>
 </form:form>

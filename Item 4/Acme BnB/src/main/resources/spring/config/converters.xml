@@ -18,10 +18,25 @@
 	">
 
 	<util:list id="converters">
+	
 		<bean class="converters.LessorToStringConverter" /> 
- 		<bean class="converters.StringToLessorConverter" /> 
- 		<bean class="converters.ActorToStringConverter" /> 
- 		<bean class="converters.StringToActorConverter" /> 
+ 		<bean class="converters.StringToLessorConverter" />
+
+		<bean class="converters.ActorToStringConverter" />
+		<bean class="converters.StringToActorConverter" />
+ 		
+ 		<bean class="converters.AttributeValueToStringConverter" /> 
+ 		<bean class="converters.StringToAttributeValueConverter" /> 
+ 		
+ 		<bean class="converters.AuditToStringConverter" /> 
+ 		<bean class="converters.StringToAuditConverter" /> 
+ 		
+ 		<bean class="converters.BookToStringConverter" /> 
+ 		<bean class="converters.StringToBookConverter" />
+
+		<bean class="converters.PropertyToStringConverter" /> 
+		<bean class="converters.StringToPropertyConverter" />
+		
 	</util:list>
 	
 </beans>

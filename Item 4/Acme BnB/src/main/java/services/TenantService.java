@@ -27,6 +27,8 @@ public class TenantService {
 	private ActorService		actorService;
 	@Autowired
 	private CustomerService		customerService;
+	@Autowired
+	private FinderService		finderService;
 
 
 	// Simple CRUD methods --------------------------------------
@@ -37,6 +39,7 @@ public class TenantService {
 		actorService.setActorCollections(result);
 		customerService.setCustomerCollections(result);
 		result.setBooks(new HashSet<Book>());
+		result.setFinder(finderService.create());
 
 		return result;
 	}
@@ -79,6 +82,14 @@ public class TenantService {
 	public Tenant findByPrincipal() {
 		Tenant result;
 		result = tenantRepository.findByUserAccount(LoginService.getPrincipal().getId());
+		return result;
+	}
+	public Collection<Book> findAllBooksByPrincipal() {
+		Tenant principal;
+		Collection<Book> result;
+
+		principal = this.findByPrincipal();
+		result = tenantRepository.findAllBooksByPrincipal(principal.getId());
 		return result;
 	}
 

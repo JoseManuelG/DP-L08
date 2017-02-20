@@ -30,6 +30,12 @@ public class LessorService {
 		
 	@Autowired
 	private LoginService loginService;
+	
+	@Autowired
+	private ConfigurationService configurationService;
+	
+	@Autowired
+	private CustomerService customerService;
 		
 	
 	// Constructor --------------------------------------------------------------------
@@ -42,7 +48,8 @@ public class LessorService {
 	
 	public Lessor create(){
 		Lessor result=new Lessor();
-		result.setProperties(new ArrayList<Property>());
+		customerService.setCustomerCollections(result);
+		result.setLessorProperties(new ArrayList<Property>());
 		result.setBooks(new ArrayList<Book>());
 		return result;
 	}
@@ -58,7 +65,7 @@ public class LessorService {
 	}
 	
 	public Lessor save(Lessor lessor){
-		Assert.notNull(lessor,"SAVE: El sponsor no puede ser null");
+		Assert.notNull(lessor,"SAVE: El lessor no puede ser null");
 		Lessor result=lessorRepository.save(lessor);
 		return result;
 	}
@@ -94,6 +101,24 @@ public class LessorService {
 		principal = this.findByPrincipal();
 		result = lessorRepository.findAllBooksByPrincipal(principal.getId());
 		return result;
+	}
+
+	public void addFee() {
+		Lessor principal;
+		double actualFee;
+
+		principal = this.findByPrincipal();
+		actualFee = principal.getTotalFee();
+		principal.setTotalFee(actualFee + configurationService.findOne().getFee());
+	}
+
+	public double findFeeFromPrincipal() {
+		Lessor principal;
+		
+		principal = findByPrincipal();
+		Assert.notNull(principal);
+		
+		return principal.getTotalFee();
 	}
 
 }

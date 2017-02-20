@@ -34,7 +34,7 @@ public class Lessor extends Customer {
 	// Relationships ----------------------------------------------------------
 
 	private CreditCard				creditCard;
-	private Collection<Property>	properties;
+	private Collection<Property>	lessorProperties;
 	private Collection<Book>		books;
 
 
@@ -50,18 +50,18 @@ public class Lessor extends Customer {
 
 	@NotNull
 	@Valid
-	@OneToMany(mappedBy = "lessor")
-	public Collection<Property> getProperties() {
-		return properties;
+	@OneToMany(mappedBy="lessor")
+	public Collection<Property> getLessorProperties() {
+		return lessorProperties;
 	}
 
-	public void setProperties(Collection<Property> properties) {
-		this.properties = properties;
+	public void setLessorProperties(Collection<Property> lessorProperties) {
+		this.lessorProperties = lessorProperties;
 	}
 
 	@NotNull
 	@Valid
-	@OneToMany
+	@OneToMany(mappedBy="lessor")
 	public Collection<Book> getBooks() {
 		return books;
 	}
