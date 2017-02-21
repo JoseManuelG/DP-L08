@@ -40,6 +40,9 @@
 		<bean class="converters.PropertyToStringConverter" /> 
 		<bean class="converters.StringToPropertyConverter" />
 		
+		<bean class="converters.CreditCardToStringConverter" /> 
+		<bean class="converters.StringToCreditCardConverter" />
+		
 	</util:list>
 	
 </beans>
