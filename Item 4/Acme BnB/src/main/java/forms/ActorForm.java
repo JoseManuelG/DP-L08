@@ -16,11 +16,7 @@ public class ActorForm {
 	private String	email;
 	private String	phone;
 	private String	picture;
-<<<<<<< HEAD
 	private Boolean	acepted;
-=======
-	private String	acepted;
->>>>>>> dcba28344a984db5939e42ef4ba044cdb9c80dd7
 
 
 	//Constructor
@@ -83,19 +79,11 @@ public class ActorForm {
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
-<<<<<<< HEAD
 
 	public Boolean getAcepted() {
 		return acepted;
 	}
 	public void setAcepted(Boolean acepted) {
-=======
-	@NotBlank
-	public String getAcepted() {
-		return acepted;
-	}
-	public void setAcepted(String acepted) {
->>>>>>> dcba28344a984db5939e42ef4ba044cdb9c80dd7
 		this.acepted = acepted;
 	}
 
