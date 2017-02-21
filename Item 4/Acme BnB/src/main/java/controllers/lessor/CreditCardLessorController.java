@@ -81,7 +81,7 @@ public class CreditCardLessorController extends AbstractController {
 		} else {
 			try {
 				creditCardService.save(creditCard);		
-				result = new ModelAndView("redirect:../view.do?creditCardId");
+				result = new ModelAndView("redirect:../view.do?creditCardId="+creditCard.getId());
 			} catch (Throwable oops) {
 				result = createEditModelAndView(creditCard, "creditCard.commit.error");				
 			}

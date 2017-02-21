@@ -82,6 +82,9 @@
 		<security:intercept-url pattern="/property/lessor/edit.do" access="hasRole('LESSOR')" />
 		<security:intercept-url pattern="/AttributeValue/lessor/edit.do" access="hasRole('LESSOR')" />
 		<security:intercept-url pattern="/AttributeValue/lessor/create.do" access="hasRole('LESSOR')" />
+		<security:intercept-url pattern="/creditCard/lessor/edit.do" access="hasRole('LESSOR')" />
+		<security:intercept-url pattern="/creditCard/lessor/create.do" access="hasRole('LESSOR')" />
+		<security:intercept-url pattern="/creditCard/lessor/view.do" access="hasRole('LESSOR')" />
 		
 		
 	<!-- TENANT -->
