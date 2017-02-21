@@ -735,9 +735,27 @@
 	-->
 	
 	<bean id="attribute1" class="domain.Attribute">
-		<property name="name" value="Number of bedrooms"/>
+		<property name="name" value="Country"/>
 	</bean>
 	
+	
+	<bean id="attribute2" class="domain.Attribute">
+		<property name="name" value="Pronvice"/>
+	</bean>
+	
+	<bean id="attribute3" class="domain.Attribute">
+		<property name="name" value="State"/>
+	</bean>
+	
+	
+	<bean id="attribute4" class="domain.Attribute">
+		<property name="name" value="City"/>
+	</bean>
+	
+	
+	<bean id="attribute5" class="domain.Attribute">
+		<property name="name" value="Capacity"/>
+	</bean>
 	<!-- AttributeValue
 	
 	<bean id="" class="domain.AttributeValue">
