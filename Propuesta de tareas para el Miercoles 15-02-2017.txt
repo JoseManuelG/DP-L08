@@ -1,0 +1,10 @@
+Propuesta de tareas para el Miercoles 15/02/2017
+T.1:División de trabajo para siguiente fecha->Asignado a Roldán
+
+T.2:Dominio,Servicios,Repositorios:
+	T.2.1:{Auditor,Audits,Attachments}->Complejidad{2-3}-Acha
+	T.2.2:{Lessor,Property,CreditCard}->Complejidad{2-3}-Gavira
+	T.2.3:{Tenant,Book,Finder,Invoice}->Complejidad{2-3}-Javi
+	T.2.4:{Administrator,Attribute,AttributeValue}->Complejidad{2-3}-Roldán
+	T.2.5:{SocialIdentity,Actor,Configuration,Comment,Customer}.->Complejidad{2-3}-Arturo
+T.3:Populate.XML->Complejidad{3-4}-Dani

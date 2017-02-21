@@ -1,0 +1,823 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ * PopulateDatabase.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+	
+	<!-- UserAccount 
+
+	<bean id="" class="security.UserAccount">
+		<property name="username" value="" />
+		<property name="password" value="" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	-->
+	
+	<bean id="userAccountAdministrator1" class="security.UserAccount">
+		<property name="username" value="admin" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMINISTRATOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccountLessor1" class="security.UserAccount">
+		<property name="username" value="lessor1" />
+		<property name="password" value="5b61d56842232fc77308dbd3e99d99d4" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="LESSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccountTenant1" class="security.UserAccount">
+		<property name="username" value="tenant1" />
+		<property name="password" value="febe027753c1e6ce9acdbbd9c80a8407" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="TENANT" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccountAuditor1" class="security.UserAccount">
+		<property name="username" value="auditor1" />
+		<property name="password" value="175d2e7a63f386554a4dd66e865c3e14" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="AUDITOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Finder 
+	
+	<bean id="" class="domain.Finder">
+		<property name="destination" value=""/>
+		<property name="minPrice" value=""/>
+		<property name="maxPrice" value=""/>
+		<property name="keyword" value=""/>
+		<property name="cacheMoment" value=""/>
+		<property name="properties">
+			<list>
+				<ref bean=""/>
+			</list>
+		</property>
+	</bean>
+	
+	-->
+	
+	<bean id="finderTenant1" class="domain.Finder">
+		<property name="destination" value="Spain"/>
+		<property name="minPrice" value=""/>
+		<property name="maxPrice" value=""/>
+		<property name="keyword" value=""/>		
+		<property name="cacheMoment" value="11/14/2016 11:45"/>
+		<property name="results">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Administrator
+	
+	<bean id="" class="domain.Administrator">
+		<property name="name" value=""/>
+		<property name="surname" value=""/>
+		<property name="email" value=""/>
+		<property name="phone" value=""/>
+		<property name="picture" value=""/>
+		<property name="socialIdentities">
+			<list>
+				<ref bean=""/>
+			</list>
+		</property>	
+		<property name="userAccount" ref=""/>
+	</bean>
+	
+	-->
+	
+	<bean id="administrator1" class="domain.Administrator">
+		<property name="name" value="Mike"/>
+		<property name="surname" value="Smith"/>
+		<property name="email" value="mikesmith@gmail.com"/>
+		<property name="phone" value="+1234"/>
+		<property name="picture" value="http://iconizer.net/files/Seven_General_Icons/orig/administrator.png"/>
+		<property name="socialIdentities">
+			<list>
+			</list>
+		</property>	
+		<property name="userAccount" ref="userAccountAdministrator1"/>
+	</bean>
+	
+	<!-- Auditor
+	
+	<bean id="" class="domain.Auditor">
+		<property name="name" value=""/>
+		<property name="surname" value=""/>
+		<property name="email" value=""/>
+		<property name="phone" value=""/>
+		<property name="picture" value=""/>
+		<property name="socialIdentities">
+			<list>
+				<ref bean=""/>
+			</list>
+		</property>	
+		<property name="userAccount" ref=""/>
+		<property name="audits">
+			<list>
+				<ref bean=""/>
+			</list>
+		</property>
+		<property name="companyName" value=""/>
+	</bean>
+	
+	-->
+	
+	<bean id="auditor1" class="domain.Auditor">
+		<property name="name" value="Al"/>
+		<property name="surname" value="Pachino"/>
+		<property name="email" value="apc@gmail.com"/>
+		<property name="phone" value="+98756"/>
+		<property name="picture" value="http://cdn.gocertify.com/images/Auditing%20team%20going%20over%20report.jpg"/>
+		<property name="socialIdentities">
+			<list>
+			</list>
+		</property>	
+		<property name="userAccount" ref="userAccountAuditor1"/>
+		<property name="audits">
+			<list>
+				<ref bean="audit1Auditor1"/>
+			</list>
+		</property>
+		<property name="companyName" value="Sample Company"/>
+	</bean>
+	
+	<!-- Lessor
+	
+	<bean id="" class="domain.Lessor">
+		<property name="name" value=""/>
+		<property name="surname" value=""/>
+		<property name="email" value=""/>
+		<property name="phone" value=""/>
+		<property name="picture" value=""/>
+		<property name="socialIdentities">
+			<list>
+				<ref bean=""/>
+			</list>
+		</property>	
+		<property name="userAccount" ref=""/>
+		<property name="comments">
+			<list>
+				<ref bean=""/>
+			</list>
+		</property>	
+		<property name="postedComments">
+			<list>
+				<ref bean=""/>
+			</list>
+		</property>
+		<property name="creditCard" ref=""/>
+		<property name="lessorProperties">
+			<list>
+				<ref bean=""/>
+			</list>
+		</property>
+		<property name="books">
+			<list>
+				<ref bean=""/>
+			</list>
+		</property>
+		<property name="totalFee" value=""/>
+	</bean>
+	
+	-->
+	
+	<bean id="lessor1" class="domain.Lessor">
+		<property name="name" value="Steve"/>
+		<property name="surname" value="Cooler"/>
+		<property name="email" value="stevecooler@gmail.com"/>
+		<property name="phone" value="+3478978"/>
+		<property name="picture" value="http://cdn2.dibujos.net/dibujos/pintar/cara-1.png"/>
+		<property name="socialIdentities">
+			<list>
+				<ref bean="socialIdentity1Lessor1"/>
+			</list>
+		</property>	
+		<property name="userAccount" ref="userAccountLessor1"/>
+		<property name="comments">
+			<list>
+				<ref bean="comment1Lessor1"/>
+			</list>
+		</property>	
+		<property name="postedComments">
+			<list>
+				<ref bean="comment1Lessor1"/>
+			</list>
+		</property>
+		<property name="creditCard" ref="creditCardLessor1"/>
+		<property name="lessorProperties">
+			<list>
+				<ref bean="property1Lessor1"/>
+				<ref bean="property2Lessor1"/>
+				<ref bean="property3Lessor1"/>
+				<ref bean="property4Lessor1"/>
+				<ref bean="property5Lessor1"/>
+				<ref bean="property6Lessor1"/>
+			</list>
+		</property>
+		<property name="books">
+			<list>
+				<ref bean="book1Tenant1"/>
+				<ref bean="book2Tenant1"/>
+				<ref bean="book3Tenant1"/>
+				<ref bean="book4Tenant1"/>
+				<ref bean="book5Tenant1"/>
+				<ref bean="book6Tenant1"/>
+			</list>
+		</property>
+		<property name="totalFee" value="0.0"/>
+	</bean>
+	
+	<!-- Tenant
+	
+	<bean id="" class="domain.Tenant">
+		<property name="name" value=""/>
+		<property name="surname" value=""/>
+		<property name="email" value=""/>
+		<property name="phone" value=""/>
+		<property name="picture" value=""/>
+		<property name="socialIdentities">
+			<list>
+				<ref bean=""/>
+			</list>
+		</property>	
+		<property name="userAccount" ref=""/>
+		<property name="comments">
+			<list>
+				<ref bean=""/>
+			</list>
+		</property>	
+		<property name="postedComments">
+			<list>
+				<ref bean=""/>
+			</list>
+		</property>
+		<property name="finder" ref=""/>
+		<property name="books">
+			<list>
+				<ref bean=""/>
+			</list>
+		</property>
+	</bean>
+	
+	-->
+	
+	<bean id="tenant1" class="domain.Tenant">
+		<property name="name" value="Billy"/>
+		<property name="surname" value="Jean"/>
+		<property name="email" value="billyjean@gmail.com"/>
+		<property name="phone" value="+35789"/>
+		<property name="picture" value="http://www.efeeme.com/wp-content/uploads/michael-jackson-26-02-14-b.jpg"/>
+		<property name="socialIdentities">
+			<list>
+			</list>
+		</property>	
+		<property name="userAccount" ref="userAccountTenant1"/>
+		<property name="comments">
+			<list>
+			</list>
+		</property>	
+		<property name="postedComments">
+			<list>
+			</list>
+		</property>
+		<property name="finder" ref="finderTenant1"/>
+		<property name="books">
+			<list>
+				<ref bean="book1Tenant1"/>
+				<ref bean="book2Tenant1"/>
+				<ref bean="book3Tenant1"/>
+				<ref bean="book4Tenant1"/>
+				<ref bean="book5Tenant1"/>
+				<ref bean="book6Tenant1"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Property 
+	
+	<bean id="" class="domain.Property">
+		<property name="name" value=""/>
+		<property name="rate" value=""/>
+		<property name="description" value=""/>	
+		<property name="address" value=""/>	
+		<property name="lessor" ref=""/>		
+		<property name="audits">
+			<list>
+				<ref bean=""/>
+			</list>
+		</property>
+		<property name="attributeValues">
+			<list>
+				<ref bean=""/>
+			</list>
+		</property>
+		<property name="books">
+			<list>
+				<ref bean=""/>
+			</list>
+		</property>
+	</bean>
+	
+	-->
+	
+	<bean id="property1Lessor1" class="domain.Property">
+		<property name="name" value="Property 1"/>
+		<property name="rate" value="30.0"/>
+		<property name="description" value="A small but very comfortable apartment"/>	
+		<property name="address" value="Spain Seville, C\Piruleta nº2 3ºA"/>	
+		<property name="lessor" ref="lessor1"/>		
+		<property name="audits">
+			<list>
+				<ref bean="audit1Auditor1"/>
+			</list>
+		</property>
+		<property name="attributeValues">
+			<list>
+				<ref bean="attributeValue1Property1Lessor1"/>
+			</list>
+		</property>
+		<property name="books">
+			<list>
+				<ref bean="book1Tenant1"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="property2Lessor1" class="domain.Property">
+		<property name="name" value="Property 2"/>
+		<property name="rate" value="35.0"/>
+		<property name="description" value="An apartment with amazing views"/>	
+		<property name="address" value="Spain Seville, C\Estravíos nº5 6ºC"/>	
+		<property name="lessor" ref="lessor1"/>		
+		<property name="audits">
+			<list>
+			</list>
+		</property>
+		<property name="attributeValues">
+			<list>
+			</list>
+		</property>
+		<property name="books">
+			<list>
+				<ref bean="book2Tenant1"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="property3Lessor1" class="domain.Property">
+		<property name="name" value="Property 3"/>
+		<property name="rate" value="79.95"/>
+		<property name="description" value="A luxury house"/>	
+		<property name="address" value="Spain Seville, C\Bien Hallado nº14"/>	
+		<property name="lessor" ref="lessor1"/>		
+		<property name="audits">
+			<list>
+			</list>
+		</property>
+		<property name="attributeValues">
+			<list>
+			</list>
+		</property>
+		<property name="books">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="property4Lessor1" class="domain.Property">
+		<property name="name" value="Property 4"/>
+		<property name="rate" value="50.0"/>
+		<property name="description" value="A cabin at countryside"/>	
+		<property name="address" value="Spain Seville, Urb. Los pinares, C\Camorra nº10"/>	
+		<property name="lessor" ref="lessor1"/>		
+		<property name="audits">
+			<list>
+			</list>
+		</property>
+		<property name="attributeValues">
+			<list>
+			</list>
+		</property>
+		<property name="books">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="property5Lessor1" class="domain.Property">
+		<property name="name" value="Property 5"/>
+		<property name="rate" value="62.0"/>
+		<property name="description" value="The perfect flat for the whole family"/>	
+		<property name="address" value="Spain Seville, C\Amatista nº37 2ºB"/>	
+		<property name="lessor" ref="lessor1"/>		
+		<property name="audits">
+			<list>
+			</list>
+		</property>
+		<property name="attributeValues">
+			<list>
+			</list>
+		</property>
+		<property name="books">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="property6Lessor1" class="domain.Property">
+		<property name="name" value="Property 6"/>
+		<property name="rate" value="20.0"/>
+		<property name="description" value="A very romantic place"/>	
+		<property name="address" value="Spain Seville, C\Cereales nº4"/>	
+		<property name="lessor" ref="lessor1"/>		
+		<property name="audits">
+			<list>
+			</list>
+		</property>
+		<property name="attributeValues">
+			<list>
+			</list>
+		</property>
+		<property name="books">
+			<list>
+				<ref bean="book3Tenant1"/>
+				<ref bean="book4Tenant1"/>
+				<ref bean="book5Tenant1"/>
+				<ref bean="book6Tenant1"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Audit 
+	
+	<bean id="" class="domain.Audit">
+		<property name="writingMoment" value=""/>
+		<property name="text" value=""/>
+		<property name="draftMode" value=""/>
+		<property name="auditor" ref=""/>		
+		<property name="property" ref=""/>
+		<property name="attachments">
+			<list>
+				<ref bean=""/>
+			</list>
+		</property>
+	</bean>
+	
+	-->
+	
+	<bean id="audit1Auditor1" class="domain.Audit">
+		<property name="writingMoment" value="02/12/2017 16:35"/>
+		<property name="text" value="This property has a very good decoration"/>
+		<property name="drafMode" value="false"/>
+		<property name="auditor" ref="auditor1"/>		
+		<property name="property" ref="property1Lessor1"/>
+		<property name="attachments">
+			<list>
+				<ref bean="attachment1Audit1Auditor1"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- CreditCard 
+	
+	<bean id="" class="domain.CreditCard">
+		<property name="holderName" value=""/>
+		<property name="brandName" value=""/>
+		<property name="number" value=""/>
+		<property name="expirationMonth" value=""/>
+		<property name="expirationYear" value=""/>
+		<property name="cvvCode" value=""/>
+	</bean>
+	
+	-->
+	
+	<bean id="creditCardLessor1" class="domain.CreditCard">
+		<property name="holderName" value="Steve"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="4485733078654607"/>
+		<property name="expirationMonth" value="05"/>
+		<property name="expirationYear" value="2020"/>
+		<property name="cvvCode" value="788"/>
+	</bean>
+	
+	<bean id="creditCardBook1Tenant1" class="domain.CreditCard">
+		<property name="holderName" value="Billy"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="4485733078654607"/>
+		<property name="expirationMonth" value="06"/>
+		<property name="expirationYear" value="2018"/>
+		<property name="cvvCode" value="325"/>
+	</bean>
+	
+	<bean id="creditCardBook2Tenant1" class="domain.CreditCard">
+		<property name="holderName" value="Billy"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="4485733078654607"/>
+		<property name="expirationMonth" value="06"/>
+		<property name="expirationYear" value="2018"/>
+		<property name="cvvCode" value="325"/>
+	</bean>
+	
+	<bean id="creditCardBook3Tenant1" class="domain.CreditCard">
+		<property name="holderName" value="Billy"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="4485733078654607"/>
+		<property name="expirationMonth" value="06"/>
+		<property name="expirationYear" value="2018"/>
+		<property name="cvvCode" value="325"/>
+	</bean>
+	
+	<bean id="creditCardBook4Tenant1" class="domain.CreditCard">
+		<property name="holderName" value="Billy"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="4485733078654607"/>
+		<property name="expirationMonth" value="06"/>
+		<property name="expirationYear" value="2018"/>
+		<property name="cvvCode" value="325"/>
+	</bean>
+	
+	<bean id="creditCardBook5Tenant1" class="domain.CreditCard">
+		<property name="holderName" value="Billy"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="4485733078654607"/>
+		<property name="expirationMonth" value="06"/>
+		<property name="expirationYear" value="2018"/>
+		<property name="cvvCode" value="325"/>
+	</bean>
+	
+	<bean id="creditCardBook6Tenant1" class="domain.CreditCard">
+		<property name="holderName" value="Billy"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="4485733078654607"/>
+		<property name="expirationMonth" value="06"/>
+		<property name="expirationYear" value="2018"/>
+		<property name="cvvCode" value="325"/>
+	</bean>
+	
+	<!-- Book 
+	
+	<bean id="" class="domain.Book">
+		<property name="checkInDate" value=""/>
+		<property name="checkOutDate" value=""/>
+		<property name="smoker" value=""/>
+		<property name="state" value=""/>
+		<property name="totalAmount" value=""/>
+		<property name="creditCard" ref=""/>
+		<property name="property" ref=""/>
+		<property name="tenant" ref=""/>		
+		<property name="invoice" ref=""/>
+	</bean>
+	
+	-->
+	
+	<bean id="book1Tenant1" class="domain.Book">
+		<property name="checkInDate" value="03/20/2016"/>
+		<property name="checkOutDate" value="03/22/2016"/>
+		<property name="smoker" value="false"/>
+		<property name="state" value="ACCEPTED"/>
+		<property name="totalAmount" value="60.0"/>
+		<property name="creditCard" ref="creditCardBook1Tenant1"/>
+		<property name="property" ref="property1Lessor1"/>
+		<property name="tenant" ref="tenant1"/>		
+		<property name="invoice" ref="invoiceBook1Tenant1"/>
+		<property name="lessor" ref="lessor1"/>
+	</bean>
+	
+	<bean id="book2Tenant1" class="domain.Book">
+		<property name="checkInDate" value="05/20/2016"/>
+		<property name="checkOutDate" value="05/21/2016"/>
+		<property name="smoker" value="true"/>
+		<property name="state" value="DENIED"/>
+		<property name="totalAmount" value="60.0"/>
+		<property name="creditCard" ref="creditCardBook2Tenant1"/>
+		<property name="property" ref="property2Lessor1"/>
+		<property name="tenant" ref="tenant1"/>		
+		<property name="invoice"><null/></property>
+		<property name="lessor" ref="lessor1"/>
+	</bean>
+	
+	<bean id="book3Tenant1" class="domain.Book">
+		<property name="checkInDate" value="03/04/2017"/>
+		<property name="checkOutDate" value="03/05/2017"/>
+		<property name="smoker" value="false"/>
+		<property name="state" value="PENDING"/>
+		<property name="totalAmount" value="20.0"/>
+		<property name="creditCard" ref="creditCardBook3Tenant1"/>
+		<property name="property" ref="property6Lessor1"/>
+		<property name="tenant" ref="tenant1"/>		
+		<property name="invoice"><null/></property>
+		<property name="lessor" ref="lessor1"/>
+	</bean>
+	
+	<bean id="book4Tenant1" class="domain.Book">
+		<property name="checkInDate" value="04/04/2017"/>
+		<property name="checkOutDate" value="04/05/2017"/>
+		<property name="smoker" value="false"/>
+		<property name="state" value="PENDING"/>
+		<property name="totalAmount" value="20.0"/>
+		<property name="creditCard" ref="creditCardBook4Tenant1"/>
+		<property name="property" ref="property6Lessor1"/>
+		<property name="tenant" ref="tenant1"/>		
+		<property name="invoice"><null/></property>
+		<property name="lessor"><null/></property>
+	</bean>
+	
+	<bean id="book5Tenant1" class="domain.Book">
+		<property name="checkInDate" value="05/04/2017"/>
+		<property name="checkOutDate" value="05/05/2017"/>
+		<property name="smoker" value="false"/>
+		<property name="state" value="PENDING"/>
+		<property name="totalAmount" value="20.0"/>
+		<property name="creditCard" ref="creditCardBook5Tenant1"/>
+		<property name="property" ref="property6Lessor1"/>
+		<property name="tenant" ref="tenant1"/>		
+		<property name="invoice"><null/></property>
+		<property name="lessor" ref="lessor1"/>
+	</bean>
+	
+	<bean id="book6Tenant1" class="domain.Book">
+		<property name="checkInDate" value="06/04/2017"/>
+		<property name="checkOutDate" value="06/05/2017"/>
+		<property name="smoker" value="false"/>
+		<property name="state" value="PENDING"/>
+		<property name="totalAmount" value="20.0"/>
+		<property name="creditCard" ref="creditCardBook6Tenant1"/>
+		<property name="property" ref="property6Lessor1"/>
+		<property name="tenant" ref="tenant1"/>		
+		<property name="invoice"><null/></property>
+		<property name="lessor"><null/></property>
+	</bean>
+	
+	<!-- Invoice 
+	
+	<bean id="" class="domain.Invoice">
+		<property name="creationMoment" value=""/>
+		<property name="VAT" value=""/>
+		<property name="information" value=""/>
+		<property name="details" value=""/>
+		<property name="book" ref=""/>
+	</bean>
+	
+	-->
+	
+	<bean id="invoiceBook1Tenant1" class="domain.Invoice">
+		<property name="creationMoment" value="03/25/2016 08:15"/>
+		<property name="VAT" value="sample VAT"/>
+		<property name="information" value="sample information"/>
+		<property name="details" value="sample details"/>
+		<property name="book" ref="book1Tenant1"/>
+	</bean>
+	
+	<!-- Attachment 
+	
+	<bean id="" class="domain.Attachment">
+		<property name="name" value=""/>
+		<property name="url" value=""/>
+		<property name="audit" ref=""/>	
+	</bean>
+	
+	-->
+	
+	<bean id="attachment1Audit1Auditor1" class="domain.Attachment">
+		<property name="name" value="Sample Attachment"/>
+		<property name="url" value="http://www.sample.com/"/>
+		<property name="audit" ref="audit1Auditor1"/>	
+	</bean>
+	
+	<!-- Attribute
+	
+	<bean id="" class="domain.Attribute">
+		<property name="name" value=""/>
+	</bean>
+	
+	-->
+	
+	<bean id="attribute1" class="domain.Attribute">
+		<property name="name" value="Country"/>
+	</bean>
+	
+	
+	<bean id="attribute2" class="domain.Attribute">
+		<property name="name" value="Pronvice"/>
+	</bean>
+	
+	<bean id="attribute3" class="domain.Attribute">
+		<property name="name" value="State"/>
+	</bean>
+	
+	
+	<bean id="attribute4" class="domain.Attribute">
+		<property name="name" value="City"/>
+	</bean>
+	
+	
+	<bean id="attribute5" class="domain.Attribute">
+		<property name="name" value="Capacity"/>
+	</bean>
+	<!-- AttributeValue
+	
+	<bean id="" class="domain.AttributeValue">
+		<property name="value" value=""/>
+		<property name="attribute" ref=""/>
+		<property name="property" ref=""/>
+	</bean>
+	
+	-->
+	
+	<bean id="attributeValue1Property1Lessor1" class="domain.AttributeValue">
+		<property name="value" value="1"/>
+		<property name="attribute" ref="attribute1"/>
+		<property name="property" ref="property1Lessor1"/>
+	</bean>
+	
+	<!-- Comment 
+	
+	<bean id="" class="domain.Comment">
+		<property name="title" value=""/>
+		<property name="postMoment" value=""/>
+		<property name="text" value=""/>
+		<property name="stars" value=""/>
+		<property name="sender" ref=""/>
+		<property name="recipient" ref=""/>
+	</bean>
+	
+	-->
+	
+	<bean id="comment1Lessor1" class="domain.Comment">
+		<property name="title" value="My first comment"/>
+		<property name="postMoment" value="01/22/2017 15:30"/>
+		<property name="text" value="first!"/>
+		<property name="stars" value="5"/>
+		<property name="sender" ref="lessor1"/>
+		<property name="recipient" ref="lessor1"/>
+	</bean>	
+	
+	<!-- SocialIdentity 
+	
+	<bean id="" class="domain.SocialIdentity">
+		<property name="nick" value=""/>
+		<property name="link" value=""/>
+		<property name="socialNetwork" value=""/>
+		<property name="actor" ref=""/>
+	</bean>
+	
+	-->	
+	
+	<bean id="socialIdentity1Lessor1" class="domain.SocialIdentity">
+		<property name="nick" value="SteveC"/>
+		<property name="link" value="http://www.sample.com/"/>
+		<property name="socialNetwork" value="Sample"/>
+		<property name="actor" ref="lessor1"/>
+	</bean>
+	
+	<!-- Configuration 	-->
+	
+	<bean id="configuration" class="domain.Configuration">
+		<property name="fee" value="1.0"/>
+		<property name="VAT" value="sample VAT"/>
+	</bean>
+	
+	
+</beans>
