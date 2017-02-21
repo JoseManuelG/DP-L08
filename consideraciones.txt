@@ -1,15 +1,20 @@
 ﻿La base de datos debe llamarse ACME-BnB
 
 ------- Por solucionar ------------
-Falta pattern telefono (actor) por definir en UML
-a cacheMoment de finder y writingMoment de audit les falta Past en UML
-faltan cascades delete que poner
-¿Añadir {NotBlank} a los URL en UML? 
-Añadir min(0) a fee del configuration en UML y java.
-b+ tree y @safehtml
-En view/display de property poner datos de su lessor y de sus attributes
+-Falta pattern telefono (actor) por definir en UML
+-a cacheMoment de finder y writingMoment de audit les falta Past en UML
+-faltan cascades delete que poner
+-¿Añadir {NotBlank} a los URL en UML? 
+-Añadir min(0) a fee del configuration en UML y java.
+-b+ tree y @safehtml
+-En view/display de property poner datos de su lessor y de sus attributes
+-Rellenar populate
+-Acabar terminos y meter tags en plantilla
+-Comprobar validez de tarjeta en varias ocasiones
+-Comprobar que cumplimos todas las leyes bien
+
 
 -------   Solucionado  ------------
-En los UML hay que quitar {NotBlank} a los String optativos.
-En los UML la propiedad estado del book esta puesta como prioridad, y tiene una restriccion NotBlank en vez de Pattern.
-En los UML la propiedad totalAmount de book es derivada, hay que ponerle la /.
+-En los UML hay que quitar {NotBlank} a los String optativos.
+-En los UML la propiedad estado del book esta puesta como prioridad, y tiene una restriccion NotBlank en vez de Pattern.
+-En los UML la propiedad totalAmount de book es derivada, hay que ponerle la /.
