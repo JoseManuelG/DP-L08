@@ -1,6 +1,7 @@
 package controllers.auditor;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.validation.Valid;
 
@@ -69,11 +70,21 @@ public class AuditAuditorController extends AbstractController {
 	
 	// Create --------------------------------------------------------------------
 		@RequestMapping(value = "/auditor/create", method = RequestMethod.GET)
-		public ModelAndView create() {
-			ModelAndView result;
-			Audit audit = auditService.create();
+		public ModelAndView create(@RequestParam int propertyId) {
 			Auditor auditor= (Auditor) actorService.findByPrincipal();
-			audit.setAuditor(auditor);
+			ModelAndView result;
+			Audit audit;
+			if(auditService.checkUnique(propertyService.findOne(propertyId), auditor)){
+				
+				audit = auditService.create();
+				
+				Date currentMoment = new Date(System.currentTimeMillis() );
+				audit.setAuditor(auditor);
+				audit.setWritingMoment(currentMoment);
+				
+			}else{
+				audit=auditService.getAuditForPropertyAndAuditor(propertyService.findOne(propertyId), auditor);
+			}
 			result = createEditModelAndView(audit);
 			return result;
 			

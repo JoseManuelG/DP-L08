@@ -89,6 +89,21 @@ public class AuditService {
 		return result;
 	}
 	
+	public boolean checkUnique(Property property, Auditor auditor) {
+		boolean result=false;
+		if(auditRepository.countAuditForauditorIdAndPropertyId(auditor.getId(), property.getId())==0){
+			result=true;
+		}
+		//Assert.notNull(auditRepository.findAuditsForauditorIdAndPropertyId(auditor.getId() ,property.getId()));
+		return result;
+	}
+	
+	public Audit getAuditForPropertyAndAuditor(Property property, Auditor auditor) {
+		Audit result;
+		result=auditRepository.findAuditForauditorIdAndPropertyId(auditor.getId(), property.getId());		
+		return result;
+	}
+	
 	public Collection<Audit> findAuditsForAuditor(Auditor auditor) {
 		Collection<Audit> result = auditRepository.findAuditsForauditorId(auditor.getId());
 		return result;
