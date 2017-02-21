@@ -51,12 +51,13 @@ public class SecurityController extends AbstractController {
 	ModelAndView save(@Valid ActorForm actorForm, BindingResult binding) {
 		ModelAndView result;
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-		if (binding.hasErrors()) {
+		if (binding.hasErrors() || !actorForm.getAcepted()) {
 			result = createEditModelAndView(actorForm);
 		} else {
 			try {
 				UserAccount userAccount = new UserAccount();
 				userAccount.setPassword(encoder.encodePassword(actorForm.getPassword(), null));
+				userAccount.setUsername(actorForm.getName());
 
 				if (actorForm.getTypeOfActor().equals("TENANT")) {
 					Tenant tenant = tenantService.create();

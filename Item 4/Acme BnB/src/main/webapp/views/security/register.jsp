@@ -32,7 +32,7 @@
     <acme:textbox code="security.register.name" path="name"/>
 	<br />
 	
-	<acme:textbox code="security.password" path="password"/>
+	<acme:password code="security.password" path="password"/>
 	<br />
 	
 	<acme:textbox code="security.register.surname" path="surname"/>
@@ -47,9 +47,9 @@
 	<a target="_blank" href="law/terms-conditions.do">
 		<spring:message code="security.register.terms" />
 	</a>
-	<br/>
-	<form:input type="checkbox" name="Terms" value="true" path="Terms"/><spring:message code="security.register.AceptTerms" />
 	
+	<br/>
+		<acme:checkbox code="security.register.AceptTerms" path="acepted"/>
 	<br />
 	
 	<acme:submit code="security.register.save" name="save"/>

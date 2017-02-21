@@ -16,7 +16,7 @@ public class ActorForm {
 	private String	email;
 	private String	phone;
 	private String	picture;
-	private String	acepted;
+	private Boolean	acepted;
 
 
 	//Constructor
@@ -79,11 +79,11 @@ public class ActorForm {
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
-	@NotBlank
-	public String getAcepted() {
+
+	public Boolean getAcepted() {
 		return acepted;
 	}
-	public void setAcepted(String acepted) {
+	public void setAcepted(Boolean acepted) {
 		this.acepted = acepted;
 	}
 
