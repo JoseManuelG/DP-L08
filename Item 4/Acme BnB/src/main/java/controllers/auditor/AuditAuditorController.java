@@ -78,7 +78,7 @@ public class AuditAuditorController extends AbstractController {
 				
 				audit = auditService.create();
 				
-				Date currentMoment = new Date(System.currentTimeMillis() );
+				Date currentMoment = new Date(System.currentTimeMillis() -1000 );
 				audit.setAuditor(auditor);
 				audit.setWritingMoment(currentMoment);
 				
