@@ -22,7 +22,7 @@ public interface AuditRepository extends JpaRepository<Audit, Integer> {
 	@Query("select count(a) from Audit a where a.auditor.id=?1 and a.property.id=?2 ")
 	public int countAuditForauditorIdAndPropertyId(int auditorId, int propertyId);
 	
-	@Query("select count a from Audit a where a.auditor.id=?1 and a.property.id=?2 ")
+	@Query("select a from Audit a where a.auditor.id=?1 and a.property.id=?2 ")
 	public Audit findAuditForauditorIdAndPropertyId(int auditorId, int propertyId);
 
 }
