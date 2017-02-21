@@ -19,7 +19,7 @@
 		<form:hidden path="property" />
 		
 		<jstl:if test="${id ne 0 }">
-		<acme:select items="${attributes}" itemLabel="attribute" code="attributeValue.attribute" path="attribute"/>
+		<acme:select items="${attributes}" itemLabel="name" code="attributeValue.attribute" path="attribute"/>
 		</jstl:if>	
 		<jstl:if test="${id eq 0 }">
 		<form:hidden path="attribute" />
@@ -30,9 +30,9 @@
 		
 	<acme:submit name="save" code="attributeValue.save"/>
 	
-	<jstl:if test="${attribute.id ne 0}">
+	<jstl:if test="${attribute.id eq 0}">
 		<acme:submit name="delete" code="attributeValue.delete"/>
 	</jstl:if>
-	<acme:cancel url="javascript:window.location.href='property/view.do?propertyId=${property.id }'" code="attribute.cancel"/>
+	<acme:cancel url="javascript:window.location.href='property/view.do?propertyId=${property.id }'" code="attributeValue.cancel"/>
 	<br>
 </form:form>

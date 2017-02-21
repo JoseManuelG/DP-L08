@@ -28,6 +28,9 @@
  		<bean class="converters.AttributeValueToStringConverter" /> 
  		<bean class="converters.StringToAttributeValueConverter" /> 
  		
+ 		<bean class="converters.AttributeToStringConverter" /> 
+ 		<bean class="converters.StringToAttributeConverter" /> 
+ 		
  		<bean class="converters.AuditToStringConverter" /> 
  		<bean class="converters.StringToAuditConverter" /> 
  		
