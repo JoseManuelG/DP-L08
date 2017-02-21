@@ -37,7 +37,9 @@
 		<value>/views/book/tiles.xml</value>			
 		<value>/views/socialIdentity/tiles.xml</value>	
 		<value>/views/attributeValue/tiles.xml</value>
-		<value>/views/creditCard/tiles.xml</value>		
+		<value>/views/creditCard/tiles.xml</value>	
+		<value>/views/auditor/tiles.xml</value>		
+			
 		
 	</util:list>
 

@@ -43,6 +43,9 @@
 		<bean class="converters.CreditCardToStringConverter" /> 
 		<bean class="converters.StringToCreditCardConverter" />
 		
+		<bean class="converters.AuditorToStringConverter" /> 
+		<bean class="converters.StringToAuditorConverter" />
+		
 	</util:list>
 	
 </beans>
