@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import security.Authority;
+import security.LoginService;
+import services.ActorService;
 import services.PropertyService;
+import domain.Actor;
+import domain.AttributeValue;
 import domain.Property;
 
 @Controller
@@ -20,6 +26,9 @@ public class PropertyController extends AbstractController {
 	
 	@Autowired
 	PropertyService propertyService ;
+	
+	@Autowired
+	ActorService actorService ;
 	
 	// Constructors -----------------------------------------------------------
 	
@@ -46,9 +55,24 @@ public class PropertyController extends AbstractController {
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public ModelAndView view(@RequestParam(required = true) Integer propertyId) {
 		ModelAndView result;
+		Boolean esMiProperty=false;
 		result = new ModelAndView("property/view");
 		Property property  = propertyService.findOne(propertyId);
+		Collection<AttributeValue> attributeValues = property.getAttributeValues();
+		
+		try{
+			
+			Actor actor = actorService.findByPrincipal();
+			esMiProperty=actor.equals(property.getLessor());
+			
+		
+		}catch( Throwable oops){
+			
+		}
+		
 		result.addObject("property", property);
+		result.addObject("attributeValues", attributeValues);
+		result.addObject("esMiProperty", esMiProperty);
 		return result;
 	}
 	

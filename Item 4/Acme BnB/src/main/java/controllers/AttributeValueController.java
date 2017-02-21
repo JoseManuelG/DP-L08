@@ -92,7 +92,7 @@ public class AttributeValueController extends AbstractController {
 				
 				attributeValueService.save(attributeValue);
 				
-				result = new ModelAndView("redirect:../property/view.do?propertyId="+attributeValue.getProperty().getId());
+				result = new ModelAndView("redirect:../../property/view.do?propertyId="+attributeValue.getProperty().getId());
 				
 		} catch (Throwable oops) {
 			result = createEditModelAndView(attributeValue, "attribute.commit.error");	
@@ -106,13 +106,12 @@ public class AttributeValueController extends AbstractController {
 		ModelAndView result=null;
 			try {
 				
-				ArrayList<Authority>authorities=new ArrayList<Authority>();
 				Actor actor = actorService.findByPrincipal();
 				Assert.isTrue(actor.equals(attributeValue.getProperty().getLessor()), "Solo puedes editar tus propias propiedades");
 				
 				attributeValueService.delete(attributeValue);
 				
-				result = new ModelAndView("redirect:../property/view.do?propertyId="+attributeValue.getProperty().getId());
+				result = new ModelAndView("redirect:../../property/view.do?propertyId="+attributeValue.getProperty().getId());
 				
 		} catch (Throwable oops) {
 			result = createEditModelAndView(attributeValue, "attribute.commit.error");	

@@ -18,10 +18,11 @@
 		<form:hidden path="version" />
 		<form:hidden path="property" />
 		
-		<jstl:if test="${id == 0 }">
+		<jstl:if test="${attributeValue.id eq 0 }">
 		<acme:select items="${attributes}" itemLabel="name" code="attributeValue.attribute" path="attribute"/>
 		</jstl:if>	
-		<jstl:if test="${id != 0 }">
+		<jstl:if test="${attributeValue.id ne 0 }">
+		<spring:message  code="attribute.name" />: <jstl:out value="${attributeValue.attribute.name}" />
 		<form:hidden path="attribute" />
 		</jstl:if>
 	
@@ -30,9 +31,10 @@
 		
 	<acme:submit name="save" code="attributeValue.save"/>
 	
-	<jstl:if test="${attribute.id != 0}">
+	<jstl:if test="${attributeValue.id ne 0}">
 		<acme:submit name="delete" code="attributeValue.delete"/>
+		
 	</jstl:if>
-	<acme:cancel url="javascript:window.location.href='property/view.do?propertyId=${property.id }'" code="attributeValue.cancel"/>
+	<acme:cancel url="property/view.do?propertyId=${attributeValue.property.id }" code="attributeValue.cancel"/>
 	<br>
 </form:form>

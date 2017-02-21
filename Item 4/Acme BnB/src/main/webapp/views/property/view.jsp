@@ -15,6 +15,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <spring:message  code="property.name" />: <jstl:out value="${property.name}" />
 <br>
@@ -25,5 +26,29 @@
 <spring:message  code="property.address" />: <jstl:out value="${property.address}"/>
 <br>
 
-
+<jstl:if test="${!results.isEmpty()}">
+	<display:table pagesize="5" class="displaytag" name="attributeValues"  id="row">
+		
+		<!-- Action links -->
+		<jstl:if test="${ esMiProperty}">
+		<display:column>
+			<a href="attributeValue/lessor/edit.do?attributeValueId=${row.id}">
+				<spring:message	code="attributeValue.edit" />
+			</a>
+	
+		</display:column>
+			</jstl:if>
+		<!-- Attributes -->
+		
+		<acme:column sorteable="false" code="attribute.name" path="attribute.name"/>
+		
+		<acme:column sorteable="false" code="attributeValue.value" path="value"/>
+		
+	</display:table>
+			<jstl:if test="${ esMiProperty}">
+			<a href=attributeValue/lessor/create.do?propertyId=${property.id }>
+	      <spring:message  code="attributeValue.create" />
+	</a>
+			</jstl:if>
+</jstl:if>
 	
