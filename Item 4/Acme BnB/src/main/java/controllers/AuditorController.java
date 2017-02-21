@@ -69,17 +69,17 @@ public class AuditorController extends AbstractController {
 	}
 
 	//registerAuditor--------------------------------------------------------------
-	@RequestMapping(value = "/administrator/registerAuditor.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/administrator/registerAuditor", method = RequestMethod.GET)
 	public ModelAndView registerAuditor() {
 		ModelAndView result;
 
 		ActorForm actorForm = new ActorForm();
-		result = new ModelAndView("auditor/edit");
+		result = new ModelAndView("auditor/administrator/registerAuditor");
 		actorForm.setTypeOfActor("AUDITOR");
 		result.addObject("actorForm", actorForm);
 
 		result.addObject("requestURI", "auditor/administrator/registerAuditor.do");
-		result.addObject("typeActor", "auditor");
+		result.addObject("typeActor", "AUDITOR");
 		return result;
 	}
 
@@ -90,7 +90,7 @@ public class AuditorController extends AbstractController {
 		actorForm.setTypeOfActor("AUDITOR");
 
 		if (binding.hasErrors()) {
-			result = registerAuditorEditModelAndView(actorForm);
+			result = registerAuditorModelAndView(actorForm, null);
 		} else {
 			try {
 				Auditor auditor = auditorService.create();
@@ -117,7 +117,7 @@ public class AuditorController extends AbstractController {
 				result = new ModelAndView("auditor/view.do");
 
 			} catch (Throwable oops) {
-				result = registerAuditorEditModelAndView(actorForm, "recipe.commit.error");
+				result = registerAuditorModelAndView(actorForm, "lessor.commit.error");
 				result.addObject("requestURI", "auditor/administrator/registerAuditor.do");
 
 			}
@@ -178,7 +178,7 @@ public class AuditorController extends AbstractController {
 
 				result = new ModelAndView("auditor/view.do");
 			} catch (Throwable oops) {
-				result = registerAuditorEditModelAndView(actorForm, "recipe.commit.error");
+				result = registerAuditorEditModelAndView(actorForm, "lessor.commit.error");
 				result.addObject("requestURI", "auditor/edit.do");
 
 			}
@@ -199,7 +199,16 @@ public class AuditorController extends AbstractController {
 
 	protected ModelAndView registerAuditorEditModelAndView(ActorForm actorForm, String message) {
 		ModelAndView result;
-		result = new ModelAndView("user/edit");
+		result = new ModelAndView("auditor/edit");
+		result.addObject("actorForm", actorForm);
+		result.addObject("message", message);
+
+		return result;
+	}
+
+	protected ModelAndView registerAuditorModelAndView(ActorForm actorForm, String message) {
+		ModelAndView result;
+		result = new ModelAndView("auditor/administrator/registerAuditor");
 		result.addObject("actorForm", actorForm);
 		result.addObject("message", message);
 
