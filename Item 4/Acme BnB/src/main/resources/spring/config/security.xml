@@ -98,6 +98,8 @@
 	
 	<security:intercept-url pattern="/auditor/administrator/registerAuditor.do" access="hasRole('ADMINISTRATOR')" />
 	<security:intercept-url pattern="/auditor/view.do" access="hasRole('AUDITOR')" />
+	<security:intercept-url pattern="/auditor/edit.do" access="hasAnyRole('AUDITOR','ADMINISTRATOR')" />
+	
 	
 	
 	<!-- None -->
