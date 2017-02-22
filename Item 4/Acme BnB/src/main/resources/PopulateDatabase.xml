@@ -576,26 +576,6 @@
 			</list>
 		</property>	
 		<property name="userAccount" ref="userAccountLessor1"/>
-		<property name="comments">
-			<list>
-				<ref bean="comment1Lessor1"/>
-				<ref bean="comment2Lessor1"/>
-				<ref bean="comment3Lessor1"/>
-				<ref bean="comment4Lessor1"/>
-				<ref bean="comment5Lessor1"/>
-				<ref bean="comment6Lessor1"/>
-			</list>
-		</property>	
-		<property name="postedComments">
-			<list>
-				<ref bean="comment1Lessor1"/>
-				<ref bean="comment2Lessor1"/>
-				<ref bean="comment3Lessor1"/>
-				<ref bean="comment4Lessor1"/>
-				<ref bean="comment5Lessor1"/>
-				<ref bean="comment6Lessor1"/>
-			</list>
-		</property>
 		<property name="creditCard" ref="creditCardLessor1"/>
 		<property name="lessorProperties">
 			<list>
@@ -631,14 +611,6 @@
 			</list>
 		</property>	
 		<property name="userAccount" ref="userAccountLessor2"/>
-		<property name="comments">
-			<list>
-			</list>
-		</property>	
-		<property name="postedComments">
-			<list>
-			</list>
-		</property>
 		<property name="creditCard"><null/></property>
 		<property name="lessorProperties">
 			<list>
@@ -664,14 +636,6 @@
 			</list>
 		</property>	
 		<property name="userAccount" ref="userAccountLessor3"/>
-		<property name="comments">
-			<list>
-			</list>
-		</property>	
-		<property name="postedComments">
-			<list>
-			</list>
-		</property>
 		<property name="creditCard"><null/></property>
 		<property name="lessorProperties">
 			<list>
@@ -695,14 +659,6 @@
 			</list>
 		</property>	
 		<property name="userAccount" ref="userAccountLessor4"/>
-		<property name="comments">
-			<list>
-			</list>
-		</property>	
-		<property name="postedComments">
-			<list>
-			</list>
-		</property>
 		<property name="creditCard"><null/></property>
 		<property name="lessorProperties">
 			<list>
@@ -726,14 +682,6 @@
 			</list>
 		</property>	
 		<property name="userAccount" ref="userAccountLessor5"/>
-		<property name="comments">
-			<list>
-			</list>
-		</property>	
-		<property name="postedComments">
-			<list>
-			</list>
-		</property>
 		<property name="creditCard"><null/></property>
 		<property name="lessorProperties">
 			<list>
@@ -757,14 +705,6 @@
 			</list>
 		</property>	
 		<property name="userAccount" ref="userAccountLessor6"/>
-		<property name="comments">
-			<list>
-			</list>
-		</property>	
-		<property name="postedComments">
-			<list>
-			</list>
-		</property>
 		<property name="creditCard"><null/></property>
 		<property name="lessorProperties">
 			<list>
@@ -822,14 +762,6 @@
 			</list>
 		</property>	
 		<property name="userAccount" ref="userAccountTenant1"/>
-		<property name="comments">
-			<list>
-			</list>
-		</property>	
-		<property name="postedComments">
-			<list>
-			</list>
-		</property>
 		<property name="finder" ref="finderTenant1"/>
 		<property name="books">
 			<list>
@@ -854,14 +786,6 @@
 			</list>
 		</property>	
 		<property name="userAccount" ref="userAccountTenant2"/>
-		<property name="comments">
-			<list>
-			</list>
-		</property>	
-		<property name="postedComments">
-			<list>
-			</list>
-		</property>
 		<property name="finder" ref="finderTenant2"/>
 		<property name="books">
 			<list>
@@ -881,14 +805,6 @@
 			</list>
 		</property>	
 		<property name="userAccount" ref="userAccountTenant3"/>
-		<property name="comments">
-			<list>
-			</list>
-		</property>	
-		<property name="postedComments">
-			<list>
-			</list>
-		</property>
 		<property name="finder" ref="finderTenant3"/>
 		<property name="books">
 			<list>
@@ -907,14 +823,6 @@
 			</list>
 		</property>	
 		<property name="userAccount" ref="userAccountTenant4"/>
-		<property name="comments">
-			<list>
-			</list>
-		</property>	
-		<property name="postedComments">
-			<list>
-			</list>
-		</property>
 		<property name="finder" ref="finderTenant4"/>
 		<property name="books">
 			<list>
@@ -933,14 +841,6 @@
 			</list>
 		</property>	
 		<property name="userAccount" ref="userAccountTenant5"/>
-		<property name="comments">
-			<list>
-			</list>
-		</property>	
-		<property name="postedComments">
-			<list>
-			</list>
-		</property>
 		<property name="finder" ref="finderTenant5"/>
 		<property name="books">
 			<list>
@@ -959,14 +859,6 @@
 			</list>
 		</property>	
 		<property name="userAccount" ref="userAccountTenant6"/>
-		<property name="comments">
-			<list>
-			</list>
-		</property>	
-		<property name="postedComments">
-			<list>
-			</list>
-		</property>
 		<property name="finder" ref="finderTenant6"/>
 		<property name="books">
 			<list>
@@ -1374,7 +1266,7 @@
 		<property name="checkInDate" value="03/20/2016"/>
 		<property name="checkOutDate" value="03/22/2016"/>
 		<property name="smoker" value="false"/>
-		<property name="state" value="ACCEPTED"/>
+		<property name="state" value="PENDING"/>
 		<property name="totalAmount" value="60.0"/>
 		<property name="creditCard" ref="creditCardBook1Tenant1"/>
 		<property name="property" ref="property1Lessor1"/>
@@ -1387,7 +1279,7 @@
 		<property name="checkInDate" value="05/20/2016"/>
 		<property name="checkOutDate" value="05/21/2016"/>
 		<property name="smoker" value="true"/>
-		<property name="state" value="DENIED"/>
+		<property name="state" value="PENDING"/>
 		<property name="totalAmount" value="60.0"/>
 		<property name="creditCard" ref="creditCardBook2Tenant1"/>
 		<property name="property" ref="property2Lessor1"/>

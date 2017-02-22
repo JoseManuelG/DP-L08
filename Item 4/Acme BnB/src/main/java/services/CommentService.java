@@ -87,6 +87,7 @@ public class CommentService {
 		Assert.notNull(comment.getPostMoment(), "La fecha de creación no puede ser nula");
 		Assert.notNull(comment.getRecipient(), "El Recipient no puede ser nulo");
 		Assert.isTrue(comment.getSender().getUserAccount().equals(loginService.getPrincipal()), "Solo el propietario puede realizar operaciones");
+		Assert.isTrue(validComment(comment), "No tienes los derechos para comentar aqui");
 		Comment result;
 
 		result = commentRepository.save(comment);
@@ -143,7 +144,6 @@ public class CommentService {
 			
 			authoritySender.addAll(sender.getUserAccount().getAuthorities());		
 			authorityRecipient.addAll(recipient.getUserAccount().getAuthorities());		
-			
 			
 			switch(authoritySender.get(0).toString()){
 				case (Authority.LESSOR):

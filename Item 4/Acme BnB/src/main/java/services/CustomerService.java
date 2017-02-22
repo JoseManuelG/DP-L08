@@ -27,7 +27,5 @@ public class CustomerService {
 	}
 
 	public void setCustomerCollections(Customer customer) {
-		customer.setComments(new HashSet<Comment>());
-		customer.setPostedComments(new HashSet<Comment>());
 	}
 }
