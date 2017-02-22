@@ -1,7 +1,9 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,8 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.CommentRepository;
+import security.Authority;
 import security.LoginService;
+import domain.Actor;
 import domain.Comment;
+import domain.Customer;
+import domain.Lessor;
+import domain.Tenant;
 
 @Service
 @Transactional
@@ -25,6 +32,15 @@ public class CommentService {
 
 	@Autowired
 	private LoginService		loginService;
+	
+	@Autowired
+	private ActorService		actorService;
+	
+	@Autowired
+	private TenantService		tenantService;
+	
+	@Autowired
+	private LessorService		lessorService;
 
 
 	//Constructors------------------------------------
@@ -78,6 +94,80 @@ public class CommentService {
 		return result;
 	}
 
+	
 	//Other bussiness methods------------------------
+	
+	public Collection<Comment> findAllCommentsOfACustomer(Customer customer) {
+		Collection<Comment> comments;
+		comments = commentRepository.findCommentsByCustomerID(customer.getId());
+		return comments;
+	}
+	
+	public boolean lessorValidToBeCommentedByTenant(Lessor lessor, Tenant tenant){
+		boolean result= false;
+		if(lessorService.lessorHaveBooksWithTenant(tenant, lessor)){
+			result=true;
+		}
+		return result;
+	}
+	
+	public boolean tenantValidToBeCommentedByLessor(Lessor lessor, Tenant tenant){
+		boolean result= false;
+		if(tenantService.tenantHaveBooksWithLessor(tenant, lessor)){
+			result=true;
+		}
+		return result;
+	}
+	
+	public boolean validAutoComment(Comment comment){
+		boolean result= false;
+		if(comment.getSender().equals(comment.getRecipient())){
+			result=true;
+		}
+		return result;
+		
+	}
+	
+	public boolean validComment(Comment comment){
+		boolean result=false;
+		if(validAutoComment(comment)){
+			result=true;
+		}else{
+			
+			Actor sender= actorService.findByPrincipal();
+			Actor recipient = (Actor) comment.getRecipient();
+			
+			ArrayList<Authority> authoritySender =new ArrayList<Authority>();
+			ArrayList<Authority> authorityRecipient =new ArrayList<Authority>();
+			
+			
+			authoritySender.addAll(sender.getUserAccount().getAuthorities());		
+			authorityRecipient.addAll(recipient.getUserAccount().getAuthorities());		
+			
+			
+			switch(authoritySender.get(0).toString()){
+				case (Authority.LESSOR):
+					switch(authorityRecipient.get(0).toString()){
+					case (Authority.TENANT):
+						result=tenantValidToBeCommentedByLessor((Lessor)sender,(Tenant)recipient);
+						break;
+					}
+				break;
+				case (Authority.TENANT):
+					switch(authorityRecipient.get(0).toString()){
+					case (Authority.LESSOR):
+						result=lessorValidToBeCommentedByTenant((Lessor)recipient,(Tenant)sender);
+						break;
+					}
+				break;
+					
+			
+			}
+			
+		}
+		
+		return result;
+		
+	}
 
 }

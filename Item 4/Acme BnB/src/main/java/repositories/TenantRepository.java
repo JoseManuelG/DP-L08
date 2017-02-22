@@ -18,5 +18,8 @@ public interface TenantRepository extends JpaRepository<Tenant, Integer> {
 
 	@Query("select t.books from Tenant t where t.id = ?1")
 	Collection<Book> findAllBooksByPrincipal(int id);
+	
+	@Query("select count (b) from Book b where b.tenant.id = ?1 and b.lessor.id= ?2")
+	int findAllBooksByTennantAndLessor(int tenantId, int lessorId);
 
 }

@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 import repositories.TenantRepository;
 import security.LoginService;
 import domain.Book;
+import domain.Lessor;
 import domain.Tenant;
 
 @Service
@@ -93,4 +94,12 @@ public class TenantService {
 		return result;
 	}
 
+	
+	public boolean tenantHaveBooksWithLessor(Tenant tenant, Lessor lessor){
+		boolean res= false;
+		if(tenantRepository.findAllBooksByTennantAndLessor(tenant.getId(),lessor.getId())>0){
+			res=true;
+		}
+		return res;
+	}
 }

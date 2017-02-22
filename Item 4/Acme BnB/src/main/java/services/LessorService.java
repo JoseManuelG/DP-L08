@@ -16,6 +16,7 @@ import domain.Book;
 import domain.CreditCard;
 import domain.Lessor;
 import domain.Property;
+import domain.Tenant;
 
 @Service
 @Transactional
@@ -119,6 +120,14 @@ public class LessorService {
 		Assert.notNull(principal);
 		
 		return principal.getTotalFee();
+	}
+	
+	public boolean lessorHaveBooksWithTenant(Tenant tenant, Lessor lessor){
+		boolean res= false;
+		if(lessorRepository.findAllBooksByTennantAndLessor(tenant.getId(),lessor.getId())>0){
+			res=true;
+		}
+		return res;
 	}
 
 }

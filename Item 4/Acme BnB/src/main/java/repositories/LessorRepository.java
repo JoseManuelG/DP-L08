@@ -20,5 +20,9 @@ public interface LessorRepository extends JpaRepository<Lessor,Integer> {
 
 	@Query("select l.books from Lessor l where l.id = ?1")
 	Collection<Book> findAllBooksByPrincipal(int id);
+	
+	
+	@Query("select count (b) from Book b where b.tenant.id = ?1 and b.lessor.id= ?2")
+	int findAllBooksByTennantAndLessor(int tenantId, int lessorId);
 
 }
