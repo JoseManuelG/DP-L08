@@ -1,3 +1,4 @@
+
 package controllers.lessor;
 
 import java.util.Collection;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import security.LoginService;
 import services.AttributeValueService;
 import services.AuditService;
 import services.BookService;
@@ -21,74 +21,69 @@ import services.CustomerService;
 import services.LessorService;
 import services.PropertyService;
 import controllers.AbstractController;
-import domain.AttributeValue;
-import domain.Audit;
-import domain.Book;
 import domain.Lessor;
 import domain.Property;
 
 @Controller
 @RequestMapping("/property/lessor")
 public class PropertyLessorController extends AbstractController {
-	
+
 	// Services -------------------------------------------------------------
-	
+
 	@Autowired
-	PropertyService propertyService;
-	
+	PropertyService			propertyService;
+
 	@Autowired
-	CustomerService customerService;
-	
+	CustomerService			customerService;
+
 	@Autowired
-	LessorService lessorService;
-	
+	LessorService			lessorService;
+
 	@Autowired
-	AttributeValueService attributeValueService;
-	
+	AttributeValueService	attributeValueService;
+
 	@Autowired
-	AuditService auditService;
-	
+	AuditService			auditService;
+
 	@Autowired
-	BookService bookService;
-	
-	@Autowired
-	LoginService loginService;
-	
+	BookService				bookService;
+
+
 	// Constructors -----------------------------------------------------------
-	
-	public PropertyLessorController(){
+
+	public PropertyLessorController() {
 		super();
 	}
-	
+
 	// List --------------------------------------------------------------------
 
 	@RequestMapping(value = "/myProperties", method = RequestMethod.GET)
-	  public ModelAndView myProperties() {
-	    ModelAndView result;
-	    Lessor lessor= (Lessor) customerService.findActorByPrincial();
-	    Collection<Property> properties = propertyService.findPropertiesByLessor(lessor);
+	public ModelAndView myProperties() {
+		ModelAndView result;
+		Lessor lessor = (Lessor) customerService.findActorByPrincial();
+		Collection<Property> properties = propertyService.findPropertiesByLessor(lessor);
 
-	    result = new ModelAndView("property/list");
-	    result.addObject("requestURI","property/lessor/myProperties.do");
-	    result.addObject("properties",properties);
-	    return result;
-	  }
-	
+		result = new ModelAndView("property/list");
+		result.addObject("requestURI", "property/lessor/myProperties.do");
+		result.addObject("properties", properties);
+		return result;
+	}
+
 	// Create --------------------------------------------------------------------
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		Property property = propertyService.create();
-		Lessor lessor= (Lessor) customerService.findActorByPrincial();
+		Property property = propertyService.create(lessorService.findByPrincipal().getId());
+		Lessor lessor = (Lessor) customerService.findActorByPrincial();
 		property.setLessor(lessor);
 		result = createEditModelAndView(property);
 		return result;
-		
+
 	}
-		
+
 	// Edit ---------------------------------------------------------------
-	@RequestMapping(value="/edit", method=RequestMethod.GET)
-	public ModelAndView edit(@RequestParam int propertyId){
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam int propertyId) {
 		ModelAndView result;
 		Property property = propertyService.findOne(propertyId);
 		result = createEditModelAndView(property);
@@ -96,30 +91,31 @@ public class PropertyLessorController extends AbstractController {
 	}
 	// Save ---------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public @ResponseBody ModelAndView save(@Valid Property property, BindingResult binding) {
+	public @ResponseBody
+	ModelAndView save(@Valid Property property, BindingResult binding) {
 		ModelAndView result;
 		if (binding.hasErrors()) {
 			System.out.println(binding.getAllErrors());
 			result = createEditModelAndView(property);
 		} else {
 			try {
-				propertyService.save(property);		
+				propertyService.save(property);
 				result = new ModelAndView("redirect:../list.do");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(property, "property.commit.error");				
+				result = createEditModelAndView(property, "property.commit.error");
 			}
 		}
 
 		return result;
 	}
-	
+
 	// Delete -------------------------------------------------------------
-	
+
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(Property property, BindingResult binding) {
 		ModelAndView result;
 
-		try {			
+		try {
 			propertyService.delete(property);
 			result = new ModelAndView("redirect:../list.do");
 		} catch (Throwable oops) {
@@ -141,11 +137,9 @@ public class PropertyLessorController extends AbstractController {
 	protected ModelAndView createEditModelAndView(Property property, String message) {
 		ModelAndView result;
 		result = new ModelAndView("property/lessor/edit");
-		result.addObject("property",property);
+		result.addObject("property", property);
 		result.addObject("message", message);
 		return result;
 	}
-
-
 
 }

@@ -2,6 +2,7 @@
 package domain;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -10,11 +11,15 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -26,6 +31,8 @@ public class Property extends DomainEntity {
 	private double	rate;
 	private String	description;
 	private String	address;
+	private Date	lastUpdate;
+	private boolean	isCopy;
 
 
 	@NotBlank
@@ -60,6 +67,24 @@ public class Property extends DomainEntity {
 		this.address = address;
 	}
 
+	@NotNull
+	@Past
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getLastUpdate() {
+		return lastUpdate;
+	}
+	public void setLastUpdate(Date lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
+
+	public boolean getIsCopy() {
+		return isCopy;
+	}
+	public void setIsCopy(boolean isCopy) {
+		this.isCopy = isCopy;
+	}
+
 
 	// Relationships -------------------------------------------------------------
 
@@ -81,7 +106,7 @@ public class Property extends DomainEntity {
 
 	@NotNull
 	@Valid
-	@ManyToOne
+	@ManyToOne(optional = true)
 	public Lessor getLessor() {
 		return lessor;
 	}
@@ -101,7 +126,9 @@ public class Property extends DomainEntity {
 
 	@NotNull
 	@Valid
-	@OneToMany( fetch=FetchType.EAGER,mappedBy = "property",cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH,CascadeType.REMOVE})
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "property", cascade = {
+		CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE
+	})
 	public Collection<AttributeValue> getAttributeValues() {
 		return attributeValues;
 	}

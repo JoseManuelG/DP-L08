@@ -900,6 +900,8 @@
 				<ref bean=""/>
 			</list>
 		</property>
+		<property name="lastUpdate" value=""/>
+		<property name="isCopy" value=""/>
 	</bean>
 	
 	-->
@@ -930,6 +932,8 @@
 				<ref bean="book1Tenant1"/>
 			</list>
 		</property>
+		<property name="lastUpdate" value="02/12/2017 16:35"/>
+		<property name="isCopy" value="false"/>
 	</bean>
 	
 	<bean id="property2Lessor1" class="domain.Property">
@@ -951,7 +955,9 @@
 			<list>
 				<ref bean="book2Tenant1"/>
 			</list>
-		</property>
+		</property>		
+		<property name="lastUpdate" value="02/12/2017 16:35"/>
+		<property name="isCopy" value="false"/>
 	</bean>
 	
 	<bean id="property3Lessor1" class="domain.Property">
@@ -973,6 +979,8 @@
 			<list>
 			</list>
 		</property>
+		<property name="lastUpdate" value="02/12/2017 16:35"/>
+		<property name="isCopy" value="false"/>
 	</bean>
 	
 	<bean id="property4Lessor1" class="domain.Property">
@@ -994,6 +1002,8 @@
 			<list>
 			</list>
 		</property>
+		<property name="lastUpdate" value="02/12/2017 16:35"/>
+		<property name="isCopy" value="false"/>
 	</bean>
 	
 	<bean id="property5Lessor1" class="domain.Property">
@@ -1015,6 +1025,8 @@
 			<list>
 			</list>
 		</property>
+		<property name="lastUpdate" value="02/12/2017 16:35"/>
+		<property name="isCopy" value="false"/>
 	</bean>
 	
 	<bean id="property6Lessor1" class="domain.Property">
@@ -1040,6 +1052,8 @@
 				<ref bean="book6Tenant1"/>
 			</list>
 		</property>
+		<property name="lastUpdate" value="02/12/2017 16:35"/>
+		<property name="isCopy" value="false"/>
 	</bean>
 	
 	<bean id="property1Lessor2" class="domain.Property">
@@ -1062,6 +1076,8 @@
 				<ref bean="book1Tenant2"/>
 			</list>
 		</property>
+		<property name="lastUpdate" value="02/12/2017 16:35"/>
+		<property name="isCopy" value="false"/>
 	</bean>
 	
 	<!-- Audit 
