@@ -1,6 +1,10 @@
 package services;
 
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -9,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.CreditCardRepository;
-import repositories.LessorRepository;
+import domain.Book;
 import domain.CreditCard;
 import domain.Lessor;
 
@@ -85,4 +89,37 @@ public class CreditCardService {
 	
 	// Other Bussiness Methods --------------------------------------------------------
 
+	public void checkCreditCard(CreditCard creditCard){
+		long today, cardDate, sevenDays;
+		Calendar calendar;
+	
+		sevenDays = 7*24*60*60*100;
+		today = System.currentTimeMillis();
+		calendar = new GregorianCalendar(creditCard.getExpirationYear(),
+			creditCard.getExpirationMonth()+1,1);
+		cardDate = calendar.getTimeInMillis();
+		
+		Assert.isTrue(cardDate>today+sevenDays, "credit.card.expired.error");
+	}
+	
+	public String maskCreditCard(CreditCard creditCard){
+		String number, mask;
+		
+		number = creditCard.getNumber().substring(12);
+		mask="************"+number;
+		
+		return mask;
+	}
+
+	public Map<Integer, String> maskCreditCardsFromBooks(Collection<Book> books) {
+		// Devuelve un map con el id del book como clave y la creditCard enmascarada como 
+		// value.
+		Map<Integer, String> result;
+		result = new HashMap<Integer, String>();
+		for (Book book : books){
+			result.put(book.getId(), maskCreditCard(book.getCreditCard()));
+		}
+		
+		return result;
+	}
 }

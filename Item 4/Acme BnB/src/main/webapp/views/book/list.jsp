@@ -17,6 +17,22 @@
 	name="books" requestURI="${requestURI}" id="row">
 
 	<!-- Attributes -->
+
+	<security:authorize access="hasRole('TENANT')">
+		<spring:message code="book.lessor" var="lessor" />
+		<display:column title="lessor" sortable="true">
+			<a href="lessor/view.do?lessorId=${row.lessor.id}">
+			<spring:message code="book.view" var="lessor" /></a>
+		</display:column>
+	</security:authorize>
+
+	<security:authorize access="hasRole('LESSOR')">
+		<spring:message code="book.tenant" var="tenant" />
+		<display:column title="tenant" sortable="true">
+			<a href="lessor/view.do?tenantId=${row.lessor.id}">
+			<spring:message code="book.view"/></a>
+		</display:column>
+	</security:authorize>
 	
 	<acme:column sorteable="true" code="book.property.name" path="property.name"/>
 	
@@ -31,8 +47,10 @@
 	<acme:column sorteable="true" code="book.amount" path="totalAmount"/>
 
 	<security:authorize access="hasRole('TENANT')">
-<!-- 	Hay que enmascarar las credit cards antes de mostrarlas -->
-<%-- 	<acme:column sortable="false" code ="book.creditcard" path="creditCard.number"/> --%>
+		<spring:message code="book.credit.card" var="CCName" />
+		<display:column title="CCName" sortable="true">
+			<jstl:out value="${maskedCard}"/>
+		</display:column>
 	</security:authorize>
 	<security:authorize access="hasRole('LESSOR')">
 		<display:column>
@@ -45,9 +63,6 @@
 			</jstl:if>
 		</display:column>
 	</security:authorize>
-	<!-- Action links -->
-	
-	
 	
 
 </display:table>

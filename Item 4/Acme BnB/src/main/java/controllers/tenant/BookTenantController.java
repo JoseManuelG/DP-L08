@@ -1,6 +1,7 @@
 package controllers.tenant;
 
 import java.util.Collection;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.BookService;
+import services.CreditCardService;
 import services.TenantService;
 import controllers.AbstractController;
 import domain.Book;
@@ -25,16 +27,23 @@ public class BookTenantController extends AbstractController {
 
 	@Autowired
 	private BookService bookService;
+
+	@Autowired
+	private CreditCardService creditCardService;
 	
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Book> books;
+		Map<Integer,String> maskedCards;
 		
 		books = tenantService.findAllBooksByPrincipal();
+		maskedCards = creditCardService.maskCreditCardsFromBooks(books);
+		
 		result = new ModelAndView("book/list");
 		result.addObject("books",books);
+		result.addObject("maskedCards",maskedCards);
 		result.addObject("requestURI","book/tenant/list.do");
 		
 		return result;
