@@ -1,12 +1,14 @@
 
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -14,6 +16,7 @@ import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -82,11 +85,11 @@ public class Book extends DomainEntity {
 
 	// Relationships ----------------------------------------------------------
 
-	private CreditCard	creditCard;
-	private Invoice		invoice;
-	private Property	property;
-	private Tenant		tenant;
-	private Lessor 		lessor;
+	private CreditCard				creditCard;
+	private Invoice					invoice;
+	private Collection<Property>	properties;
+	private Tenant					tenant;
+	private Lessor					lessor;
 
 
 	@NotNull
@@ -112,13 +115,14 @@ public class Book extends DomainEntity {
 
 	@NotNull
 	@Valid
-	@ManyToOne(optional = false)
-	public Property getProperty() {
-		return property;
+	@Size(min = 1, max = 2)
+	@ManyToMany
+	public Collection<Property> getProperties() {
+		return properties;
 	}
 
-	public void setProperty(Property property) {
-		this.property = property;
+	public void setProperties(Collection<Property> properties) {
+		this.properties = properties;
 	}
 
 	@NotNull
@@ -131,7 +135,7 @@ public class Book extends DomainEntity {
 	public void setTenant(Tenant tenant) {
 		this.tenant = tenant;
 	}
-	
+
 	@Valid
 	@ManyToOne(optional = true)
 	public Lessor getLessor() {

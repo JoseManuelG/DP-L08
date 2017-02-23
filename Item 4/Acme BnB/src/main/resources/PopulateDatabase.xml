@@ -1282,7 +1282,11 @@
 		<property name="state" value=""/>
 		<property name="totalAmount" value=""/>
 		<property name="creditCard" ref=""/>
-		<property name="property" ref=""/>
+		<property name="properties">
+			<list>
+				<ref bean=""/>
+			</list>
+		</property>		
 		<property name="tenant" ref=""/>		
 		<property name="invoice" ref=""/>
 	</bean>
@@ -1296,7 +1300,11 @@
 		<property name="state" value="PENDING"/>
 		<property name="totalAmount" value="60.0"/>
 		<property name="creditCard" ref="creditCardBook1Tenant1"/>
-		<property name="property" ref="property1Lessor1"/>
+		<property name="properties">
+			<list>
+				<ref bean="property1Lessor1"/>
+			</list>
+		</property>		
 		<property name="tenant" ref="tenant1"/>		
 		<property name="invoice" ref="invoiceBook1Tenant1"/>
 		<property name="lessor" ref="lessor1"/>
@@ -1309,7 +1317,11 @@
 		<property name="state" value="PENDING"/>
 		<property name="totalAmount" value="60.0"/>
 		<property name="creditCard" ref="creditCardBook2Tenant1"/>
-		<property name="property" ref="property2Lessor1"/>
+		<property name="properties">
+			<list>
+				<ref bean="property2Lessor1"/>
+			</list>
+		</property>	
 		<property name="tenant" ref="tenant1"/>		
 		<property name="invoice"><null/></property>
 		<property name="lessor" ref="lessor1"/>
@@ -1322,7 +1334,11 @@
 		<property name="state" value="ACCEPTED"/>
 		<property name="totalAmount" value="20.0"/>
 		<property name="creditCard" ref="creditCardBook3Tenant1"/>
-		<property name="property" ref="property3Lessor1"/>
+		<property name="properties">
+			<list>
+				<ref bean="property3Lessor1"/>
+			</list>
+		</property>	
 		<property name="tenant" ref="tenant1"/>		
 		<property name="invoice"><null/></property>
 		<property name="lessor" ref="lessor1"/>
@@ -1335,7 +1351,11 @@
 		<property name="state" value="ACCEPTED"/>
 		<property name="totalAmount" value="20.0"/>
 		<property name="creditCard" ref="creditCardBook4Tenant1"/>
-		<property name="property" ref="property4Lessor1"/>
+		<property name="properties">
+			<list>
+				<ref bean="property4Lessor1"/>
+			</list>
+		</property>	
 		<property name="tenant" ref="tenant1"/>		
 		<property name="invoice"><null/></property>
 		<property name="lessor" ref="lessor1"/>
@@ -1348,7 +1368,11 @@
 		<property name="state" value="DENIED"/>
 		<property name="totalAmount" value="20.0"/>
 		<property name="creditCard" ref="creditCardBook5Tenant1"/>
-		<property name="property" ref="property5Lessor1"/>
+		<property name="properties">
+			<list>
+				<ref bean="property5Lessor1"/>
+			</list>
+		</property>	
 		<property name="tenant" ref="tenant1"/>		
 		<property name="invoice"><null/></property>
 		<property name="lessor" ref="lessor1"/>
@@ -1361,7 +1385,11 @@
 		<property name="state" value="ACCEPTED"/>
 		<property name="totalAmount" value="20.0"/>
 		<property name="creditCard" ref="creditCardBook6Tenant1"/>
-		<property name="property" ref="property6Lessor1"/>
+		<property name="properties">
+			<list>
+				<ref bean="property6Lessor1"/>
+			</list>
+		</property>	
 		<property name="tenant" ref="tenant1"/>		
 		<property name="invoice"><null/></property>
 		<property name="lessor" ref="lessor1"/>
@@ -1374,7 +1402,11 @@
 		<property name="state" value="ACCEPTED"/>
 		<property name="totalAmount" value="200.0"/>
 		<property name="creditCard" ref="creditCardBook1Tenant2"/>
-		<property name="property" ref="property1Lessor2"/>
+		<property name="properties">
+			<list>
+				<ref bean="property1Lessor2"/>
+			</list>
+		</property>	
 		<property name="tenant" ref="tenant2"/>		
 		<property name="invoice"><null/></property>
 		<property name="lessor" ref="lessor2"/>
