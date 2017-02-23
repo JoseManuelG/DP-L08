@@ -18,15 +18,15 @@
 
 <spring:message  code="creditCard.holderName" />: <jstl:out value="${creditCard.holderName}" />
 <br>
-<spring:message  code="creditCard.creditCard.brandName" />: <jstl:out value="${creditCard.creditCard.brandName}"/>
+<spring:message  code="creditCard.brandName" />: <jstl:out value="${creditCard.brandName}"/>
 <br>
-<spring:message  code="creditCard.creditCard.number" />: <jstl:out value="${creditCard.creditCard.number}"/>
+<spring:message  code="creditCard.number" />: <jstl:out value="${creditCard.number}"/>
 <br>
-<spring:message  code="creditCard.creditCard.expirationMonth" />: <jstl:out value="${creditCard.creditCard.expirationMonth}"/>
+<spring:message  code="creditCard.expirationMonth" />: <jstl:out value="${creditCard.expirationMonth}"/>
 <br>
-<spring:message  code="creditCard.creditCard.expirationYear" />: <jstl:out value="${creditCard.creditCard.expirationYear}"/>
+<spring:message  code="creditCard.expirationYear" />: <jstl:out value="${creditCard.expirationYear}"/>
 <br>
-<spring:message  code="creditCard.creditCard.cvvCode" />: <jstl:out value="${creditCard.creditCard.cvvCode}"/>
+<spring:message  code="creditCard.cvvCode" />: <jstl:out value="${creditCard.cvvCode}"/>
 <br>
 
 	
