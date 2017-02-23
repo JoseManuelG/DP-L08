@@ -1,19 +1,26 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.TenantRepository;
+import security.Authority;
 import security.LoginService;
+import security.UserAccount;
 import domain.Book;
 import domain.Lessor;
 import domain.Tenant;
+import forms.ActorForm;
 
 @Service
 @Transactional
@@ -30,6 +37,9 @@ public class TenantService {
 	private CustomerService		customerService;
 	@Autowired
 	private FinderService		finderService;
+
+	@Autowired
+	private Validator			validator;
 
 
 	// Simple CRUD methods --------------------------------------
@@ -94,12 +104,36 @@ public class TenantService {
 		return result;
 	}
 
-	
-	public boolean tenantHaveBooksWithLessor(Tenant tenant, Lessor lessor){
-		boolean res= false;
-		if(tenantRepository.findAllBooksByTennantAndLessor(tenant.getId(),lessor.getId())>0){
-			res=true;
+	public boolean tenantHaveBooksWithLessor(Tenant tenant, Lessor lessor) {
+		boolean res = false;
+		if (tenantRepository.findAllBooksByTennantAndLessor(tenant.getId(), lessor.getId()) > 0) {
+			res = true;
 		}
 		return res;
+	}
+
+	public Tenant reconstruct(ActorForm actorForm, BindingResult binding) {
+		Tenant result = create();
+
+		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		UserAccount userAccount = new UserAccount();
+		userAccount.setPassword(encoder.encodePassword(actorForm.getPassword(), null));
+		userAccount.setUsername(actorForm.getUserName());
+		Collection<Authority> authorities = new ArrayList<Authority>();
+		Authority authority = new Authority();
+		authority.setAuthority(actorForm.getTypeOfActor());
+		authorities.add(authority);
+		userAccount.setAuthorities(authorities);
+
+		result.setName(actorForm.getName());
+		result.setSurname(actorForm.getSurname());
+		result.setPicture(actorForm.getPicture());
+		result.setEmail(actorForm.getEmail());
+		result.setPhone(actorForm.getPhone());
+
+		result.setUserAccount(userAccount);
+
+		validator.validate(result, binding);
+		return null;
 	}
 }

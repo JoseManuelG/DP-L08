@@ -25,24 +25,22 @@
 	</form:label>
 	
 	<select id="typeOfActor" name="typeOfActor">
-    	<option value="LESSOR">Lessor</option>
-    	<option value="TENANT">Tenant</option>
+    	<option value="LESSOR"><spring:message code="security.register.lessor" /></option>
+    	<option value="TENANT"><spring:message code="security.register.tenant" /></option>
     </select>
+    <br />
     
     <acme:textbox code="security.register.name" path="name"/>
-	<br />
+	
+	<acme:textbox code="security.register.username" path="userName"/>
 	
 	<acme:password code="security.password" path="password"/>
-	<br />
 	
 	<acme:textbox code="security.register.surname" path="surname"/>
-	<br />
 	
 	<acme:textbox code="security.register.email" path="email"/>
-	<br />
 	
 	<acme:textbox code="security.register.phone" path="phone"/>
-	<br />
 	
 	<a target="_blank" href="law/terms-conditions.do">
 		<spring:message code="security.register.terms" />
@@ -50,7 +48,6 @@
 	
 	<br/>
 		<acme:checkbox code="security.register.AceptTerms" path="acepted"/>
-	<br />
 	
 	<acme:submit code="security.register.save" name="save"/>
 	

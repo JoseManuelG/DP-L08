@@ -1,11 +1,6 @@
 
 package forms;
 
-import javax.validation.constraints.Pattern;
-
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.URL;
 
 public class ActorForm {
 
@@ -17,6 +12,7 @@ public class ActorForm {
 	private String	phone;
 	private String	picture;
 	private Boolean	acepted;
+	private String	UserName;
 
 
 	//Constructor
@@ -24,7 +20,7 @@ public class ActorForm {
 		super();
 	}
 	//attributes------------
-	@Pattern(regexp = "^LESSOR$|^TENANT$")
+
 	public String getTypeOfActor() {
 		return typeOfActor;
 	}
@@ -33,7 +29,6 @@ public class ActorForm {
 		this.typeOfActor = typeOfActor;
 	}
 
-	@NotBlank
 	public String getPassword() {
 		return password;
 	}
@@ -42,7 +37,6 @@ public class ActorForm {
 		this.password = password;
 	}
 
-	@NotBlank
 	public String getName() {
 		return name;
 	}
@@ -50,29 +44,28 @@ public class ActorForm {
 	public void setName(String name) {
 		this.name = name;
 	}
-	@NotBlank
+
 	public String getSurname() {
 		return surname;
 	}
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
-	@NotBlank
-	@Email
+
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	@Pattern(regexp = "^\\+([0-9][0-9][0-9])([0-9A-Za-z])+$")
+
 	public String getPhone() {
 		return phone;
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	@URL
+
 	public String getPicture() {
 		return picture;
 	}
@@ -85,6 +78,12 @@ public class ActorForm {
 	}
 	public void setAcepted(Boolean acepted) {
 		this.acepted = acepted;
+	}
+	public String getUserName() {
+		return UserName;
+	}
+	public void setUserName(String userName) {
+		UserName = userName;
 	}
 
 }
