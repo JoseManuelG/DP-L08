@@ -16,10 +16,10 @@ public interface FinderRepository extends JpaRepository<Finder, Integer> {
 	@Query("select f from Tenant t join t.finder f where t.id=?1")
 	Finder findByTenant(int tenantId);
 
-	@Query("select p from Property p where p.address like concat('%', ?1, '%') and p.rate>=?3 and (p.address like concat('%', ?2, '%') or p.name like concat('%', ?2, '%') or p.description like concat('%', ?2, '%'))")
+	@Query("select p from Property p where p.isCopy=false and p.address like concat('%', ?1, '%') and p.rate>=?3 and (p.address like concat('%', ?2, '%') or p.name like concat('%', ?2, '%') or p.description like concat('%', ?2, '%'))")
 	Collection<Property> searchPropertiesWithoutMaxPrice(String destination, String keyword, Double min);
 
-	@Query("select p from Property p where p.address like concat('%', ?1, '%') and p.rate>=?3 and (p.address like concat('%', ?2, '%') or p.name like concat('%', ?2, '%') or p.description like concat('%', ?2, '%')) and p.rate<=?4")
+	@Query("select p from Property p where p.isCopy=false and p.address like concat('%', ?1, '%') and p.rate>=?3 and (p.address like concat('%', ?2, '%') or p.name like concat('%', ?2, '%') or p.description like concat('%', ?2, '%')) and p.rate<=?4")
 	Collection<Property> searchPropertiesWithMaxPrice(String destination, String keyword, Double min, Double maxPrice);
 
 }
