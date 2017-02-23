@@ -1,10 +1,9 @@
+
 package services;
 
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -20,52 +19,53 @@ import domain.Lessor;
 @Service
 @Transactional
 public class CreditCardService {
-	
+
 	// Managed Repository -------------------------------------------------------------
-	
+
 	@Autowired
-	private CreditCardRepository creditCardRepository;
-	
+	private CreditCardRepository	creditCardRepository;
+
 	// Supporting Services ------------------------------------------------------------
-	
+
 	@Autowired
-	private BookService bookService;
-	
+	private BookService				bookService;
+
 	@Autowired
-	private LessorService lessorService;
-	
+	private LessorService			lessorService;
+
 	@Autowired
-	private CustomerService customerService;
-	
+	private CustomerService			customerService;
+
+
 	// Constructor --------------------------------------------------------------------
-	
-	public CreditCardService(){
+
+	public CreditCardService() {
 		super();
 	}
-	
+
 	// Simple CRUD methods ------------------------------------------------------------
-	
-	public CreditCard create(){
+
+	public CreditCard create() {
 		CreditCard result;
 		result = new CreditCard();
 		return result;
 	}
-	
-	public Collection<CreditCard> findAll(){
+
+	public Collection<CreditCard> findAll() {
 		Collection<CreditCard> result;
 		result = creditCardRepository.findAll();
 		Assert.notNull(result);
 		return result;
 	}
-	
-	public CreditCard findOne(int creditCardId){
+
+	public CreditCard findOne(int creditCardId) {
 		CreditCard result;
 		result = creditCardRepository.findOne(creditCardId);
 		return result;
 	}
-	
-	public CreditCard saveForBook(CreditCard creditCard){
-		Assert.notNull(creditCard,"La tarjeta de crédito no puede ser nula");
+
+	public CreditCard saveForBook(CreditCard creditCard) {
+		Assert.notNull(creditCard, "La tarjeta de crédito no puede ser nula");
 		//Assert.isTrue((bookService.existsCreditCardForAnyBook(creditCard) && !lessorService.existsCreditCardForAnyLessor(creditCard)) || (!bookService.existsCreditCardForAnyBook(creditCard) && lessorService.existsCreditCardForAnyLessor(creditCard)));
 		//Assert.isTrue(expression);
 		//Assert.isTrue((lessor.getCreditCard().getId()==creditCard.getId()) || creditCard.getId()==0); 
@@ -73,53 +73,46 @@ public class CreditCardService {
 		result = creditCardRepository.save(creditCard);
 		return result;
 	}
-	
-	public CreditCard saveForLessor(CreditCard creditCard){
-		Assert.notNull(creditCard,"La tarjeta de crédito no puede ser nula");
+
+	public CreditCard saveForLessor(CreditCard creditCard) {
+		Assert.notNull(creditCard, "La tarjeta de crédito no puede ser nula");
 		Lessor lessor = (Lessor) customerService.findActorByPrincial();
-		Assert.isTrue((lessor.getCreditCard()==null && creditCard.getId()==0) || (lessor.getCreditCard().getId()==creditCard.getId()),"Un lessor no puede tener más de una credit card");
-		Assert.isTrue(!(bookService.existsCreditCardForAnyBook(creditCard)),"La credit card de un lessor no puede pertenecer a un book");
+		Assert.isTrue((lessor.getCreditCard() == null && creditCard.getId() == 0) || (lessor.getCreditCard().getId() == creditCard.getId()), "Un lessor no puede tener más de una credit card");
+		Assert.isTrue(!(bookService.existsCreditCardForAnyBook(creditCard)), "La credit card de un lessor no puede pertenecer a un book");
 		CreditCard result;
 		result = creditCardRepository.save(creditCard);
 		lessor.setCreditCard(result);
 		lessorService.save(lessor);
 		return result;
-		
+
 	}
-	
+
 	// Other Bussiness Methods --------------------------------------------------------
 
-	public void checkCreditCard(CreditCard creditCard){
+	public void checkCreditCard(CreditCard creditCard) {
 		long today, cardDate, sevenDays;
 		Calendar calendar;
-	
-		sevenDays = 7*24*60*60*100;
+
+		sevenDays = 7 * 24 * 60 * 60 * 100;
 		today = System.currentTimeMillis();
 		calendar = new GregorianCalendar(creditCard.getExpirationYear(),
-			creditCard.getExpirationMonth()+1,1);
+			creditCard.getExpirationMonth() + 1, 1);
 		cardDate = calendar.getTimeInMillis();
-		
-		Assert.isTrue(cardDate>today+sevenDays, "credit.card.expired.error");
-	}
-	
-	public String maskCreditCard(CreditCard creditCard){
-		String number, mask;
-		
-		number = creditCard.getNumber().substring(12);
-		mask="************"+number;
-		
-		return mask;
+
+		Assert.isTrue(cardDate > today + sevenDays, "credit.card.expired.error");
 	}
 
-	public Map<Integer, String> maskCreditCardsFromBooks(Collection<Book> books) {
-		// Devuelve un map con el id del book como clave y la creditCard enmascarada como 
-		// value.
-		Map<Integer, String> result;
-		result = new HashMap<Integer, String>();
+	public void maskCreditCard(CreditCard creditCard) {
+		String number, mask;
+
+		number = creditCard.getNumber().substring(12);
+		mask = "************" + number;
+		creditCard.setNumber(mask);
+	}
+
+	public void maskCreditCardsFromBooks(Collection<Book> books) {
 		for (Book book : books){
-			result.put(book.getId(), maskCreditCard(book.getCreditCard()));
+			maskCreditCard(book.getCreditCard());
 		}
-		
-		return result;
 	}
 }

@@ -1,10 +1,10 @@
 package controllers.tenant;
 
 import java.util.Collection;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.TransactionSystemException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,14 +36,14 @@ public class BookTenantController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Book> books;
-		Map<Integer,String> maskedCards;
 		
 		books = tenantService.findAllBooksByPrincipal();
-		maskedCards = creditCardService.maskCreditCardsFromBooks(books);
-		
+		try {
+			creditCardService.maskCreditCardsFromBooks(books);
+		} catch (TransactionSystemException e) {
+		}
 		result = new ModelAndView("book/list");
 		result.addObject("books",books);
-		result.addObject("maskedCards",maskedCards);
 		result.addObject("requestURI","book/tenant/list.do");
 		
 		return result;
@@ -95,6 +95,13 @@ public class BookTenantController extends AbstractController {
 		ModelAndView result;
 
 		result = new ModelAndView("book/edit");
+		if (bookForm.getCreditCard()!=null && 
+			bookForm.getCreditCard().getNumber().length()==16){
+			try {
+				creditCardService.maskCreditCard(bookForm.getCreditCard());
+			} catch (TransactionSystemException e) {
+			}
+		}
 		result.addObject("bookForm", bookForm);
 		result.addObject("message", message);
 

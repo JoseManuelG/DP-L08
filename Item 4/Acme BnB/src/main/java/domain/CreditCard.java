@@ -3,6 +3,7 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
 import org.hibernate.validator.constraints.NotBlank;
@@ -36,7 +37,7 @@ public class CreditCard extends DomainEntity {
 		this.brandName = brandName;
 	}
 	
-	@NotBlank
+	@Pattern(regexp = "\\d+")
 	@CreditCardNumber
 	public String getNumber() {
 		return number;

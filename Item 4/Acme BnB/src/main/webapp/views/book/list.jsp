@@ -20,21 +20,25 @@
 
 	<security:authorize access="hasRole('TENANT')">
 		<spring:message code="book.lessor" var="lessor" />
-		<display:column title="lessor" sortable="true">
+		<display:column title="${lessor}" sortable="false">
 			<a href="lessor/view.do?lessorId=${row.lessor.id}">
-			<spring:message code="book.view" var="lessor" /></a>
+			<spring:message code="book.view"/></a>
 		</display:column>
 	</security:authorize>
 
 	<security:authorize access="hasRole('LESSOR')">
 		<spring:message code="book.tenant" var="tenant" />
-		<display:column title="tenant" sortable="true">
-			<a href="lessor/view.do?tenantId=${row.lessor.id}">
+		<display:column title="${tenant}" sortable="false">
+			<a href="tenant/view.do?tenantId=${row.tenant.id}">
 			<spring:message code="book.view"/></a>
 		</display:column>
 	</security:authorize>
 	
-	<acme:column sorteable="true" code="book.property.name" path="property.name"/>
+	<spring:message code="book.property.name" var="property" />
+	<display:column title="${property}" sortable="true">
+		<a href="property/view.do?propertyId=${row.property.id}">
+		<jstl:out value="${row.property.name}"/></a>
+	</display:column>
 	
 	<acme:column sorteable="true" code="book.checkin" path="checkInDate"/>
 	
@@ -47,10 +51,7 @@
 	<acme:column sorteable="true" code="book.amount" path="totalAmount"/>
 
 	<security:authorize access="hasRole('TENANT')">
-		<spring:message code="book.credit.card" var="CCName" />
-		<display:column title="CCName" sortable="true">
-			<jstl:out value="${maskedCard}"/>
-		</display:column>
+		<acme:column sorteable="false" code="book.credit.card" path="creditCard.number"/>
 	</security:authorize>
 	<security:authorize access="hasRole('LESSOR')">
 		<display:column>
