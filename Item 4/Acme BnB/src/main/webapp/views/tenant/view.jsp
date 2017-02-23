@@ -36,8 +36,12 @@
 :
 <jstl:out value="${lessor.phone}" />
 <br>
-
-
+<jstl:if test="${esMiPerfil}">
+			<a href=security/edit.do>
+	      <spring:message  code="property.edit" />
+	</a>
+</jstl:if>
+<br>
 <jstl:if test="${!socialIdentities.isEmpty()}">
 	<display:table pagesize="5" class="displaytag1" name="socialIdentities"
 		requestURI="${requestURI}" id="row" uid="social">
@@ -92,6 +96,3 @@
 
 
 	</display:table>
-
-<br/>
-<a href="tenant/edit.do"><spring:message code="lessor.edit" /></a>
