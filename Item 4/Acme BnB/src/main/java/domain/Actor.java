@@ -21,7 +21,7 @@ import security.UserAccount;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public abstract class Actor extends DomainEntity {
+public abstract class Actor extends Comentable {
 
 	private String	name;
 	private String	surname;

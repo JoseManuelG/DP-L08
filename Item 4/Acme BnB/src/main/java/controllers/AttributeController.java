@@ -17,12 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import security.Authority;
 import security.LoginService;
 import services.ActorService;
-import services.AttachmentService;
 import services.AttributeService;
-import services.SocialIdentityService;
-import domain.Actor;
 import domain.Attribute;
-import domain.SocialIdentity;
 
 @Controller
 @RequestMapping("/attribute/administrator")
@@ -50,6 +46,7 @@ public class AttributeController extends AbstractController {
 		public @ResponseBody ModelAndView list() {
 			ModelAndView result= new ModelAndView("attribute/administrator/list");
 			Collection<Attribute> attributes= attributeService.findAll();
+			result.addObject("RequestURI","attribute/administrator/list.do");
 			result.addObject("attributes",attributes);
 			return result;
 		

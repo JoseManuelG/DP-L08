@@ -6,23 +6,25 @@ import java.util.Collection;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.Version;
+import javax.persistence.OneToMany;
 
 @Entity
 @Access(AccessType.PROPERTY)
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public interface Comentable {
+public class Comentable extends DomainEntity{
+	//Attributes
+	//Relathionships
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
-	int getId();
-	void setId(int id);
-	@Version
-	int getVersion();
-	void setVersion(int version);
+	private Collection<Comment> comments;
+	@OneToMany
+	public Collection<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(Collection<Comment> comments) {
+		this.comments = comments;
+	}
+	
+	
 }
