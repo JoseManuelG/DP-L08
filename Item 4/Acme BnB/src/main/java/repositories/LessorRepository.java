@@ -12,7 +12,8 @@ import domain.Lessor;
 @Repository
 public interface LessorRepository extends JpaRepository<Lessor,Integer> {
 	
-	@Query("select l from Lessor l where l.creditCard.id = ?1")
+	
+	@Query("select case when count(l) > 0 then true else false end from Lessor l where l.creditCard.id = ?1")
 	boolean existsCreditCardForAnyLessor(int creditCardId);
 
 	@Query("select l from Lessor l where l.userAccount.id = ?1")
@@ -20,7 +21,6 @@ public interface LessorRepository extends JpaRepository<Lessor,Integer> {
 
 	@Query("select l.books from Lessor l where l.id = ?1")
 	Collection<Book> findAllBooksByPrincipal(int id);
-	
 	
 	@Query("select count (b) from Book b where b.tenant.id = ?1 and b.lessor.id= ?2")
 	int findAllBooksByTennantAndLessor(int tenantId, int lessorId);

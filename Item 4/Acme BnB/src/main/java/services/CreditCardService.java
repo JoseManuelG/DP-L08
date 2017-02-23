@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.CreditCardRepository;
+import repositories.LessorRepository;
 import domain.CreditCard;
 import domain.Lessor;
 
@@ -59,14 +60,27 @@ public class CreditCardService {
 		return result;
 	}
 	
-	public CreditCard save(CreditCard creditCard){
+	public CreditCard saveForBook(CreditCard creditCard){
 		Assert.notNull(creditCard,"La tarjeta de crédito no puede ser nula");
-		Assert.isTrue((bookService.existsCreditCardForAnyBook(creditCard) && !lessorService.existsCreditCardForAnyLessor(creditCard)) || (!bookService.existsCreditCardForAnyBook(creditCard) && lessorService.existsCreditCardForAnyLessor(creditCard)));
-		Lessor lessor = (Lessor) customerService.findActorByPrincial();
-		Assert.isTrue((creditCard.getId()!=0 &&  lessor.getCreditCard().getId()==creditCard.getId()) || creditCard.getId()==0); 
+		//Assert.isTrue((bookService.existsCreditCardForAnyBook(creditCard) && !lessorService.existsCreditCardForAnyLessor(creditCard)) || (!bookService.existsCreditCardForAnyBook(creditCard) && lessorService.existsCreditCardForAnyLessor(creditCard)));
+		//Assert.isTrue(expression);
+		//Assert.isTrue((lessor.getCreditCard().getId()==creditCard.getId()) || creditCard.getId()==0); 
 		CreditCard result;
 		result = creditCardRepository.save(creditCard);
 		return result;
+	}
+	
+	public CreditCard saveForLessor(CreditCard creditCard){
+		Assert.notNull(creditCard,"La tarjeta de crédito no puede ser nula");
+		Lessor lessor = (Lessor) customerService.findActorByPrincial();
+		Assert.isTrue((lessor.getCreditCard()==null && creditCard.getId()==0) || (lessor.getCreditCard().getId()==creditCard.getId()),"Un lessor no puede tener más de una credit card");
+		Assert.isTrue(!(bookService.existsCreditCardForAnyBook(creditCard)),"La credit card de un lessor no puede pertenecer a un book");
+		CreditCard result;
+		result = creditCardRepository.save(creditCard);
+		lessor.setCreditCard(result);
+		lessorService.save(lessor);
+		return result;
+		
 	}
 	
 	// Other Bussiness Methods --------------------------------------------------------
