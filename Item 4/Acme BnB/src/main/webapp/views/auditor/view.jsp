@@ -26,7 +26,7 @@
 <br>
 <spring:message  code="lessor.phone" />: <jstl:out value="${auditor.phone}"/>
 <br>
-<spring:message  code="lessor.picture" />: <jstl:out value="${auditor.picture}"/>
+<img src=<jstl:out value="${auditor.picture}"/> />
 <br>
 <spring:message  code="auditor.companyName" />: <jstl:out value="${auditor.companyName}"/>
 <br>
