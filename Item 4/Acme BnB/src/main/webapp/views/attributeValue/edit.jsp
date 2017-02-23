@@ -11,9 +11,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-
+<jstl:if test="${!noQuedanMas}">
 <form:form action="attributeValue/lessor/edit.do" modelAttribute="attributeValue">
-
+	
 		<form:hidden path="id" />
 		<form:hidden path="version" />
 		<form:hidden path="property" />
@@ -38,3 +38,9 @@
 	<acme:cancel url="property/view.do?propertyId=${attributeValue.property.id }" code="attributeValue.cancel"/>
 	<br>
 </form:form>
+</jstl:if>
+<jstl:if test="${noQuedanMas}">
+	<spring:message  code="attributeValue.noHayMas" />
+	<br>
+	<acme:cancel url="property/view.do?propertyId=${attributeValue.property.id }" code="attributeValue.cancel"/>
+</jstl:if>

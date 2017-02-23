@@ -51,16 +51,24 @@ public class AttributeValueController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public @ResponseBody ModelAndView create(int propertyId) {
 		ModelAndView result= new ModelAndView("attributeValue/lessor/create");
+		Boolean noQuedanMas = false;
 		AttributeValue attributeValue= attributeValueService.create();
 		Property property=propertyService.findOne(propertyId);
 		attributeValue.setProperty(property);
+		
+		
 		Collection<Attribute>attributes= attributeService.findAll();
 		for(AttributeValue aux:property.getAttributeValues()){
 			attributes.remove(aux.getAttribute());
 		}
+		if(attributes.isEmpty()){
+			noQuedanMas=true;
+		}
+		
 		result.addObject("attributes",attributes);
 		result.addObject("attributeValue",attributeValue);
-		
+		result.addObject("noQuedanMas",noQuedanMas);
+
 		return result;
 	
 	
