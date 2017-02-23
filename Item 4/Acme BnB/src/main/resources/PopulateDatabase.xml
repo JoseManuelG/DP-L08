@@ -598,6 +598,16 @@
 			</list>
 		</property>
 		<property name="totalFee" value="0.0"/>
+				<property name="comments">
+			<list>
+				<ref bean="comment1Lessor1"/>
+				<ref bean="comment2Lessor1"/>
+				<ref bean="comment3Lessor1"/>
+				<ref bean="comment4Lessor1"/>
+				<ref bean="comment5Lessor1"/>
+				<ref bean="comment6Lessor1"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="lessor2" class="domain.Lessor">
@@ -617,6 +627,7 @@
 				<ref bean="property1Lessor2"/>
 			</list>
 		</property>
+
 		<property name="books">
 			<list>
 				<ref bean="book1Tenant2"/>

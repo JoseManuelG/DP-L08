@@ -56,6 +56,7 @@
 						<li><a href="book/lessor/list.do"><spring:message code="master.page.lessor.request.books" /></a></li>
 						<li><a href="property/lessor/myProperties.do"><spring:message code="master.page.lessor.myProperties" /></a></li>
 						<li><a href="lessor/fee.do"><spring:message code="master.page.lessor.unpaid.fee" /></a></li>
+							<li><a href="lessor/view.do"><spring:message code="master.page.lessor.myProfile" /></a></li>
 					</security:authorize>
 					<security:authorize access="hasRole('TENANT')">
 						<li><a href="book/tenant/list.do"><spring:message code="master.page.tenant.request.books" /></a></li>

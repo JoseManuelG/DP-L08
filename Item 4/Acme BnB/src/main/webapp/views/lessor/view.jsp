@@ -8,22 +8,101 @@
  * http://www.tdg-seville.info/License.html
  --%>
 
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 
-<%@taglib prefix="jstl"	uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-
-<spring:message  code="lessor.name" />: <jstl:out value="${lessor.name}" />
-<br>
-<spring:message  code="lessor.surname" />: <jstl:out value="${lessor.surname}"/>
-<br>
-<spring:message  code="lessor.email" />: <jstl:out value="${lessor.email}"/>
-<br>
-<spring:message  code="lessor.phone" />: <jstl:out value="${lessor.phone}"/>
-<br>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-	
+<spring:message code="lessor.name" />
+:
+<jstl:out value="${lessor.name}" />
+<br>
+<spring:message code="lessor.surname" />
+:
+<jstl:out value="${lessor.surname}" />
+<br>
+<spring:message code="lessor.email" />
+:
+<jstl:out value="${lessor.email}" />
+<br>
+<spring:message code="lessor.phone" />
+:
+<jstl:out value="${lessor.phone}" />
+<br>
+
+
+<jstl:if test="${!properties.isEmpty()}">
+	<display:table pagesize="5" class="displaytag" name="properties"
+		requestURI="${requestURI}" id="row" uid="property">
+
+		<!-- Action links -->
+
+		<!-- Attributes -->
+
+		<acme:column sorteable="true" code="finder.property.name" path="name" />
+
+		<acme:column sorteable="true" code="finder.property.rate" path="rate" />
+
+		<acme:column sorteable="false" code="finder.property.description"
+			path="description" />
+
+		<acme:column sorteable="false" code="finder.property.address"
+			path="address" />
+
+		<display:column>
+			<a href="property/view.do?propertyId=${property.id}"> <spring:message
+					code="finder.display" />
+			</a>
+		</display:column>
+
+	</display:table>
+</jstl:if>
+
+<jstl:if test="${!socialIdentities.isEmpty()}">
+	<display:table pagesize="5" class="displaytag1" name="socialIdentities"
+		requestURI="${requestURI}" id="row" uid="social">
+
+		<!-- Action links -->
+
+		<!-- Attributes -->
+
+		<acme:column sorteable="true" code="socialIdentity.nick" path="nick" />
+
+		<acme:column sorteable="true" code="socialIdentity.socialNetwork"
+			path="socialNetwork" />
+
+		<display:column>
+			<a href=<jstl:out value="${social.link}" />> <spring:message
+					code="socialIdentity.link" />
+			</a>
+		</display:column>
+
+	</display:table>
+</jstl:if>
+
+	<display:table pagesize="5" class="displaytag1" name="comments"
+		requestURI="${requestURI}" id="row" uid="comments">
+
+		<!-- Action links -->
+
+		<!-- Attributes -->
+
+		<acme:column sorteable="true" code="socialIdentity.nick" path="title" />
+
+		<acme:column sorteable="true" code="socialIdentity.socialNetwork"
+			path="text" />
+
+		<acme:column sorteable="true" code="socialIdentity.socialNetwork"
+			path="stars" />
+		<acme:column sorteable="true" code="socialIdentity.socialNetwork"
+			path="postMoment" />
+
+
+	</display:table>

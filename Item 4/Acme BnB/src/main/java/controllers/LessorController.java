@@ -44,10 +44,14 @@ public class LessorController extends AbstractController {
 	// View ---------------------------------------------------------------
 
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
-	public ModelAndView view(@RequestParam(required = true) Integer lessorId) {
+	public ModelAndView view() {
 		ModelAndView result;
 		result = new ModelAndView("lessor/view");
+		
+		
+		
 		Lessor lessor  = (Lessor) customerService.findActorByPrincial();
+		
 		Collection<SocialIdentity> socialIdentities = lessor.getSocialIdentities();
 		if (socialIdentities != null) {
 			result.addObject("socialIdentities", socialIdentities);
@@ -56,6 +60,10 @@ public class LessorController extends AbstractController {
 			result.addObject("socialIdentities", socialIdentities);
 		}
 		result.addObject("lessor", lessor);
+		result.addObject("properties", lessor.getLessorProperties());
+		result.addObject("comments", lessor.getComments());
+		result.addObject("requestURI","lessor/view.do");
+		
 		return result;
 	}
 
