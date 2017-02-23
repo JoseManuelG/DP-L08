@@ -13,7 +13,7 @@
 <!-- Listing grid -->
 
 <display:table pagesize="5" class="displaytag" keepStatus="false"
-	name="attributes" requestURI="" id="row">
+	name="attributes" requestURI="${requestURI}" id="row">
 	
 	<!-- Action links -->
 

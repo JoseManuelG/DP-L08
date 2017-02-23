@@ -46,7 +46,7 @@ public class AttributeController extends AbstractController {
 		public @ResponseBody ModelAndView list() {
 			ModelAndView result= new ModelAndView("attribute/administrator/list");
 			Collection<Attribute> attributes= attributeService.findAll();
-			result.addObject("RequestURI","attribute/administrator/list.do");
+			result.addObject("requestURI","attribute/administrator/list.do");
 			result.addObject("attributes",attributes);
 			return result;
 		
