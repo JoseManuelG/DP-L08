@@ -42,7 +42,7 @@ public class SocialIdentityController extends AbstractController {
 	public @ResponseBody ModelAndView save() {
 		ModelAndView result= new ModelAndView("socialIdentity/create");
 		SocialIdentity socialIdentity= socialIdentityService.create();
-		socialIdentity.setActor(actorService.findByPrincipal());
+		
 		result.addObject("socialIdentity",socialIdentity);
 		ArrayList<Authority> authorities = new ArrayList<Authority>();
 		authorities.addAll(actorService.findByPrincipal().getUserAccount().getAuthorities());
@@ -58,7 +58,8 @@ public class SocialIdentityController extends AbstractController {
 	public @ResponseBody ModelAndView save(int socialIdentityId) {
 		ModelAndView result= new ModelAndView("socialIdentity/edit");
 		SocialIdentity socialIdentity= socialIdentityService.findOne(socialIdentityId);
-		//socialIdentity.setActor(actorService.findByPrincipal());
+		Actor actor = actorService.findByPrincipal();
+		Assert.isTrue(socialIdentity.getActor().equals(actor), "No puedes cambiar una SocialIdentity que no este asignada a usted");
 		result.addObject("socialIdentity",socialIdentity);
 		ArrayList<Authority> authorities = new ArrayList<Authority>();
 		authorities.addAll(socialIdentity.getActor().getUserAccount().getAuthorities());
@@ -71,17 +72,18 @@ public class SocialIdentityController extends AbstractController {
 	
 	}
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public @ResponseBody ModelAndView save(@Valid SocialIdentity socialIdentity, BindingResult binding) {
+	public @ResponseBody ModelAndView save(SocialIdentity socialIdentity, BindingResult binding) {
 		ModelAndView result;
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(socialIdentity);
 			System.out.println(binding.getAllErrors().toString());
 		} else {
 			try {
-				Actor actor = actorService.findByPrincipal();
-				Assert.isTrue(socialIdentity.getActor().equals(actor), "No puedes cambiar una SocialIdentity que no este asignada a usted");
+				socialIdentity.setActor(actorService.findByPrincipal());
 				socialIdentityService.save(socialIdentity);
 				ArrayList<Authority> authorities = new ArrayList<Authority>();
+				Actor actor = actorService.findByPrincipal();
+
 				authorities.addAll(actor.getUserAccount().getAuthorities());
 				String aux=authorities.get(0).getAuthority().toLowerCase();
 				result = new ModelAndView("redirect:../"+aux+"/view.do");
@@ -99,11 +101,12 @@ public class SocialIdentityController extends AbstractController {
 			try {
 			
 				Actor actor = actorService.findByPrincipal();
-				Assert.isTrue(socialIdentity.getActor().equals(actor), "No puedes cambiar una SocialIdentity que no este asignada a usted");
+				SocialIdentity identity=socialIdentityService.findOne(socialIdentity.getId());
+				Assert.isTrue(identity.getActor().equals(actor), "No puedes cambiar una SocialIdentity que no este asignada a usted");
 				ArrayList<Authority> authorities = new ArrayList<Authority>();
 				authorities.addAll(actor.getUserAccount().getAuthorities());
 				String aux=authorities.get(0).getAuthority().toLowerCase();
-				socialIdentityService.delete(socialIdentity);
+				socialIdentityService.delete(identity);
 				result = new ModelAndView("redirect:../"+aux+"/view.do");
 				
 		} catch (Throwable oops) {
