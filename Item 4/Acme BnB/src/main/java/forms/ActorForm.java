@@ -1,7 +1,6 @@
 
 package forms;
 
-
 public class ActorForm {
 
 	private String	typeOfActor;
@@ -12,7 +11,7 @@ public class ActorForm {
 	private String	phone;
 	private String	picture;
 	private Boolean	acepted;
-	private String	UserName;
+	private String	userName;
 
 
 	//Constructor
@@ -80,10 +79,10 @@ public class ActorForm {
 		this.acepted = acepted;
 	}
 	public String getUserName() {
-		return UserName;
+		return this.userName;
 	}
 	public void setUserName(String userName) {
-		UserName = userName;
+		this.userName = userName;
 	}
 
 }

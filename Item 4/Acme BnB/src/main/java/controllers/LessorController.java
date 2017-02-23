@@ -15,13 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import security.Authority;
-import security.UserAccount;
 import services.CustomerService;
 import services.LessorService;
 import domain.Lessor;
 import domain.SocialIdentity;
-import forms.ActorForm;
 
 @Controller
 @RequestMapping("/lessor")
@@ -42,19 +39,7 @@ public class LessorController extends AbstractController {
 		super();
 	}
 
-	// List ---------------------------------------------------------------
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
-		ModelAndView result;
-		Collection<Lessor> lessors;
-		lessors = lessorService.findAll();
-		result = new ModelAndView("lessor/list");
-		result.addObject("requestURI", "lessor/list.do");
-		result.addObject("lessors", lessors);
-
-		return result;
-	}
 
 	// View ---------------------------------------------------------------
 
@@ -76,71 +61,29 @@ public class LessorController extends AbstractController {
 
 	// Edit ---------------------------------------------------------------
 
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView create() {
+	@RequestMapping(value="/edit", method=RequestMethod.GET)
+	public ModelAndView edit(){
 		ModelAndView result;
-		result = new ModelAndView("lessor/edit");
 		Lessor lessor  = (Lessor) customerService.findActorByPrincial();
-		ActorForm actorForm = new ActorForm();
-		
-		actorForm.setTypeOfActor("LESSOR");
-		actorForm.setLessor(lessor);
-		actorForm.getLessor().setId(lessor.getId());
-		actorForm.getLessor().setTotalFee(lessor.getTotalFee());
-		actorForm.getLessor().setBooks(lessor.getBooks());
-		actorForm.getLessor().setComments(lessor.getComments());
-		actorForm.getLessor().setCreditCard(lessor.getCreditCard());
-		actorForm.getLessor().setPostedComments(lessor.getPostedComments());
-		actorForm.getLessor().setLessorProperties(lessor.getLessorProperties());
-		actorForm.getLessor().setSocialIdentities(lessor.getSocialIdentities());
-		actorForm.getLessor().getUserAccount().setUsername(lessor.getUserAccount().getUsername());
-		actorForm.getLessor().getUserAccount().setPassword(lessor.getUserAccount().getUsername());
-		actorForm.getLessor().setName(lessor.getName());
-		actorForm.getLessor().setSurname(lessor.getSurname());
-		actorForm.getLessor().setEmail(lessor.getEmail());
-		actorForm.getLessor().setPhone(lessor.getPhone());
-		actorForm.getLessor().setPicture(lessor.getPicture());
-		actorForm.setConditionsAccepted(false);
-		
-		result.addObject("actorForm", actorForm);
-		result.addObject("typeActor", "LESSOR");
+		result = createEditModelAndView(lessor);
 		return result;
 	}
 	
 	// Save -------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public @ResponseBody ModelAndView save(ActorForm actorForm, BindingResult binding) {
+	public @ResponseBody ModelAndView save(@Valid Lessor lessor, BindingResult binding) {
 		ModelAndView result;
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		if (binding.hasErrors()) {
-			result = createEditModelAndView(actorForm);
+			result = createEditModelAndView(lessor);
 		} else {
 			try {
-				Lessor lessor  = (Lessor) customerService.findActorByPrincial();
-
-				UserAccount userAccount = lessor.getUserAccount();
-
-				userAccount.setPassword(encoder.encodePassword( actorForm.getLessor().getUserAccount().getPassword(), null));
-				userAccount.setUsername(actorForm.getLessor().getUserAccount().getUsername());
-
-				lessor.setName(actorForm.getLessor().getName());
-				lessor.setSurname(actorForm.getLessor().getSurname());
-				lessor.setEmail(actorForm.getLessor().getEmail());
-				lessor.setPhone(actorForm.getLessor().getPhone());
-				lessor.setPicture(actorForm.getLessor().getPicture());
-				Collection<Authority> authorities = new ArrayList<Authority>();
-				Authority authority = new Authority();
-				authority.setAuthority(actorForm.getTypeOfActor());
-				authorities.add(authority);
-				userAccount.setAuthorities(authorities);
-				lessor.setUserAccount(userAccount);
-
 				lessorService.save(lessor);
-
-				result = this.view(null);
+				result = new ModelAndView("../");
+			
 			} catch (Throwable oops) {
-				result = createEditModelAndView(actorForm, "lessor.commit.error");
+				result = createEditModelAndView(lessor, "lessor.commit.error");
 			}
 		}
 
@@ -150,14 +93,14 @@ public class LessorController extends AbstractController {
 	// Delete -------------------------------------------------------------
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(@Valid ActorForm actorForm, BindingResult binding) {
+	public ModelAndView delete(Lessor lessor, BindingResult binding) {
 		ModelAndView result;
 
 		try {			
-			lessorService.delete(actorForm.getLessor());
-			result = new ModelAndView("redirect:list.do");
+			lessorService.delete(lessor);
+			result = new ModelAndView("../");
 		} catch (Throwable oops) {
-			result = createEditModelAndView(actorForm, "lessor.commit.error");
+			result = createEditModelAndView(lessor, "lessor.commit.error");
 		}
 
 		return result;
@@ -165,18 +108,18 @@ public class LessorController extends AbstractController {
 
 	// Ancillary methods ------------------------------------------------------
 
-	protected ModelAndView createEditModelAndView(ActorForm actorForm) {
+	protected ModelAndView createEditModelAndView(Lessor lessor) {
 		ModelAndView result;
 
-		result = createEditModelAndView(actorForm, null);
+		result = createEditModelAndView(lessor, null);
 
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(ActorForm actorForm, String message) {
+	protected ModelAndView createEditModelAndView(Lessor lessor, String message) {
 		ModelAndView result;
 		result = new ModelAndView("lessor/edit");
-		result.addObject("actorForm", actorForm);
+		result.addObject("lessor", lessor);
 		result.addObject("message", message);
 
 		return result;
