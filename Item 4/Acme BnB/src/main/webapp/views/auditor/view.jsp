@@ -34,13 +34,33 @@
 <display:table pagesize="5" class="displaytag" keepStatus="false"
 	name="socialIdentities" requestURI="${requestURI}" id="row" uid="socialIdentity">
 	
+	<jstl:if test="${esMiPerfil}">
+			<spring:message code="property.edit.property" var="editHeader" />
+			<display:column title="${editHeader}">
+				<a href="socialIdentity/edit.do?socialIdentityId=${social.id}">
+				<spring:message	code="property.edit" />
+				</a>
+				
+			</display:column>
+	</jstl:if>
+	
 	<acme:column sorteable="true" code="auditor.socialIdentity.nick" path="nick"/>
 	
 	<acme:column sorteable="false" code="auditor.socialIdentity.socialNetwork" path="socialNetwork"/>
 	
-	<acme:column sorteable="false" code="auditor.socialIdentity.link" path="link"/>
+	<display:column>
+			<a href=<jstl:out value="${social.link}" />>
+				<spring:message code="auditor.socialIdentity.link" />
+			</a>
+	</display:column>
 	
 </display:table>
+<br/>
+<jstl:if test="${esMiPerfil}">
+	<a href=socialIdentity/create.do>
+	     <spring:message  code="socialIdentity.create" />
+	</a>
+</jstl:if>
 <br/>
 <display:table pagesize="5" class="displaytag" keepStatus="false"
 	name="audits" requestURI="${requestURI}" id="row" uid="audit">

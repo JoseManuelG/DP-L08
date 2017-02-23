@@ -71,6 +71,7 @@ public class AuditorController extends AbstractController {
 		result.addObject("auditor", auditor);
 		result.addObject("socialIdentities", socialIdentities);
 		result.addObject("audits", audits);
+		result.addObject("esMiPerfil", true);
 		result.addObject("requestURI", "auditor/view");
 		return result;
 	}
