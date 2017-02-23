@@ -64,7 +64,6 @@ public class AuditorController extends AbstractController {
 		audits = auditor.getAudits();
 
 		result.addObject("audits", audits);
-		result.addObject(auditor);
 		return result;
 	}
 
