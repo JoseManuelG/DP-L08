@@ -42,27 +42,41 @@ public class LessorController extends AbstractController {
 
 	// View ---------------------------------------------------------------
 
-	@RequestMapping(value = "/view", method = RequestMethod.GET)
+	@RequestMapping(value = "/myProfile", method = RequestMethod.GET)
 	public ModelAndView view() {
 		ModelAndView result;
 		result = new ModelAndView("lessor/view");
 		
 		
 		
-		Lessor lessor  = (Lessor) customerService.findActorByPrincial();
+		Lessor lessor  =  lessorService.findByPrincipal();
 		
-		Collection<SocialIdentity> socialIdentities = lessor.getSocialIdentities();
-		if (socialIdentities != null) {
-			result.addObject("socialIdentities", socialIdentities);
-		} else {
-			socialIdentities = new ArrayList<SocialIdentity>();
-			result.addObject("socialIdentities", socialIdentities);
-		}
+	
+		result.addObject("lessor", lessor);
+		result.addObject("properties", lessor.getLessorProperties());
+		result.addObject("comments", lessor.getComments());
+		result.addObject("socialIdentities",lessor.getSocialIdentities());
+		result.addObject("requestURI","lessor/view.do");
+		result.addObject("esMiPerfil",true);
+		return result;
+	}
+	
+	@RequestMapping(value = "/view", method = RequestMethod.GET)
+	public ModelAndView view(int lessorId) {
+		ModelAndView result;
+		result = new ModelAndView("lessor/view");
+		
+		
+		
+		Lessor lessor  =  lessorService.findOne(lessorId);
+
+		
 		result.addObject("lessor", lessor);
 		result.addObject("properties", lessor.getLessorProperties());
 		result.addObject("comments", lessor.getComments());
 		result.addObject("requestURI","lessor/view.do");
-		result.addObject("esMiPerfil",true);
+		result.addObject("socialIdentities",lessor.getSocialIdentities());
+		result.addObject("esMiPerfil",false);
 		return result;
 	}
 

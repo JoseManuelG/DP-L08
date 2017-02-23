@@ -24,6 +24,10 @@
 		<put-attribute name="title" value="Perfil de arrendador" />
 		<put-attribute name="body" value="/views/lessor/view.jsp" />
 	</definition>
+	<definition name="lessor/myProfile" extends="master.page">	
+		<put-attribute name="title" value="Su Perfil" />
+		<put-attribute name="body" value="/views/lessor/view.jsp" />
+	</definition>
 	<definition name="lessor/edit" extends="master.page">	
 		<put-attribute name="title" value="Editar perfil" />
 		<put-attribute name="body" value="/views/lessor/edit.jsp" />
