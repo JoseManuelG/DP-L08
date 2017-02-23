@@ -28,6 +28,7 @@ import security.Authority;
 import security.UserAccount;
 import services.ActorService;
 import services.AuditorService;
+import domain.Audit;
 import domain.Auditor;
 import domain.SocialIdentity;
 import forms.ActorForm;
@@ -57,12 +58,21 @@ public class AuditorController extends AbstractController {
 	public ModelAndView view() {
 		ModelAndView result;
 		result = new ModelAndView("auditor/view");
+
 		Auditor auditor;
 		Collection<SocialIdentity> socialIdentities = new ArrayList<SocialIdentity>();
+		Collection<Audit> audits = new ArrayList<Audit>();
+
 		auditor = (Auditor) actorService.findByPrincipal();
+
+		socialIdentities.addAll(auditor.getSocialIdentities());
+		audits.addAll(auditor.getAudits());
 
 		result.addObject("auditor", auditor);
 		result.addObject("socialIdentities", socialIdentities);
+		result.addObject("audits", audits);
+		result.addObject("esMiPerfil", true);
+		result.addObject("requestURI", "auditor/view");
 		return result;
 	}
 
