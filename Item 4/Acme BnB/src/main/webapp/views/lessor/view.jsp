@@ -43,7 +43,15 @@
 		requestURI="${requestURI}" id="row" uid="property">
 
 		<!-- Action links -->
-
+		<jstl:if test="${esMiPerfil}">
+			<spring:message code="property.edit.property" var="editHeader" />
+			<display:column title="${editHeader}">
+				<a href="property/lessor/edit.do?propertyId=${property.id}">
+				<spring:message	code="property.edit" />
+				</a>
+				
+			</display:column>
+		</jstl:if>
 		<!-- Attributes -->
 
 		<acme:column sorteable="true" code="finder.property.name" path="name" />
@@ -64,13 +72,26 @@
 
 	</display:table>
 </jstl:if>
+<jstl:if test="${esMiPerfil}">
+			<a href=property/lessor/create.do>
+	      <spring:message  code="lessor.property.create" />
+	</a>
+</jstl:if>
 
 <jstl:if test="${!socialIdentities.isEmpty()}">
 	<display:table pagesize="5" class="displaytag1" name="socialIdentities"
 		requestURI="${requestURI}" id="row" uid="social">
 
 		<!-- Action links -->
-
+		<jstl:if test="${esMiPerfil}">
+			<spring:message code="property.edit.property" var="editHeader" />
+			<display:column title="${editHeader}">
+				<a href="socialIdentity/edit.do?socialIdentityId=${social.id}">
+				<spring:message	code="property.edit" />
+				</a>
+				
+			</display:column>
+		</jstl:if>
 		<!-- Attributes -->
 
 		<acme:column sorteable="true" code="socialIdentity.nick" path="nick" />
@@ -86,6 +107,11 @@
 
 	</display:table>
 </jstl:if>
+<jstl:if test="${esMiPerfil}">
+			<a href=socialIdentity/create.do>
+	      <spring:message  code="socialIdentity.create" />
+	</a>
+</jstl:if>
 
 	<display:table pagesize="5" class="displaytag1" name="comments"
 		requestURI="${requestURI}" id="row" uid="comments">
@@ -94,14 +120,14 @@
 
 		<!-- Attributes -->
 
-		<acme:column sorteable="true" code="socialIdentity.nick" path="title" />
+		<acme:column sorteable="true" code="lessor.comment.title" path="title" />
 
-		<acme:column sorteable="true" code="socialIdentity.socialNetwork"
+		<acme:column sorteable="true" code="lessor.comment.text"
 			path="text" />
 
-		<acme:column sorteable="true" code="socialIdentity.socialNetwork"
+		<acme:column sorteable="true" code="lessor.comment.stars"
 			path="stars" />
-		<acme:column sorteable="true" code="socialIdentity.socialNetwork"
+		<acme:column sorteable="true" code="lessor.comment.postMoment"
 			path="postMoment" />
 
 

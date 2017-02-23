@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -63,7 +62,7 @@ public class LessorController extends AbstractController {
 		result.addObject("properties", lessor.getLessorProperties());
 		result.addObject("comments", lessor.getComments());
 		result.addObject("requestURI","lessor/view.do");
-		
+		result.addObject("esMiPerfil",true);
 		return result;
 	}
 

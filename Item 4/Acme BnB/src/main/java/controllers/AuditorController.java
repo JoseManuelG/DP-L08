@@ -28,8 +28,8 @@ import security.Authority;
 import security.UserAccount;
 import services.ActorService;
 import services.AuditorService;
-import domain.Audit;
 import domain.Auditor;
+import domain.SocialIdentity;
 import forms.ActorForm;
 
 @Controller
@@ -56,14 +56,13 @@ public class AuditorController extends AbstractController {
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public ModelAndView view() {
 		ModelAndView result;
-		Collection<Audit> audits;
 		result = new ModelAndView("auditor/view");
 		Auditor auditor;
-
+		Collection<SocialIdentity> socialIdentities = new ArrayList<SocialIdentity>();
 		auditor = (Auditor) actorService.findByPrincipal();
-		audits = auditor.getAudits();
 
-		result.addObject("audits", audits);
+		result.addObject("auditor", auditor);
+		result.addObject("socialIdentities", socialIdentities);
 		return result;
 	}
 
