@@ -76,6 +76,7 @@
 		<security:intercept-url pattern="/book/lessor/denyBook.do" access="hasRole('LESSOR')" />
 		<security:intercept-url pattern="/book/lessor/list.do" access="hasRole('LESSOR')" />
 		<security:intercept-url pattern="/lessor/edit.do" access="hasRole('LESSOR')" />
+		<security:intercept-url pattern="/lessor/myProfile.do" access="hasRole('LESSOR')" />
 		<security:intercept-url pattern="/lessor/fee.do" access="hasRole('LESSOR')" />
 		<security:intercept-url pattern="/property/lessor/myProperties.do" access="hasRole('LESSOR')" />
 		<security:intercept-url pattern="/property/lessor/create.do" access="hasRole('LESSOR')" />
