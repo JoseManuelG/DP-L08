@@ -20,14 +20,11 @@
 
 	
 	<acme:textbox code="socialIdentity.nick" path="nick"/>
-	<br />
-	
+
 	<acme:textbox code="socialIdentity.socialNetwork" path="socialNetwork"/>
-	<br />
 
 	<acme:textbox code="socialIdentity.link" path="link"/>
-	<br />
-	
+
 	
 	<acme:submit name="save" code="socialIdentity.save"/>
 	

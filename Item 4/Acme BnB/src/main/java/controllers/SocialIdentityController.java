@@ -72,7 +72,7 @@ public class SocialIdentityController extends AbstractController {
 	}
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public @ResponseBody ModelAndView save(@Valid SocialIdentity socialIdentity, BindingResult binding) {
-		ModelAndView result=null;
+		ModelAndView result;
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(socialIdentity);
 			System.out.println(binding.getAllErrors().toString());

@@ -46,6 +46,9 @@
 		<bean class="converters.AuditorToStringConverter" /> 
 		<bean class="converters.StringToAuditorConverter" />
 		
+		<bean class="converters.ActorToStringConverter" /> 
+		<bean class="converters.StringToActorConverter" />
+		
 	</util:list>
 	
 </beans>
