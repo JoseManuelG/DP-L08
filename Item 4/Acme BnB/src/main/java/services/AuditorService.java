@@ -1,16 +1,23 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.AuditorRepository;
+import security.Authority;
 import security.LoginService;
+import security.UserAccount;
 import domain.Auditor;
+import forms.ActorForm;
 
 @Service
 @Transactional
@@ -19,6 +26,9 @@ public class AuditorService {
 	// Managed Repository --------------------------------------
 	@Autowired
 	private AuditorRepository	auditorRepository;
+
+	@Autowired
+	private Validator			validator;
 
 
 	// Supporting Services --------------------------------------
@@ -68,6 +78,31 @@ public class AuditorService {
 	public Auditor findActorByPrincial() {
 		Auditor result;
 		result = auditorRepository.findByUserAccountId(LoginService.getPrincipal().getId());
+		return result;
+	}
+	public Auditor reconstruct(ActorForm actorForm, BindingResult binding) {
+		Auditor result = create();
+
+		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		UserAccount userAccount = new UserAccount();
+		userAccount.setPassword(encoder.encodePassword(actorForm.getPassword(), null));
+		userAccount.setUsername(actorForm.getUserName());
+		Collection<Authority> authorities = new ArrayList<Authority>();
+		Authority authority = new Authority();
+		authority.setAuthority(actorForm.getTypeOfActor());
+		authorities.add(authority);
+		userAccount.setAuthorities(authorities);
+
+		result.setName(actorForm.getName());
+		result.setSurname(actorForm.getSurname());
+		result.setPicture(actorForm.getPicture());
+		result.setEmail(actorForm.getEmail());
+		result.setPhone(actorForm.getPhone());
+		result.setCompanyName(actorForm.getCompanyName());
+
+		result.setUserAccount(userAccount);
+
+		validator.validate(result, binding);
 		return result;
 	}
 

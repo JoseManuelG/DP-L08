@@ -20,24 +20,20 @@
 <p><spring:message code="security.register" /></p>
 <form:form action="${requestURI}" modelAttribute="actorForm">
 	
-	<form:label path="typeOfActor">
-		<spring:message code="security.register.typeOfActor" />
-	</form:label>
     
     <acme:textbox code="security.register.name" path="name"/>
-	<br />
+		
+	<acme:textbox code="security.register.username" path="userName"/>
 	
 	<acme:password code="security.password" path="password"/>
-	<br />
 	
 	<acme:textbox code="security.register.surname" path="surname"/>
-	<br />
 	
 	<acme:textbox code="security.register.email" path="email"/>
-	<br />
 	
 	<acme:textbox code="security.register.phone" path="phone"/>
-	<br />
+	
+	<acme:textbox code="auditor.companyName" path="companyName"/>
 	
 	
 	<acme:submit code="security.register.save" name="save"/>

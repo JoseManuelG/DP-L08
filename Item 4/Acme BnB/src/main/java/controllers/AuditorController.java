@@ -85,34 +85,15 @@ public class AuditorController extends AbstractController {
 	@RequestMapping(value = "/administrator/registerAuditor", method = RequestMethod.POST, params = "save")
 	public ModelAndView registerAuditor(ActorForm actorForm, BindingResult binding) {
 		ModelAndView result;
-		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-
+		Auditor auditor = auditorService.reconstruct(actorForm, binding);
 		if (binding.hasErrors()) {
 			result = registerAuditorModelAndView(actorForm, null);
 		} else {
 			try {
-				Auditor auditor = auditorService.create();
-
-				UserAccount userAccount = new UserAccount();
-
-				userAccount.setPassword(encoder.encodePassword(actorForm.getPassword(), null));
-				userAccount.setUsername(actorForm.getName());
-
-				auditor.setName(actorForm.getName());
-				auditor.setSurname(actorForm.getSurname());
-				auditor.setEmail(actorForm.getEmail());
-				auditor.setPhone(actorForm.getPhone());
-
-				Collection<Authority> authorities = new ArrayList<Authority>();
-				Authority authority = new Authority();
-				authority.setAuthority(actorForm.getTypeOfActor());
-				authorities.add(authority);
-				userAccount.setAuthorities(authorities);
-				auditor.setUserAccount(userAccount);
 
 				auditorService.save(auditor);
 
-				result = new ModelAndView("auditor/view.do");
+				result = new ModelAndView("redirect:/");
 
 			} catch (Throwable oops) {
 				result = registerAuditorModelAndView(actorForm, "lessor.commit.error");
