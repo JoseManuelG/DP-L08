@@ -12,6 +12,7 @@ public class ActorForm {
 	private String	picture;
 	private Boolean	acepted;
 	private String	userName;
+	private String	companyName;
 
 
 	//Constructor
@@ -83,6 +84,14 @@ public class ActorForm {
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 
 }
