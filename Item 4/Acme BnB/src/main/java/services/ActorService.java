@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import repositories.ActorRepository;
 import security.LoginService;
 import domain.Actor;
+import domain.Comment;
 import domain.SocialIdentity;
 
 @Service
@@ -32,6 +33,7 @@ public class ActorService {
 
 	public void setActorCollections(Actor actor) {
 		actor.setSocialIdentities(new HashSet<SocialIdentity>());
+		actor.setComments(new HashSet<Comment>());
 	}
 
 }

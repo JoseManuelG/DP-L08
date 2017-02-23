@@ -8,7 +8,6 @@ import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -36,7 +35,7 @@ public class Auditor extends Actor {
 
 
 	@NotNull
-	@Valid
+	//	@Valid
 	@OneToMany(mappedBy = "auditor", cascade = {
 		CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE
 	})

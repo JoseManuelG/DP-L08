@@ -16,6 +16,7 @@ import repositories.AuditorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Audit;
 import domain.Auditor;
 import forms.ActorForm;
 
@@ -28,6 +29,8 @@ public class AuditorService {
 	private AuditorRepository	auditorRepository;
 
 	@Autowired
+	private ActorService		actorService;
+	@Autowired
 	private Validator			validator;
 
 
@@ -37,7 +40,8 @@ public class AuditorService {
 	public Auditor create() {
 		Auditor result;
 		result = new Auditor();
-
+		actorService.setActorCollections(result);
+		result.setAudits(new ArrayList<Audit>());
 		return result;
 	}
 	public Collection<Auditor> findAll() {
@@ -89,7 +93,7 @@ public class AuditorService {
 		userAccount.setUsername(actorForm.getUserName());
 		Collection<Authority> authorities = new ArrayList<Authority>();
 		Authority authority = new Authority();
-		authority.setAuthority(actorForm.getTypeOfActor());
+		authority.setAuthority("AUDITOR");
 		authorities.add(authority);
 		userAccount.setAuthorities(authorities);
 
