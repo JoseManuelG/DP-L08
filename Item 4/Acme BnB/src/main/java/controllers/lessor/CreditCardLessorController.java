@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.CreditCardService;
 import services.CustomerService;
+import services.LessorService;
 import controllers.AbstractController;
 import domain.CreditCard;
 import domain.Lessor;
@@ -49,15 +50,13 @@ public class CreditCardLessorController extends AbstractController {
 	}
 	// View ---------------------------------------------------------------
 
-	@RequestMapping(value = "/view", method = RequestMethod.GET)
-	public ModelAndView view(@RequestParam(required = true) Integer creditCardId) {
+	@RequestMapping(value = "/myCreditCard", method = RequestMethod.GET)
+	public ModelAndView view() {
 		ModelAndView result;
 		result = new ModelAndView("creditCard/lessor/view");
-		CreditCard creditCard = creditCardService.findOne(creditCardId);
-		Lessor lessor  = (Lessor) customerService.findActorByPrincial();
-		if (lessor.getCreditCard().getId() == creditCardId) {
-			result.addObject("creditCard", creditCard);
-		}
+		Lessor lessor= (Lessor) customerService.findActorByPrincial();
+		result.addObject("creditCard", lessor.getCreditCard());
+
 		return result;
 	}
 	// Edit ---------------------------------------------------------------
