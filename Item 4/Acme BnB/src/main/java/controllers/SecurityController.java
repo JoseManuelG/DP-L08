@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.LessorService;
 import services.TenantService;
+import domain.Actor;
 import domain.Lessor;
 import domain.Tenant;
 import forms.ActorForm;
@@ -23,6 +25,8 @@ public class SecurityController extends AbstractController {
 	TenantService	tenantService;
 	@Autowired
 	LessorService	lessorService;
+	@Autowired
+	ActorService	actorService;
 
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -69,6 +73,27 @@ public class SecurityController extends AbstractController {
 
 		return result;
 	}
+	// Edit ---------------------------------------------------------------
+	
+		@RequestMapping(value="/edit", method=RequestMethod.GET)
+		public ModelAndView edit(){
+			ModelAndView result;
+			Actor actor= actorService .findByPrincipal();
+			ActorForm actorForm= new ActorForm();
+			actorForm.setName(actor.getName());
+			actorForm.setSurname(actor.getSurname());
+			actorForm.setEmail(actor.getEmail());
+			actorForm.setPhone(actor.getPhone());
+			actorForm.setPicture(actor.getPicture());
+			
+			actorForm.setUserName(actor.getUserAccount().getUsername());
+			actorForm.setPassword(actor.getUserAccount().getPassword());
+			
+			
+			result = createEditModelAndView(actorForm);
+			return result;
+		}
+		
 
 	// Ancillary methods ------------------------------------------------------
 

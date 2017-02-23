@@ -36,7 +36,11 @@
 :
 <jstl:out value="${lessor.phone}" />
 <br>
-
+<jstl:if test="${esMiPerfil}">
+			<a href=security/edit.do>
+	      <spring:message  code="property.edit" />
+	</a>
+</jstl:if>
 
 <jstl:if test="${!properties.isEmpty()}">
 	<display:table pagesize="5" class="displaytag" name="properties"

@@ -1,8 +1,5 @@
 package controllers;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.CustomerService;
 import services.LessorService;
 import domain.Lessor;
-import domain.SocialIdentity;
+import forms.ActorForm;
 
 @Controller
 @RequestMapping("/lessor")
@@ -81,11 +78,12 @@ public class LessorController extends AbstractController {
 	}
 
 	// Edit ---------------------------------------------------------------
-
+/*
 	@RequestMapping(value="/edit", method=RequestMethod.GET)
 	public ModelAndView edit(){
 		ModelAndView result;
-		Lessor lessor  = (Lessor) customerService.findActorByPrincial();
+		Lessor lessor  = lessorService.findByPrincipal();
+		ActorForm actorForm;
 		result = createEditModelAndView(lessor);
 		return result;
 	}
@@ -93,7 +91,7 @@ public class LessorController extends AbstractController {
 	// Save -------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public @ResponseBody ModelAndView save(@Valid Lessor lessor, BindingResult binding) {
+	public @ResponseBody ModelAndView save( ActorForm lessor, BindingResult binding) {
 		ModelAndView result;
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		if (binding.hasErrors()) {
@@ -126,7 +124,7 @@ public class LessorController extends AbstractController {
 
 		return result;
 	}
-
+*/
 	// Ancillary methods ------------------------------------------------------
 
 	protected ModelAndView createEditModelAndView(Lessor lessor) {

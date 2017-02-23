@@ -61,7 +61,7 @@
 		
 		<security:intercept-url pattern="/socialIdentity/create.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/socialIdentity/edit.do" access="isAuthenticated()" /> 
-		
+		<security:intercept-url pattern="/security/edit.do" access="isAuthenticated()" /> 
 		
 	<!-- ADMINISTRATOR -->
 	
