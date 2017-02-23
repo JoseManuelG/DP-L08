@@ -54,7 +54,7 @@ public class AuditorController extends AbstractController {
 
 	// View ---------------------------------------------------------------
 
-	@RequestMapping(value = "/view", method = RequestMethod.GET)
+	@RequestMapping(value = "/myProfile", method = RequestMethod.GET)
 	public ModelAndView view() {
 		ModelAndView result;
 		result = new ModelAndView("auditor/view");
@@ -72,6 +72,28 @@ public class AuditorController extends AbstractController {
 		result.addObject("socialIdentities", socialIdentities);
 		result.addObject("audits", audits);
 		result.addObject("esMiPerfil", true);
+		result.addObject("requestURI", "auditor/view");
+		return result;
+	}
+
+	@RequestMapping(value = "/view", method = RequestMethod.GET)
+	public ModelAndView view(int auditorId) {
+		ModelAndView result;
+		result = new ModelAndView("auditor/view");
+
+		Auditor auditor;
+		Collection<SocialIdentity> socialIdentities = new ArrayList<SocialIdentity>();
+		Collection<Audit> audits = new ArrayList<Audit>();
+
+		auditor = auditorService.findOne(auditorId);
+
+		socialIdentities.addAll(auditor.getSocialIdentities());
+		audits.addAll(auditor.getAudits());
+
+		result.addObject("auditor", auditor);
+		result.addObject("socialIdentities", socialIdentities);
+		result.addObject("audits", audits);
+		result.addObject("esMiPerfil", false);
 		result.addObject("requestURI", "auditor/view");
 		return result;
 	}

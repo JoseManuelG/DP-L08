@@ -71,6 +71,6 @@
 		
 </display:table>
 <br/>
-<a href="auditor/edit.do"><spring:message  code="auditor.edit" /></a>
+<a href="security/edit.do"><spring:message  code="auditor.edit" /></a>
 
 	
