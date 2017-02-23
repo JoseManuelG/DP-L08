@@ -1,14 +1,11 @@
 
 package controllers;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.LessorService;
@@ -41,17 +38,16 @@ public class SecurityController extends AbstractController {
 	// Save ---------------------------------------------------------------
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
-	public @ResponseBody
-	ModelAndView save(@Valid ActorForm actorForm, BindingResult binding) {
+	public ModelAndView save(ActorForm actorForm, BindingResult binding) {
 		ModelAndView result;
 		Tenant tenant = null;
 		Lessor lessor = null;
 		if (actorForm.getTypeOfActor().equals("TENANT")) {
 			tenant = tenantService.reconstruct(actorForm, binding);
-		} else if (actorForm.getTypeOfActor().equals("TENANT")) {
+		} else if (actorForm.getTypeOfActor().equals("LESSOR")) {
 			lessor = lessorService.reconstruct(actorForm, binding);
 		}
-		if (binding.hasErrors() && !actorForm.getAcepted() && (tenant != null || lessor != null)) {
+		if (binding.hasErrors() && !actorForm.getAcepted()) {
 			result = createEditModelAndView(actorForm);
 		} else {
 			try {

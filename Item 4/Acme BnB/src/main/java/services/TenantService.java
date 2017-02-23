@@ -134,6 +134,6 @@ public class TenantService {
 		result.setUserAccount(userAccount);
 
 		validator.validate(result, binding);
-		return null;
+		return result;
 	}
 }

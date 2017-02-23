@@ -38,6 +38,10 @@ public class FinderService {
 		result.setDestination("Spain");
 		result.setCacheMoment(oneHourAgo);
 		result.setResults(new ArrayList<Property>());
+		//Para validarlo a comentar----------------------
+		result.setKeyword("");
+		result.setMaxPrice(0.);
+		result.setMinPrice(0.);
 
 		return result;
 	}

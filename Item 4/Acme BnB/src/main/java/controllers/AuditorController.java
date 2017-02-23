@@ -68,26 +68,24 @@ public class AuditorController extends AbstractController {
 		return result;
 	}
 
-	//registerAuditor--------------------------------------------------------------
+	//RegisterAuditor--------------------------------------------------------------
+
 	@RequestMapping(value = "/administrator/registerAuditor", method = RequestMethod.GET)
 	public ModelAndView registerAuditor() {
 		ModelAndView result;
 
 		ActorForm actorForm = new ActorForm();
 		result = new ModelAndView("auditor/administrator/registerAuditor");
-		actorForm.setTypeOfActor("AUDITOR");
 		result.addObject("actorForm", actorForm);
-
-		result.addObject("requestURI", "auditor/administrator/registerAuditor.do");
-		result.addObject("typeActor", "AUDITOR");
 		return result;
 	}
 
+	//Save ---------------------------------------------------------------------------
+
 	@RequestMapping(value = "/administrator/registerAuditor", method = RequestMethod.POST, params = "save")
-	public ModelAndView registerAuditor(@Valid ActorForm actorForm, BindingResult binding) {
+	public ModelAndView registerAuditor(ActorForm actorForm, BindingResult binding) {
 		ModelAndView result;
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-		actorForm.setTypeOfActor("AUDITOR");
 
 		if (binding.hasErrors()) {
 			result = registerAuditorModelAndView(actorForm, null);
