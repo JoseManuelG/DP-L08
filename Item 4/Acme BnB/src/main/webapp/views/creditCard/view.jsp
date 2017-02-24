@@ -16,17 +16,33 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<spring:message  code="creditCard.holderName" />: <jstl:out value="${creditCard.holderName}" />
-<br>
-<spring:message  code="creditCard.brandName" />: <jstl:out value="${creditCard.brandName}"/>
-<br>
-<spring:message  code="creditCard.number" />: <jstl:out value="${creditCard.number}"/>
-<br>
-<spring:message  code="creditCard.expirationMonth" />: <jstl:out value="${creditCard.expirationMonth}"/>
-<br>
-<spring:message  code="creditCard.expirationYear" />: <jstl:out value="${creditCard.expirationYear}"/>
-<br>
-<spring:message  code="creditCard.cvvCode" />: <jstl:out value="${creditCard.cvvCode}"/>
-<br>
+<jstl:if test="${editable ne false}">
+	<security:authorize access="hasRole('LESSOR')">
+	<spring:message  code="creditCard.holderName" />: <jstl:out value="${creditCard.holderName}" />
+	<br>
+	<spring:message  code="creditCard.brandName" />: <jstl:out value="${creditCard.brandName}"/>
+	<br>
+	<spring:message  code="creditCard.number" />: <jstl:out value="${creditCard.number}"/>
+	<br>
+	<spring:message  code="creditCard.expirationMonth" />: <jstl:out value="${creditCard.expirationMonth}"/>
+	<br>
+	<spring:message  code="creditCard.expirationYear" />: <jstl:out value="${creditCard.expirationYear}"/>
+	<br>
+	<spring:message  code="creditCard.cvvCode" />: <jstl:out value="${creditCard.cvvCode}"/>
+	<br>
 
+	<a href="creditCard/lessor/edit.do">
+		      <spring:message  code="creditCard.edit" />
+	</a>
+	</security:authorize>
+</jstl:if>
+
+<jstl:if test="${editable eq false}">
+	<security:authorize access="hasRole('LESSOR')">
+		<spring:message  code="creditCard.noCreditCard" />
+		<a href="creditCard/lessor/create.do">
+			      <spring:message  code="creditCard.newCreditCard" />
+		</a>
+	</security:authorize>
+</jstl:if>
 	

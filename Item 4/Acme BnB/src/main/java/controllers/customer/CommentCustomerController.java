@@ -62,6 +62,7 @@ public class CommentCustomerController extends AbstractController {
 	// Create --------------------------------------------------------------------
 		@RequestMapping(value = "/customer/create", method = RequestMethod.GET)
 		public ModelAndView create(@RequestParam int customerId) {
+			Collection<Comentable> recipient2 =  comentableRepository.findAll();
 			Comentable recipient =  comentableRepository.findOne(customerId);
 			Customer sender= (Customer) actorService.findByPrincipal();
 			ModelAndView result;

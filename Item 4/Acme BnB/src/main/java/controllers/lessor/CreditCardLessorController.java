@@ -4,16 +4,15 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CreditCardService;
 import services.CustomerService;
-import services.LessorService;
 import controllers.AbstractController;
 import domain.CreditCard;
 import domain.Lessor;
@@ -55,17 +54,20 @@ public class CreditCardLessorController extends AbstractController {
 		ModelAndView result;
 		result = new ModelAndView("creditCard/lessor/view");
 		Lessor lessor= (Lessor) customerService.findActorByPrincial();
-		result.addObject("creditCard", lessor.getCreditCard());
-
+		if(lessor.getCreditCard() != null){
+			result.addObject("creditCard", lessor.getCreditCard());
+		}else{
+			result.addObject("editable",Boolean.FALSE);
+		}
 		return result;
 	}
 	// Edit ---------------------------------------------------------------
 	
 	@RequestMapping(value="/edit", method=RequestMethod.GET)
-	public ModelAndView edit(@RequestParam int creditCardId){
+	public ModelAndView edit(){
 		ModelAndView result;
-		CreditCard creditCard= creditCardService.findOne(creditCardId);
-		result = createEditModelAndView(creditCard);
+		Lessor lessor= (Lessor) customerService.findActorByPrincial();
+		result = createEditModelAndView(lessor.getCreditCard());
 		return result;
 	}
 	
@@ -80,7 +82,7 @@ public class CreditCardLessorController extends AbstractController {
 		} else {
 			try {
 				creditCardService.saveForLessor(creditCard);		
-				result = new ModelAndView("redirect:../view.do?creditCardId="+creditCard.getId());
+				result = new ModelAndView("redirect:../lessor/myCreditCard.do");
 			} catch (Throwable oops) {
 				result = createEditModelAndView(creditCard, "creditCard.commit.error");				
 			}
@@ -89,6 +91,23 @@ public class CreditCardLessorController extends AbstractController {
 		return result;
 	}
 	
+	// Delete ----------------------------------------------------------------
+	
+	@RequestMapping(value="/edit",method=RequestMethod.POST,params="delete")
+	public ModelAndView delete(@Valid CreditCard creditCard,BindingResult binding) {
+		ModelAndView result;
+		
+		Assert.notNull(creditCard);
+		System.out.println(binding);
+		try{
+			creditCardService.delete(creditCard);
+			result = new ModelAndView("redirect:../lessor/myCreditCard.do");
+		}catch (Throwable oops) {
+			result=createEditModelAndView(creditCard,"creditCard.commit.error");
+		}
+
+		return result;
+	}
 	
 	// Ancillary methods ------------------------------------------------------
 
