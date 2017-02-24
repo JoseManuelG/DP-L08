@@ -42,6 +42,8 @@
 		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
+			<li><a class="fNiv" href="security/register.do"><spring:message code="master.page.register" /></a></li>
+			
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
@@ -61,9 +63,14 @@
 					</security:authorize>
 					<security:authorize access="hasRole('TENANT')">
 						<li><a href="book/tenant/list.do"><spring:message code="master.page.tenant.request.books" /></a></li>
+						<li><a href="tenant/myProfile.do"><spring:message code="master.page.lessor.myProfile" /></a></li>
 					</security:authorize>	
 					<security:authorize access="hasRole('ADMINISTRATOR')">
+						<li><a href="auditor/administrator/registerAuditor.do"><spring:message code="master.page.administrator.registerAuditor" /></a></li>
 						<li><a href="attribute/administrator/list.do"><spring:message code="master.page.administrator.attributes" /></a></li>
+					</security:authorize>	
+					<security:authorize access="hasRole('AUDITOR')">
+						<li><a href="auditor/myProfile.do"><spring:message code="master.page.lessor.myProfile" /></a></li>
 					</security:authorize>	
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
