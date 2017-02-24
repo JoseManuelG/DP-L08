@@ -62,7 +62,7 @@ public class AuditService {
 		Assert.notNull(audit, "La tarjeta de crédito no puede ser nula");
 		Audit result;
 		if (audit.getId() == 0) {
-			Date currentTime = new Date(System.currentTimeMillis());
+			Date currentTime = new Date(System.currentTimeMillis()-100);
 			audit.setWritingMoment(currentTime);
 		}
 

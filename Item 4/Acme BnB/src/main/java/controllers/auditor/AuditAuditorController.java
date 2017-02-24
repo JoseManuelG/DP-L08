@@ -83,7 +83,7 @@ public class AuditAuditorController extends AbstractController {
 				Property property = propertyService.findOne(propertyId);
 				audit.setProperty(property);
 				
-				Date currentMoment = new Date(System.currentTimeMillis() -10000 );
+				Date currentMoment = new Date(System.currentTimeMillis() - 100 );
 				audit.setAuditor(auditor);
 				audit.setWritingMoment(currentMoment);
 				
@@ -100,6 +100,11 @@ public class AuditAuditorController extends AbstractController {
 		public ModelAndView edit(@RequestParam int auditId){
 			ModelAndView result;
 			Audit audit = auditService.findOne(auditId);
+			
+			Date currentMoment = new Date(System.currentTimeMillis() - 100  );
+			
+			audit.setWritingMoment(currentMoment);
+			
 			result = createEditModelAndView(audit);
 			return result;
 		}
@@ -113,7 +118,7 @@ public class AuditAuditorController extends AbstractController {
 			} else {
 				try {
 					
-					Date currentMoment = new Date(System.currentTimeMillis() -15000 );
+					Date currentMoment = new Date(System.currentTimeMillis() - 100  );
 					
 					audit.setWritingMoment(currentMoment);
 					
@@ -136,7 +141,7 @@ public class AuditAuditorController extends AbstractController {
 				result = createEditModelAndView(audit);
 			} else {
 				try {
-					Date currentMoment = new Date(System.currentTimeMillis() -15000 );
+					Date currentMoment = new Date(System.currentTimeMillis() -60001  );
 					
 					audit.setWritingMoment(currentMoment);
 					
