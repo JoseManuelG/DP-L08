@@ -72,7 +72,7 @@ public class AuditorController extends AbstractController {
 		result.addObject("socialIdentities", socialIdentities);
 		result.addObject("audits", audits);
 		result.addObject("esMiPerfil", true);
-		result.addObject("requestURI", "auditor/view");
+		result.addObject("requestURI", "auditor/myProfile.do");
 		return result;
 	}
 
@@ -94,7 +94,7 @@ public class AuditorController extends AbstractController {
 		result.addObject("socialIdentities", socialIdentities);
 		result.addObject("audits", audits);
 		result.addObject("esMiPerfil", false);
-		result.addObject("requestURI", "auditor/view");
+		result.addObject("requestURI", "auditor/view.do");
 		return result;
 	}
 

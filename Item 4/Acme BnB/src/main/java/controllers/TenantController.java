@@ -47,7 +47,7 @@ public class TenantController extends AbstractController {
 		result.addObject("tenant", tenant);
 		result.addObject("comments", tenant.getComments());
 		result.addObject("socialIdentities", tenant.getSocialIdentities());
-		result.addObject("requestURI", "tenant/view.do");
+		result.addObject("requestURI", "tenant/myProfile.do");
 		result.addObject("esMiPerfil", true);
 		return result;
 	}
