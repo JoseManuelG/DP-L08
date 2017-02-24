@@ -31,6 +31,7 @@
 		<value>/views/book/messages</value>
 		<value>/views/lessor/messages</value>
 		<value>/views/finder/messages</value>
+		<value>/views/invoice/messages</value>
 		<value>/views/property/messages</value>
 		<value>/views/socialIdentity/messages</value>
 		<value>/views/attributeValue/messages</value>

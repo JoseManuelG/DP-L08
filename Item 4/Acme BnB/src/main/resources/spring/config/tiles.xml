@@ -31,7 +31,8 @@
 		<value>/views/attribute/tiles.xml</value>
 		<value>/views/book/tiles.xml</value>
 		<value>/views/lessor/tiles.xml</value>
-		<value>/views/finder/tiles.xml</value>		
+		<value>/views/finder/tiles.xml</value>	
+		<value>/views/invoice/tiles.xml</value>		
 		<value>/views/property/tiles.xml</value>
 		<value>/views/book/tiles.xml</value>			
 		<value>/views/socialIdentity/tiles.xml</value>	

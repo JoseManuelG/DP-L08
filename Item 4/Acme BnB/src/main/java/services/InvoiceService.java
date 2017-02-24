@@ -2,15 +2,18 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionSystemException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.InvoiceRepository;
 import domain.Book;
 import domain.Invoice;
+import domain.Tenant;
 
 @Service
 @Transactional
@@ -24,17 +27,42 @@ public class InvoiceService {
 	@Autowired
 	private ConfigurationService	configurationService;
 
+	@Autowired
+	private CreditCardService	creditCardService;
+
 
 	// Simple CRUD methods --------------------------------------
 	public Invoice create(Book book) {
 		Invoice result;
+		Tenant tenant;
+		String details, information;
+		
+		try {
+			creditCardService.maskCreditCard(book.getCreditCard());
+		}catch (TransactionSystemException e) {
+		}
+		tenant = book.getTenant();
+		details = "Checkin: " + book.getCheckInDate() + "\n" +
+			"Checkout: " + book.getCheckOutDate() + "\n" +
+			"Credit Card: " + book.getCreditCard() + "\n" +
+			"Amount: " + book.getTotalAmount() + "\n";
+		if (book.getSmoker()){
+			details += "Smoker \n";
+		} else {
+			details += "No smoker \n";
+		}			
+		
+		information = tenant.getName() + " " + tenant.getSurname(); 
 
 		result = new Invoice();
+		result.setCreationMoment(new Date(System.currentTimeMillis()));
 		result.setVAT(configurationService.findOne().getVAT());
 		result.setBook(book);
-		result.setDetails("??????"); //TODO: Ask for what kind of details save.
-		result.setInformation("???????"); //TODO: Ask for what kind of information save.
-
+		result.setDetails(details);
+		result.setInformation(information);
+		
+		result = this.save(result);
+		
 		return result;
 	}
 	public Collection<Invoice> findAll() {
