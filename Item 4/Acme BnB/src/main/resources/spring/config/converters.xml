@@ -49,6 +49,9 @@
 		<bean class="converters.TenantToStringConverter" /> 
 		<bean class="converters.StringToTenantConverter" />
 		
+		<bean class="converters.AttachmentToStringConverter" /> 
+		<bean class="converters.StringToAttachmentConverter" />
+		
 	
 	</util:list>
 	
