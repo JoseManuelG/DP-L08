@@ -109,32 +109,23 @@ public class AuditorService {
 		validator.validate(result, binding);
 		return result;
 	}
-	
 
-	public Auditor reconstruct(ActorForm actorForm,Auditor auditor ,BindingResult binding) {
-		Auditor result = auditor;
-
+	public Auditor reconstruct(ActorForm actorForm, Auditor auditor, BindingResult binding) {
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-		UserAccount userAccount = new UserAccount();
+		UserAccount userAccount = auditor.getUserAccount();
 		userAccount.setPassword(encoder.encodePassword(actorForm.getPassword(), null));
 		userAccount.setUsername(actorForm.getUserName());
-		Collection<Authority> authorities = new ArrayList<Authority>();
-		Authority authority = new Authority();
-		authority.setAuthority("AUDITOR");
-		authorities.add(authority);
-		userAccount.setAuthorities(authorities);
 
-		result.setName(actorForm.getName());
-		result.setSurname(actorForm.getSurname());
-		result.setPicture(actorForm.getPicture());
-		result.setEmail(actorForm.getEmail());
-		result.setPhone(actorForm.getPhone());
-		result.setCompanyName(actorForm.getCompanyName());
+		auditor.setName(actorForm.getName());
+		auditor.setSurname(actorForm.getSurname());
+		auditor.setPicture(actorForm.getPicture());
+		auditor.setEmail(actorForm.getEmail());
+		auditor.setPhone(actorForm.getPhone());
 
-		result.setUserAccount(userAccount);
+		auditor.setUserAccount(userAccount);
 
-		validator.validate(result, binding);
-		return result;
+		validator.validate(auditor, binding);
+		return auditor;
 	}
 
 }
