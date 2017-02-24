@@ -48,9 +48,13 @@ public class BookService {
 	// Simple CRUD methods --------------------------------------
 	public Book create(Property property, Tenant tenant) {
 		Book result;
-
+		Collection<Property> properties;
+		
 		result = new Book();
-		result.setProperties(new ArrayList<Property>());
+		properties = new ArrayList<Property>();
+		result.setProperties(properties);
+		properties.add(propertyService.createCopy(property));
+		properties.add(property);
 		result.setTenant(tenant);
 		result.setState("PENDING");
 
@@ -77,13 +81,13 @@ public class BookService {
 		Book result;
 
 		Assert.notNull(book, "book.error.null");
+		checkDayAfter(book);
 		calculateTotalAmount(book);
 		result = bookRepository.save(book);
 		Assert.notNull(result, "book.error.commit");
 
 		return result;
 	}
-
 	public void delete(Book book) {
 		Assert.notNull(book, "book.error.null");
 
@@ -165,6 +169,16 @@ public class BookService {
 		//TODO: �Hacer mediante query este tipo de acceso?
 
 		Assert.isTrue(owner.equals(principal));
+	}
+
+	private void checkDayAfter(Book book) {
+		long checkIn, checkOut, aDay;
+		
+		checkIn = book.getCheckInDate().getTime();
+		checkOut = book.getCheckOutDate().getTime();
+		aDay = 24*60*60*100;
+		
+		Assert.isTrue(checkOut-checkIn>=aDay, "book.error.checkDate");
 	}
 
 	private void calculateTotalAmount(Book book) {

@@ -94,5 +94,29 @@ public class PropertyService {
 		Collection<Property> result = propertyRepository.findPropertiesByLessorId(lessor.getId());
 		return result;
 	}
+	
+	public Property createCopy(Property property){
+		Property result;
+		Collection<AttributeValue> attributeValues;
+
+		attributeValues = property.getAttributeValues();
+		for (AttributeValue value : attributeValues){
+			value.setId(0);
+			value.setVersion(0);
+		}
+		
+		result= this.create(property.getLessor().getId());
+		result.setAddress(property.getAddress());
+		result.setAttributeValues(attributeValues);
+		result.setDescription(property.getDescription());
+		result.setIsCopy(true);
+		result.setLastUpdate(property.getLastUpdate());
+		result.setName(property.getName());
+		result.setRate(property.getRate());
+		
+		result = propertyRepository.save(result);
+		
+		return result;
+	}
 
 }
