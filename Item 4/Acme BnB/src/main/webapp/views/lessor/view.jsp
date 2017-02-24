@@ -36,6 +36,8 @@
 :
 <jstl:out value="${lessor.phone}" />
 <br>
+<img src=<jstl:out value="${lessor.picture}"/> />
+<br>
 <jstl:if test="${esMiPerfil}">
 			<a href=security/edit.do>
 	      <spring:message  code="property.edit" />
