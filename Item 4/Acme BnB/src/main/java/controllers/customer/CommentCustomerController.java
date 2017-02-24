@@ -1,5 +1,6 @@
 package controllers.customer;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -15,11 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import repositories.ComentableRepository;
+import security.Authority;
 import services.ActorService;
 import services.CommentService;
 import services.CustomerService;
 import services.PropertyService;
 import controllers.AbstractController;
+import domain.Actor;
 import domain.Comentable;
 import domain.Comment;
 import domain.Customer;
@@ -79,8 +82,12 @@ public class CommentCustomerController extends AbstractController {
 				try {
 					Date currentMoment = new Date(System.currentTimeMillis() -10000 );
 					comment.setPostMoment(currentMoment);
-					commentService.save(comment);		
-					result = new ModelAndView("redirect:../");
+					commentService.save(comment);	
+					Actor actor=(Actor)comment.getRecipient();
+					ArrayList<Authority> authorities=new ArrayList<Authority>();
+					authorities.addAll(	actor.getUserAccount().getAuthorities());
+					String aux= authorities.get(0).getAuthority().toLowerCase();
+					result = new ModelAndView("redirect:../../"+aux+"/view.do?"+aux+"Id="+actor.getId());
 				} catch (Throwable oops) {
 					result = createEditModelAndView(comment, "comment.commit.error");				
 				}
@@ -92,15 +99,7 @@ public class CommentCustomerController extends AbstractController {
 	
 		// View ---------------------------------------------------------------
 		
-		@RequestMapping(value = "/view", method = RequestMethod.GET)
-		public ModelAndView view(@RequestParam(required = true) Integer commentId) {
-			ModelAndView result;
-			result = new ModelAndView("comment/view");
-			Comment comment  = commentService.findOne(commentId);
-			result.addObject("comment", comment);
-			return result;
-		}
-		
+	
 		
 		// Ancillary methods ------------------------------------------------------
 

@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.CommentService;
 import services.CustomerService;
 import services.TenantService;
+import domain.Customer;
 import domain.Tenant;
 
 @Controller
@@ -24,7 +26,8 @@ public class TenantController extends AbstractController {
 
 	@Autowired
 	private TenantService	tenantService;
-
+	@Autowired
+	private CommentService commentService;
 	@Autowired
 	private CustomerService	customerService;
 
@@ -45,7 +48,7 @@ public class TenantController extends AbstractController {
 		Tenant tenant = tenantService.findByPrincipal();
 
 		result.addObject("tenant", tenant);
-		result.addObject("comments", tenant.getComments());
+		result.addObject("comments", commentService.findAllCommentsOfACustomer((Customer) tenant));
 		result.addObject("socialIdentities", tenant.getSocialIdentities());
 		result.addObject("requestURI", "tenant/myProfile.do");
 		result.addObject("esMiPerfil", true);
@@ -60,7 +63,7 @@ public class TenantController extends AbstractController {
 		Tenant tenant = tenantService.findOne(tenantId);
 
 		result.addObject("tenant", tenant);
-		result.addObject("comments", tenant.getComments());
+		result.addObject("comments", commentService.findAllCommentsOfACustomer((Customer) tenant));
 		result.addObject("requestURI", "tenant/view.do");
 		result.addObject("socialIdentities", tenant.getSocialIdentities());
 		result.addObject("esMiPerfil", false);
