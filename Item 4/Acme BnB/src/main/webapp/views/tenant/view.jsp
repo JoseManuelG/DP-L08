@@ -22,19 +22,19 @@
 
 <spring:message code="lessor.name" />
 :
-<jstl:out value="${lessor.name}" />
+<jstl:out value="${tenant.name}" />
 <br>
 <spring:message code="lessor.surname" />
 :
-<jstl:out value="${lessor.surname}" />
+<jstl:out value="${tenant.surname}" />
 <br>
 <spring:message code="lessor.email" />
 :
-<jstl:out value="${lessor.email}" />
+<jstl:out value="${tenant.email}" />
 <br>
 <spring:message code="lessor.phone" />
 :
-<jstl:out value="${lessor.phone}" />
+<jstl:out value="${tenant.phone}" />
 <br>
 <jstl:if test="${esMiPerfil}">
 			<a href=security/edit.do>
