@@ -36,8 +36,9 @@
 	
 	<acme:textbox code="security.register.phone" path="phone"/>
 	
-	
 	<acme:submit code="security.register.save" name="save"/>
+	
+	<acme:submit code="security.register.delete" name="delete"/>
 	
 	<acme:cancel url="javascript:window.location.href=''" code="security.register.cancel"/>
 	

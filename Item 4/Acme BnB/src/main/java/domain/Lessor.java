@@ -12,6 +12,9 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public class Lessor extends Customer {
@@ -50,7 +53,8 @@ public class Lessor extends Customer {
 
 	@NotNull
 	@Valid
-	@OneToMany(mappedBy="lessor")
+	@OneToMany(mappedBy = "lessor")
+	@Cascade(CascadeType.ALL)
 	public Collection<Property> getLessorProperties() {
 		return lessorProperties;
 	}
@@ -61,7 +65,8 @@ public class Lessor extends Customer {
 
 	@NotNull
 	@Valid
-	@OneToMany(mappedBy="lessor")
+	@OneToMany(mappedBy = "lessor")
+	@Cascade(CascadeType.REFRESH)
 	public Collection<Book> getBooks() {
 		return books;
 	}

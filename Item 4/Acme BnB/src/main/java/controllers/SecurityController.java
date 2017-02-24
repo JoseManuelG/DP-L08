@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import security.Authority;
-import security.UserAccount;
 import services.ActorService;
 import services.AdministratorService;
 import services.AuditorService;
@@ -29,15 +28,16 @@ public class SecurityController extends AbstractController {
 
 	//Services------------------------------------------------------------
 	@Autowired
-	TenantService	tenantService;
+	TenantService			tenantService;
 	@Autowired
-	LessorService	lessorService;
+	LessorService			lessorService;
 	@Autowired
-	ActorService	actorService;
+	ActorService			actorService;
 	@Autowired
 	AdministratorService	administratorService;
 	@Autowired
-	AuditorService	auditorService;
+	AuditorService			auditorService;
+
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView create() {
@@ -84,56 +84,53 @@ public class SecurityController extends AbstractController {
 		return result;
 	}
 	// Edit ---------------------------------------------------------------
-	
-		@RequestMapping(value="/edit", method=RequestMethod.GET)
-		public ModelAndView edit(){
-			ModelAndView result= new ModelAndView("security/edit");
-			Actor actor= actorService .findByPrincipal();
-			ActorForm actorForm= new ActorForm();
-			actorForm.setName(actor.getName());
-			actorForm.setSurname(actor.getSurname());
-			actorForm.setEmail(actor.getEmail());
-			actorForm.setPhone(actor.getPhone());
-			actorForm.setPicture(actor.getPicture());
-			
-			actorForm.setUserName(actor.getUserAccount().getUsername());
-			actorForm.setPassword(actor.getUserAccount().getPassword());
-			result.addObject(actorForm);
-			
-			
-			return result;
-		}
-		@RequestMapping(value="/edit", method = RequestMethod.POST, params = "save")
-		public ModelAndView edit(ActorForm actorForm,BindingResult binding){
-			ModelAndView result;
-			Actor actor= actorService .findByPrincipal();
-			Tenant tenant = null;
-			Lessor lessor = null;
-			Auditor auditor=null;
-			ArrayList<Authority> authorities = new ArrayList<Authority>();
-			authorities.addAll(actor.getUserAccount().getAuthorities());
-			String aux = authorities.get(0).getAuthority();
 
-			if(aux.equals(Authority.AUDITOR)){
-				 auditor= auditorService.findActorByPrincial();
-				 auditor= auditorService.reconstruct(actorForm, auditor, binding);
-				
-			}else if(aux.equals(Authority.LESSOR)){
-				 lessor= lessorService.findByPrincipal();
-				 lessor=lessorService.reconstruct(actorForm, lessor, binding);
-				
-				
-			}else if(aux.equals(Authority.TENANT)){
-				 tenant= tenantService.findByPrincipal();
-				 tenant= tenantService.reconstruct(actorForm, tenant, binding);
-			}
-			
-			
-			if(binding.hasErrors()){
-				result = new ModelAndView("security/edit");
-				result.addObject("actorForm", actorForm);
-				result.addObject("message", null);
-			}else{
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit() {
+		ModelAndView result = new ModelAndView("security/edit");
+		Actor actor = actorService.findByPrincipal();
+		ActorForm actorForm = new ActorForm();
+		actorForm.setName(actor.getName());
+		actorForm.setSurname(actor.getSurname());
+		actorForm.setEmail(actor.getEmail());
+		actorForm.setPhone(actor.getPhone());
+		actorForm.setPicture(actor.getPicture());
+
+		actorForm.setUserName(actor.getUserAccount().getUsername());
+		actorForm.setPassword(actor.getUserAccount().getPassword());
+		result.addObject(actorForm);
+
+		return result;
+	}
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView edit(ActorForm actorForm, BindingResult binding) {
+		ModelAndView result;
+		Actor actor = actorService.findByPrincipal();
+		Tenant tenant = null;
+		Lessor lessor = null;
+		Auditor auditor = null;
+		ArrayList<Authority> authorities = new ArrayList<Authority>();
+		authorities.addAll(actor.getUserAccount().getAuthorities());
+		String aux = authorities.get(0).getAuthority();
+
+		if (aux.equals(Authority.AUDITOR)) {
+			auditor = auditorService.findActorByPrincial();
+			auditor = auditorService.reconstruct(actorForm, auditor, binding);
+
+		} else if (aux.equals(Authority.LESSOR)) {
+			lessor = lessorService.findByPrincipal();
+			lessor = lessorService.reconstruct(actorForm, lessor, binding);
+
+		} else if (aux.equals(Authority.TENANT)) {
+			tenant = tenantService.findByPrincipal();
+			tenant = tenantService.reconstruct(actorForm, tenant, binding);
+		}
+
+		if (binding.hasErrors()) {
+			result = new ModelAndView("security/edit");
+			result.addObject("actorForm", actorForm);
+			result.addObject("message", null);
+		} else {
 			try {
 				if (aux.equals("TENANT")) {
 
@@ -143,23 +140,68 @@ public class SecurityController extends AbstractController {
 
 					lessorService.save(lessor);
 
-				}else if (aux.equals("LESSOR")) {
+				} else if (aux.equals("AUDITOR")) {
 
-					lessorService.save(lessor);
+					auditorService.save(auditor);
 
 				}
 
-				
 			} catch (Throwable oops) {
 				result = createEditModelAndView(actorForm, "lessor.commit.error");
 			}
-			aux=aux.toLowerCase();
-			result = new ModelAndView("redirect:../"+aux+"/myProfile.do");
-			}
-			
-			return result;
+			aux = aux.toLowerCase();
+			result = new ModelAndView("redirect:../" + aux + "/myProfile.do");
 		}
 
+		return result;
+	}
+
+	// Delete ---------------------------------------------------------------
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete() {
+		ModelAndView result;
+		Actor actor = actorService.findByPrincipal();
+		Tenant tenant = null;
+		Lessor lessor = null;
+		Auditor auditor = null;
+		ArrayList<Authority> authorities = new ArrayList<Authority>();
+		authorities.addAll(actor.getUserAccount().getAuthorities());
+		String aux = authorities.get(0).getAuthority();
+
+		if (aux.equals(Authority.AUDITOR)) {
+			auditor = auditorService.findActorByPrincial();
+
+		} else if (aux.equals(Authority.LESSOR)) {
+			lessor = lessorService.findByPrincipal();
+
+		} else if (aux.equals(Authority.TENANT)) {
+			tenant = tenantService.findByPrincipal();
+		}
+
+		try {
+
+			if (aux.equals("TENANT")) {
+				tenantService.delete(tenant);
+
+			} else if (aux.equals("LESSOR")) {
+				lessorService.delete(lessor);
+
+			} else if (aux.equals("AUDITOR")) {
+				auditorService.delete(auditor);
+
+			}
+
+		} catch (Exception e) {
+			result = new ModelAndView("redirect:../" + aux + "/myProfile.do");
+			result.addObject("lessor.commit.error");
+		}
+
+		aux = aux.toLowerCase();
+		result = new ModelAndView("redirect:../");
+		return result;
+
+	}
 	// Ancillary methods ------------------------------------------------------
 
 	protected ModelAndView createEditModelAndView(ActorForm actorForm) {
