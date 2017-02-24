@@ -33,7 +33,6 @@ public class Property extends DomainEntity {
 	private String	description;
 	private String	address;
 	private Date	lastUpdate;
-	private boolean	isCopy;
 
 
 	@NotBlank
@@ -77,13 +76,6 @@ public class Property extends DomainEntity {
 	}
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
-	}
-
-	public boolean getIsCopy() {
-		return isCopy;
-	}
-	public void setIsCopy(boolean isCopy) {
-		this.isCopy = isCopy;
 	}
 
 

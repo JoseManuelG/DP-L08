@@ -1,7 +1,6 @@
 
 package domain;
 
-import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
@@ -16,7 +15,6 @@ import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -32,7 +30,32 @@ public class Book extends DomainEntity {
 	private boolean	smoker;
 	private String	state;
 	private Double	totalAmount;
+	private String	propertyName;
+	private String	propertyAddress;
 
+
+	@NotBlank
+	public String getPropertyName() {
+		return propertyName;
+	}
+
+	public void setPropertyName(String propertyName) {
+		this.propertyName = propertyName;
+	}
+
+	@NotBlank
+	public String getPropertyAddress() {
+		return propertyAddress;
+	}
+	
+	public void setPropertyAddress(String propertyAddress) {
+		this.propertyAddress = propertyAddress;
+	}
+
+	
+	public void setProperty(Property property) {
+		this.property = property;
+	}
 
 	@NotNull
 	@Temporal(TemporalType.DATE)
@@ -85,11 +108,11 @@ public class Book extends DomainEntity {
 
 	// Relationships ----------------------------------------------------------
 
-	private CreditCard				creditCard;
-	private Invoice					invoice;
-	private Collection<Property>	properties;
-	private Tenant					tenant;
-	private Lessor					lessor;
+	private CreditCard	creditCard;
+	private Invoice		invoice;
+	private Property	property;
+	private Tenant		tenant;
+	private Lessor		lessor;
 
 
 	@NotNull
@@ -113,16 +136,14 @@ public class Book extends DomainEntity {
 		this.invoice = invoice;
 	}
 
-	@NotNull
 	@Valid
-	@Size(min = 1, max = 2)
 	@ManyToMany
-	public Collection<Property> getProperties() {
-		return properties;
+	public Property getProperty() {
+		return property;
 	}
 
-	public void setProperties(Collection<Property> properties) {
-		this.properties = properties;
+	public void setProperties(Property property) {
+		this.property = property;
 	}
 
 	@NotNull
