@@ -16,25 +16,14 @@
        
 <tiles-definitions>
 
-	<definition name="lessor/list" extends="master.page">	
-		<put-attribute name="title" value="Lessor catalogue" />
-		<put-attribute name="body" value="/views/lessor/list.jsp" />
+	<definition name="auditor/myProfile" extends="master.page">	
+		<put-attribute name="title" value="Profile" />
+		<put-attribute name="body" value="/views/auditor/view.jsp" />
 	</definition>
-	<definition name="lessor/view" extends="master.page">	
-		<put-attribute name="title" value="Lessor's profile" />
-		<put-attribute name="body" value="/views/lessor/view.jsp" />
-	</definition>
-	<definition name="lessor/myProfile" extends="master.page">	
-		<put-attribute name="title" value="Your's profile" />
-		<put-attribute name="body" value="/views/lessor/view.jsp" />
-	</definition>
-	<definition name="lessor/edit" extends="master.page">	
-		<put-attribute name="title" value="Edit profile" />
-		<put-attribute name="body" value="/views/lessor/edit.jsp" />
-	</definition>	
 	
-	<definition name="lessor/fee" extends="master.page">	
-		<put-attribute name="title" value="Cuota pendiente" />
-		<put-attribute name="body" value="/views/lessor/fee.jsp" />
+	<definition name="auditor/view" extends="master.page">	
+		<put-attribute name="title" value="Profile" />
+		<put-attribute name="body" value="/views/auditor/view.jsp" />
 	</definition>
+
 </tiles-definitions>

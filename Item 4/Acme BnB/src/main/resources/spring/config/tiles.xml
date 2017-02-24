@@ -40,6 +40,8 @@
 		<value>/views/auditor/tiles.xml</value>		
 		<value>/views/audit/tiles.xml</value>	
 		<value>/views/attachment/tiles.xml</value>	
+		<value>/views/tenant/tiles.xml</value>	
+		
 			
 		
 	</util:list>

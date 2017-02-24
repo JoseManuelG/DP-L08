@@ -99,12 +99,16 @@
 		<security:intercept-url pattern="/book/tenant/list.do" access="hasRole('TENANT')" />
 		<security:intercept-url pattern="/book/tenant/book.do" access="hasRole('TENANT')" />
 		<security:intercept-url pattern="/finder/tenant/finder.do" access="hasRole('TENANT')" />
+		<security:intercept-url pattern="/tenant/view.do" access="hasRole('TENANT')" />
+		<security:intercept-url pattern="/tenant/myProfile.do" access="hasRole('TENANT')" />
+		
 		
 	
 	<!-- AUDITOR -->
 	
 		<security:intercept-url pattern="/auditor/administrator/registerAuditor.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/auditor/view.do" access="hasRole('AUDITOR')" />
+		<security:intercept-url pattern="/auditor/myProfile.do" access="hasRole('AUDITOR')" />
 		<security:intercept-url pattern="/auditor/edit.do" access="hasAnyRole('AUDITOR','ADMINISTRATOR')" />
 	
 		<security:intercept-url pattern="/audit/auditor/create.do" access="hasRole('AUDITOR')" />	
