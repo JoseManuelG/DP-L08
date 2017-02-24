@@ -87,7 +87,7 @@ public class CommentService {
 		Assert.notNull(comment.getPostMoment(), "La fecha de creación no puede ser nula");
 		Assert.notNull(comment.getRecipient(), "El Recipient no puede ser nulo");
 		Assert.isTrue(comment.getSender().getUserAccount().equals(loginService.getPrincipal()), "Solo el propietario puede realizar operaciones");
-		Assert.isTrue(validComment(comment), "No tienes los derechos para comentar aqui");
+		//Assert.isTrue(validComment(comment), "No tienes los derechos para comentar aqui");
 		Comment result;
 
 		result = commentRepository.save(comment);

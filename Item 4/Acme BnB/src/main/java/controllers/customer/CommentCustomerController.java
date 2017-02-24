@@ -14,18 +14,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import repositories.ComentableRepository;
 import services.ActorService;
-import services.AuditService;
-import services.AuditorService;
 import services.CommentService;
 import services.CustomerService;
 import services.PropertyService;
 import controllers.AbstractController;
-import domain.Audit;
-import domain.Auditor;
+import domain.Comentable;
 import domain.Comment;
 import domain.Customer;
-import domain.Property;
 
 @Controller
 @RequestMapping("/comment")
@@ -36,7 +33,8 @@ public class CommentCustomerController extends AbstractController {
 
 	@Autowired
 	private CustomerService customerService ;
-	
+	@Autowired
+	private ComentableRepository comentableRepository;
 	@Autowired
 	private PropertyService propertyService ;
 	
@@ -64,13 +62,15 @@ public class CommentCustomerController extends AbstractController {
 	// Create --------------------------------------------------------------------
 		@RequestMapping(value = "/customer/create", method = RequestMethod.GET)
 		public ModelAndView create(@RequestParam int customerId) {
-			Customer recipient = (Customer) actorService.findOne(customerId);
+			Comentable recipient =  comentableRepository.findOne(customerId);
 			Customer sender= (Customer) actorService.findByPrincipal();
 			ModelAndView result;
-			Comment comment;			
+			Comment comment;
 			comment = commentService.create();
 			comment.setRecipient(recipient);
 			comment.setSender(sender);
+			comment.setRecipient(recipient);
+
 			result = createEditModelAndView(comment);
 			return result;
 			

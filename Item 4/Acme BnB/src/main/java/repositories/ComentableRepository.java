@@ -10,7 +10,5 @@ import domain.Comentable;
 @Repository
 public interface ComentableRepository extends JpaRepository<Comentable, Integer> {
 
-	@Query("select a from Comentable a where a.userAccount.id = ?1")
-	Comentable findByUserAccountId(int id);
 
 }

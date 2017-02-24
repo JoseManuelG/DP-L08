@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Comentable extends DomainEntity{
+public abstract class Comentable extends DomainEntity{
 	//Attributes
 	//Relathionships
 	
