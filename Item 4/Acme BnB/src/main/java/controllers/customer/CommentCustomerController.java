@@ -49,7 +49,7 @@ public class CommentCustomerController extends AbstractController {
 	
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView auditorlist(@RequestParam int customerId) {
+	public ModelAndView list(@RequestParam int customerId) {
 		ModelAndView result;
 		Collection<Comment> comments;
 		Customer customer= (Customer) actorService.findByPrincipal();

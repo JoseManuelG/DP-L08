@@ -1100,7 +1100,7 @@
 	<bean id="audit1Auditor1" class="domain.Audit">
 		<property name="writingMoment" value="02/12/2017 16:35"/>
 		<property name="text" value="This property has a very good decoration"/>
-		<property name="drafMode" value="false"/>
+		<property name="draftMode" value="false"/>
 		<property name="auditor" ref="auditor1"/>		
 		<property name="property" ref="property1Lessor1"/>
 		<property name="attachments">
@@ -1118,7 +1118,7 @@
 	<bean id="audit2Auditor1" class="domain.Audit">
 		<property name="writingMoment" value="02/12/2017 16:35"/>
 		<property name="text" value="This property has very good furnitire"/>
-		<property name="drafMode" value="false"/>
+		<property name="draftMode" value="false"/>
 		<property name="auditor" ref="auditor1"/>		
 		<property name="property" ref="property2Lessor1"/>
 		<property name="attachments">
@@ -1130,7 +1130,7 @@
 	<bean id="audit3Auditor1" class="domain.Audit">
 		<property name="writingMoment" value="02/12/2017 16:35"/>
 		<property name="text" value="This property has very good views"/>
-		<property name="drafMode" value="false"/>
+		<property name="draftMode" value="false"/>
 		<property name="auditor" ref="auditor1"/>		
 		<property name="property" ref="property3Lessor1"/>
 		<property name="attachments">
@@ -1142,7 +1142,7 @@
 	<bean id="audit4Auditor1" class="domain.Audit">
 		<property name="writingMoment" value="02/12/2017 16:35"/>
 		<property name="text" value="This property has very good price"/>
-		<property name="drafMode" value="false"/>
+		<property name="draftMode" value="false"/>
 		<property name="auditor" ref="auditor1"/>		
 		<property name="property" ref="property4Lessor1"/>
 		<property name="attachments">
@@ -1154,7 +1154,7 @@
 	<bean id="audit5Auditor1" class="domain.Audit">
 		<property name="writingMoment" value="02/12/2017 16:35"/>
 		<property name="text" value="This property has very good taste"/>
-		<property name="drafMode" value="false"/>
+		<property name="draftMode" value="false"/>
 		<property name="auditor" ref="auditor1"/>		
 		<property name="property" ref="property5Lessor1"/>
 		<property name="attachments">
@@ -1166,7 +1166,7 @@
 	<bean id="audit6Auditor1" class="domain.Audit">
 		<property name="writingMoment" value="02/12/2017 16:35"/>
 		<property name="text" value="This property is located in the center of the city"/>
-		<property name="drafMode" value="false"/>
+		<property name="draftMode" value="false"/>
 		<property name="auditor" ref="auditor1"/>		
 		<property name="property" ref="property6Lessor1"/>
 		<property name="attachments">
@@ -1178,7 +1178,7 @@
 	<bean id="audit1Auditor2" class="domain.Audit">
 		<property name="writingMoment" value="02/12/2017 16:35"/>
 		<property name="text" value="This property is located in the middle of the city"/>
-		<property name="drafMode" value="false"/>
+		<property name="draftMode" value="false"/>
 		<property name="auditor" ref="auditor2"/>		
 		<property name="property" ref="property1Lessor2"/>
 		<property name="attachments">

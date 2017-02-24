@@ -55,15 +55,15 @@ public class AuditAuditorController extends AbstractController {
 		return result;
 	}
 	
-	@RequestMapping(value = "/auditorlist", method = RequestMethod.GET)
-	public ModelAndView auditorlist(@RequestParam int auditorId) {
+	@RequestMapping(value = "/auditor/auditorlist", method = RequestMethod.GET)
+	public ModelAndView auditorlist() {
 		ModelAndView result;
 		Collection<Audit> audits;
-		
-		audits = auditService.findAuditsForAuditor(auditorService.findOne(auditorId));
-		result = new ModelAndView("audit/list");
+		Auditor auditor = auditorService.findActorByPrincial();
+		audits = auditService.findAuditsForAuditor(auditorService.findOne(auditor.getId()));
+		result = new ModelAndView("audit/auditor/auditorlist");
 		result.addObject("audits",audits);
-		result.addObject("requestURI","audit/auditorlist.do");
+		result.addObject("requestURI","audit/auditor/auditorlist.do");
 		
 		return result;
 	}

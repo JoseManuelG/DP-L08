@@ -27,7 +27,7 @@ public class Audit extends DomainEntity {
 
 	private Date	writingMoment;
 	private String	text;
-	private Boolean	drafMode;
+	private Boolean	draftMode;
 
 
 	@NotNull
@@ -52,12 +52,12 @@ public class Audit extends DomainEntity {
 	}
 
 	@NotNull
-	public Boolean getDrafMode() {
-		return drafMode;
+	public Boolean getDraftMode() {
+		return draftMode;
 	}
 
-	public void setDrafMode(Boolean drafMode) {
-		this.drafMode = drafMode;
+	public void setDraftMode(Boolean draftMode) {
+		this.draftMode = draftMode;
 	}
 
 
