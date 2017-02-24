@@ -1,14 +1,9 @@
 package controllers;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CommentService;
@@ -16,7 +11,6 @@ import services.CustomerService;
 import services.LessorService;
 import domain.Customer;
 import domain.Lessor;
-import forms.ActorForm;
 
 @Controller
 @RequestMapping("/lessor")
@@ -29,6 +23,7 @@ public class LessorController extends AbstractController {
 	
 	@Autowired
 	private CustomerService customerService;
+	
 	@Autowired
 	private CommentService commentService;
 
@@ -74,7 +69,7 @@ public class LessorController extends AbstractController {
 		
 		result.addObject("lessor", lessor);
 		result.addObject("properties", lessor.getLessorProperties());
-		result.addObject("comments", lessor.getComments());
+		result.addObject("comments", commentService.findAllCommentsOfACustomer((Customer)lessor));
 		result.addObject("requestURI","lessor/view.do");
 		result.addObject("socialIdentities",lessor.getSocialIdentities());
 		result.addObject("esMiPerfil",false);
