@@ -52,6 +52,25 @@
 			</jstl:if>
 </jstl:if>
 
+<display:table pagesize="5" class="displaytag" name="audits"  id="row">
+		
+		<!-- Action links -->
+		
+		<display:column>
+			<a href="audit/view.do?auditId=${row.id}">
+				<spring:message	code="audit.view" />
+			</a>
+	
+		</display:column>
+			
+		<!-- Attributes -->
+		
+		<acme:column sorteable="false" code="audit.text" path="text"/>
+		
+		<acme:column sorteable="false" code="audit.auditor" path="auditor"/>
+		
+	</display:table>
+
 <security:authorize access="hasRole('AUDITOR')">
 		
 			<a href="audit/auditor/create.do?propertyId=${property.id}">

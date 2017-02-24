@@ -13,6 +13,7 @@ import services.ActorService;
 import services.PropertyService;
 import domain.Actor;
 import domain.AttributeValue;
+import domain.Audit;
 import domain.Property;
 
 @Controller
@@ -56,6 +57,7 @@ public class PropertyController extends AbstractController {
 		result = new ModelAndView("property/view");
 		Property property  = propertyService.findOne(propertyId);
 		Collection<AttributeValue> attributeValues = property.getAttributeValues();
+		Collection<Audit> audits = property.getAudits();
 		
 		try{
 			
@@ -68,6 +70,7 @@ public class PropertyController extends AbstractController {
 		}
 		
 		result.addObject("property", property);
+		result.addObject("audits", audits);
 		result.addObject("attributeValues", attributeValues);
 		result.addObject("esMiProperty", esMiProperty);
 		return result;
