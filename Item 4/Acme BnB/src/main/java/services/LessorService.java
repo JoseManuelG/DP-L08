@@ -162,5 +162,30 @@ public class LessorService {
 		validator.validate(result, binding);
 		return result;
 	}
+	
+	public Lessor reconstruct(ActorForm actorForm,Lessor lessor,BindingResult binding) {
+		Lessor result = lessor;
+
+		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		UserAccount userAccount = lessor.getUserAccount();
+		userAccount.setPassword(encoder.encodePassword(actorForm.getPassword(), null));
+		userAccount.setUsername(actorForm.getUserName());
+//		Collection<Authority> authorities = new ArrayList<Authority>();
+//		Authority authority = new Authority();
+//		authority.setAuthority(actorForm.getTypeOfActor());
+//		authorities.add(authority);
+//		userAccount.setAuthorities(authorities);
+
+		lessor.setName(actorForm.getName());
+		lessor.setSurname(actorForm.getSurname());
+		lessor.setPicture(actorForm.getPicture());
+		lessor.setEmail(actorForm.getEmail());
+		lessor.setPhone(actorForm.getPhone());
+
+		lessor.setUserAccount(userAccount);
+
+		validator.validate(lessor, binding);
+		return result;
+	}
 
 }

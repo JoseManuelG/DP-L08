@@ -107,38 +107,55 @@ public class SecurityController extends AbstractController {
 		public ModelAndView edit(ActorForm actorForm,BindingResult binding){
 			ModelAndView result;
 			Actor actor= actorService .findByPrincipal();
-			
+			Tenant tenant = null;
+			Lessor lessor = null;
+			Auditor auditor=null;
 			ArrayList<Authority> authorities = new ArrayList<Authority>();
 			authorities.addAll(actor.getUserAccount().getAuthorities());
-			
-			if(authorities.get(0).equals(Authority.AUDITOR)){
-				Auditor auditor= auditorService.findActorByPrincial();
-				auditor.setName(actorForm.getName());
-				auditor.setSurname(actorForm.getSurname());
-				auditor.setEmail(actorForm.getEmail());
-				auditor.setPhone(actorForm.getPhone());
-				auditor.setPicture(actorForm.getPicture());
-				UserAccount account= auditor.getUserAccount();
-				account.setUsername(actorForm.getUserName());
-				account.setPassword(actorForm.getPassword());
-				auditor.setUserAccount(account);
-			}else if(authorities.get(0).toString().equals(Authority.LESSOR)){
-				Lessor lessor= lessorService.findByPrincipal();
-				lessor.setName(actorForm.getName());
-				lessor.setSurname(actorForm.getSurname());
-				lessor.setEmail(actorForm.getEmail());
-				lessor.setPhone(actorForm.getPhone());
-				lessor.setPicture(actorForm.getPicture());
-				UserAccount account= lessor.getUserAccount();
-				account.setUsername(actorForm.getUserName());
-				account.setPassword(actorForm.getPassword());
-				lessor.setUserAccount(account);
-				lessorService.save(lessor);
-			}else if(authorities.get(0).equals(Authority.TENANT)){
+			String aux = authorities.get(0).getAuthority();
+
+			if(aux.equals(Authority.AUDITOR)){
+				 auditor= auditorService.findActorByPrincial();
+				 auditor= auditorService.reconstruct(actorForm, auditor, binding);
 				
+			}else if(aux.equals(Authority.LESSOR)){
+				 lessor= lessorService.findByPrincipal();
+				 lessor=lessorService.reconstruct(actorForm, lessor, binding);
+				
+				
+			}else if(aux.equals(Authority.TENANT)){
+				 tenant= tenantService.findByPrincipal();
+				 tenant= tenantService.reconstruct(actorForm, tenant, binding);
 			}
-			result = new ModelAndView("redirect:/");
 			
+			
+			if(binding.hasErrors()){
+				result = new ModelAndView("security/edit");
+				result.addObject("actorForm", actorForm);
+				result.addObject("message", null);
+			}else{
+			try {
+				if (aux.equals("TENANT")) {
+
+					tenantService.save(tenant);
+
+				} else if (aux.equals("LESSOR")) {
+
+					lessorService.save(lessor);
+
+				}else if (aux.equals("LESSOR")) {
+
+					lessorService.save(lessor);
+
+				}
+
+				
+			} catch (Throwable oops) {
+				result = createEditModelAndView(actorForm, "lessor.commit.error");
+			}
+			aux=aux.toLowerCase();
+			result = new ModelAndView("redirect:../"+aux+"/myProfile.do");
+			}
 			
 			return result;
 		}

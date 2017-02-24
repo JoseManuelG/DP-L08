@@ -136,4 +136,28 @@ public class TenantService {
 		validator.validate(result, binding);
 		return result;
 	}
+	public Tenant reconstruct(ActorForm actorForm,Tenant tenant, BindingResult binding) {
+		Tenant result = tenant;
+
+		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		UserAccount userAccount = new UserAccount();
+		userAccount.setPassword(encoder.encodePassword(actorForm.getPassword(), null));
+		userAccount.setUsername(actorForm.getUserName());
+		Collection<Authority> authorities = new ArrayList<Authority>();
+		Authority authority = new Authority();
+		authority.setAuthority(actorForm.getTypeOfActor());
+		authorities.add(authority);
+		userAccount.setAuthorities(authorities);
+
+		result.setName(actorForm.getName());
+		result.setSurname(actorForm.getSurname());
+		result.setPicture(actorForm.getPicture());
+		result.setEmail(actorForm.getEmail());
+		result.setPhone(actorForm.getPhone());
+
+		result.setUserAccount(userAccount);
+
+		validator.validate(result, binding);
+		return result;
+	}
 }
