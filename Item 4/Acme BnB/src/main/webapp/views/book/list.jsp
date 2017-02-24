@@ -21,16 +21,26 @@
 	<security:authorize access="hasRole('TENANT')">
 		<spring:message code="book.lessor" var="lessor" />
 		<display:column title="${lessor}" sortable="false">
-			<a href="lessor/view.do?lessorId=${row.lessor.id}">
-			<spring:message code="book.view"/></a>
+			<jstl:if test="${row.lessor != null}">
+				<a href="lessor/view.do?lessorId=${row.lessor.id}">
+				<spring:message code="book.view"/></a>
+			</jstl:if>
+			<jstl:if test="${row.lessor == null}">
+			<spring:message code="book.deleted"/>
+			</jstl:if>
 		</display:column>
 	</security:authorize>
 
 	<security:authorize access="hasRole('LESSOR')">
 		<spring:message code="book.tenant" var="tenant" />
 		<display:column title="${tenant}" sortable="false">
-			<a href="tenant/view.do?tenantId=${row.tenant.id}">
-			<spring:message code="book.view"/></a>
+			<jstl:if test="${row.lessor != null}">
+				<a href="tenant/view.do?tenantId=${row.tenant.id}">
+				<spring:message code="book.view"/></a>
+			</jstl:if>
+			<jstl:if test="${row.lessor == null}">
+				<spring:message code="book.deleted"/>
+			</jstl:if>
 		</display:column>
 	</security:authorize>
 	
@@ -51,7 +61,21 @@
 	<acme:column sorteable="true" code="book.amount" path="totalAmount"/>
 
 	<security:authorize access="hasRole('TENANT')">
+		
 		<acme:column sorteable="false" code="book.credit.card" path="creditCard.number"/>
+		
+		<spring:message code="book.invoice" var="invoice" />
+		<display:column title="${invoice}" sortable="false">
+			<jstl:if test="${row.invoice != null}">
+				<spring:message code="book.view" var="request"/>
+			</jstl:if>
+			<jstl:if test="${row.invoice == null}">
+				<spring:message code="book.request.invoice" var="request"/>
+			</jstl:if>
+				<a href="invoice/tenant/view.do?bookId=${row.id}">${request}</a>
+		</display:column>
+		
+		
 	</security:authorize>
 	<security:authorize access="hasRole('LESSOR')">
 		<display:column>
