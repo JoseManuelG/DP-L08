@@ -13,6 +13,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -78,7 +80,8 @@ public class Comment extends DomainEntity {
 	}
 	@NotNull
 	@Valid
-	@ManyToOne(optional = false, targetEntity = DomainEntity.class)
+	@Cascade(CascadeType.REFRESH)
+	@ManyToOne(optional = false)
 	public Comentable getRecipient() {
 		return recipient;
 	}

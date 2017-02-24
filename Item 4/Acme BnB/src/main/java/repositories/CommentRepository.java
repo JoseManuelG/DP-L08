@@ -13,7 +13,7 @@ import domain.Comment;
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
 	
 	//Find all the audits for a given property 
-	@Query("select c.comments from Customer c where c.id=?1")
+	@Query("select c from Comment c where recipient_id=?1")
 	Collection<Comment> findCommentsByCustomerID(int id);
 
 }

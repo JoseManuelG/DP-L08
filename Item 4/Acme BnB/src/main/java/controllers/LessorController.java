@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.CommentService;
 import services.CustomerService;
 import services.LessorService;
+import domain.Customer;
 import domain.Lessor;
 import forms.ActorForm;
 
@@ -27,6 +29,8 @@ public class LessorController extends AbstractController {
 	
 	@Autowired
 	private CustomerService customerService;
+	@Autowired
+	private CommentService commentService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -51,9 +55,9 @@ public class LessorController extends AbstractController {
 	
 		result.addObject("lessor", lessor);
 		result.addObject("properties", lessor.getLessorProperties());
-		result.addObject("comments", lessor.getComments());
+		result.addObject("comments", commentService.findAllCommentsOfACustomer((Customer)lessor));
 		result.addObject("socialIdentities",lessor.getSocialIdentities());
-		result.addObject("requestURI","lessor/view.do");
+		result.addObject("requestURI","lessor/myProfile.do");
 		result.addObject("esMiPerfil",true);
 		return result;
 	}

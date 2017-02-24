@@ -138,3 +138,6 @@
 
 
 	</display:table>
+	<a href="comment/customer/create.do?customerId=${lessor.id }">
+	      <spring:message  code="socialIdentity.create" />
+	</a>

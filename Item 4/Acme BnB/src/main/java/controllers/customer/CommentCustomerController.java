@@ -46,18 +46,7 @@ public class CommentCustomerController extends AbstractController {
 	
 	
 	
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam int customerId) {
-		ModelAndView result;
-		Collection<Comment> comments;
-		Customer customer= (Customer) actorService.findByPrincipal();
-		comments = commentService.findAllCommentsOfACustomer(customer);
-		result = new ModelAndView("comment/list");
-		result.addObject("comments",comments);
-		result.addObject("requestURI","comment/list.do");
-		
-		return result;
-	}
+	
 	
 	// Create --------------------------------------------------------------------
 		@RequestMapping(value = "/customer/create", method = RequestMethod.GET)
@@ -71,7 +60,8 @@ public class CommentCustomerController extends AbstractController {
 			comment.setRecipient(recipient);
 			comment.setSender(sender);
 			comment.setRecipient(recipient);
-
+			Date currentMoment = new Date(System.currentTimeMillis() -10000 );
+			comment.setPostMoment(currentMoment);
 			result = createEditModelAndView(comment);
 			return result;
 			
@@ -80,17 +70,17 @@ public class CommentCustomerController extends AbstractController {
 	
 		// Save ---------------------------------------------------------------
 		@RequestMapping(value = "/customer/create", method = RequestMethod.POST, params = "save")
-		public @ResponseBody ModelAndView save(@Valid Comment comment, BindingResult binding) {
+		public @ResponseBody ModelAndView save( @Valid Comment comment, BindingResult binding) {
 			ModelAndView result;
 			if (binding.hasErrors()) {
 				System.out.println(binding.getAllErrors());
 				result = createEditModelAndView(comment);
 			} else {
 				try {
-					Date currentMoment = new Date(System.currentTimeMillis() -1000 );
+					Date currentMoment = new Date(System.currentTimeMillis() -10000 );
 					comment.setPostMoment(currentMoment);
 					commentService.save(comment);		
-					result = new ModelAndView("redirect:../list.do");
+					result = new ModelAndView("redirect:../");
 				} catch (Throwable oops) {
 					result = createEditModelAndView(comment, "comment.commit.error");				
 				}
@@ -125,6 +115,7 @@ public class CommentCustomerController extends AbstractController {
 		protected ModelAndView createEditModelAndView(Comment comment, String message) {
 			ModelAndView result;
 			result = new ModelAndView("comment/customer/create");
+			
 			result.addObject("comment",comment);
 			result.addObject("message", message);
 			return result;

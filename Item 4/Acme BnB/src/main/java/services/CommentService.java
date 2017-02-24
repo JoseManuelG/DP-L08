@@ -83,7 +83,7 @@ public class CommentService {
 		Assert.isTrue(comment.getId() == 0, "No se pueden modificar comentarios");
 		Assert.hasText(comment.getTitle(), "El titulo no puede ser nulo ni estar vacío");
 		Assert.hasText(comment.getText(), "El texto no puede ser nulo ni estar vacío");
-		Assert.isTrue(comment.getStars() != 0, "No se puede dejar un comentario sin estrellas");
+		Assert.isTrue(comment.getStars() >= 0, "No se puede dejar un comentario sin estrellas");
 		Assert.notNull(comment.getPostMoment(), "La fecha de creación no puede ser nula");
 		Assert.notNull(comment.getRecipient(), "El Recipient no puede ser nulo");
 		Assert.isTrue(comment.getSender().getUserAccount().equals(loginService.getPrincipal()), "Solo el propietario puede realizar operaciones");
