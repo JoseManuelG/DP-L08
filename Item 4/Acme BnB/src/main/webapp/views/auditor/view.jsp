@@ -67,7 +67,7 @@
 	
 	<acme:column sorteable="true" code="auditor.audit.writingMoment" path="writingMoment"/>
 	
-	<acme:column sorteable="false" code="auditor.socialIdentity.drafMode" path="drafMode"/>
+	<acme:column sorteable="false" code="auditor.socialIdentity.draftMode" path="draftMode"/>
 		
 </display:table>
 <br/>
