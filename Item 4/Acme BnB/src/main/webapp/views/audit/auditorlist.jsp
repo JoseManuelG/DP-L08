@@ -24,6 +24,12 @@
 			</a>
 		</display:column>
 		</security:authorize>
+		
+		<display:column>
+			<a href="audit/view.do?auditId=${row.id}">
+				<spring:message	code="audit.view" />
+			</a>
+		</display:column>
 	
 	<!-- Attributes -->
 	

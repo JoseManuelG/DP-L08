@@ -19,6 +19,7 @@ import services.AuditService;
 import services.AuditorService;
 import services.PropertyService;
 import controllers.AbstractController;
+import domain.Attachment;
 import domain.Audit;
 import domain.Auditor;
 import domain.Property;
@@ -79,7 +80,10 @@ public class AuditAuditorController extends AbstractController {
 				audit = auditService.create();
 				audit.setDraftMode(false);
 				
-				Date currentMoment = new Date(System.currentTimeMillis() -1000 );
+				Property property = propertyService.findOne(propertyId);
+				audit.setProperty(property);
+				
+				Date currentMoment = new Date(System.currentTimeMillis() -10000 );
 				audit.setAuditor(auditor);
 				audit.setWritingMoment(currentMoment);
 				
@@ -108,6 +112,11 @@ public class AuditAuditorController extends AbstractController {
 				result = createEditModelAndView(audit);
 			} else {
 				try {
+					
+					Date currentMoment = new Date(System.currentTimeMillis() -15000 );
+					
+					audit.setWritingMoment(currentMoment);
+					
 					audit.setDraftMode(true);
 					auditService.save(audit);		
 					result = new ModelAndView("redirect:../auditor/auditorlist.do");
@@ -127,6 +136,10 @@ public class AuditAuditorController extends AbstractController {
 				result = createEditModelAndView(audit);
 			} else {
 				try {
+					Date currentMoment = new Date(System.currentTimeMillis() -15000 );
+					
+					audit.setWritingMoment(currentMoment);
+					
 					audit.setDraftMode(false);
 					auditService.save(audit);		
 					result = new ModelAndView("redirect:../auditor/auditorlist.do");
@@ -145,7 +158,7 @@ public class AuditAuditorController extends AbstractController {
 
 			try {			
 				auditService.delete(audit);
-				result = new ModelAndView("redirect:../auditorlist.do");
+				result = new ModelAndView("redirect:../auditor/auditorlist.do");
 			} catch (Throwable oops) {
 				result = createEditModelAndView(audit, "audit.commit.error");
 			}
@@ -160,7 +173,17 @@ public class AuditAuditorController extends AbstractController {
 			ModelAndView result;
 			result = new ModelAndView("audit/view");
 			Audit audit  = auditService.findOne(auditId);
+			Collection<Attachment> attachments = audit.getAttachments();
+			Auditor auditor = auditorService.findActorByPrincial();
+			if(auditor.equals(audit.getAuditor())){
+				boolean esMiAudit = true;
+				
+				result.addObject("esMiAudit", esMiAudit);
+			}
 			result.addObject("audit", audit);
+			result.addObject("attachments", attachments);
+			result.addObject("requestURI","audit/view.do");
+			
 			return result;
 		}
 		

@@ -37,7 +37,7 @@
 	
 	<jstl:if test="${ esMiAudit}">
 		<display:column>
-			<a href="attachment/auditor/edit.do?attachmentId=${row.id}">
+			<a href="attachment/auditor/edit.do?attachmentId=${attachment.id}">
 				<spring:message	code="audit.attachment.edit" />
 			</a>
 	
