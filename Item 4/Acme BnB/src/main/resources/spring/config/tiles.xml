@@ -38,6 +38,8 @@
 		<value>/views/attributeValue/tiles.xml</value>
 		<value>/views/creditCard/tiles.xml</value>	
 		<value>/views/auditor/tiles.xml</value>		
+		<value>/views/audit/tiles.xml</value>	
+		<value>/views/attachment/tiles.xml</value>	
 			
 		
 	</util:list>

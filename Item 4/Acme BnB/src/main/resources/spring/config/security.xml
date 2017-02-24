@@ -55,7 +55,13 @@
 		
 		<security:intercept-url pattern="/property/list.do" access="permitAll" />
 		<security:intercept-url pattern="/property/view.do" access="permitAll" />
-		 
+		
+		
+		<security:intercept-url pattern="/audit/view.do" access="permitAll" />
+		
+		<security:intercept-url pattern="/attachment/view.do" access="permitAll" />
+		
+		<security:intercept-url pattern="/comment/list.do" access="permitAll" />	 
 		 
 	<!-- isAuthenticated() -->
 		
@@ -97,9 +103,22 @@
 	
 	<!-- AUDITOR -->
 	
-	<security:intercept-url pattern="/auditor/administrator/registerAuditor.do" access="hasRole('ADMINISTRATOR')" />
-	<security:intercept-url pattern="/auditor/view.do" access="hasRole('AUDITOR')" />
-	<security:intercept-url pattern="/auditor/edit.do" access="hasAnyRole('AUDITOR','ADMINISTRATOR')" />
+		<security:intercept-url pattern="/auditor/administrator/registerAuditor.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/auditor/view.do" access="hasRole('AUDITOR')" />
+		<security:intercept-url pattern="/auditor/edit.do" access="hasAnyRole('AUDITOR','ADMINISTRATOR')" />
+	
+		<security:intercept-url pattern="/audit/auditor/create.do" access="hasRole('AUDITOR')" />	
+		<security:intercept-url pattern="/audit/auditor/edit.do" access="hasRole('AUDITOR')" />
+		<security:intercept-url pattern="/audit/auditor/auditorlist.do" access="hasRole('AUDITOR')" />
+		
+		<security:intercept-url pattern="/attachment/auditor/create.do" access="hasRole('AUDITOR')" />	
+		<security:intercept-url pattern="/attachment/auditor/edit.do" access="hasRole('AUDITOR')" />
+	
+	
+	<!-- CUSTOMER -->
+	
+		<security:intercept-url pattern="/comment/customer/create.do" access="hasAnyRole('LESSOR','TENANT')" />	
+
 	
 	
 	

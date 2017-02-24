@@ -901,7 +901,7 @@
 			</list>
 		</property>
 		<property name="lastUpdate" value=""/>
-		<property name="isCopy" value=""/>
+		<property name="isCopy" value="true"/>
 	</bean>
 	
 	-->

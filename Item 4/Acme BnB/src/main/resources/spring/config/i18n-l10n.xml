@@ -16,7 +16,6 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd 
 	">
-
 	<util:list id="messages">
 		<value>/views/master-page/messages</value>
 		<value>/views/misc/messages</value>
@@ -37,6 +36,8 @@
 		<value>/views/attributeValue/messages</value>
 		<value>/views/creditCard/messages</value>
 		<value>/views/auditor/messages</value>
+		<value>/views/audit/messages</value>
+		<value>/views/attachment/messages</value>
 	</util:list>
 
 </beans>

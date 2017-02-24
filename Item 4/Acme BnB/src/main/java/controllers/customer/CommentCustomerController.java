@@ -78,7 +78,7 @@ public class CommentCustomerController extends AbstractController {
 			
 	
 		// Save ---------------------------------------------------------------
-		@RequestMapping(value = "/customer/edit", method = RequestMethod.POST, params = "save")
+		@RequestMapping(value = "/customer/create", method = RequestMethod.POST, params = "save")
 		public @ResponseBody ModelAndView save(@Valid Comment comment, BindingResult binding) {
 			ModelAndView result;
 			if (binding.hasErrors()) {
@@ -123,7 +123,7 @@ public class CommentCustomerController extends AbstractController {
 
 		protected ModelAndView createEditModelAndView(Comment comment, String message) {
 			ModelAndView result;
-			result = new ModelAndView("comment/customer/edit");
+			result = new ModelAndView("comment/customer/create");
 			result.addObject("comment",comment);
 			result.addObject("message", message);
 			return result;
