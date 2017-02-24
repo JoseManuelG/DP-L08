@@ -23,14 +23,6 @@
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		
-		<li><a class="fNiv"><spring:message code="master.page.lessor" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="lessor/list.do"><spring:message code="master.page.lessor.list" />
-						</a>
-					</li>
-				</ul>
-			</li>
 			<li><a class="fNiv"><spring:message code="master.page.property" /></a>
 				<ul>
 					<li class="arrow"></li>
@@ -62,6 +54,7 @@
 						<li><a href="creditCard/lessor/myCreditCard.do"><spring:message code="master.page.lessor.creditCard" /></a></li>
 					</security:authorize>
 					<security:authorize access="hasRole('TENANT')">
+						<li><a href="finder/tenant/finder.do"><spring:message code="master.page.tenant.finder" /></a></li>
 						<li><a href="book/tenant/list.do"><spring:message code="master.page.tenant.request.books" /></a></li>
 						<li><a href="tenant/myProfile.do"><spring:message code="master.page.lessor.myProfile" /></a></li>
 					</security:authorize>	
