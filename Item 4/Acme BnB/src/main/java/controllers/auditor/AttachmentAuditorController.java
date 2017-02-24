@@ -85,7 +85,7 @@ public class AttachmentAuditorController extends AbstractController {
 			} else {
 				try {
 					attachmentService.save(attachment);		
-					result = new ModelAndView("redirect:../list.do");
+					result = new ModelAndView("redirect:../../audit/view.do?auditId="+attachment.getAudit().getId());
 				} catch (Throwable oops) {
 					result = createEditModelAndView(attachment, "attachment.commit.error");				
 				}
