@@ -55,6 +55,9 @@
 		<bean class="converters.ComentableToStringConverter" /> 
 		<bean class="converters.StringToComentableConverter" />
 		
+		<bean class="converters.CustomerToStringConverter" /> 
+		<bean class="converters.StringToCustomerConverter" />
+		
 	
 	</util:list>
 	
