@@ -15,6 +15,7 @@ import repositories.CreditCardRepository;
 import domain.Book;
 import domain.CreditCard;
 import domain.Lessor;
+import domain.Property;
 
 @Service
 @Transactional
@@ -85,6 +86,16 @@ public class CreditCardService {
 		lessorService.save(lessor);
 		return result;
 
+	}
+	
+	public void delete(CreditCard creditCard){
+		Assert.notNull(creditCard, "La tarjeta de crédito no puede ser nula");
+		Lessor lessor = (Lessor) customerService.findActorByPrincial();
+		Assert.isTrue(lessor.getCreditCard().getId() == creditCard.getId(), "La tarjeta de crédito debe pertenecer al lessor");
+		Assert.isTrue(!(bookService.existsCreditCardForAnyBook(creditCard)), "La credit card de un lessor no puede pertenecer a un book");
+		lessor.setCreditCard(null);
+		lessorService.save(lessor);
+		creditCardRepository.delete(creditCard);
 	}
 
 	// Other Bussiness Methods --------------------------------------------------------
