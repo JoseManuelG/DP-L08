@@ -42,6 +42,7 @@
 			<a href=security/edit.do>
 	      <spring:message  code="property.edit" />
 	</a>
+	<br>
 </jstl:if>
 
 <jstl:if test="${!properties.isEmpty()}">
@@ -113,12 +114,13 @@
 
 	</display:table>
 </jstl:if>
+<br>
 <jstl:if test="${esMiPerfil}">
 			<a href=socialIdentity/create.do>
 	      <spring:message  code="socialIdentity.create" />
 	</a>
 </jstl:if>
-
+<jstl:if test="${!comments.isEmpty()}">
 	<display:table pagesize="5" class="displaytag1" name="comments"
 		requestURI="${requestURI}" id="row" uid="comments">
 
@@ -138,6 +140,8 @@
 
 
 	</display:table>
+	</jstl:if>
+	<br>
 	<a href="comment/customer/create.do?customerId=${lessor.id }">
-	      <spring:message  code="socialIdentity.create" />
+	      <spring:message  code="comment.create" />
 	</a>

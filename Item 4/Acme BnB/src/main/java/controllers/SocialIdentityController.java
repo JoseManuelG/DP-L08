@@ -86,7 +86,7 @@ public class SocialIdentityController extends AbstractController {
 
 				authorities.addAll(actor.getUserAccount().getAuthorities());
 				String aux=authorities.get(0).getAuthority().toLowerCase();
-				result = new ModelAndView("redirect:../"+aux+"/view.do");
+				result = new ModelAndView("redirect:../"+aux+"/myProfile.do");
 				
 		} catch (Throwable oops) {
 			result = createEditModelAndView(socialIdentity, "socialIdentity.commit.error");	
@@ -107,7 +107,7 @@ public class SocialIdentityController extends AbstractController {
 				authorities.addAll(actor.getUserAccount().getAuthorities());
 				String aux=authorities.get(0).getAuthority().toLowerCase();
 				socialIdentityService.delete(identity);
-				result = new ModelAndView("redirect:../"+aux+"/view.do");
+				result = new ModelAndView("redirect:../"+aux+"/myProfile.do");
 				
 		} catch (Throwable oops) {
 			result = createEditModelAndView(socialIdentity, "socialIdentity.commit.error");	
