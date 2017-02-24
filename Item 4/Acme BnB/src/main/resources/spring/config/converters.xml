@@ -52,6 +52,9 @@
 		<bean class="converters.AttachmentToStringConverter" /> 
 		<bean class="converters.StringToAttachmentConverter" />
 		
+		<bean class="converters.ComentableToStringConverter" /> 
+		<bean class="converters.StringToComentableConverter" />
+		
 	
 	</util:list>
 	
