@@ -20,6 +20,7 @@
 		<form:hidden path="auditor" />
 		<form:hidden path="property" />	
 		<form:hidden path="attachments" />	
+		<form:hidden path="draftMode" />	
 		
 	<acme:textbox code="audit.text" path="text"/>
 	<br />

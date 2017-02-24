@@ -77,6 +77,7 @@ public class AuditAuditorController extends AbstractController {
 			if(auditService.checkUnique(propertyService.findOne(propertyId), auditor)){
 				
 				audit = auditService.create();
+				audit.setDraftMode(false);
 				
 				Date currentMoment = new Date(System.currentTimeMillis() -1000 );
 				audit.setAuditor(auditor);
@@ -107,8 +108,9 @@ public class AuditAuditorController extends AbstractController {
 				result = createEditModelAndView(audit);
 			} else {
 				try {
+					audit.setDraftMode(true);
 					auditService.save(audit);		
-					result = new ModelAndView("redirect:../auditorlist.do");
+					result = new ModelAndView("redirect:../auditor/auditorlist.do");
 				} catch (Throwable oops) {
 					result = createEditModelAndView(audit, "audit.commit.error");				
 				}
@@ -116,7 +118,25 @@ public class AuditAuditorController extends AbstractController {
 
 			return result;
 		}
-		
+
+		@RequestMapping(value = "/auditor/edit", method = RequestMethod.POST, params = "draftsave")
+		public @ResponseBody ModelAndView draftsave(@Valid Audit audit, BindingResult binding) {
+			ModelAndView result;
+			if (binding.hasErrors()) {
+				System.out.println(binding.getAllErrors());
+				result = createEditModelAndView(audit);
+			} else {
+				try {
+					audit.setDraftMode(false);
+					auditService.save(audit);		
+					result = new ModelAndView("redirect:../auditor/auditorlist.do");
+				} catch (Throwable oops) {
+					result = createEditModelAndView(audit, "audit.commit.error");				
+				}
+			}
+
+			return result;
+		}
 		// Delete -------------------------------------------------------------
 		
 		@RequestMapping(value = "/auditor/edit", method = RequestMethod.POST, params = "delete")
@@ -154,7 +174,7 @@ public class AuditAuditorController extends AbstractController {
 
 			return result;
 		}
-
+		
 		protected ModelAndView createEditModelAndView(Audit audit, String message) {
 			ModelAndView result;
 			result = new ModelAndView("audit/auditor/edit");
