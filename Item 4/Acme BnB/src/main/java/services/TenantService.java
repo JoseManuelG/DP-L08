@@ -4,6 +4,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -88,6 +89,11 @@ public class TenantService {
 
 		tenantRepository.delete(tenant);
 	}
+
+	public double count() {
+		// Dasboard-02
+		return tenantRepository.count();
+	}
 	// Other business methods --------------------------------------
 
 	public Tenant findByPrincipal() {
@@ -152,5 +158,34 @@ public class TenantService {
 
 		validator.validate(tenant, binding);
 		return tenant;
+	}
+
+	public Tenant getLessorWithMoreAcceptedBooks() {
+		//Dashboard-06
+		return tenantRepository.getTenantWithMoreAcceptedBooks().get(0);
+	}
+
+	public Tenant getLessorWithMoreDeniedBooks() {
+		//Dashboard-07
+		return tenantRepository.getTenantWithMoreDeniedBooks().get(0);
+	}
+
+	public Tenant getLessorWithMorePendingBooks() {
+		//Dashboard-08
+		return tenantRepository.getTenantWithMorePendingBooks().get(0);
+	}
+
+	public Tenant getTenantWithMinAcceptedVersusTotalBooksRatio() {
+		//Dashboard-10
+		return tenantRepository.getTenantsByAcceptedVersusTotalBooksRatio().get(0);
+	}
+
+	public Tenant getTenantWithMaxAcceptedVersusTotalBooksRatio() {
+		//Dashboard-10
+		List<Tenant> tenants;
+
+		tenants = tenantRepository.getTenantsByAcceptedVersusTotalBooksRatio();
+
+		return tenants.get(tenants.size());
 	}
 }

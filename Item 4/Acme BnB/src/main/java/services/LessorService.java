@@ -3,6 +3,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -89,6 +90,11 @@ public class LessorService {
 		lessorRepository.delete(lessor);
 	}
 
+	public long count() {
+		//Dashboard-01
+		return lessorRepository.count();
+	}
+
 	// Other Bussiness Methods --------------------------------------------------------
 
 	public boolean existsCreditCardForAnyLessor(CreditCard creditCard) {
@@ -162,19 +168,19 @@ public class LessorService {
 		validator.validate(result, binding);
 		return result;
 	}
-	
-	public Lessor reconstruct(ActorForm actorForm,Lessor lessor,BindingResult binding) {
+
+	public Lessor reconstruct(ActorForm actorForm, Lessor lessor, BindingResult binding) {
 		Lessor result = lessor;
 
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		UserAccount userAccount = lessor.getUserAccount();
 		userAccount.setPassword(encoder.encodePassword(actorForm.getPassword(), null));
 		userAccount.setUsername(actorForm.getUserName());
-//		Collection<Authority> authorities = new ArrayList<Authority>();
-//		Authority authority = new Authority();
-//		authority.setAuthority(actorForm.getTypeOfActor());
-//		authorities.add(authority);
-//		userAccount.setAuthorities(authorities);
+		//		Collection<Authority> authorities = new ArrayList<Authority>();
+		//		Authority authority = new Authority();
+		//		authority.setAuthority(actorForm.getTypeOfActor());
+		//		authorities.add(authority);
+		//		userAccount.setAuthorities(authorities);
 
 		lessor.setName(actorForm.getName());
 		lessor.setSurname(actorForm.getSurname());
@@ -188,4 +194,32 @@ public class LessorService {
 		return result;
 	}
 
+	public Lessor getLessorWithMoreAcceptedBooks() {
+		//Dashboard-03
+		return lessorRepository.getLessorWithMoreAcceptedBooks().get(0);
+	}
+
+	public Lessor getLessorWithMoreDeniedBooks() {
+		//Dashboard-04
+		return lessorRepository.getLessorWithMoreDeniedBooks().get(0);
+	}
+
+	public Lessor getLessorWithMorePendingBooks() {
+		//Dashboard-05
+		return lessorRepository.getLessorWithMorePendingBooks().get(0);
+	}
+
+	public Lessor getLessorWithMinAcceptedVersusTotalBooksRatio() {
+		//Dashboard-09
+		return lessorRepository.getLessorsByAcceptedVersusTotalBooksRatio().get(0);
+	}
+
+	public Lessor getLessorWithMaxAcceptedVersusTotalBooksRatio() {
+		//Dashboard-09
+		List<Lessor> lessors;
+
+		lessors = lessorRepository.getLessorsByAcceptedVersusTotalBooksRatio();
+
+		return lessors.get(lessors.size());
+	}
 }

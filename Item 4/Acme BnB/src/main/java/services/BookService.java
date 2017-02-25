@@ -170,6 +170,42 @@ public class BookService {
 		Assert.isTrue(owner.equals(principal));
 	}
 
+	public double getAverageAcceptedBooksPerLessor() {
+		//Dashboard-01
+		double res;
+
+		res = bookRepository.countAcceptedBooks() / lessorService.count();
+
+		return res;
+	}
+
+	public double getAverageDeniedBooksPerLessor() {
+		//Dashboard-01
+		double res;
+
+		res = bookRepository.countDeniedBooks() / lessorService.count();
+
+		return res;
+	}
+
+	public double getAverageAcceptedBooksPerTenant() {
+		//Dashboard-02
+		double res;
+
+		res = bookRepository.countAcceptedBooks() / tenantService.count();
+
+		return res;
+	}
+
+	public double getAverageDeniedBooksPerTenant() {
+		//Dashboard-02
+		double res;
+
+		res = bookRepository.countDeniedBooks() / tenantService.count();
+
+		return res;
+	}
+
 	private void checkDayAfter(Book book) {
 		long checkIn, checkOut, aDay;
 

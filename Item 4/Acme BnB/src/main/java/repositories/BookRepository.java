@@ -11,7 +11,7 @@ import domain.Book;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Integer> {
-	
+
 	@Query("select case when count(b) > 0 then true else false end from Book b where b.creditCard.id = ?1")
 	public boolean existsCreditCardForAnyBook(int creditCardId);
 
@@ -19,4 +19,11 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 	@Query("select p.books from Property p where p.id=?1")
 	public Collection<Book> findBooksForPropertyId(int propertyId);
 
+	//Dashboard-01/02
+	@Query("select count(b) from Book b where b.state='ACCEPTED'")
+	public double countAcceptedBooks();
+
+	//Dashboard-01/02
+	@Query("select count(b) from Book b where b.state='DENIED'")
+	public double countDeniedBooks();
 }

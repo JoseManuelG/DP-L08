@@ -4,6 +4,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -92,6 +93,11 @@ public class PropertyService {
 	public Collection<Property> findPropertiesByLessor(Lessor lessor) {
 		Collection<Property> result = propertyRepository.findPropertiesByLessorId(lessor.getId());
 		return result;
+	}
+
+	public List<Property> findPropertiesByLessorByNumberOfAudits(int lessorId) {
+		//Dashboard-12
+		return propertyRepository.findPropertiesByLessorByNumberOfAudits(lessorId);
 	}
 
 }

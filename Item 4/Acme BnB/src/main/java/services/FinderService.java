@@ -121,4 +121,19 @@ public class FinderService {
 
 		return result;
 	}
+
+	public double getAverageResultsPerFinder() {
+		//Dashboard-11
+		return finderRepository.getAverageResultsPerFinder();
+	}
+
+	public int getMinimumResultsPerFinder() {
+		//Dashboard-11
+		return finderRepository.getMinimumResultsPerFinder();
+	}
+
+	public int getMaximumResultsPerFinder() {
+		//Dashboard-11
+		return finderRepository.getMaximumResultsPerFinder();
+	}
 }

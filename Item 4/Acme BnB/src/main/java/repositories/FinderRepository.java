@@ -22,4 +22,16 @@ public interface FinderRepository extends JpaRepository<Finder, Integer> {
 	@Query("select p from Property p where p.isCopy=false and p.address like concat('%', ?1, '%') and p.rate>=?3 and (p.address like concat('%', ?2, '%') or p.name like concat('%', ?2, '%') or p.description like concat('%', ?2, '%')) and p.rate<=?4")
 	Collection<Property> searchPropertiesWithMaxPrice(String destination, String keyword, Double min, Double maxPrice);
 
+	//Dashboard-11
+	@Query("select avg(f.results.size) from Finder f")
+	double getAverageResultsPerFinder();
+
+	//Dashboard-11
+	@Query("select min(f.results.size) from Finder f")
+	int getMinimumResultsPerFinder();
+
+	//Dashboard-11
+	@Query("select max(f.results.size) from Finder f")
+	int getMaximumResultsPerFinder();
+
 }
