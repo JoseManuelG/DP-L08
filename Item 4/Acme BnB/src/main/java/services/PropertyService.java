@@ -47,7 +47,6 @@ public class PropertyService {
 		result.setAttributeValues(new ArrayList<AttributeValue>());
 		result.setAudits(new ArrayList<Audit>());
 		result.setBooks(new ArrayList<Book>());
-		result.setIsCopy(false);
 		result.setLastUpdate(new Date(System.currentTimeMillis() - 100));
 		result.setLessor(lessorService.findOne(lessorId));
 		return result;
@@ -78,7 +77,7 @@ public class PropertyService {
 		Assert.notNull(property, "La propiedad no puede ser nula");
 		Assert.isTrue(property.getId() != 0, "La propiedad debe estar antes en la base de datos");
 		propertyRepository.exists(property.getId());
-		Assert.isTrue(lessorService.findByPrincipal().equals(property.getLessor().getUserAccount()));
+		Assert.isTrue(lessorService.findByPrincipal().equals(property.getLessor()));
 		Lessor lessor = property.getLessor();
 		Collection<Property> properties = lessor.getLessorProperties();
 		properties.remove(property);
@@ -92,30 +91,6 @@ public class PropertyService {
 
 	public Collection<Property> findPropertiesByLessor(Lessor lessor) {
 		Collection<Property> result = propertyRepository.findPropertiesByLessorId(lessor.getId());
-		return result;
-	}
-	
-	public Property createCopy(Property property){
-		Property result;
-		Collection<AttributeValue> attributeValues;
-
-		attributeValues = property.getAttributeValues();
-		for (AttributeValue value : attributeValues){
-			value.setId(0);
-			value.setVersion(0);
-		}
-		
-		result= this.create(property.getLessor().getId());
-		result.setAddress(property.getAddress());
-		result.setAttributeValues(attributeValues);
-		result.setDescription(property.getDescription());
-		result.setIsCopy(true);
-		result.setLastUpdate(property.getLastUpdate());
-		result.setName(property.getName());
-		result.setRate(property.getRate());
-		
-		result = propertyRepository.save(result);
-		
 		return result;
 	}
 

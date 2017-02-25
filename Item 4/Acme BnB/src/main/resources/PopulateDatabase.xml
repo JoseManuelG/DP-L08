@@ -1498,6 +1498,10 @@
 		<property name="name" value="Number of bedrooms"/>
 	</bean>
 	
+	<bean id="attribute7" class="domain.Attribute">
+		<property name="name" value="State"/>
+	</bean>
+	
 	<!-- AttributeValue
 	
 	<bean id="" class="domain.AttributeValue">

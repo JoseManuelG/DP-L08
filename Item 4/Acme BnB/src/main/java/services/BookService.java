@@ -1,7 +1,6 @@
 
 package services;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +29,6 @@ public class BookService {
 
 	// Supporting Services --------------------------------------
 	@Autowired
-	private ActorService	actorService;
-
-	@Autowired
 	private LessorService	lessorService;
 
 	@Autowired
@@ -48,15 +44,14 @@ public class BookService {
 	// Simple CRUD methods --------------------------------------
 	public Book create(Property property, Tenant tenant) {
 		Book result;
-		Collection<Property> properties;
-		
+
 		result = new Book();
-		properties = new ArrayList<Property>();
-		result.setProperties(properties);
-		properties.add(propertyService.createCopy(property));
-		properties.add(property);
+		result.setProperty(property);
 		result.setTenant(tenant);
 		result.setState("PENDING");
+		result.setPropertyAddress(property.getAddress());
+		result.setPropertyName(property.getName());
+		result.setLessor(property.getLessor());
 
 		return result;
 	}
@@ -83,6 +78,7 @@ public class BookService {
 		Assert.notNull(book, "book.error.null");
 		checkDayAfter(book);
 		calculateTotalAmount(book);
+		checkOwnerTenantIsPrincipal(book);
 		result = bookRepository.save(book);
 		Assert.notNull(result, "book.error.commit");
 
@@ -158,14 +154,8 @@ public class BookService {
 		Actor principal;
 		Lessor owner;
 
-		owner = null;
-
-		principal = actorService.findByPrincipal();
-		for (Property p : book.getProperties()) {
-			owner = p.getLessor();
-			if (owner != null)
-				break;
-		}
+		principal = lessorService.findByPrincipal();
+		owner = book.getProperty().getLessor();
 
 		Assert.isTrue(owner.equals(principal));
 	}
@@ -174,40 +164,30 @@ public class BookService {
 		Actor principal;
 		Tenant owner;
 
-		owner = null;
-
-		principal = actorService.findByPrincipal();
+		principal = tenantService.findByPrincipal();
 		owner = book.getTenant();
-		
+
 		Assert.isTrue(owner.equals(principal));
 	}
 
 	private void checkDayAfter(Book book) {
 		long checkIn, checkOut, aDay;
-		
+
 		checkIn = book.getCheckInDate().getTime();
 		checkOut = book.getCheckOutDate().getTime();
-		aDay = 24*60*60*100;
-		
-		Assert.isTrue(checkOut-checkIn>=aDay, "book.error.checkDate");
+		aDay = 24 * 60 * 60 * 100;
+
+		Assert.isTrue(checkOut - checkIn >= aDay, "book.error.checkDate");
 	}
 
 	private void calculateTotalAmount(Book book) {
 		int days;
 		long out, in;
-		Property prop;
 
 		out = book.getCheckOutDate().getTime();
 		in = book.getCheckInDate().getTime();
 		days = (int) (out - in) / (1000 * 60 * 60 * 24);
 
-		prop = null;
-		for (Property p : book.getProperties()) {
-			if (p.getIsCopy()) {
-				prop = p;
-			}
-		}
-
-		book.setTotalAmount(days * prop.getRate());
+		book.setTotalAmount(days * book.getProperty().getRate());
 	}
 }
