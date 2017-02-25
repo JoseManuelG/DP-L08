@@ -101,4 +101,25 @@ public class InvoiceService {
 	}
 
 	// Other business methods --------------------------------------
+	
+	public double getMinimumInvoicesPerTenant(){
+		double res = invoiceRepository.getMinimumInvoicesPerTenant();
+		return res;
+	}
+	
+	public double getAverageInvoicesPerTenant(){
+		double res = invoiceRepository.getAverageInvoicesPerTenant();
+		return res;
+	}
+	
+	public double getMaximumInvoicesPerTenant(){
+		double res = invoiceRepository.getMaximumInvoicesPerTenant();
+		return res;
+	}
+	
+	public double getTotalDueMoneyOfInvoices(){
+		double res = invoiceRepository.getTotalDueMoneyOfInvoices();
+		return res;
+	}
+
 }

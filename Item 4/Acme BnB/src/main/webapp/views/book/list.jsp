@@ -46,8 +46,8 @@
 	
 	<spring:message code="book.property.name" var="property" />
 	<display:column title="${property}" sortable="true">
-		<a href="property/view.do?propertyId=${row.properties[0].id}">
-		<jstl:out value="${row.properties[0].name}"/></a>
+		<a href="property/view.do?propertyId=${row.property.id}">
+		<jstl:out value="${row.property.name}"/></a>
 	</display:column>
 	
 	<acme:column sorteable="true" code="book.checkin" path="checkInDate"/>

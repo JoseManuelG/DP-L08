@@ -100,4 +100,20 @@ public class PropertyService {
 		return propertyRepository.findPropertiesByLessorByNumberOfAudits(lessorId);
 	}
 
+	public List<Property> findPropertiesByLessorOrderedByRequestNumber (Lessor lessor){
+		return propertyRepository.findPropertiesByLessorIdOrderedByRequestNumber(lessor.getId());
+	}
+
+	public List<Property> findPropertiesByLessorWithAcceptedBooks (Lessor lessor){
+		return propertyRepository.findPropertiesByLessorIdWithAcceptedBooks(lessor.getId());
+	}
+	
+	public List<Property> findPropertiesByLessorWithDenieBooks (Lessor lessor){
+		return propertyRepository.findPropertiesByLessorIdWithDeniedBooks(lessor.getId());
+	}
+	
+	public List<Property> findPropertiesByLessorWithPendingBooks (Lessor lessor){
+		return propertyRepository.findPropertiesByLessorIdWithPendingBooks(lessor.getId());
+	}
+
 }

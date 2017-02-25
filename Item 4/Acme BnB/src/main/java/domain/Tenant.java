@@ -46,7 +46,7 @@ public class Tenant extends Customer {
 
 	@NotNull
 	@Valid
-	@OneToMany
+	@OneToMany(mappedBy = "tenant")
 	public Collection<Invoice> getInvoices() {
 		return invoices;
 	}
