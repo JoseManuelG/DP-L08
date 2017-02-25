@@ -77,7 +77,6 @@ public class BookService {
 
 		Assert.notNull(book, "book.error.null");
 		checkDayAfter(book);
-		calculateTotalAmount(book);
 		checkOwnerTenantIsPrincipal(book);
 		result = bookRepository.save(book);
 		Assert.notNull(result, "book.error.commit");
@@ -137,6 +136,7 @@ public class BookService {
 		book.setCheckOutDate(bookForm.getCheckOutDate());
 		book.setCreditCard(bookForm.getCreditCard());
 		book.setSmoker(bookForm.getSmoker());
+		calculateTotalAmount(book);
 		validator.validate(book, bindingResult);
 		return book;
 	}
@@ -155,7 +155,7 @@ public class BookService {
 		Lessor owner;
 
 		principal = lessorService.findByPrincipal();
-		owner = book.getProperty().getLessor();
+		owner = book.getLessor();
 
 		Assert.isTrue(owner.equals(principal));
 	}

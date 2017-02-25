@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -28,7 +29,7 @@ public class Book extends DomainEntity {
 	private Date	checkOutDate;
 	private boolean	smoker;
 	private String	state;
-	private Double	totalAmount;
+	private double	totalAmount;
 	private String	propertyName;
 	private String	propertyAddress;
 
@@ -46,12 +47,11 @@ public class Book extends DomainEntity {
 	public String getPropertyAddress() {
 		return propertyAddress;
 	}
-	
+
 	public void setPropertyAddress(String propertyAddress) {
 		this.propertyAddress = propertyAddress;
 	}
 
-	
 	public void setProperty(Property property) {
 		this.property = property;
 	}
@@ -96,11 +96,12 @@ public class Book extends DomainEntity {
 		this.state = state;
 	}
 
-	public Double getTotalAmount() {
+	@Min(0)
+	public double getTotalAmount() {
 		return totalAmount;
 	}
 
-	public void setTotalAmount(Double totalAmount) {
+	public void setTotalAmount(double totalAmount) {
 		this.totalAmount = totalAmount;
 	}
 
