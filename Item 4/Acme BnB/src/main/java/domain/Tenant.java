@@ -20,6 +20,7 @@ public class Tenant extends Customer {
 
 	private Finder				finder;
 	private Collection<Book>	books;
+	private Collection<Invoice>	invoices;
 
 
 	@Valid
@@ -41,6 +42,17 @@ public class Tenant extends Customer {
 
 	public void setBooks(Collection<Book> books) {
 		this.books = books;
+	}
+
+	@NotNull
+	@Valid
+	@OneToMany
+	public Collection<Invoice> getInvoices() {
+		return invoices;
+	}
+
+	public void setInvoices(Collection<Invoice> invoices) {
+		this.invoices = invoices;
 	}
 
 }

@@ -7,7 +7,6 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -137,7 +136,7 @@ public class Book extends DomainEntity {
 	}
 
 	@Valid
-	@ManyToMany
+	@ManyToOne
 	public Property getProperty() {
 		return property;
 	}
