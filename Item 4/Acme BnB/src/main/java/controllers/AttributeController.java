@@ -74,6 +74,7 @@ public class AttributeController extends AbstractController {
 	
 	
 	}
+	@SuppressWarnings("static-access")
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public @ResponseBody ModelAndView save(@Valid Attribute attribute, BindingResult binding) {
 		ModelAndView result=null;
@@ -95,6 +96,8 @@ public class AttributeController extends AbstractController {
 	}
 			return result;
 	}
+	
+	@SuppressWarnings("static-access")
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public @ResponseBody ModelAndView save( Attribute attribute) {
 		ModelAndView result=null;

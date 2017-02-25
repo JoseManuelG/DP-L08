@@ -10,9 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.AttributeValueRepository;
-import security.Authority;
-import security.LoginService;
-import security.UserAccount;
 import domain.Actor;
 import domain.AttributeValue;
 import domain.Property;

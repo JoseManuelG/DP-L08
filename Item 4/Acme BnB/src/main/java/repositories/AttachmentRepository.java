@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Attachment;
-import domain.Auditor;
 
 @Repository
 public interface AttachmentRepository extends JpaRepository<Attachment, Integer> {

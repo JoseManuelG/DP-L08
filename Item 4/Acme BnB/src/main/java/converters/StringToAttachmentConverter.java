@@ -6,9 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import repositories.AttachmentRepository;
-import repositories.AuditRepository;
 import domain.Attachment;
-import domain.Audit;
 
 @Component
 @Transactional

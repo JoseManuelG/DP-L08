@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -71,6 +72,7 @@ public class Invoice extends DomainEntity {
 	// Relationships ----------------------------------------------------------
 
 	private Book	book;
+	private Tenant	tenant;
 
 
 	@Valid
@@ -82,6 +84,17 @@ public class Invoice extends DomainEntity {
 
 	public void setBook(Book book) {
 		this.book = book;
+	}
+
+	@Valid
+	@NotNull
+	@ManyToOne
+	public Tenant getTenant() {
+		return tenant;
+	}
+
+	public void setTenant(Tenant tenant) {
+		this.tenant = tenant;
 	}
 
 }

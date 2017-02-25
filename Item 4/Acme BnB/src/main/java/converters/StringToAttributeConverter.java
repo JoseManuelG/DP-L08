@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import repositories.AttributeRepository;
 import domain.Attribute;
-import domain.AttributeValue;
 
 @Component
 @Transactional

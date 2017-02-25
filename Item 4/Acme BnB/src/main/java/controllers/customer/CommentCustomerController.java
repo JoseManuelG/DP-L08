@@ -19,8 +19,6 @@ import repositories.ComentableRepository;
 import security.Authority;
 import services.ActorService;
 import services.CommentService;
-import services.CustomerService;
-import services.PropertyService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Comentable;
@@ -35,11 +33,7 @@ public class CommentCustomerController extends AbstractController {
 	private CommentService commentService ;
 
 	@Autowired
-	private CustomerService customerService ;
-	@Autowired
 	private ComentableRepository comentableRepository;
-	@Autowired
-	private PropertyService propertyService ;
 	
 	@Autowired
 	private ActorService actorService ;

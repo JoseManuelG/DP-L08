@@ -15,7 +15,6 @@ import repositories.CreditCardRepository;
 import domain.Book;
 import domain.CreditCard;
 import domain.Lessor;
-import domain.Property;
 
 @Service
 @Transactional

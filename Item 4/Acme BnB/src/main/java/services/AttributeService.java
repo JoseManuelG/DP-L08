@@ -13,7 +13,6 @@ import org.springframework.util.Assert;
 import repositories.AttributeRepository;
 import security.Authority;
 import security.LoginService;
-import security.UserAccount;
 import domain.Attribute;
 
 @Service
