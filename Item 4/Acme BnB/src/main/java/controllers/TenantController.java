@@ -48,7 +48,7 @@ public class TenantController extends AbstractController {
 		Tenant tenant = tenantService.findByPrincipal();
 
 		result.addObject("tenant", tenant);
-		result.addObject("comments", commentService.findAllCommentsOfACustomer((Customer) tenant));
+		result.addObject("comments", commentService.findAllCommentsOfACustomer( tenant));
 		result.addObject("socialIdentities", tenant.getSocialIdentities());
 		result.addObject("requestURI", "tenant/myProfile.do");
 		result.addObject("esMiPerfil", true);
