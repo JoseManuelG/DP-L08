@@ -100,19 +100,23 @@ public class PropertyService {
 		return propertyRepository.findPropertiesByLessorByNumberOfAudits(lessorId);
 	}
 
-	public List<Property> findPropertiesByLessorOrderedByRequestNumber (Lessor lessor){
+	public List<Property> findPropertiesByLessorOrderedByRequestNumber(Lessor lessor) {
+		//Dashboard-13
 		return propertyRepository.findPropertiesByLessorIdOrderedByRequestNumber(lessor.getId());
 	}
 
-	public List<Property> findPropertiesByLessorWithAcceptedBooks (Lessor lessor){
+	public List<Property> findPropertiesByLessorWithAcceptedBooks(Lessor lessor) {
+		//Dashboard-14
 		return propertyRepository.findPropertiesByLessorIdWithAcceptedBooks(lessor.getId());
 	}
-	
-	public List<Property> findPropertiesByLessorWithDenieBooks (Lessor lessor){
+
+	public List<Property> findPropertiesByLessorWithDenieBooks(Lessor lessor) {
+		//Dashboard-15
 		return propertyRepository.findPropertiesByLessorIdWithDeniedBooks(lessor.getId());
 	}
-	
-	public List<Property> findPropertiesByLessorWithPendingBooks (Lessor lessor){
+
+	public List<Property> findPropertiesByLessorWithPendingBooks(Lessor lessor) {
+		//Dashboard-16
 		return propertyRepository.findPropertiesByLessorIdWithPendingBooks(lessor.getId());
 	}
 

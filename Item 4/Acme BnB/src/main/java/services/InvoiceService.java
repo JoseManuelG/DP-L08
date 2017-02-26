@@ -28,7 +28,7 @@ public class InvoiceService {
 	private ConfigurationService	configurationService;
 
 	@Autowired
-	private CreditCardService	creditCardService;
+	private CreditCardService		creditCardService;
 
 
 	// Simple CRUD methods --------------------------------------
@@ -36,23 +36,20 @@ public class InvoiceService {
 		Invoice result;
 		Tenant tenant;
 		String details, information;
-		
+
 		try {
 			creditCardService.maskCreditCard(book.getCreditCard());
-		}catch (TransactionSystemException e) {
+		} catch (TransactionSystemException e) {
 		}
 		tenant = book.getTenant();
-		details = "Checkin: " + book.getCheckInDate() + "\n" +
-			"Checkout: " + book.getCheckOutDate() + "\n" +
-			"Credit Card: " + book.getCreditCard() + "\n" +
-			"Amount: " + book.getTotalAmount() + "\n";
-		if (book.getSmoker()){
+		details = "Checkin: " + book.getCheckInDate() + "\n" + "Checkout: " + book.getCheckOutDate() + "\n" + "Credit Card: " + book.getCreditCard() + "\n" + "Amount: " + book.getTotalAmount() + "\n";
+		if (book.getSmoker()) {
 			details += "Smoker \n";
 		} else {
 			details += "No smoker \n";
-		}			
-		
-		information = tenant.getName() + " " + tenant.getSurname(); 
+		}
+
+		information = tenant.getName() + " " + tenant.getSurname();
 
 		result = new Invoice();
 		result.setCreationMoment(new Date(System.currentTimeMillis()));
@@ -60,9 +57,9 @@ public class InvoiceService {
 		result.setBook(book);
 		result.setDetails(details);
 		result.setInformation(information);
-		
+
 		result = this.save(result);
-		
+
 		return result;
 	}
 	public Collection<Invoice> findAll() {
@@ -101,23 +98,27 @@ public class InvoiceService {
 	}
 
 	// Other business methods --------------------------------------
-	
-	public double getMinimumInvoicesPerTenant(){
+
+	public double getMinimumInvoicesPerTenant() {
+		//Dashboard-18
 		double res = invoiceRepository.getMinimumInvoicesPerTenant();
 		return res;
 	}
-	
-	public double getAverageInvoicesPerTenant(){
+
+	public double getAverageInvoicesPerTenant() {
+		//Dashboard-18
 		double res = invoiceRepository.getAverageInvoicesPerTenant();
 		return res;
 	}
-	
-	public double getMaximumInvoicesPerTenant(){
+
+	public double getMaximumInvoicesPerTenant() {
+		//Dashboard-18
 		double res = invoiceRepository.getMaximumInvoicesPerTenant();
 		return res;
 	}
-	
-	public double getTotalDueMoneyOfInvoices(){
+
+	public double getTotalDueMoneyOfInvoices() {
+		//Dashboard-19
 		double res = invoiceRepository.getTotalDueMoneyOfInvoices();
 		return res;
 	}

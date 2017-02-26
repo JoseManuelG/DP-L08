@@ -226,13 +226,22 @@ public class BookService {
 
 		book.setTotalAmount(days * book.getProperty().getRate());
 	}
-	
-	public double getAverageRequestsWithAuditsVersusNoAudits(){
-		double withAudits = bookRepository.getAverageRequestsWithAudits();
-		double withoutAudits = bookRepository.getAverageRequestsWithoutAudits();
-		double res =withAudits/withoutAudits;
+
+	public double getAverageRequestsWithAuditsVersusNoAudits() {
+		//Dashboard-20
+		Double withAudits;
+		Double withoutAudits;
+		double res;
+
+		withAudits = bookRepository.getAverageRequestsWithAudits();
+		withoutAudits = bookRepository.getAverageRequestsWithoutAudits();
+
+		if (withAudits == null || withoutAudits == null || withoutAudits == 0.0) {
+			res = 0.0;
+		} else {
+			res = withAudits / withoutAudits;
+		}
 		return res;
 	}
-	
-	
+
 }

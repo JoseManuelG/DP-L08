@@ -605,6 +605,7 @@
 		<property name="lessorProperties">
 			<list>
 				<ref bean="property1Lessor2"/>
+				<ref bean="property2Lessor2"/>
 			</list>
 		</property>
 
@@ -1050,7 +1051,7 @@
 	</bean>
 	
 	<bean id="property1Lessor2" class="domain.Property">
-		<property name="name" value="Property 2 l2"/>
+		<property name="name" value="Property 1 l2"/>
 		<property name="rate" value="100.0"/>
 		<property name="description" value="A big and very comfortable apartment"/>	
 		<property name="address" value="Spain Seville, C\Piruleta nº30 1ºB"/>	
@@ -1067,6 +1068,27 @@
 		<property name="books">
 			<list>
 				<ref bean="book1Tenant2"/>
+			</list>
+		</property>
+		<property name="lastUpdate" value="02/12/2017 16:35"/>
+	</bean>
+	
+	<bean id="property2Lessor2" class="domain.Property">
+		<property name="name" value="Property 2 l2"/>
+		<property name="rate" value="120.0"/>
+		<property name="description" value="A very big and very comfortable apartment"/>	
+		<property name="address" value="Spain Seville, C\Piruleta nº30 1ºC"/>	
+		<property name="lessor" ref="lessor2"/>		
+		<property name="audits">
+			<list>
+			</list>
+		</property>
+		<property name="attributeValues">
+			<list>
+			</list>
+		</property>
+		<property name="books">
+			<list>
 			</list>
 		</property>
 		<property name="lastUpdate" value="02/12/2017 16:35"/>

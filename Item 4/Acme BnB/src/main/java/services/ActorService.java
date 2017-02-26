@@ -21,10 +21,11 @@ public class ActorService {
 	@Autowired
 	private ActorRepository	actorRepository;
 
+
 	//Supported Services--------------------------------------------------------------------
-	
+
 	//Constructor--------------------------------------------------------------------
-	
+
 	public Actor findByPrincipal() {
 		Actor result;
 		result = actorRepository.findByUserAccountId(LoginService.getPrincipal().getId());
@@ -37,26 +38,28 @@ public class ActorService {
 	}
 
 	// Other Business Methods -------------------------------------------------------------
-	
+
 	public void setActorCollections(Actor actor) {
 		actor.setSocialIdentities(new HashSet<SocialIdentity>());
 		actor.setComments(new HashSet<Comment>());
 	}
-	
-	public double getMinimumSocialIdentitiesPerActor(){
+
+	public double getMinimumSocialIdentitiesPerActor() {
+		//Dashboard-17
 		double res = actorRepository.getMinimumSocialIdentitiesPerActor();
 		return res;
 	}
-	
-	public double getAverageSocialIdentitiesPerActor(){
+
+	public double getAverageSocialIdentitiesPerActor() {
+		//Dashboard-17
 		double res = actorRepository.getAverageSocialIdentitiesPerActor();
 		return res;
 	}
-	
-	public double getMaximumSocialIdentitiesPerActor(){
+
+	public double getMaximumSocialIdentitiesPerActor() {
+		//Dashboard-17
 		double res = actorRepository.getMaximumSocialIdentitiesPerActor();
 		return res;
 	}
-	
 
 }

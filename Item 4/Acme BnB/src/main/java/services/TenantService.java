@@ -160,17 +160,17 @@ public class TenantService {
 		return tenant;
 	}
 
-	public Tenant getLessorWithMoreAcceptedBooks() {
+	public Tenant getTenantWithMoreAcceptedBooks() {
 		//Dashboard-06
 		return tenantRepository.getTenantWithMoreAcceptedBooks().get(0);
 	}
 
-	public Tenant getLessorWithMoreDeniedBooks() {
+	public Tenant getTenantWithMoreDeniedBooks() {
 		//Dashboard-07
 		return tenantRepository.getTenantWithMoreDeniedBooks().get(0);
 	}
 
-	public Tenant getLessorWithMorePendingBooks() {
+	public Tenant getTenantWithMorePendingBooks() {
 		//Dashboard-08
 		return tenantRepository.getTenantWithMorePendingBooks().get(0);
 	}
