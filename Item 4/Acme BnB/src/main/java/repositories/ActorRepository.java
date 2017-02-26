@@ -14,15 +14,15 @@ public interface ActorRepository extends JpaRepository<Actor, Integer> {
 	Actor findByUserAccountId(int id);
 	
 	//Returns the minimum number of social identities per actor
-	@Query("select min(a.socialIdentities.size from Actor a")
+	@Query("select min(a.socialIdentities.size) from Actor a")
 	public double getMinimumSocialIdentitiesPerActor();
 	
 	//Returns the average number of social identities per actor
-	@Query("select avg(a.socialIdentities.size from Actor a")
+	@Query("select avg(a.socialIdentities.size) from Actor a")
 	public double getAverageSocialIdentitiesPerActor();
 	
 	//Returns the maximum number of social identities per actor
-	@Query("select max(a.socialIdentities.size from Actor a")
+	@Query("select max(a.socialIdentities.size) from Actor a")
 	public double getMaximumSocialIdentitiesPerActor();
 
 }

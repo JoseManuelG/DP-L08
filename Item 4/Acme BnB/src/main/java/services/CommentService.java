@@ -85,7 +85,7 @@ public class CommentService {
 		Assert.notNull(comment.getPostMoment(), "La fecha de creación no puede ser nula");
 		Assert.notNull(comment.getRecipient(), "El Recipient no puede ser nulo");
 		Assert.isTrue(comment.getSender().getUserAccount().equals(loginService.getPrincipal()), "Solo el propietario puede realizar operaciones");
-		//Assert.isTrue(validComment(comment), "No tienes los derechos para comentar aqui");
+		Assert.isTrue(validComment(comment), "No tienes los derechos para comentar aqui");
 		Comment result;
 
 		result = commentRepository.save(comment);
@@ -129,11 +129,12 @@ public class CommentService {
 	
 	public boolean validComment(Comment comment){
 		boolean result=false;
+		//si se comenta a si mismo se autoValida
 		if(validAutoComment(comment)){
 			result=true;
 		}else{
 			
-			Actor sender= actorService.findByPrincipal();
+			Actor sender= comment.getSender();
 			Actor recipient = (Actor) comment.getRecipient();
 			
 			ArrayList<Authority> authoritySender =new ArrayList<Authority>();
@@ -143,16 +144,16 @@ public class CommentService {
 			authoritySender.addAll(sender.getUserAccount().getAuthorities());		
 			authorityRecipient.addAll(recipient.getUserAccount().getAuthorities());		
 			
-			switch(authoritySender.get(0).toString()){
+			switch(authoritySender.get(0).getAuthority()){
 				case (Authority.LESSOR):
-					switch(authorityRecipient.get(0).toString()){
+					switch(authorityRecipient.get(0).getAuthority()){
 					case (Authority.TENANT):
 						result=tenantValidToBeCommentedByLessor((Lessor)sender,(Tenant)recipient);
 						break;
 					}
 				break;
 				case (Authority.TENANT):
-					switch(authorityRecipient.get(0).toString()){
+					switch(authorityRecipient.get(0).getAuthority()){
 					case (Authority.LESSOR):
 						result=lessorValidToBeCommentedByTenant((Lessor)recipient,(Tenant)sender);
 						break;
