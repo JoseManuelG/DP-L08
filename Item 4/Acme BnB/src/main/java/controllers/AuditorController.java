@@ -145,7 +145,7 @@ public class AuditorController extends AbstractController {
 		result = new ModelAndView("auditor/edit");
 		actorForm.setEmail(auditor.getEmail());
 		actorForm.setName(auditor.getName());
-		actorForm.setPassword(auditor.getUserAccount().getPassword());
+		actorForm.setUserAccount(auditor.getUserAccount());
 		actorForm.setPhone(auditor.getPhone());
 		actorForm.setSurname(auditor.getSurname());
 		actorForm.setTypeOfActor("AUDITOR");
@@ -169,8 +169,8 @@ public class AuditorController extends AbstractController {
 
 				UserAccount userAccount = auditor.getUserAccount();
 
-				userAccount.setPassword(encoder.encodePassword(actorForm.getPassword(), null));
-				userAccount.setUsername(actorForm.getName());
+				userAccount.setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
+				userAccount.setUsername(actorForm.getUserAccount().getUsername());
 
 				auditor.setName(actorForm.getName());
 				auditor.setSurname(actorForm.getSurname());

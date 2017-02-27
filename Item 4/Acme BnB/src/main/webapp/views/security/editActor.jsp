@@ -24,9 +24,9 @@
     
     <acme:textbox code="security.register.name" path="name"/>
 	
-	<acme:textbox code="security.register.username" path="userName"/>
+	<acme:textbox code="security.register.username" path="userAccount.username"/>
 	
-	<acme:password code="security.password" path="password"/>
+	<acme:password code="security.password" path="userAccount.password"/>
 	
 	<acme:textbox code="security.register.surname" path="surname"/>
 	

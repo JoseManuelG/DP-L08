@@ -149,8 +149,8 @@ public class LessorService {
 
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		UserAccount userAccount = new UserAccount();
-		userAccount.setPassword(encoder.encodePassword(actorForm.getPassword(), null));
-		userAccount.setUsername(actorForm.getUserName());
+		userAccount.setUsername(actorForm.getUserAccount().getUsername());
+		userAccount.setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
 		Collection<Authority> authorities = new ArrayList<Authority>();
 		Authority authority = new Authority();
 		authority.setAuthority(actorForm.getTypeOfActor());
@@ -168,14 +168,13 @@ public class LessorService {
 		validator.validate(result, binding);
 		return result;
 	}
-
 	public Lessor reconstruct(ActorForm actorForm, Lessor lessor, BindingResult binding) {
 		Lessor result = lessor;
 
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		UserAccount userAccount = lessor.getUserAccount();
-		userAccount.setPassword(encoder.encodePassword(actorForm.getPassword(), null));
-		userAccount.setUsername(actorForm.getUserName());
+		userAccount.setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
+		userAccount.setUsername(actorForm.getUserAccount().getUsername());
 		//		Collection<Authority> authorities = new ArrayList<Authority>();
 		//		Authority authority = new Authority();
 		//		authority.setAuthority(actorForm.getTypeOfActor());

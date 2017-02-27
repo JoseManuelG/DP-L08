@@ -123,8 +123,8 @@ public class TenantService {
 
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		UserAccount userAccount = new UserAccount();
-		userAccount.setPassword(encoder.encodePassword(actorForm.getPassword(), null));
-		userAccount.setUsername(actorForm.getUserName());
+		userAccount.setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
+		userAccount.setUsername(actorForm.getUserAccount().getUsername());
 		Collection<Authority> authorities = new ArrayList<Authority>();
 		Authority authority = new Authority();
 		authority.setAuthority(actorForm.getTypeOfActor());
@@ -145,8 +145,8 @@ public class TenantService {
 	public Tenant reconstruct(ActorForm actorForm, Tenant tenant, BindingResult binding) {
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		UserAccount userAccount = tenant.getUserAccount();
-		userAccount.setPassword(encoder.encodePassword(actorForm.getPassword(), null));
-		userAccount.setUsername(actorForm.getUserName());
+		userAccount.setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
+		userAccount.setUsername(actorForm.getUserAccount().getUsername());
 
 		tenant.setName(actorForm.getName());
 		tenant.setSurname(actorForm.getSurname());

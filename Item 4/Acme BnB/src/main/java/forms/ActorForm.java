@@ -1,18 +1,21 @@
 
 package forms;
 
+import security.UserAccount;
+
 public class ActorForm {
 
-	private String	typeOfActor;
-	private String	password;
-	private String	name;
-	private String	surname;
-	private String	email;
-	private String	phone;
-	private String	picture;
-	private Boolean	acepted;
-	private String	userName;
-	private String	companyName;
+	private String		typeOfActor;
+	//	private String	password;
+	private String		name;
+	private String		surname;
+	private String		email;
+	private String		phone;
+	private String		picture;
+	private Boolean		acepted;
+	//	private String	userName;
+	private String		companyName;
+	private UserAccount	userAccount;
 
 
 	//Constructor
@@ -29,13 +32,13 @@ public class ActorForm {
 		this.typeOfActor = typeOfActor;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
+	//	public String getPassword() {
+	//		return password;
+	//	}
+	//
+	//	public void setPassword(String password) {
+	//		this.password = password;
+	//	}
 
 	public String getName() {
 		return name;
@@ -79,12 +82,12 @@ public class ActorForm {
 	public void setAcepted(Boolean acepted) {
 		this.acepted = acepted;
 	}
-	public String getUserName() {
-		return this.userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+	//	public String getUserName() {
+	//		return this.userName;
+	//	}
+	//	public void setUserName(String userName) {
+	//		this.userName = userName;
+	//	}
 
 	public String getCompanyName() {
 		return companyName;
@@ -92,6 +95,14 @@ public class ActorForm {
 
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
+	}
+
+	public UserAccount getUserAccount() {
+		return userAccount;
+	}
+
+	public void setUserAccount(UserAccount userAccount) {
+		this.userAccount = userAccount;
 	}
 
 }

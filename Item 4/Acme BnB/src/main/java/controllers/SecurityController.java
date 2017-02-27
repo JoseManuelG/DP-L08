@@ -61,7 +61,7 @@ public class SecurityController extends AbstractController {
 		} else if (actorForm.getTypeOfActor().equals("LESSOR")) {
 			lessor = lessorService.reconstruct(actorForm, binding);
 		}
-		if (binding.hasErrors() && !actorForm.getAcepted()) {
+		if (binding.hasErrors() && actorForm.getAcepted()) {
 			result = createEditModelAndView(actorForm);
 		} else {
 			try {
@@ -96,8 +96,7 @@ public class SecurityController extends AbstractController {
 		actorForm.setPhone(actor.getPhone());
 		actorForm.setPicture(actor.getPicture());
 
-		actorForm.setUserName(actor.getUserAccount().getUsername());
-		actorForm.setPassword(actor.getUserAccount().getPassword());
+		actorForm.setUserAccount(actor.getUserAccount());
 		result.addObject(actorForm);
 
 		return result;
