@@ -6,7 +6,6 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionSystemException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
@@ -30,23 +29,33 @@ public class InvoiceService {
 	@Autowired
 	private CreditCardService		creditCardService;
 
+	@Autowired
+	private TenantService			tenantService;
+
+	@Autowired
+	private BookService				bookService;
+
 
 	// Simple CRUD methods --------------------------------------
 	public Invoice create(Book book) {
 		Invoice result;
 		Tenant tenant;
-		String details, information;
+		String details, information, maskedNumber;
 
-		try {
-			creditCardService.maskCreditCard(book.getCreditCard());
-		} catch (TransactionSystemException e) {
-		}
+		bookService.checkOwnerTenantIsPrincipal(book);
+		Assert.isNull(book.getInvoice());
+		Assert.isTrue(book.getState().equals("ACCEPTED"), "invoice.unaccepted.error");
+		maskedNumber = creditCardService.getMaskedCreditCardAsString(book.getCreditCard());
 		tenant = book.getTenant();
-		details = "Checkin: " + book.getCheckInDate() + "\n" + "Checkout: " + book.getCheckOutDate() + "\n" + "Credit Card: " + book.getCreditCard() + "\n" + "Amount: " + book.getTotalAmount() + "\n";
+		details = "Checkin: " + book.getCheckInDate() + "<br/>" 
+				+ "Checkout: " + book.getCheckOutDate() + "<br/>" 
+				+ "Address: " + book.getPropertyAddress() + "<br/>" 
+				+ "Credit Card: " + maskedNumber + "<br/>" 
+				+ "Amount: " + book.getTotalAmount() + "&euro;<br/>";
 		if (book.getSmoker()) {
-			details += "Smoker \n";
+			details += "Smoker <br/>";
 		} else {
-			details += "No smoker \n";
+			details += "No smoker <br/>";
 		}
 
 		information = tenant.getName() + " " + tenant.getSurname();
@@ -57,11 +66,13 @@ public class InvoiceService {
 		result.setBook(book);
 		result.setDetails(details);
 		result.setInformation(information);
+		result.setTenant(tenant);
 
-		result = this.save(result);
+		bookService.addInvoice(book, result);
 
 		return result;
 	}
+
 	public Collection<Invoice> findAll() {
 		Collection<Invoice> result;
 
@@ -98,6 +109,14 @@ public class InvoiceService {
 	}
 
 	// Other business methods --------------------------------------
+
+	public void checkOwnerIsPrincipal(Invoice invoice) {
+		Tenant principal, owner;
+
+		owner = invoice.getTenant();
+		principal = tenantService.findByPrincipal();
+		Assert.isTrue(owner.equals(principal));
+	}
 
 	public double getMinimumInvoicesPerTenant() {
 		//Dashboard-18

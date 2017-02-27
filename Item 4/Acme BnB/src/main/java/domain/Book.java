@@ -127,7 +127,7 @@ public class Book extends DomainEntity {
 	}
 
 	@Valid
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	public Invoice getInvoice() {
 		return invoice;
 	}

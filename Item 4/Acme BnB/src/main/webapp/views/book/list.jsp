@@ -44,11 +44,7 @@
 		</display:column>
 	</security:authorize>
 	
-	<spring:message code="book.property.name" var="property" />
-	<display:column title="${property}" sortable="true">
-		<a href="property/view.do?propertyId=${row.property.id}">
-		<jstl:out value="${row.property.name}"/></a>
-	</display:column>
+	<acme:column sorteable="true" code="book.property.name" path="propertyName"/>
 	
 	<acme:column sorteable="true" code="book.checkin" path="checkInDate"/>
 	
@@ -72,11 +68,10 @@
 			<jstl:if test="${row.invoice == null}">
 				<spring:message code="book.request.invoice" var="request"/>
 			</jstl:if>
-				<a href="invoice/tenant/view.do?bookId=${row.id}">${request}</a>
+				<a href="book/tenant/requestInvoice.do?bookId=${row.id}">${request}</a>
 		</display:column>
-		
-		
 	</security:authorize>
+	
 	<security:authorize access="hasRole('LESSOR')">
 		<display:column>
 			<jstl:if test="${row.state eq 'PENDING'}">

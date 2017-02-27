@@ -25,5 +25,5 @@
 </fieldset>
 <fieldset>
 	<legend><spring:message code="invoice.bookDetails"/></legend>
-	<jstl:out value="${invoice.details}"/><br/>
+	${invoice.details}
 </fieldset>

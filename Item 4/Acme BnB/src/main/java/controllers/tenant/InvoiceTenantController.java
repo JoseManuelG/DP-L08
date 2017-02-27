@@ -1,112 +1,35 @@
 package controllers.tenant;
 
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.TransactionSystemException;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.BookService;
-import services.CreditCardService;
-import services.TenantService;
+import services.InvoiceService;
 import controllers.AbstractController;
-import domain.Book;
-import forms.BookForm;
+import domain.Invoice;
 
 @Controller
-@RequestMapping("/book/tenant")
+@RequestMapping("/invoice/tenant")
 public class InvoiceTenantController extends AbstractController {
-
+	
 	@Autowired
-	private TenantService tenantService;
+	private InvoiceService invoiceService;
 
-	@Autowired
-	private BookService bookService;
 
-	@Autowired
-	private CreditCardService creditCardService;
-	
-
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
+	@RequestMapping(value = "/view", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam int invoiceId) {
 		ModelAndView result;
-		Collection<Book> books;
+		Invoice invoice;
 		
-		books = tenantService.findAllBooksByPrincipal();
-		try {
-			creditCardService.maskCreditCardsFromBooks(books);
-		} catch (TransactionSystemException e) {
-		}
-		result = new ModelAndView("book/list");
-		result.addObject("books",books);
-		result.addObject("requestURI","book/tenant/list.do");
+		invoice = invoiceService.findOne(invoiceId);
+		invoiceService.checkOwnerIsPrincipal(invoice);
+		
+		result = new ModelAndView("invoice/view");
+		result.addObject("invoice",invoice);
 		
 		return result;
 	}
-	
-
-	@RequestMapping(value = "/book", method = RequestMethod.GET)
-	public ModelAndView book(@RequestParam int propertyId) {
-		ModelAndView result;
-		BookForm bookForm;
-		
-		bookForm = new BookForm();
-		bookForm.setPropertyId(propertyId);
-		result = createEditModelAndView(bookForm);
-		
-		return result;
-	}
-	
-
-	@RequestMapping(value = "/book", method = RequestMethod.POST, params = "book")
-	public ModelAndView edit(BookForm bookForm, BindingResult bindingResult) {
-		ModelAndView result;
-		Book book;
-		
-		book = bookService.reconstruct(bookForm, bindingResult);
-		if (bindingResult.hasErrors()){
-			result = createEditModelAndView(bookForm);
-		} else {
-			try{
-				bookService.save(book);
-				result = new ModelAndView("redirect:list.do");
-			} catch (IllegalArgumentException e) {
-				result = createEditModelAndView(bookForm, e.getMessage());
-			}
-		}
-		
-		return result;
-	}
-
-	protected ModelAndView createEditModelAndView(BookForm bookForm) {
-		ModelAndView result;
-
-		result = createEditModelAndView(bookForm, null);
-		
-		return result;
-	}	
-	
-	protected ModelAndView createEditModelAndView(BookForm bookForm, String message) {
-		ModelAndView result;
-
-		result = new ModelAndView("book/edit");
-		if (bookForm.getCreditCard()!=null && 
-			bookForm.getCreditCard().getNumber().length()==16){
-			try {
-				creditCardService.maskCreditCard(bookForm.getCreditCard());
-			} catch (TransactionSystemException e) {
-			}
-		}
-		result.addObject("bookForm", bookForm);
-		result.addObject("message", message);
-
-		return result;
-	}
-	
 }
-

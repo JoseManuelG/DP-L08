@@ -112,12 +112,25 @@ public class CreditCardService {
 		Assert.isTrue(cardDate > today + sevenDays, "credit.card.expired.error");
 	}
 
-	public void maskCreditCard(CreditCard creditCard) {
+	public String getMaskedCreditCardAsString(CreditCard creditCard) {
 		String number, mask;
 
-		number = creditCard.getNumber().substring(12);
-		mask = "************" + number;
-		creditCard.setNumber(mask);
+		number = creditCard.getNumber();
+		mask = "";
+		if (number.length()<=4){
+			mask = number;
+		} else {
+			for (int i=0; i<number.length()-4; i++){
+				mask += "*";
+			}
+			mask += number.substring(number.length()-4);
+		}
+
+		return mask;
+	}
+
+	public void maskCreditCard(CreditCard creditCard) {
+		creditCard.setNumber(getMaskedCreditCardAsString(creditCard));
 	}
 
 	public void maskCreditCardsFromBooks(Collection<Book> books) {
