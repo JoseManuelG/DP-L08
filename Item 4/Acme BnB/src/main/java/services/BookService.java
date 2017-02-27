@@ -154,6 +154,7 @@ public class BookService {
 		Actor principal;
 		Lessor owner;
 
+		Assert.notNull(book, "book.exists.error");
 		principal = lessorService.findByPrincipal();
 		Assert.notNull(principal,"book.principal.error");
 		owner = book.getLessor();
@@ -165,6 +166,7 @@ public class BookService {
 		Actor principal;
 		Tenant owner;
 
+		Assert.notNull(book, "book.exists.error");
 		principal = tenantService.findByPrincipal();
 		Assert.notNull(principal,"book.principal.error");
 		owner = book.getTenant();
