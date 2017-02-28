@@ -94,7 +94,7 @@ public class DashboardAdministratorController extends AbstractController {
 	public ModelAndView lessors() {
 		ModelAndView result;
 
-		result = new ModelAndView("dashboard/administrator/lessors");
+		result = new ModelAndView("lessor/list");
 
 		result.addObject("lessors", lessorService.findAll());
 

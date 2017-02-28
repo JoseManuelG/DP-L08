@@ -2,7 +2,7 @@
 
 ->Poner restricciones de html para que en campos de numeros solo entren numero y asi se quita el error de pete por mal convertidor.
 
-->Añadir a la vista de property/list el mensaje correspondiente arriba si se trata de una dashboard
+->Añadir a la vista de property/list el mensaje correspondiente arriba si se trata de una dashboard y boton para volver a la lista de lessors si es dashboard
 ->Cancel de crearSocialIdentity, de editarPerfilTenant
 -Delete de Tenant No funciona
 ->Comentar en Tenant

@@ -16,9 +16,9 @@
 <display:table pagesize="5" class="displaytag" keepStatus="false"
 	name="lessors" requestURI="${requestURI}" id="row">
 		
-	<acme:column sorteable="true" code="lessor.name" path="nameHeader"/>
+	<acme:column sorteable="true" code="lessor.name" path="name"/>
 	
-	<acme:column sorteable="true" code="lessor.surname" path="surnameHeader"/>
+	<acme:column sorteable="true" code="lessor.surname" path="surname"/>
 	
 	<display:column>
 		<a href="dashboard/administrator/propertiesOrderedByAudits.do?lessorId=${row.id}">
