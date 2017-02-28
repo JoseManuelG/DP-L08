@@ -1,0 +1,104 @@
+Display a dashboard with the following information:
+
+01-The average number of accepted and denied requests per lessor. Dani -> book/lessor
+
+	select count(b) from Book b where b.state='ACCEPTED';
+	select count(b) from Book b where b.state=’DENIED’;
+	dividas entre:
+	select count(l) from Lessor l;
+
+02-The average number of accepted and denied requests per tenant. Dani -> book/tenant
+
+	select count(b) from Book b where b.state='ACCEPTED';
+	select count(b) from Book b where b.state=’DENIED’;
+	dividas entre:
+	select count(t) from Tenant t;
+	
+03-The lessors who have approved more requests. Dani -> lessor
+
+	select b.lessor from Book b where b.state='ACCEPTED' group by b.lessor order by count(b) desc;
+	y sacar el primero por java.
+	
+04-The lessors who have denied more requests. Dani -> lessor
+
+	select b.lessor from Book b where b.state='DENIED' group by b.lessor order by count(b) desc;
+	y sacar el primero por java.
+	
+05-The lessors who have more pending requests. Dani -> lessor
+
+	select b.lessor from Book b where b.state='PENDING' group by b.lessor order by count(b) desc;
+	y sacar el primero por java.
+	
+06-The tenants who have got more requests approved. Dani -> tenant
+
+	select b.tenant from Book b where b.state='ACCEPTED' group by b.tenant order by count(b) desc;
+	y sacar el primero por java.
+	
+07-The tenants who have got more requests denied. Dani -> tenant
+
+	select b.tenant from Book b where b.state='DENIED' group by b.tenant order by count(b) desc;
+	y sacar el primero por java.
+	
+08-The tenants who have more pending requests. Dani -> tenant
+
+	select b.tenant from Book b where b.state='PENDING' group by b.tenant order by count(b) desc;
+	y sacar el primero por java.
+	
+09-The lessor/s whose ratio of requested versus approved request/s is the maximum or the minimum. (Ratios must be rounded to one decimal place). Dani -> lessor
+
+	select b.lessor from Book b where b.state='ACCEPTED' group by b.lessor order by 1.0*count(b)/b.lessor.books.size desc;
+	El primero es el que tiene menor ratio, y el último el que mayor ratio tiene.
+	
+10-The tenant/s whose ratio of requested versus approved request/s is the maximum or the minimum. (Ratios must be rounded to one decimal place). Dani -> tenant
+
+	select b.tenant from Book b where b.state='ACCEPTED' group by b.tenant order by 1.0*count(b)/b.tenant.books.size desc;
+	El primero es el que tiene menor ratio, y el último el que mayor ratio tiene.
+	
+11-The average, the minimum, and the maximum number of results per finder. Dani -> finder
+
+	select avg(f.results.size) from Finder f;
+	select min(f.results.size) from Finder f;
+	select max(f.results.size) from Finder f;
+	
+12-A listing with his or her properties sorted according to the number of audits  that they have got. Dani -> property
+
+	select p from Property p where p.lessor.id=?1 order by p.audits.size;
+	en ?1 se tiene que ir poniendo la id de cada lessor.
+	
+13-A listing with his or her properties sorted according to the number of requests that they have got. property
+
+	select distinct b.property from Book b where b.lessor.id=?1 order by b.state desc;
+
+14-A listing with his or her properties sorted according to the number of approved requests that they have got. property
+
+	select distinct b.property from Book b where b.lessor.id=?1 and b.state='ACCEPTED' order by b.state desc;
+	
+15-A listing with his or her properties sorted according to the number of denied requests that they have got. property
+
+	select distinct b.property from Book b where b.lessor.id=?1 and b.state='DENIED' order by b.state desc;
+	
+16-A listing with his or her properties sorted according to the number of pending requests that they have got.  property
+
+	select distinct b.property from Book b where b.lessor.id=?1 and b.state='PENDING' order by b.state desc;
+	
+17-The minimum, the average, and the maximum number of social identities per actor. actor
+
+	select min(a.socialIdentities.size), avg(a.socialIdentities.size), max(a.socialIdentities.size) from Actor a;
+	
+18-The minimum, the average, and the maximum number of invoices issued tothe tenants. invoice
+
+	select min(t.invoices.size), avg(t.invoices.size), max(t.invoices.size) from Tenant t;
+	
+19-The total amount of money due in the invoices issued by the system. invoice
+
+	select sum(b.totalAmount) from Book b where b.invoice is not null;
+	
+20-The average number of requests for properties that have at least an audit record versus the average number of requests for properties that do not have any audits. book
+
+	select avg(p.books.size) from Property p where p.audits is not empty;
+	entre:
+	select avg(p.books.size) from Property p where p.audits is empty;
+
+
+A+:Gavira/Javi
+	
