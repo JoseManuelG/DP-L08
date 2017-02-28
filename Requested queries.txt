@@ -62,12 +62,11 @@ Display a dashboard with the following information:
 	
 12-A listing with his or her properties sorted according to the number of audits  that they have got. Dani -> property
 
-	select p from Property p where p.lessor.id=?1 order by p.audits.size;
-	en ?1 se tiene que ir poniendo la id de cada lessor.
+	select p from Property p where p.lessor.id=?1 order by p.audits.size desc;
 	
 13-A listing with his or her properties sorted according to the number of requests that they have got. property
 
-	select distinct b.property from Book b where b.lessor.id=?1 order by b.state desc;
+	select p from Property p where p.lessor.id=?1 order by p.books.size desc;
 
 14-A listing with his or her properties sorted according to the number of approved requests that they have got. property
 
@@ -99,6 +98,14 @@ Display a dashboard with the following information:
 	entre:
 	select avg(p.books.size) from Property p where p.audits is empty;
 
+21-The minimum, the average, and the maximum number of audits that the properties have got.	
+	select min(p.audits.size) from Property p;
+	select avg(p.audits.size) from Property p;
+	select max(p.audits.size) from Property p;
+
+22-A listing in which the attributes are sorted in descending order regarding the number of times they have been used to describe a property.
+
+	select distinct a.attribute from AttributeValue a order by a.attribute desc;
 
 A+:Gavira/Javi
 	

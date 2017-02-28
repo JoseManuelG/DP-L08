@@ -1,7 +1,8 @@
-->hacer book con tarjeta de credito caducada, o que caduca en menos de 7 dias, se lo traga, si pongo que el dia es el 29 de febrero, salta un nullpointerException con trazaen la vista
+﻿->hacer book con tarjeta de credito caducada, o que caduca en menos de 7 dias, se lo traga, si pongo que el dia es el 29 de febrero, salta un nullpointerException con trazaen la vista
 
 ->Poner restricciones de html para que en campos de numeros solo entren numero y asi se quita el error de pete por mal convertidor.
 
+->Añadir a la vista de property/list el mensaje correspondiente arriba si se trata de una dashboard y boton para volver a la lista de lessors si es dashboard
 ->Cancel de crearSocialIdentity, de editarPerfilTenant
 -Delete de Tenant No funciona
 ->Comentar en Tenant
