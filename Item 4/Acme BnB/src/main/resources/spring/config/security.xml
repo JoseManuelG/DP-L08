@@ -51,6 +51,7 @@
 		
 		
 		<security:intercept-url pattern="/lessor/list.do" access="permitAll" />
+		<security:intercept-url pattern="/lessor/view.do" access="permitAll" />
 		
 		<security:intercept-url pattern="/property/list.do" access="permitAll" />
 		<security:intercept-url pattern="/property/view.do" access="permitAll" />
@@ -69,6 +70,7 @@
 		<security:intercept-url pattern="/security/edit.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/audit/view.do" access="isAuthenticated()" />
 		
+		
 	<!-- ADMINISTRATOR -->
 	
 		<security:intercept-url pattern="/attribute/administrator/create.do" access="hasRole('ADMINISTRATOR')" /> 
@@ -83,7 +85,6 @@
 		<security:intercept-url pattern="/book/lessor/list.do" access="hasRole('LESSOR')" />
 		<security:intercept-url pattern="/lessor/edit.do" access="hasRole('LESSOR')" />
 		<security:intercept-url pattern="/lessor/myProfile.do" access="hasRole('LESSOR')" />
-		<security:intercept-url pattern="/lessor/view.do" access="isAuthenticated()" />
 		<security:intercept-url pattern="/lessor/fee.do" access="hasRole('LESSOR')" />
 		<security:intercept-url pattern="/property/lessor/myProperties.do" access="hasRole('LESSOR')" />
 		<security:intercept-url pattern="/property/lessor/create.do" access="hasRole('LESSOR')" />
