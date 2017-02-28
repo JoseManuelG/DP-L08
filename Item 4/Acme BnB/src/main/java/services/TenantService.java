@@ -186,6 +186,6 @@ public class TenantService {
 
 		tenants = tenantRepository.getTenantsByAcceptedVersusTotalBooksRatio();
 
-		return tenants.get(tenants.size());
+		return tenants.get(tenants.size() - 1);
 	}
 }

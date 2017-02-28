@@ -62,7 +62,7 @@ public class AuditService {
 		Assert.notNull(audit, "La tarjeta de crédito no puede ser nula");
 		Audit result;
 		if (audit.getId() == 0) {
-			Date currentTime = new Date(System.currentTimeMillis()-100);
+			Date currentTime = new Date(System.currentTimeMillis() - 100);
 			audit.setWritingMoment(currentTime);
 		}
 
@@ -81,32 +81,46 @@ public class AuditService {
 
 	}
 
-
 	// Other Bussiness Methods --------------------------------------------------------
-	
+
 	public Collection<Audit> findAuditsForProperty(Property property) {
 		Collection<Audit> result = auditRepository.findAuditsForPropertyId(property.getId());
 		return result;
 	}
-	
+
 	public boolean checkUnique(Property property, Auditor auditor) {
-		boolean result=false;
-		if(auditRepository.countAuditForauditorIdAndPropertyId(auditor.getId(), property.getId())==0){
-			result=true;
+		boolean result = false;
+		if (auditRepository.countAuditForauditorIdAndPropertyId(auditor.getId(), property.getId()) == 0) {
+			result = true;
 		}
 		//Assert.notNull(auditRepository.findAuditsForauditorIdAndPropertyId(auditor.getId() ,property.getId()));
 		return result;
 	}
-	
+
 	public Audit getAuditForPropertyAndAuditor(Property property, Auditor auditor) {
 		Audit result;
-		result=auditRepository.findAuditForauditorIdAndPropertyId(auditor.getId(), property.getId());		
+		result = auditRepository.findAuditForauditorIdAndPropertyId(auditor.getId(), property.getId());
 		return result;
 	}
-	
+
 	public Collection<Audit> findAuditsForAuditor(Auditor auditor) {
 		Collection<Audit> result = auditRepository.findAuditsForauditorId(auditor.getId());
 		return result;
+	}
+
+	public int getMinimumAuditsPerProperty() {
+		//Dashboard-21
+		return auditRepository.getMinimumAuditsPerProperty();
+	}
+
+	public double getAverageAuditsPerProperty() {
+		//Dashboard-21
+		return auditRepository.getAverageAuditsPerProperty();
+	}
+
+	public int getMaximumAuditsPerProperty() {
+		//Dashboard-21
+		return auditRepository.getMaximumAuditsPerProperty();
 	}
 
 }

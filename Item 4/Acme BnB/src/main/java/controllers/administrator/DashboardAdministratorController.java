@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
+import services.AuditService;
 import services.BookService;
 import services.FinderService;
 import services.InvoiceService;
@@ -37,6 +38,9 @@ public class DashboardAdministratorController extends AbstractController {
 	@Autowired
 	private InvoiceService	invoiceService;
 
+	@Autowired
+	private AuditService	auditService;
+
 
 	// List --------------------------------------------------------------------
 
@@ -44,7 +48,7 @@ public class DashboardAdministratorController extends AbstractController {
 	public ModelAndView dashboard() {
 		ModelAndView result;
 
-		result = new ModelAndView("dashboard");
+		result = new ModelAndView("dashboard/administrator/dashboard");
 		//Queries 1-11
 		result.addObject("AverageAcceptedBooksPerLessor", bookService.getAverageAcceptedBooksPerLessor());
 		result.addObject("AverageDeniedBooksPerLessor", bookService.getAverageDeniedBooksPerLessor());
@@ -63,7 +67,7 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("AverageResultsPerFinder", finderService.getAverageResultsPerFinder());
 		result.addObject("MinimumResultsPerFinder", finderService.getMinimumResultsPerFinder());
 		result.addObject("MaximumResultsPerFinder", finderService.getMaximumResultsPerFinder());
-		//Queries 17-20 
+		//Queries 17-21 
 		result.addObject("MinimumSocialIdentitiesPerActor", actorService.getMinimumSocialIdentitiesPerActor());
 		result.addObject("AverageSocialIdentitiesPerActor", actorService.getAverageSocialIdentitiesPerActor());
 		result.addObject("MaximumSocialIdentitiesPerActor", actorService.getMaximumSocialIdentitiesPerActor());
@@ -72,6 +76,9 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("MaximumInvoicesPerTenant", invoiceService.getMaximumInvoicesPerTenant());
 		result.addObject("TotalDueMoneyOfInvoices", invoiceService.getTotalDueMoneyOfInvoices());
 		result.addObject("AverageRequestsWithAuditsVersusNoAudits", bookService.getAverageRequestsWithAuditsVersusNoAudits());
+		result.addObject("MinimumAuditsPerProperty", auditService.getMinimumAuditsPerProperty());
+		result.addObject("AverageAuditsPerProperty", auditService.getAverageAuditsPerProperty());
+		result.addObject("MaximumAuditsPerProperty", auditService.getMaximumAuditsPerProperty());
 
 		result.addObject("requestURI", "dashboard/administrator/dashboard.do");
 
