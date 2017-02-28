@@ -19,6 +19,7 @@ import services.AuditService;
 import services.AuditorService;
 import services.PropertyService;
 import controllers.AbstractController;
+import domain.Actor;
 import domain.Attachment;
 import domain.Audit;
 import domain.Auditor;
@@ -178,13 +179,13 @@ public class AuditAuditorController extends AbstractController {
 			ModelAndView result;
 			result = new ModelAndView("audit/view");
 			Audit audit  = auditService.findOne(auditId);
+			boolean esMiAudit=false;
 			Collection<Attachment> attachments = audit.getAttachments();
-			Auditor auditor = auditorService.findActorByPrincial();
-			if(auditor.equals(audit.getAuditor())){
-				boolean esMiAudit = true;
-				
-				result.addObject("esMiAudit", esMiAudit);
+			Actor actor = actorService.findByPrincipal();
+			if(actor.equals(audit.getAuditor())){
+				esMiAudit = true;	
 			}
+			result.addObject("esMiAudit", esMiAudit);
 			result.addObject("audit", audit);
 			result.addObject("attachments", attachments);
 			result.addObject("requestURI","audit/view.do");
