@@ -975,6 +975,8 @@
 		</property>
 		<property name="books">
 			<list>
+				<ref bean="book3Tenant1"/>
+				<ref bean="book4Tenant1"/>
 			</list>
 		</property>
 		<property name="lastUpdate" value="02/12/2017 16:35"/>
@@ -1019,6 +1021,7 @@
 		</property>
 		<property name="books">
 			<list>
+				<ref bean="book5Tenant1"/>
 			</list>
 		</property>
 		<property name="lastUpdate" value="02/12/2017 16:35"/>
@@ -1041,9 +1044,6 @@
 		</property>
 		<property name="books">
 			<list>
-				<ref bean="book3Tenant1"/>
-				<ref bean="book4Tenant1"/>
-				<ref bean="book5Tenant1"/>
 				<ref bean="book6Tenant1"/>
 			</list>
 		</property>
@@ -1357,10 +1357,10 @@
 		<property name="smoker" value="false"/>
 		<property name="state" value="ACCEPTED"/>
 		<property name="totalAmount" value="20.0"/>
-		<property name="propertyName" value="Property 4"/>
-		<property name="propertyAddress" value="Spain Seville, Urb. Los pinares, C\Camorra nº10"/>
+		<property name="propertyName" value="Property 3"/>
+		<property name="propertyAddress" value="Spain Seville, C\Bien Hallado nº14"/>
 		<property name="creditCard" ref="creditCardBook4Tenant1"/>
-		<property name="property" ref="property4Lessor1"/>
+		<property name="property" ref="property3Lessor1"/>
 		<property name="tenant" ref="tenant1"/>		
 		<property name="invoice"><null/></property>
 		<property name="lessor" ref="lessor1"/>

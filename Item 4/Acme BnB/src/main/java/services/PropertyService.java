@@ -97,27 +97,68 @@ public class PropertyService {
 
 	public List<Property> findPropertiesByLessorByNumberOfAudits(int lessorId) {
 		//Dashboard-12
-		return propertyRepository.findPropertiesByLessorByNumberOfAudits(lessorId);
+		List<Property> properties;
+		List<Property> result;
+		properties = propertyRepository.findPropertiesByLessorId(lessorId);
+		result = propertyRepository.findPropertiesByLessorByNumberOfAudits(lessorId);
+		for (Property p : properties) {
+			if (!result.contains(p))
+				result.add(p);
+		}
+		return result;
+
 	}
 
 	public List<Property> findPropertiesByLessorOrderedByRequestNumber(int lessorId) {
 		//Dashboard-13
-		return propertyRepository.findPropertiesByLessorIdOrderedByRequestNumber(lessorId);
+		List<Property> properties;
+		List<Property> result;
+		properties = propertyRepository.findPropertiesByLessorId(lessorId);
+		result = propertyRepository.findPropertiesByLessorIdOrderedByRequestNumber(lessorId);
+		for (Property p : properties) {
+			if (!result.contains(p))
+				result.add(p);
+		}
+		return result;
 	}
 
 	public List<Property> findPropertiesByLessorWithAcceptedBooks(int lessorId) {
 		//Dashboard-14
-		return propertyRepository.findPropertiesByLessorIdWithAcceptedBooks(lessorId);
+		List<Property> properties;
+		List<Property> result;
+		properties = propertyRepository.findPropertiesByLessorId(lessorId);
+		result = propertyRepository.findPropertiesByLessorIdWithAcceptedBooks(lessorId);
+		for (Property p : properties) {
+			if (!result.contains(p))
+				result.add(p);
+		}
+		return result;
 	}
 
 	public List<Property> findPropertiesByLessorWithDenieBooks(int lessorId) {
 		//Dashboard-15
-		return propertyRepository.findPropertiesByLessorIdWithDeniedBooks(lessorId);
+		List<Property> properties;
+		List<Property> result;
+		properties = propertyRepository.findPropertiesByLessorId(lessorId);
+		result = propertyRepository.findPropertiesByLessorIdWithDeniedBooks(lessorId);
+		for (Property p : properties) {
+			if (!result.contains(p))
+				result.add(p);
+		}
+		return result;
 	}
 
 	public List<Property> findPropertiesByLessorWithPendingBooks(int lessorId) {
 		//Dashboard-16
-		return propertyRepository.findPropertiesByLessorIdWithPendingBooks(lessorId);
+		List<Property> properties;
+		List<Property> result;
+		properties = propertyRepository.findPropertiesByLessorId(lessorId);
+		result = propertyRepository.findPropertiesByLessorIdWithPendingBooks(lessorId);
+		for (Property p : properties) {
+			if (!result.contains(p))
+				result.add(p);
+		}
+		return result;
 	}
 
 	public List<Audit> findAuditsByProperty(Property property) {
