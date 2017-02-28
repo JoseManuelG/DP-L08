@@ -61,6 +61,7 @@
 					<security:authorize access="hasRole('ADMINISTRATOR')">
 						<li><a href="auditor/administrator/registerAuditor.do"><spring:message code="master.page.administrator.registerAuditor" /></a></li>
 						<li><a href="attribute/administrator/list.do"><spring:message code="master.page.administrator.attributes" /></a></li>
+						<li><a href="dashboard/administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
 					</security:authorize>	
 					<security:authorize access="hasRole('AUDITOR')">
 						<li><a href="auditor/myProfile.do"><spring:message code="master.page.lessor.myProfile" /></a></li>

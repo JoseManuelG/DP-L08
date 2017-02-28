@@ -69,6 +69,7 @@
 		<security:intercept-url pattern="/socialIdentity/edit.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/security/edit.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/audit/view.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/tenant/view.do" access="isAuthenticated()" />
 		
 		
 	<!-- ADMINISTRATOR -->
@@ -76,6 +77,8 @@
 		<security:intercept-url pattern="/attribute/administrator/create.do" access="hasRole('ADMINISTRATOR')" /> 
 		<security:intercept-url pattern="/attribute/administrator/edit.do" access="hasRole('ADMINISTRATOR')" />  
 		<security:intercept-url pattern="/attribute/administrator/list.do" access="hasRole('ADMINISTRATOR')" /> 
+		
+		<security:intercept-url pattern="/dashboard/administrator/dashboard.do" access="hasRole('ADMINISTRATOR')" />  
 		
 		
 	<!-- LESSOR -->
@@ -103,7 +106,6 @@
 		<security:intercept-url pattern="/book/tenant/requestInvoice.do" access="hasRole('TENANT')" />
 		<security:intercept-url pattern="/finder/tenant/finder.do" access="hasRole('TENANT')" />
 		<security:intercept-url pattern="/invoice/tenant/view.do" access="isAuthenticated()" />
-		<security:intercept-url pattern="/tenant/view.do" access="hasRole('TENANT')" />
 		<security:intercept-url pattern="/tenant/myProfile.do" access="hasRole('TENANT')" />
 		
 		

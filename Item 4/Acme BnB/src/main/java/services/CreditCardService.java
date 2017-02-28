@@ -106,15 +106,15 @@ public class CreditCardService {
 		sevenDays = 7 * 24 * 60 * 60 * 100;
 		today = System.currentTimeMillis();
 		calendar = new GregorianCalendar(creditCard.getExpirationYear(),
-			creditCard.getExpirationMonth() + 1, 1);
+			creditCard.getExpirationMonth(), 1);
 		cardDate = calendar.getTimeInMillis();
-
-		Assert.isTrue(cardDate > today + sevenDays, "credit.card.expired.error");
+		
+		Assert.isTrue(cardDate > today + sevenDays, "creditCard.expired.error");
 	}
 
 	public String getMaskedCreditCardAsString(CreditCard creditCard) {
 		String number, mask;
-
+		
 		number = creditCard.getNumber();
 		mask = "";
 		if (number.length()<=4){

@@ -39,6 +39,9 @@ public class BookService {
 	private PropertyService	propertyService;
 
 	@Autowired
+	private CreditCardService creditCardService;
+	
+	@Autowired
 	private Validator		validator;
 
 
@@ -76,8 +79,13 @@ public class BookService {
 		Book result;
 
 		Assert.notNull(book, "book.null.error");
+		
 		checkDayAfter(book);
 		checkOwnerTenantIsPrincipal(book);
+		checkBookDate(book);
+		creditCardService.checkCreditCard(book.getCreditCard());
+		
+		calculateTotalAmount(book);
 		result = bookRepository.save(book);
 		Assert.notNull(result, "book.commit.error");
 
@@ -103,9 +111,12 @@ public class BookService {
 		Book book;
 
 		book = this.findOne(bookId);
+		
 		checkOwnerLessorIsPrincipal(book);
 		checkStateIsPending(book);
-		//TODO: ¿Checkear que las fechas sean futuras? (Qué sentido tiene aceptar un book que se ha pasado de fecha...)
+		checkBookDate(book);
+		creditCardService.checkCreditCard(book.getLessor().getCreditCard());
+		
 		book.setState("ACCEPTED");
 		bookRepository.save(book);
 		lessorService.addFee();
@@ -136,7 +147,6 @@ public class BookService {
 		book.setCheckOutDate(bookForm.getCheckOutDate());
 		book.setCreditCard(bookForm.getCreditCard());
 		book.setSmoker(bookForm.getSmoker());
-		calculateTotalAmount(book);
 		validator.validate(book, bindingResult);
 		return book;
 	}
@@ -217,21 +227,27 @@ public class BookService {
 		checkOut = book.getCheckOutDate().getTime();
 		aDay = 24 * 60 * 60 * 100;
 
-		Assert.isTrue(checkOut - checkIn >= aDay, "book.checkDate.error");
+		Assert.isTrue(checkOut - checkIn >= aDay, "book.checkDayAfter.error");
+	}
+	
+	private void checkBookDate (Book book){
+		long checkIn, now;
+
+		checkIn = book.getCheckInDate().getTime();
+		now = System.currentTimeMillis();
+
+		Assert.isTrue(checkIn > now, "book.checkDate.error");
 	}
 
 	private void calculateTotalAmount(Book book) {
 		int days;
 		long out, in;
-		double amount;
 
 		out = book.getCheckOutDate().getTime();
 		in = book.getCheckInDate().getTime();
 		days = (int) (out - in) / (1000 * 60 * 60 * 24);
-		amount = days * book.getProperty().getRate();
-		amount = amount>=0 ? amount : 0;
 
-		book.setTotalAmount(amount);
+		book.setTotalAmount(days * book.getProperty().getRate());
 	}
 
 	public double getAverageRequestsWithAuditsVersusNoAudits() {
