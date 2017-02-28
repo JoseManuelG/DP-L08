@@ -78,6 +78,8 @@
 		<security:intercept-url pattern="/attribute/administrator/edit.do" access="hasRole('ADMINISTRATOR')" />  
 		<security:intercept-url pattern="/attribute/administrator/list.do" access="hasRole('ADMINISTRATOR')" /> 
 		
+		<security:intercept-url pattern="/dashboard/administrator/dashboard.do" access="hasRole('ADMINISTRATOR')" />  
+		
 		
 	<!-- LESSOR -->
 	
