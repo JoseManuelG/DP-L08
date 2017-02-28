@@ -79,6 +79,12 @@
 		<security:intercept-url pattern="/attribute/administrator/list.do" access="hasRole('ADMINISTRATOR')" /> 
 		
 		<security:intercept-url pattern="/dashboard/administrator/dashboard.do" access="hasRole('ADMINISTRATOR')" />  
+		<security:intercept-url pattern="/dashboard/administrator/lessors.do" access="hasRole('ADMINISTRATOR')" />  
+		<security:intercept-url pattern="/dashboard/administrator/propertiesOrderedByAudits.do" access="hasRole('ADMINISTRATOR')" />  
+		<security:intercept-url pattern="/dashboard/administrator/propertiesOrderedByBooks.do" access="hasRole('ADMINISTRATOR')" />  
+		<security:intercept-url pattern="/dashboard/administrator/propertiesOrderedByAcceptedBooks.do" access="hasRole('ADMINISTRATOR')" />  
+		<security:intercept-url pattern="/dashboard/administrator/propertiesOrderedByDeniedBooks.do" access="hasRole('ADMINISTRATOR')" />  
+		<security:intercept-url pattern="/dashboard/administrator/propertiesOrderedByPendingBooks.do" access="hasRole('ADMINISTRATOR')" />  
 		
 		
 	<!-- LESSOR -->

@@ -9,35 +9,46 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <!-- Listing grid -->
 
 <display:table pagesize="5" class="displaytag" keepStatus="false"
 	name="lessors" requestURI="${requestURI}" id="row">
+		
+	<acme:column sorteable="true" code="lessor.name" path="nameHeader"/>
 	
-	<!-- Action links -->
-		<display:column>
-			<a href="lessor/edit.do?lessorId=${row.id}">
-				<spring:message	code="lessor.edit" />
-			</a>
-		</display:column>
+	<acme:column sorteable="true" code="lessor.surname" path="surnameHeader"/>
 	
-	<!-- Attributes -->
+	<display:column>
+		<a href="dashboard/administrator/propertiesOrderedByAudits.do?lessorId=${row.id}">
+			<spring:message	code="propertiesOrderedByAudits" />
+		</a>
+	</display:column>
 	
-	<spring:message code="lessor.name" var="nameHeader" />
-	<display:column property="name" title="${nameHeader}" sortable="false" />
+	<display:column>
+		<a href="dashboard/administrator/propertiesOrderedByBooks.do?lessorId=${row.id}">
+			<spring:message	code="propertiesOrderedByBooks" />
+		</a>
+	</display:column>
 	
-	<spring:message code="lessor.surname" var="surnameHeader" />
-	<display:column property="surname" title="${surnameHeader}" sortable="false" />
+	<display:column>
+		<a href="dashboard/administrator/propertiesOrderedByAcceptedBooks.do?lessorId=${row.id}">
+			<spring:message	code="propertiesOrderedByAcceptedBooks" />
+		</a>
+	</display:column>
 	
-	<spring:message code="lessor.email" var="emailHeader" />
-	<display:column property="email" title="${emailHeader}" sortable="false" />
-
-	<spring:message code="lessor.phone" var="phoneHeader" />
-	<display:column property="phone" title="${phoneHeader}" sortable="false" />
+	<display:column>
+		<a href="dashboard/administrator/propertiesOrderedByDeniedBooks.do?lessorId=${row.id}">
+			<spring:message	code="propertiesOrderedByDeniedBooks" />
+		</a>
+	</display:column>
 	
-	<spring:message code="lessor.totalFee" var="totalFeeHeader" />
-	<display:column property="totalFee" title="${totalFeeHeader}" sortable="false" />
+	<display:column>
+		<a href="dashboard/administrator/propertiesOrderedByPendingBooks.do?lessorId=${row.id}">
+			<spring:message	code="propertiesOrderedByPendingBooks" />
+		</a>
+	</display:column>
 	
 </display:table>
 
