@@ -85,6 +85,7 @@
 		<security:intercept-url pattern="/dashboard/administrator/propertiesOrderedByAcceptedBooks.do" access="hasRole('ADMINISTRATOR')" />  
 		<security:intercept-url pattern="/dashboard/administrator/propertiesOrderedByDeniedBooks.do" access="hasRole('ADMINISTRATOR')" />  
 		<security:intercept-url pattern="/dashboard/administrator/propertiesOrderedByPendingBooks.do" access="hasRole('ADMINISTRATOR')" />  
+		<security:intercept-url pattern="/dashboard/administrator/attributes.do" access="hasRole('ADMINISTRATOR')" />  
 		
 		
 	<!-- LESSOR -->

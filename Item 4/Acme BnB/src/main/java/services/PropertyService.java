@@ -97,8 +97,8 @@ public class PropertyService {
 
 	public List<Property> findPropertiesByLessorByNumberOfAudits(int lessorId) {
 		//Dashboard-12
-		List<Property> properties;
-		List<Property> result;
+		List<Property> properties, result;
+
 		properties = propertyRepository.findPropertiesByLessorId(lessorId);
 		result = propertyRepository.findPropertiesByLessorByNumberOfAudits(lessorId);
 		for (Property p : properties) {
@@ -111,8 +111,8 @@ public class PropertyService {
 
 	public List<Property> findPropertiesByLessorOrderedByRequestNumber(int lessorId) {
 		//Dashboard-13
-		List<Property> properties;
-		List<Property> result;
+		List<Property> properties, result;
+
 		properties = propertyRepository.findPropertiesByLessorId(lessorId);
 		result = propertyRepository.findPropertiesByLessorIdOrderedByRequestNumber(lessorId);
 		for (Property p : properties) {
@@ -124,8 +124,8 @@ public class PropertyService {
 
 	public List<Property> findPropertiesByLessorWithAcceptedBooks(int lessorId) {
 		//Dashboard-14
-		List<Property> properties;
-		List<Property> result;
+		List<Property> properties, result;
+
 		properties = propertyRepository.findPropertiesByLessorId(lessorId);
 		result = propertyRepository.findPropertiesByLessorIdWithAcceptedBooks(lessorId);
 		for (Property p : properties) {
@@ -137,8 +137,8 @@ public class PropertyService {
 
 	public List<Property> findPropertiesByLessorWithDenieBooks(int lessorId) {
 		//Dashboard-15
-		List<Property> properties;
-		List<Property> result;
+		List<Property> properties, result;
+
 		properties = propertyRepository.findPropertiesByLessorId(lessorId);
 		result = propertyRepository.findPropertiesByLessorIdWithDeniedBooks(lessorId);
 		for (Property p : properties) {
@@ -150,8 +150,8 @@ public class PropertyService {
 
 	public List<Property> findPropertiesByLessorWithPendingBooks(int lessorId) {
 		//Dashboard-16
-		List<Property> properties;
-		List<Property> result;
+		List<Property> properties, result;
+
 		properties = propertyRepository.findPropertiesByLessorId(lessorId);
 		result = propertyRepository.findPropertiesByLessorIdWithPendingBooks(lessorId);
 		for (Property p : properties) {

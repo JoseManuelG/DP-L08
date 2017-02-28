@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
+import services.AttributeService;
 import services.AuditService;
 import services.BookService;
 import services.FinderService;
@@ -23,28 +24,31 @@ import controllers.AbstractController;
 public class DashboardAdministratorController extends AbstractController {
 
 	@Autowired
-	private FinderService	finderService;
+	private FinderService		finderService;
 
 	@Autowired
-	private ActorService	actorService;
+	private ActorService		actorService;
 
 	@Autowired
-	private BookService		bookService;
+	private BookService			bookService;
 
 	@Autowired
-	private LessorService	lessorService;
+	private LessorService		lessorService;
 
 	@Autowired
-	private TenantService	tenantService;
+	private TenantService		tenantService;
 
 	@Autowired
-	private InvoiceService	invoiceService;
+	private InvoiceService		invoiceService;
 
 	@Autowired
-	private AuditService	auditService;
+	private AuditService		auditService;
 
 	@Autowired
-	private PropertyService	propertyService;
+	private PropertyService		propertyService;
+
+	@Autowired
+	private AttributeService	attributeService;
 
 
 	// List --------------------------------------------------------------------
@@ -164,6 +168,21 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("properties", propertyService.findPropertiesByLessorWithPendingBooks(lessorId));
 
 		result.addObject("requestURI", "dashboard/administrator/propertiesOrderedByPendingBooks.do?lessorId=" + lessorId);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/attributes", method = RequestMethod.GET)
+	public ModelAndView attributes() {
+		ModelAndView result;
+
+		result = new ModelAndView("attribute/administrator/list");
+
+		result.addObject("attributes", attributeService.getAttributesByFrequence());
+
+		result.addObject("dashboard", "");
+
+		result.addObject("requestURI", "dashboard/administrator/attributes.do");
 
 		return result;
 	}

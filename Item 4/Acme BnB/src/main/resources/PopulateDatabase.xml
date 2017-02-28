@@ -948,6 +948,7 @@
 		</property>
 		<property name="attributeValues">
 			<list>
+				<ref bean="attributeValue1Property2Lessor1"/>
 			</list>
 		</property>
 		<property name="books">
@@ -1568,6 +1569,12 @@
 		<property name="value" value="1"/>
 		<property name="attribute" ref="attribute6"/>
 		<property name="property" ref="property1Lessor1"/>
+	</bean>
+	
+	<bean id="attributeValue1Property2Lessor1" class="domain.AttributeValue">
+		<property name="value" value="2"/>
+		<property name="attribute" ref="attribute6"/>
+		<property name="property" ref="property2Lessor1"/>
 	</bean>
 	
 	<!-- Comment 

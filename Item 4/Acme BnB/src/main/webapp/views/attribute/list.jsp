@@ -10,6 +10,10 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+<jstl:if test="${dashboard!=null}">
+	<spring:message code="attribute.dashboard"/>
+</jstl:if>
+
 <!-- Listing grid -->
 
 <display:table pagesize="5" class="displaytag" keepStatus="false"
@@ -17,13 +21,11 @@
 	
 	<!-- Action links -->
 
-	<security:authorize access="hasRole('ADMINISTRATOR')">
-		<display:column>
-			<a href="attribute/administrator/edit.do?attributeId=${row.id}">
-				<spring:message	code="attribute.edit" />
-			</a>
-		</display:column>
-		</security:authorize>
+	<display:column>
+		<a href="attribute/administrator/edit.do?attributeId=${row.id}">
+			<spring:message	code="attribute.edit" />
+		</a>
+	</display:column>
 	
 	<!-- Attributes -->
 	
