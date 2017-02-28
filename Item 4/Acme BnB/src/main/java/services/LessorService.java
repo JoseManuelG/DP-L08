@@ -219,6 +219,6 @@ public class LessorService {
 
 		lessors = lessorRepository.getLessorsByAcceptedVersusTotalBooksRatio();
 
-		return lessors.get(lessors.size());
+		return lessors.get(lessors.size() - 1);
 	}
 }

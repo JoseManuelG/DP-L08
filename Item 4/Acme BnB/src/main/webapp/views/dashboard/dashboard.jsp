@@ -16,16 +16,16 @@
 	<spring:message code="AverageDeniedBooksPerLessor" />: <jstl:out value="${AverageDeniedBooksPerLessor}"/><br/>
 	<spring:message code="AverageAcceptedBooksPerTenant" />: <jstl:out value="${AverageAcceptedBooksPerTenant}"/><br/>
 	<spring:message code="AverageDeniedBooksPerTenant" />: <jstl:out value="${AverageDeniedBooksPerTenant}"/><br/>
-	<spring:message code="LessorWithMoreAcceptedBooks" />: <jstl:out value="${LessorWithMoreAcceptedBooks}"/><br/>
-	<spring:message code="LessorWithMoreDeniedBooks" />: <jstl:out value="${LessorWithMoreDeniedBooks}"/><br/>
-	<spring:message code="LessorWithMorePendingBooks" />: <jstl:out value="${LessorWithMorePendingBooks}"/><br/>
-	<spring:message code="TenantWithMoreAcceptedBooks" />: <jstl:out value="${TenantWithMoreAcceptedBooks}"/><br/>
-	<spring:message code="TenantWithMoreDeniedBooks" />: <jstl:out value="${TenantWithMoreDeniedBooks}"/><br/>
-	<spring:message code="TenantWithMorePendingBooks" />: <jstl:out value="${TenantWithMorePendingBooks}"/><br/>
-	<spring:message code="LessorWithMaxAcceptedVersusTotalBooksRatio" />: <jstl:out value="${LessorWithMaxAcceptedVersusTotalBooksRatio}"/><br/>
-	<spring:message code="LessorWithMinAcceptedVersusTotalBooksRatio" />: <jstl:out value="${LessorWithMinAcceptedVersusTotalBooksRatio}"/><br/>
-	<spring:message code="TenantWithMaxAcceptedVersusTotalBooksRatio" />: <jstl:out value="${TenantWithMaxAcceptedVersusTotalBooksRatio}"/><br/>
-	<spring:message code="TenantWithMinAcceptedVersusTotalBooksRatio" />: <jstl:out value="${TenantWithMinAcceptedVersusTotalBooksRatio}"/><br/>
+	<spring:message code="LessorWithMoreAcceptedBooks" />: <jstl:out value="${LessorWithMoreAcceptedBooks.name}"/> <jstl:out value="${LessorWithMoreAcceptedBooks.surname}"/><br/>
+	<spring:message code="LessorWithMoreDeniedBooks" />: <jstl:out value="${LessorWithMoreDeniedBooks.name}"/> <jstl:out value="${LessorWithMoreDeniedBooks.surname}"/><br/>
+	<spring:message code="LessorWithMorePendingBooks" />: <jstl:out value="${LessorWithMorePendingBooks.name}"/> <jstl:out value="${LessorWithMorePendingBooks.surname}"/><br/>
+	<spring:message code="TenantWithMoreAcceptedBooks" />: <jstl:out value="${TenantWithMoreAcceptedBooks.name}"/> <jstl:out value="${TenantWithMoreAcceptedBooks.surname}"/><br/>
+	<spring:message code="TenantWithMoreDeniedBooks" />: <jstl:out value="${TenantWithMoreDeniedBooks.name}"/> <jstl:out value="${TenantWithMoreDeniedBooks.surname}"/><br/>
+	<spring:message code="TenantWithMorePendingBooks" />: <jstl:out value="${TenantWithMorePendingBooks.name}"/> <jstl:out value="${TenantWithMorePendingBooks.surname}"/><br/>
+	<spring:message code="LessorWithMaxAcceptedVersusTotalBooksRatio" />: <jstl:out value="${LessorWithMaxAcceptedVersusTotalBooksRatio.name}"/> <jstl:out value="${LessorWithMaxAcceptedVersusTotalBooksRatio.surname}"/><br/>
+	<spring:message code="LessorWithMinAcceptedVersusTotalBooksRatio" />: <jstl:out value="${LessorWithMinAcceptedVersusTotalBooksRatio.name}"/> <jstl:out value="${LessorWithMinAcceptedVersusTotalBooksRatio.surname}"/><br/>
+	<spring:message code="TenantWithMaxAcceptedVersusTotalBooksRatio" />: <jstl:out value="${TenantWithMaxAcceptedVersusTotalBooksRatio.name}"/> <jstl:out value="${TenantWithMaxAcceptedVersusTotalBooksRatio.surname}"/><br/>
+	<spring:message code="TenantWithMinAcceptedVersusTotalBooksRatio" />: <jstl:out value="${TenantWithMinAcceptedVersusTotalBooksRatio.name}"/> <jstl:out value="${TenantWithMinAcceptedVersusTotalBooksRatio.surname}"/><br/>
 	<spring:message code="AverageResultsPerFinder" />: <jstl:out value="${AverageResultsPerFinder}"/><br/>
 	<spring:message code="MinimumResultsPerFinder" />: <jstl:out value="${MinimumResultsPerFinder}"/><br/>
 	<spring:message code="MaximumResultsPerFinder" />: <jstl:out value="${MaximumResultsPerFinder}"/><br/>
@@ -37,4 +37,7 @@
 	<spring:message code="MaximumInvoicesPerTenant" />: <jstl:out value="${MaximumInvoicesPerTenant}"/><br/>
 	<spring:message code="TotalDueMoneyOfInvoices" />: <jstl:out value="${TotalDueMoneyOfInvoices}"/><br/>
 	<spring:message code="AverageRequestsWithAuditsVersusNoAudits" />: <jstl:out value="${AverageRequestsWithAuditsVersusNoAudits}"/><br/>
+	<spring:message code="MinimumAuditsPerProperty" />: <jstl:out value="${MinimumAuditsPerProperty}"/><br/>
+	<spring:message code="AverageAuditsPerProperty" />: <jstl:out value="${AverageAuditsPerProperty}"/><br/>
+	<spring:message code="MaximumAuditsPerProperty" />: <jstl:out value="${MaximumAuditsPerProperty}"/><br/>
 </fieldset>

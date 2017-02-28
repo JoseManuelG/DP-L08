@@ -99,6 +99,12 @@ Display a dashboard with the following information:
 	entre:
 	select avg(p.books.size) from Property p where p.audits is empty;
 
+21-The minimum, the average, and the maximum number of audits that the properties have got.	
+	select min(p.audits.size) from Property p;
+	select avg(p.audits.size) from Property p;
+	select max(p.audits.size) from Property p;
+
+22-A listing in which the attributes are sorted in descending order regarding the number of times they have been used to describe a property.
 
 A+:Gavira/Javi
 	
