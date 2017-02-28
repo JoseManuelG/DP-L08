@@ -57,7 +57,7 @@ public class PropertyController extends AbstractController {
 		result = new ModelAndView("property/view");
 		Property property  = propertyService.findOne(propertyId);
 		Collection<AttributeValue> attributeValues = property.getAttributeValues();
-		Collection<Audit> audits = property.getAudits();
+		Collection<Audit> audits = propertyService.findAuditsByProperty(property);
 		
 		try{
 			

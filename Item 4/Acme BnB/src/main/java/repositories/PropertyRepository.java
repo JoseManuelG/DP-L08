@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import domain.Audit;
 import domain.Property;
 
 @Repository
@@ -36,5 +37,9 @@ public interface PropertyRepository extends JpaRepository<Property, Integer> {
 	//Returns every property of a given lessor with pending book requests
 	@Query("select distinct b.property from Book b where b.lessor.id=?1 and b.state='PENDING' order by b.state desc")
 	public List<Property> findPropertiesByLessorIdWithPendingBooks(int lessorId);
+
+	//Returns every audit of a given property
+	@Query("select a from Audit a where a.property.id =?1 and a.draftMode=true")
+	public List<Audit> findAuditsByProperty(int id);
 
 }

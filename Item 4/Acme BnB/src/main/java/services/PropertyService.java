@@ -119,5 +119,11 @@ public class PropertyService {
 		//Dashboard-16
 		return propertyRepository.findPropertiesByLessorIdWithPendingBooks(lessor.getId());
 	}
+	
+	
+	public List<Audit> findAuditsByProperty(Property	property) {
+		
+		return propertyRepository.findAuditsByProperty(property.getId());
+	}
 
 }
