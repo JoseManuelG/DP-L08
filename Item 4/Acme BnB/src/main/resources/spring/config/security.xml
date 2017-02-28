@@ -56,7 +56,7 @@
 		<security:intercept-url pattern="/property/view.do" access="permitAll" />
 		
 		
-		<security:intercept-url pattern="/audit/view.do" access="permitAll" />
+		
 		
 		<security:intercept-url pattern="/attachment/view.do" access="permitAll" />
 		
@@ -67,6 +67,7 @@
 		<security:intercept-url pattern="/socialIdentity/create.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/socialIdentity/edit.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/security/edit.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/audit/view.do" access="isAuthenticated()" />
 		
 	<!-- ADMINISTRATOR -->
 	
