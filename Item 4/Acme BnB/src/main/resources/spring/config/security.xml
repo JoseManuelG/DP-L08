@@ -51,7 +51,6 @@
 		
 		
 		<security:intercept-url pattern="/lessor/list.do" access="permitAll" />
-		<security:intercept-url pattern="/lessor/view.do" access="permitAll" />
 		
 		<security:intercept-url pattern="/property/list.do" access="permitAll" />
 		<security:intercept-url pattern="/property/view.do" access="permitAll" />
@@ -83,6 +82,7 @@
 		<security:intercept-url pattern="/book/lessor/list.do" access="hasRole('LESSOR')" />
 		<security:intercept-url pattern="/lessor/edit.do" access="hasRole('LESSOR')" />
 		<security:intercept-url pattern="/lessor/myProfile.do" access="hasRole('LESSOR')" />
+		<security:intercept-url pattern="/lessor/view.do" access="isAuthenticated()" />
 		<security:intercept-url pattern="/lessor/fee.do" access="hasRole('LESSOR')" />
 		<security:intercept-url pattern="/property/lessor/myProperties.do" access="hasRole('LESSOR')" />
 		<security:intercept-url pattern="/property/lessor/create.do" access="hasRole('LESSOR')" />
@@ -100,7 +100,7 @@
 		<security:intercept-url pattern="/book/tenant/book.do" access="hasRole('TENANT')" />
 		<security:intercept-url pattern="/book/tenant/requestInvoice.do" access="hasRole('TENANT')" />
 		<security:intercept-url pattern="/finder/tenant/finder.do" access="hasRole('TENANT')" />
-		<security:intercept-url pattern="/invoice/tenant/view.do" access="hasRole('TENANT')" />
+		<security:intercept-url pattern="/invoice/tenant/view.do" access="isAuthenticated()" />
 		<security:intercept-url pattern="/tenant/view.do" access="hasRole('TENANT')" />
 		<security:intercept-url pattern="/tenant/myProfile.do" access="hasRole('TENANT')" />
 		
@@ -109,7 +109,7 @@
 	<!-- AUDITOR -->
 	
 		<security:intercept-url pattern="/auditor/administrator/registerAuditor.do" access="hasRole('ADMINISTRATOR')" />
-		<security:intercept-url pattern="/auditor/view.do" access="hasRole('AUDITOR')" />
+		<security:intercept-url pattern="/auditor/view.do" access="isAuthenticated()" />
 		<security:intercept-url pattern="/auditor/myProfile.do" access="hasRole('AUDITOR')" />
 		<security:intercept-url pattern="/auditor/edit.do" access="hasAnyRole('AUDITOR','ADMINISTRATOR')" />
 	
