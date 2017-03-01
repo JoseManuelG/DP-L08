@@ -26,6 +26,6 @@
 			<spring:message code="master.page.cookies.header" /><br/>
 			<spring:message code="master.page.cookies.body1"/>
 			<a href="law/terms-conditions.do#cookies-policy"><spring:message code="master.page.cookies.bodylink"/></a><spring:message code="master.page.cookies.body2"/>&nbsp;
-			<a href="#" onclick="acceptCookies()"><spring:message code="master.page.cookies.accept" /></a>
+			<p class="link" onclick="acceptCookies()"><spring:message code="master.page.cookies.accept" /></p>
 		</div>
 </jstl:if>
