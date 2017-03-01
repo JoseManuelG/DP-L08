@@ -35,7 +35,7 @@
 	
 	<acme:column sorteable="false" code="audit.attachment.url" path="url"/>
 	
-	<jstl:if test="${ esMiAudit}">
+	<jstl:if test="${ esMiAudit && audit.draftMode}">
 		<display:column>
 			<a href="attachment/auditor/edit.do?attachmentId=${attachment.id}">
 				<spring:message	code="audit.attachment.edit" />
@@ -43,13 +43,14 @@
 	
 		</display:column>
 			</jstl:if>	
+				
 </display:table>
 
-<jstl:if test="${ esMiAudit}">
+<jstl:if test="${ esMiAudit && audit.draftMode}">
 				<a href="attachment/auditor/create.do?auditId=${audit.id}">
 				<spring:message	code="audit.attachment.create" />
 				</a>
-</jstl:if>
+	</jstl:if>
 <br/>
 
 
