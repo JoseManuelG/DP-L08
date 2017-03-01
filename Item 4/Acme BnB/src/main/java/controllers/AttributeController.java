@@ -18,6 +18,7 @@ import security.Authority;
 import security.LoginService;
 import services.ActorService;
 import services.AttributeService;
+import services.AttributeValueService;
 import domain.Attribute;
 
 @Controller
@@ -26,7 +27,8 @@ public class AttributeController extends AbstractController {
 
 	@Autowired
 	AttributeService attributeService ;
-
+	@Autowired
+	AttributeValueService attributeValueService ;
 	@Autowired
 	LoginService loginService;
 
@@ -110,10 +112,14 @@ public class AttributeController extends AbstractController {
 				result =this.list();
 				
 		} catch (Throwable oops) {
+			if(attributeValueService.findAttributeValuesForAttribute(attribute).isEmpty()){
 			result = createEditModelAndView(attribute, "attribute.commit.error");	
+			}else{
+				result = createEditModelAndView(attribute, "attribute.use.error");	
+					
 			}
 			
-	
+		}
 			return result;
 	}
 

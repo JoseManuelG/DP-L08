@@ -99,5 +99,5 @@
 
 	</display:table>
 		<a href="comment/customer/create.do?customerId=${tenant.id }">
-	      <spring:message  code="socialIdentity.create" />
+	      <spring:message  code="comment.create" />
 	</a>

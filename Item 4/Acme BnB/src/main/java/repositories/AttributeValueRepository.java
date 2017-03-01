@@ -14,5 +14,8 @@ public interface AttributeValueRepository extends JpaRepository<AttributeValue, 
 	//Find all the attribute values for a given property 
 	@Query("select p.attributeValues from Property p where p.id=?1")
 	public Collection<AttributeValue> findAttributeValuesForPropertyId(int propertyId);
+	//Find all the attribute values for a given property 
+	@Query("select p from AttributeValue p where attribute_id=?1")
+	public Collection<AttributeValue> findAttributeValuesForAttributeId(int attributeId);
 
 }

@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 
 import repositories.AttributeValueRepository;
 import domain.Actor;
+import domain.Attribute;
 import domain.AttributeValue;
 import domain.Property;
 
@@ -92,6 +93,11 @@ public class AttributeValueService {
 	// Other bussiness methods ----------------------------------------------------------------------------------------
 	public Collection<AttributeValue> findAttributeValuesForProperty(Property property) {
 		Collection<AttributeValue> result = attributeValueRepository.findAttributeValuesForPropertyId(property.getId());
+		return result;
+	}
+	
+	public Collection<AttributeValue> findAttributeValuesForAttribute(Attribute attribute) {
+		Collection<AttributeValue> result = attributeValueRepository.findAttributeValuesForAttributeId(attribute.getId());
 		return result;
 	}
 
