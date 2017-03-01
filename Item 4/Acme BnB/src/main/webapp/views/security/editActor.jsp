@@ -40,6 +40,6 @@
 	
 	<acme:submit code="security.register.delete" name="delete"/>
 	
-	<acme:cancel url="javascript:window.location.href=''" code="security.register.cancel"/>
+	<acme:cancel url="" code="security.register.cancel"/>
 	
 </form:form>

@@ -26,6 +26,6 @@
 	<jstl:if test="${attribute.id ne 0}">
 		<acme:submit name="delete" code="attribute.delete"/>
 	</jstl:if>
-	<acme:cancel url="javascript:window.location.href='attribute/administrator/list.do'" code="attribute.cancel"/>
+	<acme:cancel url="attribute/administrator/list.do" code="attribute.cancel"/>
 	<br>
 </form:form>

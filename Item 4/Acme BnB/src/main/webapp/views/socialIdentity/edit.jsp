@@ -31,6 +31,6 @@
 	<jstl:if test="${socialIdentity.id ne 0}">
 		<acme:submit name="delete" code="socialIdentity.delete"/>
 	</jstl:if>
-	<acme:cancel url="javascript:window.location.href='${typeActor}/view.do'" code="socialIdentity.cancel"/>
+	<acme:cancel url='${typeActor}/myProfile.do' code="socialIdentity.cancel"/>
 	<br>
 </form:form>

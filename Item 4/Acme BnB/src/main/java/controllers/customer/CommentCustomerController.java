@@ -19,6 +19,7 @@ import repositories.ComentableRepository;
 import security.Authority;
 import services.ActorService;
 import services.CommentService;
+import services.CustomerService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Comentable;
@@ -48,7 +49,7 @@ public class CommentCustomerController extends AbstractController {
 	// Create --------------------------------------------------------------------
 		@RequestMapping(value = "/customer/create", method = RequestMethod.GET)
 		public ModelAndView create(@RequestParam int customerId) {
-			Collection<Comentable> recipient2 =  comentableRepository.findAll();
+			 comentableRepository.findAll();
 			Comentable recipient =  comentableRepository.findOne(customerId);
 			Customer sender= (Customer) actorService.findByPrincipal();
 			ModelAndView result;
@@ -60,6 +61,20 @@ public class CommentCustomerController extends AbstractController {
 			Date currentMoment = new Date(System.currentTimeMillis() -10000 );
 			comment.setPostMoment(currentMoment);
 			result = createEditModelAndView(comment);
+			
+			if(sender.getId()==recipient.getId()){
+				Actor actor =actorService.findOne(recipient.getId());	
+				ArrayList<Authority> authorities= new ArrayList<Authority>();
+				authorities.addAll(actor.getUserAccount().getAuthorities());
+				String requestURI = authorities.get(0).getAuthority().toLowerCase()+"/myProfile.do";
+				result.addObject("requestURI",requestURI);
+			}else{
+				Actor actor =actorService.findOne(recipient.getId());	
+				ArrayList<Authority> authorities= new ArrayList<Authority>();
+				authorities.addAll(actor.getUserAccount().getAuthorities());
+				String requestURI = authorities.get(0).getAuthority().toLowerCase()+"/view.do?"+authorities.get(0).getAuthority().toLowerCase()+"Id="+recipient.getId();
+				result.addObject("requestURI",requestURI);
+			}
 			return result;
 			
 		}

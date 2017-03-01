@@ -28,6 +28,7 @@
 		
 	<acme:submit name="save" code="comment.save"/>
 	
-	<acme:cancel url="javascript:window.location.href='/welcome/index.do'" code="comment.cancel"/>
+	<acme:cancel url='${requestURI}' code="comment.cancel"/>
+	
 	<br>
 </form:form>
