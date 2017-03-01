@@ -54,7 +54,6 @@ public class Lessor extends Customer {
 	@NotNull
 	@Valid
 	@OneToMany(mappedBy = "lessor")
-	@Cascade(CascadeType.ALL)
 	public Collection<Property> getLessorProperties() {
 		return lessorProperties;
 	}

@@ -88,7 +88,7 @@ public class Invoice extends DomainEntity {
 
 	@Valid
 	@NotNull
-	@ManyToOne
+	@ManyToOne(optional = true)
 	public Tenant getTenant() {
 		return tenant;
 	}

@@ -150,7 +150,11 @@ public class LessorService {
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		UserAccount userAccount = new UserAccount();
 		userAccount.setUsername(actorForm.getUserAccount().getUsername());
-		userAccount.setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
+		if (actorForm.getUserAccount().getPassword().isEmpty()) {
+			userAccount.setPassword(actorForm.getUserAccount().getPassword());
+		} else {
+			userAccount.setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
+		}
 		Collection<Authority> authorities = new ArrayList<Authority>();
 		Authority authority = new Authority();
 		authority.setAuthority(actorForm.getTypeOfActor());

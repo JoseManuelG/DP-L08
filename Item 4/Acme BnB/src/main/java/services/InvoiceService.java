@@ -47,11 +47,8 @@ public class InvoiceService {
 		Assert.isTrue(book.getState().equals("ACCEPTED"), "invoice.unaccepted.error");
 		maskedNumber = creditCardService.getMaskedCreditCardAsString(book.getCreditCard());
 		tenant = book.getTenant();
-		details = "Checkin: " + book.getCheckInDate() + "<br/>" 
-				+ "Checkout: " + book.getCheckOutDate() + "<br/>" 
-				+ "Address: " + book.getPropertyAddress() + "<br/>" 
-				+ "Credit Card: " + maskedNumber + "<br/>" 
-				+ "Amount: " + book.getTotalAmount() + "&euro;<br/>";
+		details = "Checkin: " + book.getCheckInDate() + "<br/>" + "Checkout: " + book.getCheckOutDate() + "<br/>" + "Address: " + book.getPropertyAddress() + "<br/>" + "Credit Card: " + maskedNumber + "<br/>" + "Amount: " + book.getTotalAmount()
+			+ "&euro;<br/>";
 		if (book.getSmoker()) {
 			details += "Smoker <br/>";
 		} else {
@@ -106,6 +103,9 @@ public class InvoiceService {
 		Assert.isTrue(invoiceRepository.exists(invoice.getId()), "invoice.error.exists");
 
 		invoiceRepository.delete(invoice);
+	}
+	public void deleteAll(Tenant tenant) {
+		invoiceRepository.delete(tenant.getInvoices());
 	}
 
 	// Other business methods --------------------------------------
