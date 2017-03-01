@@ -102,9 +102,6 @@ public class AuditAuditorController extends AbstractController {
 			ModelAndView result;
 			Audit audit = auditService.findOne(auditId);
 			
-			Date currentMoment = new Date(System.currentTimeMillis() - 100  );
-			
-			audit.setWritingMoment(currentMoment);
 			
 			result = createEditModelAndView(audit);
 			return result;
@@ -118,8 +115,7 @@ public class AuditAuditorController extends AbstractController {
 				result = createEditModelAndView(audit);
 			} else {
 				try {
-										
-					audit.setDraftMode(false);
+					audit.getProperty().getAudits().remove(auditService.findOne(audit.getId()));
 					auditService.save(audit);		
 					result = new ModelAndView("redirect:../auditor/auditorlist.do");
 				} catch (Throwable oops) {
@@ -138,9 +134,8 @@ public class AuditAuditorController extends AbstractController {
 				result = createEditModelAndView(audit);
 			} else {
 				try {
-					
-					audit.setDraftMode(true);
-					auditService.save(audit);		
+					audit.getProperty().getAudits().remove(auditService.findOne(audit.getId()));
+					auditService.saveDraft(audit);		
 					result = new ModelAndView("redirect:../auditor/auditorlist.do");
 				} catch (Throwable oops) {
 					result = createEditModelAndView(audit, "audit.commit.error");				
@@ -155,7 +150,7 @@ public class AuditAuditorController extends AbstractController {
 		public ModelAndView delete(Audit audit, BindingResult binding) {
 			ModelAndView result;
 
-			try {			
+			try {
 				auditService.delete(audit);
 				result = new ModelAndView("redirect:../auditor/auditorlist.do");
 			} catch (Throwable oops) {

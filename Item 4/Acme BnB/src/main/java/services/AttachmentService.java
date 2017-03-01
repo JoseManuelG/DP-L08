@@ -56,16 +56,22 @@ public class AttachmentService {
 		return result;
 	}
 
+	@SuppressWarnings("static-access")
 	public Attachment save(Attachment attachment) {
-		Assert.notNull(attachment, "El attachment no puede ser nulo");
 		Attachment result;
+		
+		Assert.notNull(attachment, "El attachment no puede ser nulo");
+		Assert.isTrue(loginService.getPrincipal().equals(attachment.getAudit().getAuditor().getUserAccount()));
+		Assert.isTrue(attachment.getAudit().getDraftMode());
 		result = attachmentRepository.save(attachment);
 		return result;
 	}
+	
 	@SuppressWarnings("static-access")
 	public void delete(Attachment attachment) {
 		Assert.notNull(attachment, "El attachment no puede ser nulo");
 		Assert.isTrue(attachment.getId() != 0, "El attachment debe estar antes en la base de datos");
+		Assert.isTrue(attachment.getAudit().getDraftMode());
 		attachmentRepository.exists(attachment.getId());
 		Assert.isTrue(loginService.getPrincipal().equals(attachment.getAudit().getAuditor().getUserAccount()));
 

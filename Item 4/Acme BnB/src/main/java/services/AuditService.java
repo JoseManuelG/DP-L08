@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.AuditRepository;
-import security.LoginService;
+import domain.Actor;
 import domain.Audit;
 import domain.Auditor;
 import domain.Property;
@@ -28,7 +28,7 @@ public class AuditService {
 	// Supporting Services ------------------------------------------------------------
 
 	@Autowired
-	private LoginService	loginService;
+	private ActorService	actorService;
 
 
 	// Constructor --------------------------------------------------------------------
@@ -59,23 +59,48 @@ public class AuditService {
 	}
 
 	public Audit save(Audit audit) {
-		Assert.notNull(audit, "El audit no puede ser nulo");
 		Audit result;
 
+		Assert.notNull(audit, "El audit no puede ser nulo");
+		Assert.isTrue(actorService.findByPrincipal().equals((Actor)audit.getAuditor()));
+		if(audit.getId()!=0){
+			Assert.isTrue(audit.getDraftMode());
+		}
+		
 		Date currentTime = new Date(System.currentTimeMillis() - 100);
 		audit.setWritingMoment(currentTime);
+		audit.setDraftMode(false);
+		audit.getProperty().getAudits().remove(findOne(audit.getId()));
+		
+		result = auditRepository.save(audit);
+		return result;
+	}
+	
+	public Audit saveDraft(Audit audit) {
+		Audit result;
+		
+		Assert.notNull(audit, "El audit no puede ser nulo");
+		Assert.isTrue(actorService.findByPrincipal().equals((Actor)audit.getAuditor()));
+		if(audit.getId()!=0){
+			Assert.isTrue(audit.getDraftMode());
+		}
+		
+		Date currentTime = new Date(System.currentTimeMillis() - 100);
+		audit.setWritingMoment(currentTime);
+		audit.setDraftMode(true);
+		audit.getProperty().getAudits().remove(findOne(audit.getId()));
 		
 		result = auditRepository.save(audit);
 		return result;
 	}
 
-	@SuppressWarnings("static-access")
 	public void delete(Audit audit) {
 		Assert.notNull(audit, "El audit no puede ser nulo");
 		Assert.isTrue(audit.getId() != 0, "El audit debe estar antes en la base de datos");
+		Assert.isTrue(audit.getDraftMode());
 		auditRepository.exists(audit.getId());
-		Assert.isTrue(loginService.getPrincipal().equals(audit.getAuditor().getUserAccount()));
-
+		Assert.isTrue(actorService.findByPrincipal().equals((Actor)audit.getAuditor()));
+		audit.getProperty().getAudits().remove(findOne(audit.getId()));
 		auditRepository.delete(audit);
 
 	}
@@ -121,5 +146,7 @@ public class AuditService {
 		//Dashboard-21
 		return auditRepository.getMaximumAuditsPerProperty();
 	}
+
+	
 
 }

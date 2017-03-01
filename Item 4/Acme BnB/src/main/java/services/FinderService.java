@@ -38,10 +38,7 @@ public class FinderService {
 		result.setDestination("Spain");
 		result.setCacheMoment(oneHourAgo);
 		result.setResults(new ArrayList<Property>());
-		//Para validarlo a comentar----------------------
 		result.setKeyword("");
-		result.setMaxPrice(0.);
-		result.setMinPrice(0.);
 
 		return result;
 	}
@@ -81,7 +78,7 @@ public class FinderService {
 
 		result = finder;
 
-		if (lastSearch.before(oneHourAgo) || !(finder.getDestination().equals(old.getDestination()) && finder.getKeyword().equals(old.getKeyword()) && finder.getMaxPrice() == old.getMaxPrice() && finder.getMinPrice() == old.getMinPrice())) {
+		if (lastSearch.before(oneHourAgo) || !(finder.getDestination().equals(old.getDestination()) && finder.getKeyword().equals(old.getKeyword()) && finder.getMaxPrice().equals(old.getMaxPrice()) && finder.getMinPrice().equals(old.getMinPrice()))) {
 			result.setCacheMoment(new Date(System.currentTimeMillis() - 100));
 			if (result.getMinPrice() == null) {
 				min = 0.0;

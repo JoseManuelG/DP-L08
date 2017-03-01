@@ -33,6 +33,6 @@
 		<acme:submit name="delete" code="audit.delete"/>
 		
 	</jstl:if>
-	<acme:cancel url="property/view.do?propertyId=${audit.property.id }" code="audit.cancel"/>
+	<acme:cancel url="audit/auditor/auditorlist.do" code="audit.cancel"/>
 	<br>
 </form:form>
