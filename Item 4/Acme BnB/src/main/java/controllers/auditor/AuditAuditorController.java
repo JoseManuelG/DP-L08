@@ -118,11 +118,7 @@ public class AuditAuditorController extends AbstractController {
 				result = createEditModelAndView(audit);
 			} else {
 				try {
-					
-					Date currentMoment = new Date(System.currentTimeMillis() - 100  );
-					
-					audit.setWritingMoment(currentMoment);
-					
+										
 					audit.setDraftMode(false);
 					auditService.save(audit);		
 					result = new ModelAndView("redirect:../auditor/auditorlist.do");
@@ -142,9 +138,6 @@ public class AuditAuditorController extends AbstractController {
 				result = createEditModelAndView(audit);
 			} else {
 				try {
-					Date currentMoment = new Date(System.currentTimeMillis() -60001  );
-					
-					audit.setWritingMoment(currentMoment);
 					
 					audit.setDraftMode(true);
 					auditService.save(audit);		

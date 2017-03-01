@@ -108,7 +108,9 @@ public class Property extends DomainEntity {
 
 	@NotNull
 	@Valid
-	@OneToMany(mappedBy = "property")
+	@OneToMany(mappedBy = "property", cascade= {
+			CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE
+		})
 	public Collection<Audit> getAudits() {
 		return audits;
 	}

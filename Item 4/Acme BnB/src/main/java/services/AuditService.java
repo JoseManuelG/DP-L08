@@ -59,12 +59,11 @@ public class AuditService {
 	}
 
 	public Audit save(Audit audit) {
-		Assert.notNull(audit, "La tarjeta de crédito no puede ser nula");
+		Assert.notNull(audit, "El audit no puede ser nulo");
 		Audit result;
-		if (audit.getId() == 0) {
-			Date currentTime = new Date(System.currentTimeMillis() - 100);
-			audit.setWritingMoment(currentTime);
-		}
+
+		Date currentTime = new Date(System.currentTimeMillis() - 100);
+		audit.setWritingMoment(currentTime);
 		
 		result = auditRepository.save(audit);
 		return result;
