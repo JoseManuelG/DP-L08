@@ -3,16 +3,16 @@
 ->Poner restricciones de html para que en campos de numeros solo entren numero y asi se quita el error de pete por mal convertidor.
 
 ->Añadir a la vista de property/list el mensaje correspondiente arriba si se trata de una dashboard y boton para volver a la lista de lessors si es dashboard
-->Cancel de crearSocialIdentity(solucionado)
+->Cancel de crearSocialIdentity(ARREGLADO)
 ->cancel de editarPerfilTenant
 -Delete de Tenant No funciona
-->Comentar en Tenant
+->Comentar en Tenant(ARREGLADO)
 ->Edit de property no funciona, el cancel tampoco
 -> Registrar property tampoco funciona
 -> Property no funciona el delete
 ->CreditCard de lessor peudo poner una caducada.
 ->Nombre de auditors en ver una propiedad (la tabla audits)
-->Traduccion de crear un commment en perfil lessor español
+->Traduccion de crear un commment en perfil lessor español(ARREGLADO)
 ->Restriccion de negocio de No poder aceptar o denegar books si no tienes tarjeta de credito el lessor
 ->El checkBox de registro no funciona
 ->No hay boton en el menu para ver los audits
@@ -24,6 +24,6 @@
 ->No ni guardar ni borrar ningun tipo de audit ya sea publico o no, que ya esté creado
 ->Texto de crear Audits, que ponga "Crear Audits" no solo "Crear"
 ->No Poder modificar archivos adjuntos una vez es publico el audit
-->Attributes de admin, poner el mensaje de no se ha podido borrar porque el attributo se está usando
-->Boton Attributos del menu, en ingles que esté en ingles
+->Attributes de admin, poner el mensaje de no se ha podido borrar porque el attributo se está usando(ARREGLADO)
+->Boton Attributos del menu, en ingles que esté en ingles(ARREGLADO)
 ->Registrar audits en español el titulo está en español
