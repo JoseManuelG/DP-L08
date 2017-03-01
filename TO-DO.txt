@@ -9,13 +9,6 @@
 ->CreditCard de lessor peudo poner una caducada.
 ->Restriccion de negocio de No poder aceptar o denegar books si no tienes tarjeta de credito el lessor
 ->El checkBox de registro no funciona
-->No hay boton en el menu para ver los audits
-->botones de editar en audits publicos
-->btones de modificar los archivosAdjuntos de un audit public
-->No puedo guardar como un borrador ningun tipo de audit ya creado
-->No ni guardar ni borrar ningun tipo de audit ya sea publico o no, que ya esté creado
-->Texto de crear Audits, que ponga "Crear Audits" no solo "Crear"
-->No Poder modificar archivos adjuntos una vez es publico el audit
 ->Registrar audits en español el titulo está en español
 -> Problemas con el view de lessor
 
@@ -30,4 +23,10 @@
 ->Quitar el boton de crear audits en al lista de audits(ARREGLADO)
 ->Attributes de admin, poner el mensaje de no se ha podido borrar porque el attributo se está usando(ARREGLADO)
 ->Boton Attributos del menu, en ingles que esté en ingles(ARREGLADO)
-
+->No hay boton en el menu para ver los audits (ARREGLADO)
+->botones de editar en audits publicos (ARREGLADO)
+->btones de modificar los archivosAdjuntos de un audit public (ARREGLADO)
+->No puedo guardar como un borrador ningun tipo de audit ya creado (ARREGLADO)
+->No ni guardar ni borrar ningun tipo de audit ya sea publico o no, que ya esté creado (ARREGLADO)
+->Texto de crear Audits, que ponga "Crear Audits" no solo "Crear" (ARREGLADO)
+->No Poder modificar archivos adjuntos una vez es publico el audit (ARREGLADO)
