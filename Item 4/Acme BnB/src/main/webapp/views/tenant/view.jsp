@@ -98,6 +98,8 @@
 
 
 	</display:table>
+	<jstl:if test="${puedoComentar}">
 		<a href="comment/customer/create.do?customerId=${tenant.id }">
 	      <spring:message  code="comment.create" />
 	</a>
+	</jstl:if>

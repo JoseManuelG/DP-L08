@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CommentService;
+import services.CustomerService;
 import services.LessorService;
+import domain.Comentable;
+import domain.Comment;
 import domain.Lessor;
 
 @Controller
@@ -18,6 +21,9 @@ public class LessorController extends AbstractController {
 
 	@Autowired
 	private LessorService lessorService;
+	@Autowired
+	private CustomerService customerService;
+	
 	
 	@Autowired
 	private CommentService commentService;
@@ -49,6 +55,7 @@ public class LessorController extends AbstractController {
 		result.addObject("socialIdentities",lessor.getSocialIdentities());
 		result.addObject("requestURI","lessor/myProfile.do");
 		result.addObject("esMiPerfil",true);
+		result.addObject("puedoComentar",true);
 		return result;
 	}
 	
@@ -58,16 +65,24 @@ public class LessorController extends AbstractController {
 		result = new ModelAndView("lessor/view");
 		
 		
-		
+		boolean puedoComentar = false;
 		Lessor lessor  =  lessorService.findOne(lessorId);
-
-		
+		try{
+		Comment comment= commentService.create();
+		comment.setRecipient((Comentable) lessor);
+		comment.setSender(customerService.findActorByPrincial());
+		puedoComentar=commentService.validComment(comment);
+		}catch (Throwable oops) {
+			puedoComentar=false;
+		}
 		result.addObject("lessor", lessor);
 		result.addObject("properties", lessor.getLessorProperties());
 		result.addObject("comments", commentService.findAllCommentsOfACustomer(lessor));
 		result.addObject("requestURI","lessor/view.do");
 		result.addObject("socialIdentities",lessor.getSocialIdentities());
 		result.addObject("esMiPerfil",false);
+		result.addObject("puedoComentar",puedoComentar);
+
 		return result;
 	}
 

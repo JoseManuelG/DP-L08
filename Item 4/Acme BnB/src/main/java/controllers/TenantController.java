@@ -15,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import services.CommentService;
 import services.CustomerService;
 import services.TenantService;
+import domain.Comentable;
+import domain.Comment;
 import domain.Customer;
 import domain.Tenant;
 
@@ -52,6 +54,9 @@ public class TenantController extends AbstractController {
 		result.addObject("socialIdentities", tenant.getSocialIdentities());
 		result.addObject("requestURI", "tenant/myProfile.do");
 		result.addObject("esMiPerfil", true);
+		//Bloque de botoneria de comentario Hecho por roldan -->
+		result.addObject("puedoComentar",true);
+		//<---
 		return result;
 	}
 
@@ -59,14 +64,26 @@ public class TenantController extends AbstractController {
 	public ModelAndView view(int tenantId) {
 		ModelAndView result;
 		result = new ModelAndView("tenant/view");
-
+		boolean puedoComentar = false;
 		Tenant tenant = tenantService.findOne(tenantId);
-
+		
+		//Bloque de botoneria de comentario Hecho por roldan -->
+		try{
+			Comment comment= commentService.create();
+			comment.setRecipient((Comentable) tenant);
+			comment.setSender(customerService.findActorByPrincial());
+			puedoComentar=commentService.validComment(comment);
+			}catch (Throwable oops) {
+				puedoComentar=false;
+			}
+		result.addObject("puedoComentar",puedoComentar);
+		//<--
 		result.addObject("tenant", tenant);
 		result.addObject("comments", commentService.findAllCommentsOfACustomer((Customer) tenant));
 		result.addObject("requestURI", "tenant/view.do");
 		result.addObject("socialIdentities", tenant.getSocialIdentities());
 		result.addObject("esMiPerfil", false);
+
 		return result;
 	}
 
