@@ -65,7 +65,7 @@ public class AuditService {
 			Date currentTime = new Date(System.currentTimeMillis() - 100);
 			audit.setWritingMoment(currentTime);
 		}
-
+		
 		result = auditRepository.save(audit);
 		return result;
 	}

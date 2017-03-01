@@ -67,6 +67,7 @@
 						</security:authorize>	
 					<security:authorize access="hasRole('AUDITOR')">
 						<li><a href="auditor/myProfile.do"><spring:message code="master.page.lessor.myProfile" /></a></li>
+						<li><a href="audit/auditor/auditorlist.do"><spring:message code="master.page.lessor.myAudits" /></a></li>
 					</security:authorize>	
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>

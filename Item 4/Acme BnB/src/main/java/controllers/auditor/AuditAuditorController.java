@@ -79,7 +79,7 @@ public class AuditAuditorController extends AbstractController {
 			if(auditService.checkUnique(propertyService.findOne(propertyId), auditor)){
 				
 				audit = auditService.create();
-				audit.setDraftMode(false);
+				audit.setDraftMode(true);
 				
 				Property property = propertyService.findOne(propertyId);
 				audit.setProperty(property);
@@ -123,7 +123,7 @@ public class AuditAuditorController extends AbstractController {
 					
 					audit.setWritingMoment(currentMoment);
 					
-					audit.setDraftMode(true);
+					audit.setDraftMode(false);
 					auditService.save(audit);		
 					result = new ModelAndView("redirect:../auditor/auditorlist.do");
 				} catch (Throwable oops) {
@@ -146,7 +146,7 @@ public class AuditAuditorController extends AbstractController {
 					
 					audit.setWritingMoment(currentMoment);
 					
-					audit.setDraftMode(false);
+					audit.setDraftMode(true);
 					auditService.save(audit);		
 					result = new ModelAndView("redirect:../auditor/auditorlist.do");
 				} catch (Throwable oops) {
@@ -182,7 +182,7 @@ public class AuditAuditorController extends AbstractController {
 			boolean esMiAudit=false;
 			Collection<Attachment> attachments = audit.getAttachments();
 			Actor actor = actorService.findByPrincipal();
-			if(actor.equals(audit.getAuditor())){
+			if(actor.equals((Actor)audit.getAuditor())){
 				esMiAudit = true;	
 			}
 			result.addObject("esMiAudit", esMiAudit);

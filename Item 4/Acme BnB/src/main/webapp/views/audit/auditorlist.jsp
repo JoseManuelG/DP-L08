@@ -17,15 +17,18 @@
 	
 	<!-- Action links -->
 
-	<security:authorize access="hasRole('AUDITOR')">
-		<display:column>
-			<a href="audit/auditor/edit.do?auditId=${row.id}">
-				<spring:message	code="audit.edit" />
-			</a>
+	
+		<spring:message code="audit.edit.audit" var="editHeader" />
+		<display:column title="${editHeader}">
+			<jstl:if test="${row.draftMode }">
+				<a href="audit/auditor/edit.do?auditId=${row.id}">
+					<spring:message	code="audit.edit" />
+				</a>				
+			</jstl:if>
 		</display:column>
-		</security:authorize>
 		
-		<display:column>
+		<spring:message code="audit.view.audit" var="viewHeader" />
+			<display:column title="${viewHeader}">
 			<a href="audit/view.do?auditId=${row.id}">
 				<spring:message	code="audit.view" />
 			</a>
@@ -35,10 +38,9 @@
 	
 	<spring:message code="audit.text" var="text" />
 	<display:column property="text" title="${text}" sortable="false" />
+	<spring:message code="audit.draftMode" var="draftMode" />
 	<display:column property="draftMode" title="${draftMode}" sortable="true" />
 
 </display:table>
 
-<a href="audit/auditor/create.do">
-	<spring:message	code="audit.create" />
-</a>
+

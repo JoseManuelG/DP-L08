@@ -56,7 +56,8 @@
 		
 		<!-- Action links -->
 		
-		<display:column>
+		<spring:message code="property.view.audit" var="auditHeader" />
+			<display:column title="${auditHeader}">
 			<a href="audit/view.do?auditId=${row.id}">
 				<spring:message	code="audit.view" />
 			</a>
@@ -67,7 +68,9 @@
 		
 		<acme:column sorteable="false" code="audit.text" path="text"/>
 		
-		<acme:column sorteable="false" code="audit.auditor" path="auditor"/>
+		<acme:column sorteable="false" code="audit.auditor.name" path="auditor.name"/>
+		
+		<acme:column sorteable="false" code="audit.auditor.companyName" path="auditor.companyName"/>
 		
 	</display:table>
 
