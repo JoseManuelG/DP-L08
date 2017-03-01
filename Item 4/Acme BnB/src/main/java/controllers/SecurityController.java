@@ -14,6 +14,7 @@ import security.Authority;
 import services.ActorService;
 import services.AdministratorService;
 import services.AuditorService;
+import services.InvoiceService;
 import services.LessorService;
 import services.TenantService;
 import domain.Actor;
@@ -37,6 +38,8 @@ public class SecurityController extends AbstractController {
 	AdministratorService	administratorService;
 	@Autowired
 	AuditorService			auditorService;
+	@Autowired
+	InvoiceService			invoiceService;
 
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -61,8 +64,11 @@ public class SecurityController extends AbstractController {
 		} else if (actorForm.getTypeOfActor().equals("LESSOR")) {
 			lessor = lessorService.reconstruct(actorForm, binding);
 		}
-		if (binding.hasErrors() && actorForm.getAcepted()) {
+		if (binding.hasErrors()) {
 			result = createEditModelAndView(actorForm);
+		} else if (!((boolean) actorForm.getAcepted())) {
+
+			result = createEditModelAndView(actorForm, "security.terms.error");
 		} else {
 			try {
 				if (actorForm.getTypeOfActor().equals("TENANT")) {
@@ -181,6 +187,7 @@ public class SecurityController extends AbstractController {
 		try {
 
 			if (aux.equals("TENANT")) {
+				invoiceService.deleteAll(tenant);
 				tenantService.delete(tenant);
 
 			} else if (aux.equals("LESSOR")) {

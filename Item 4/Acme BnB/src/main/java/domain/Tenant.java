@@ -46,7 +46,7 @@ public class Tenant extends Customer {
 
 	@NotNull
 	@Valid
-	@OneToMany(mappedBy = "tenant")
+	@OneToMany(mappedBy = "tenant", cascade = CascadeType.ALL)
 	public Collection<Invoice> getInvoices() {
 		return invoices;
 	}
