@@ -19,6 +19,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Book;
+import domain.Invoice;
 import domain.Lessor;
 import domain.Tenant;
 import forms.ActorForm;
@@ -38,6 +39,9 @@ public class TenantService {
 	private CustomerService		customerService;
 	@Autowired
 	private FinderService		finderService;
+
+	@Autowired
+	private BookService			bookService;
 
 	@Autowired
 	private Validator			validator;
@@ -86,7 +90,8 @@ public class TenantService {
 		Assert.notNull(tenant, "tenant.error.null");
 
 		Assert.isTrue(tenantRepository.exists(tenant.getId()), "tenant.error.exists");
-
+		
+		bookService.removeTenant(tenant);
 		tenantRepository.delete(tenant);
 	}
 
@@ -187,5 +192,10 @@ public class TenantService {
 		tenants = tenantRepository.getTenantsByAcceptedVersusTotalBooksRatio();
 
 		return tenants.get(tenants.size() - 1);
+	}
+	public void addInvoice(Tenant tenant, Invoice result) {
+		tenant.getInvoices().add(result);
+		tenantRepository.save(tenant);
+
 	}
 }

@@ -266,9 +266,32 @@ public class BookService {
 		}
 		return res;
 	}
-	public void addInvoice(Book book, Invoice invoice) {
+	public Invoice addInvoice(Book book, Invoice invoice) {
+		Book result;
+		
 		book.setInvoice(invoice);
-		bookRepository.save(book);
+		result = bookRepository.save(book);
+		
+		return result.getInvoice();
+	}
+	
+	public void removeTenant(Tenant tenant) {
+		
+		for (Book book : tenant.getBooks()){
+			book.setTenant(null);
+			bookRepository.save(book);
+		}
+		
+	}
+
+	public void removeLessor(Lessor lessor) {
+		
+		for (Book book : lessor.getBooks()){
+			book.setLessor(null);
+			book.setProperty(null);
+			bookRepository.save(book);
+		}
+		
 	}
 
 }

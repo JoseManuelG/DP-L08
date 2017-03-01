@@ -63,9 +63,9 @@ public class InvoiceService {
 		result.setBook(book);
 		result.setDetails(details);
 		result.setInformation(information);
-		result.setTenant(tenant);
-
-		bookService.addInvoice(book, result);
+		
+		result = bookService.addInvoice(book, result);
+		tenantService.addInvoice(tenant,result);
 
 		return result;
 	}
@@ -113,7 +113,7 @@ public class InvoiceService {
 	public void checkOwnerIsPrincipal(Invoice invoice) {
 		Tenant principal, owner;
 
-		owner = invoice.getTenant();
+		owner = invoice.getBook().getTenant();
 		principal = tenantService.findByPrincipal();
 		Assert.isTrue(owner.equals(principal));
 	}

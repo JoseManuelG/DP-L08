@@ -46,6 +46,9 @@ public class LessorService {
 	private CustomerService			customerService;
 
 	@Autowired
+	private BookService				bookService;
+
+	@Autowired
 	private Validator				validator;
 
 
@@ -87,6 +90,8 @@ public class LessorService {
 		Assert.notNull(lessor, "DELETE: El lessor no puede ser null");
 		Assert.isTrue(lessor.getId() != 0, "El lessor debe haber sido guardado");
 		Assert.isTrue(principal.equals(lessor.getUserAccount()), "UserAccount no valido");
+
+		bookService.removeLessor(lessor);
 		lessorRepository.delete(lessor);
 	}
 

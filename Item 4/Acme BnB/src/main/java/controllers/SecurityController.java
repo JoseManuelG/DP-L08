@@ -197,14 +197,14 @@ public class SecurityController extends AbstractController {
 				auditorService.delete(auditor);
 
 			}
+			result = new ModelAndView("redirect:/j_spring_security_logout");
 
 		} catch (Exception e) {
+			aux = aux.toLowerCase();
 			result = new ModelAndView("redirect:../" + aux + "/myProfile.do");
-			result.addObject("lessor.commit.error");
 		}
 
-		aux = aux.toLowerCase();
-		result = new ModelAndView("redirect:../");
+		
 		return result;
 
 	}

@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -12,8 +13,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -53,7 +52,7 @@ public class Lessor extends Customer {
 
 	@NotNull
 	@Valid
-	@OneToMany(mappedBy = "lessor")
+	@OneToMany(mappedBy = "lessor", cascade = CascadeType.REMOVE)
 	public Collection<Property> getLessorProperties() {
 		return lessorProperties;
 	}
@@ -64,8 +63,7 @@ public class Lessor extends Customer {
 
 	@NotNull
 	@Valid
-	@OneToMany(mappedBy = "lessor")
-	@Cascade(CascadeType.REFRESH)
+	@OneToMany(mappedBy = "lessor", cascade = CascadeType.REFRESH)
 	public Collection<Book> getBooks() {
 		return books;
 	}

@@ -52,10 +52,6 @@ public class Book extends DomainEntity {
 		this.propertyAddress = propertyAddress;
 	}
 
-	public void setProperty(Property property) {
-		this.property = property;
-	}
-
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
@@ -142,13 +138,12 @@ public class Book extends DomainEntity {
 		return property;
 	}
 
-	public void setProperties(Property property) {
+	public void setProperty(Property property) {
 		this.property = property;
 	}
 
-	@NotNull
 	@Valid
-	@ManyToOne(optional = true)
+	@ManyToOne
 	public Tenant getTenant() {
 		return tenant;
 	}

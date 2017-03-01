@@ -1420,7 +1420,6 @@
 		<property name="information" value=""/>
 		<property name="details" value=""/>
 		<property name="book" ref=""/>
-		<property name="tenant" ref=""/>
 	</bean>
 	
 	-->
@@ -1431,7 +1430,6 @@
 		<property name="information" value="sample information"/>
 		<property name="details" value="sample details"/>
 		<property name="book" ref="book1Tenant1"/>
-		<property name="tenant" ref="tenant1"/>
 	</bean>
 	
 	<!-- Attachment 
