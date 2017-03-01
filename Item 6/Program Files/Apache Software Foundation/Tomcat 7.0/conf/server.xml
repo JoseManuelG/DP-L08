@@ -86,7 +86,7 @@
            protocol="org.apache.coyote.http11.Http11NioProtocol"
            port="443" maxThreads="200"
            scheme="https" secure="true" SSLEnabled="true"
-           keystoreFile="C:\Documents and Settings\Boss\.keystore" keystorePass="changeit"
+           keystoreFile="C:\Certificados\sample.jks" keystorePass="samplePassword"
            clientAuth="false" sslProtocol="TLS"/>
 
 
