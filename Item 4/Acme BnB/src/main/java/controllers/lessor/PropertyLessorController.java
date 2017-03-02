@@ -3,8 +3,6 @@ package controllers.lessor;
 
 import java.util.Collection;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -94,14 +92,15 @@ public class PropertyLessorController extends AbstractController {
 	public @ResponseBody ModelAndView save(Property property, BindingResult binding) {
 		ModelAndView result;
 		
-		property = propertyService.reconstruct(property, binding);
+		
 		if (binding.hasErrors()) {
 			System.out.println(binding.getAllErrors());
 			result = createEditModelAndView(property);
 		} else {
 			try {
+				property = propertyService.reconstruct(property, binding);
 				propertyService.save(property);
-				result = new ModelAndView("redirect:../list.do");
+				result = new ModelAndView("redirect:../lessor/myProperties.do");
 			} catch (Throwable oops) {
 				result = createEditModelAndView(property, "property.commit.error");
 			}
@@ -120,7 +119,7 @@ public class PropertyLessorController extends AbstractController {
 			Lessor lessor = (Lessor) customerService.findActorByPrincial();
 			property.setLessor(lessor);
 			propertyService.delete(property);
-			result = new ModelAndView("redirect:../list.do");
+			result = new ModelAndView("redirect:../lessor/myProperties.do");
 		} catch (Throwable oops) {
 			result = createEditModelAndView(property, "property.commit.error");
 		}
