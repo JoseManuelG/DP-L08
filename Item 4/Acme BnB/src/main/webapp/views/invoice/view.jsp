@@ -21,9 +21,9 @@
 
 <fieldset>
 	<legend><spring:message code="invoice.tenantInformation"/></legend>
-	<jstl:out value="${invoice.information}"/><br/>
+	<jstl:out value="${invoice.information}"/>
 </fieldset>
 <fieldset>
 	<legend><spring:message code="invoice.bookDetails"/></legend>
-	${invoice.details}
+	<jstl:out value="${invoice.details}"/>
 </fieldset>

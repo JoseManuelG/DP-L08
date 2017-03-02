@@ -1,12 +1,9 @@
 ﻿GENERAL:
 -> Cambiar imagen de logo
-->Poner restricciones de html para que en campos de numeros solo entren numero y asi se quita el error de pete por mal convertidor.
-->b+ tree y @safehtml
 ->Comprobar que cumplimos todas las leyes bien
 ->Acabar terminos y meter tags en plantilla (EN PROGRESO)
-->view de invoice usar <Jstl:out> en la linea 28
 -> Hacer el war y cambiar el create.sql (CREATE ACTUALIZADO)
--> Comprobar en pre-production que peta por tener el populate vacio
+-> Comprobar en pre-production qué peta por tener el populate vacio
 ->Terminar informe de costes
 -> Sincronizar plantilla 1.9 con 1.10 y proyectos 1.9 y 1.10
 -> Organizar controllers segun actor
@@ -20,7 +17,52 @@ PROPERTY:
 
 
 COMMENTS:
--> Cambiar nombres de las relaciones.
+-> Cambiar nombres de las relaciones sender y receipment por customer y commentable.
+
+B+ TREE:
+	Actor
+	Administrator
+	Attachment
+	Attribute
+	AttributeValue
+	Audit
+	Auditor
+	Book
+	Comment
+	Commentable
+	Configuration
+	CreditCard
+	Customer
+	DomainEntity
+	Finder
+	Invoice
+	Lessor
+	Property
+	SocialIdentity
+	Tenant
+
+
+@SAFEHTML:
+	Actor (HECHO)
+	Administrator
+	Attachment
+	Attribute (HECHO)
+	AttributeValue
+	Audit
+	Auditor (HECHO)
+	Book
+	Comment (HECHO)
+	Commentable
+	Configuration
+	CreditCard
+	Customer
+	DomainEntity
+	Finder
+	Invoice
+	Lessor
+	Property
+	SocialIdentity (HECHO)
+	Tenant
 
 EXTRAS:
 -> Internacionalizar errores para que se muestre que regla de negocio ha fallado (como en books)
@@ -60,3 +102,5 @@ EXTRAS:
 ->tag de colum usar <Jstl:out> (NO PROCEDE)
 -> Cambiar nombre clase Comentable a Commentable (ARREGLADO)
 -> Modificar "welcome"(ARREGLADO)
+->view de invoice usar <Jstl:out> en la linea 28 (ARREGLADO)
+->Poner restricciones de html para que en campos de numeros solo entren numero y asi se quita el error de pete por mal convertidor. (AÑADIDO ERROR POR MAL CONVERTIDOR)
