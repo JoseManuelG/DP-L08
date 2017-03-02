@@ -3,11 +3,13 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import repositories.ComentableRepository;
 import repositories.CommentRepository;
 import security.Authority;
 import security.LoginService;
@@ -30,6 +32,8 @@ public class CommentService {
 
 	@Autowired
 	private LoginService		loginService;
+	@Autowired
+	private ComentableRepository comentableRepository;
 	
 	@Autowired
 	private ActorService		actorService;
@@ -98,6 +102,7 @@ public class CommentService {
 	
 	public Collection<Comment> findAllCommentsOfACustomer(Customer customer) {
 		Collection<Comment> comments;
+		
 		comments = commentRepository.findCommentsByCustomerID(customer.getId());
 		return comments;
 	}
