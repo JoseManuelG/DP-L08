@@ -18,6 +18,7 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -30,7 +31,7 @@ public class Comment extends DomainEntity {
 	private int		stars;
 	private Date	postMoment;
 
-
+	@SafeHtml
 	@NotBlank
 	public String getTitle() {
 		return title;
@@ -38,6 +39,7 @@ public class Comment extends DomainEntity {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	@SafeHtml
 	@NotBlank
 	public String getText() {
 		return text;

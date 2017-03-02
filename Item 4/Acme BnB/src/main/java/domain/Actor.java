@@ -15,6 +15,7 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 
 import security.UserAccount;
@@ -31,6 +32,7 @@ public abstract class Actor extends Comentable {
 
 
 	//attributes------------
+	@SafeHtml
 	@NotBlank
 	public String getName() {
 		return name;
@@ -39,7 +41,7 @@ public abstract class Actor extends Comentable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	@SafeHtml
 	@NotBlank
 	public String getSurname() {
 		return surname;
@@ -48,7 +50,7 @@ public abstract class Actor extends Comentable {
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
-
+	@SafeHtml
 	@NotBlank
 	@Email
 	public String getEmail() {
@@ -64,7 +66,7 @@ public abstract class Actor extends Comentable {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
+	@SafeHtml
 	@URL
 	public String getPicture() {
 		return picture;
