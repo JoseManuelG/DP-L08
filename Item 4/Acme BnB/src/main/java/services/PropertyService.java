@@ -11,6 +11,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.PropertyRepository;
 import domain.AttributeValue;
@@ -34,6 +36,10 @@ public class PropertyService {
 	private LessorService		lessorService;
 
 
+	// Validator --------------------------------------------------------------------
+	@Autowired
+	private Validator validator;
+	
 	// Constructor --------------------------------------------------------------------
 
 	public PropertyService() {
@@ -164,6 +170,29 @@ public class PropertyService {
 	public List<Audit> findAuditsByProperty(Property property) {
 
 		return propertyRepository.findAuditsByProperty(property.getId());
+	}
+	
+	public Property reconstruct(Property property, BindingResult bindingResult){
+		Property result;
+		
+		if(property.getId() == 0){
+			int lessorId = lessorService.findByPrincipal().getId();
+			result = this.create(lessorId);
+			result.setName(property.getName());
+			result.setRate(property.getRate());
+			result.setDescription(property.getDescription());
+			result.setAddress(property.getAddress());
+			validator.validate(result, bindingResult);
+		} else{
+			result = propertyRepository.findOne(property.getId());
+			result.setName(property.getName());
+			result.setRate(property.getRate());
+			result.setDescription(property.getDescription());
+			result.setAddress(property.getAddress());
+			validator.validate(result, bindingResult);
+		}
+		return result;
+		
 	}
 
 }

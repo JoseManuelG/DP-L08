@@ -91,9 +91,10 @@ public class PropertyLessorController extends AbstractController {
 	}
 	// Save ---------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public @ResponseBody
-	ModelAndView save(@Valid Property property, BindingResult binding) {
+	public @ResponseBody ModelAndView save(Property property, BindingResult binding) {
 		ModelAndView result;
+		
+		property = propertyService.reconstruct(property, binding);
 		if (binding.hasErrors()) {
 			System.out.println(binding.getAllErrors());
 			result = createEditModelAndView(property);
@@ -116,6 +117,8 @@ public class PropertyLessorController extends AbstractController {
 		ModelAndView result;
 
 		try {
+			Lessor lessor = (Lessor) customerService.findActorByPrincial();
+			property.setLessor(lessor);
 			propertyService.delete(property);
 			result = new ModelAndView("redirect:../list.do");
 		} catch (Throwable oops) {

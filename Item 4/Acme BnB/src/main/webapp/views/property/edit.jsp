@@ -15,11 +15,6 @@
 	
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="attributeValues"/>
-	<form:hidden path="audits"/>
-	<form:hidden path="books"/>
-	<form:hidden path="lessor"/>
-	<br />
 	
 	<acme:textbox code="property.name" path="name"/>
 	<acme:textbox code="property.rate" path="rate"/>
