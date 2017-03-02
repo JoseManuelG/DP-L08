@@ -19,6 +19,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -33,7 +34,7 @@ public class Property extends DomainEntity {
 	private String	address;
 	private Date	lastUpdate;
 
-
+	@SafeHtml
 	@NotBlank
 	public String getName() {
 		return name;
@@ -49,7 +50,8 @@ public class Property extends DomainEntity {
 	public void setRate(double rate) {
 		this.rate = rate;
 	}
-
+	
+	@SafeHtml
 	@NotBlank
 	public String getDescription() {
 		return description;
@@ -58,6 +60,7 @@ public class Property extends DomainEntity {
 		this.description = description;
 	}
 
+	@SafeHtml
 	@NotBlank
 	public String getAddress() {
 		return address;

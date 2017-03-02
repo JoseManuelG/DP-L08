@@ -47,9 +47,9 @@ B+ TREE:
 	AttributeValue
 	Audit
 	Configuration
-	CreditCard
+	CreditCard (HECHO)
 	Finder
-	Property
+	Property (HECHO)
 	Administrator (NO PROCEDE)
 	Commentable (NO PROCEDE)
 	Customer (NO PROCEDE)

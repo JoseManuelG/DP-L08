@@ -92,7 +92,6 @@ public class PropertyLessorController extends AbstractController {
 	public @ResponseBody ModelAndView save(Property property, BindingResult binding) {
 		ModelAndView result;
 		
-		
 		if (binding.hasErrors()) {
 			System.out.println(binding.getAllErrors());
 			result = createEditModelAndView(property);
