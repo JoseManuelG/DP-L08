@@ -102,7 +102,7 @@ public class CommentService {
 	
 	public Collection<Comment> findAllCommentsOfACustomer(Customer customer) {
 		Collection<Comment> comments;
-		
+		comentableRepository.findAll();
 		comments = commentRepository.findCommentsByCustomerID(customer.getId());
 		return comments;
 	}

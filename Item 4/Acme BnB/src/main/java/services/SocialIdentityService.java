@@ -1,6 +1,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,8 @@ import org.springframework.util.Assert;
 import repositories.SocialIdentityRepository;
 import security.LoginService;
 import security.UserAccount;
+import domain.Lessor;
+import domain.Property;
 import domain.SocialIdentity;
 
 @Service
@@ -84,4 +87,9 @@ public class SocialIdentityService {
 		}
 		
 		//OtherBusinessesModels-------------------------------
+		public List<Property> findSocialIdentitiesByLessorId(Lessor  lessor) {
+			return socialIdentityRepository.findSocialIdentitiesByLessorId(lessor.getId());
+		}
+			
+		
 }

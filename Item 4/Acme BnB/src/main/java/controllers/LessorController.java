@@ -9,6 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 import services.CommentService;
 import services.CustomerService;
 import services.LessorService;
+import services.PropertyService;
+import services.SocialIdentityService;
 import domain.Comentable;
 import domain.Comment;
 import domain.Lessor;
@@ -23,8 +25,11 @@ public class LessorController extends AbstractController {
 	private LessorService lessorService;
 	@Autowired
 	private CustomerService customerService;
+	@Autowired
+	private SocialIdentityService socialIdentityService;
 	
-	
+	@Autowired
+	private PropertyService propertyService;
 	@Autowired
 	private CommentService commentService;
 
@@ -76,10 +81,10 @@ public class LessorController extends AbstractController {
 			puedoComentar=false;
 		}
 		result.addObject("lessor", lessor);
-		result.addObject("properties", lessor.getLessorProperties());
+		result.addObject("properties", propertyService.findPropertiesByLessor(lessor));
 		result.addObject("comments", commentService.findAllCommentsOfACustomer(lessor));
 		result.addObject("requestURI","lessor/view.do");
-		result.addObject("socialIdentities",lessor.getSocialIdentities());
+		result.addObject("socialIdentities",socialIdentityService.findSocialIdentitiesByLessorId(lessor));
 		result.addObject("esMiPerfil",false);
 		result.addObject("puedoComentar",puedoComentar);
 
