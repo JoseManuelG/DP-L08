@@ -34,6 +34,6 @@
 		<acme:submit name="delete" code="creditCard.delete"/>
 	</jstl:if>
 	
-	<acme:cancel url="javascript:window.location.href='../lessor/myProfile.do'" code="creditCard.cancel"/>
+	<acme:cancel url="creditCard/lessor/myCreditCard.do" code="creditCard.cancel"/>
 	<br>
 </form:form>

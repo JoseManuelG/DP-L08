@@ -28,6 +28,6 @@
 	<jstl:if test="${property.id ne 0}">
 		<acme:submit name="delete" code="property.delete"/>
 	</jstl:if>
-	<acme:cancel url="javascript:window.location.href='property/list.do'" code="property.cancel"/>
+	<acme:cancel url="property/lessor/myProperties.do" code="property.cancel"/>
 	<br>
 </form:form>

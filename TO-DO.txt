@@ -11,7 +11,6 @@
 
 PROPERTY:
 ->Añadir a la vista de property/list el mensaje correspondiente arriba si se trata de una dashboard y boton para volver a la lista de lessors si es dashboard
-->Cancel de property no funciona
 -> Property no funciona el delete
 
 
@@ -105,3 +104,4 @@ EXTRAS:
 ->Poner restricciones de html para que en campos de numeros solo entren numero y asi se quita el error de pete por mal convertidor. (AÑADIDO ERROR POR MAL CONVERTIDOR)
 ->Edit de property no funciona(ARREGLADO)
 ->Registrar property tampoco funciona(ARREGLADO)
+->Cancel de property no funciona(ARREGLADO)
