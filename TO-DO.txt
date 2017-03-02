@@ -10,6 +10,9 @@ GENERAL:
 ->b+ tree y @safehtml
 ->Comprobar que cumplimos todas las leyes bien
 ->Acabar terminos y meter tags en plantilla
+->view de invoice usar <Jstl:out> en la linea 28
+->tag de colum usar <Jstl:out> 
+
 
 PROPERTY:
 ->Añadir a la vista de property/list el mensaje correspondiente arriba si se trata de una dashboard y boton para volver a la lista de lessors si es dashboard
