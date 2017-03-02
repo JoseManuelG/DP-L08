@@ -1523,6 +1523,10 @@
 		<property name="name" value="State"/>
 	</bean>
 	
+	<bean id="attribute8" class="domain.Attribute">
+		<property name="name" value="Capacity"/>
+	</bean>
+	
 	<!-- AttributeValue
 	
 	<bean id="" class="domain.AttributeValue">
