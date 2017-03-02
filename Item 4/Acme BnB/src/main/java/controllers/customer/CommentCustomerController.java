@@ -1,7 +1,6 @@
 package controllers.customer;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 
 import javax.validation.Valid;
@@ -15,15 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import repositories.ComentableRepository;
+import repositories.CommentableRepository;
 import security.Authority;
 import services.ActorService;
 import services.CommentService;
-import services.CustomerService;
 import controllers.AbstractController;
 import domain.Actor;
-import domain.Comentable;
 import domain.Comment;
+import domain.Commentable;
 import domain.Customer;
 
 @Controller
@@ -34,7 +32,7 @@ public class CommentCustomerController extends AbstractController {
 	private CommentService commentService ;
 
 	@Autowired
-	private ComentableRepository comentableRepository;
+	private CommentableRepository commentableRepository;
 	
 	@Autowired
 	private ActorService actorService ;
@@ -49,8 +47,8 @@ public class CommentCustomerController extends AbstractController {
 	// Create --------------------------------------------------------------------
 		@RequestMapping(value = "/customer/create", method = RequestMethod.GET)
 		public ModelAndView create(@RequestParam int customerId) {
-			 comentableRepository.findAll();
-			Comentable recipient =  comentableRepository.findOne(customerId);
+			commentableRepository.findAll();
+			 Commentable recipient =  commentableRepository.findOne(customerId);
 			Customer sender= (Customer) actorService.findByPrincipal();
 			ModelAndView result;
 			Comment comment;

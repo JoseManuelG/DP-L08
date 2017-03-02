@@ -46,7 +46,7 @@
 		
 	</display:table>
 			<jstl:if test="${ esMiProperty}">
-			<a href=attributeValue/lessor/create.do?propertyId=${property.id }>
+			<a href=attributeValue/lessor/create.do?propertyId=${property.id}>
 	      <spring:message  code="attributeValue.create" />
 	</a>
 			</jstl:if>

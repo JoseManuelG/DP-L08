@@ -7,26 +7,26 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import repositories.ComentableRepository;
-import domain.Comentable;
+import repositories.CommentableRepository;
+import domain.Commentable;
 
 @Component
 @Transactional
-public class StringToComentableConverter implements Converter<String, Comentable> {
+public class StringToCommentableConverter implements Converter<String, Commentable> {
 
 	@Autowired
-	ComentableRepository comentableRepository;
+	CommentableRepository commentableRepository;
 
 	@Override
-	public Comentable convert(String text) {
-		Comentable result;
+	public Commentable convert(String text) {
+		Commentable result;
 		int id;
 
 		try {
 			id = Integer.valueOf(text);
-			Collection<Comentable> recipient2 =  comentableRepository.findAll();
+			Collection<Commentable> recipient2 =  commentableRepository.findAll();
 
-			result = comentableRepository.findOne(id);
+			result = commentableRepository.findOne(id);
 		} catch (Throwable oops) {
 			throw new IllegalArgumentException(oops);
 		}

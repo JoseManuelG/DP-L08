@@ -69,7 +69,7 @@ public class Comment extends DomainEntity {
 
 	//Relationships---------------------------
 	private Customer	sender;
-	private Comentable	recipient;
+	private Commentable	recipient;
 
 
 	@NotNull
@@ -85,10 +85,10 @@ public class Comment extends DomainEntity {
 	@Valid
 	@Cascade(CascadeType.REFRESH)
 	@ManyToOne(optional = false)
-	public Comentable getRecipient() {
+	public Commentable getRecipient() {
 		return recipient;
 	}
-	public void setRecipient(Comentable recipient) {
+	public void setRecipient(Commentable recipient) {
 		this.recipient = recipient;
 	}
 

@@ -52,8 +52,8 @@
 		<bean class="converters.AttachmentToStringConverter" /> 
 		<bean class="converters.StringToAttachmentConverter" />
 		
-		<bean class="converters.ComentableToStringConverter" /> 
-		<bean class="converters.StringToComentableConverter" />
+		<bean class="converters.CommentableToStringConverter" /> 
+		<bean class="converters.StringToCommentableConverter" />
 		
 		<bean class="converters.CustomerToStringConverter" /> 
 		<bean class="converters.StringToCustomerConverter" />

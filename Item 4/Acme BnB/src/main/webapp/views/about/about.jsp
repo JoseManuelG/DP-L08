@@ -21,4 +21,3 @@
 	<br/>
 	<spring:message code="about.vat" />: <jstl:out value="${vat}"/>
 </div>
-

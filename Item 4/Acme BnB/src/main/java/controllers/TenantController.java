@@ -15,8 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import services.CommentService;
 import services.CustomerService;
 import services.TenantService;
-import domain.Comentable;
 import domain.Comment;
+import domain.Commentable;
 import domain.Customer;
 import domain.Tenant;
 
@@ -70,7 +70,7 @@ public class TenantController extends AbstractController {
 		//Bloque de botoneria de comentario Hecho por roldan -->
 		try{
 			Comment comment= commentService.create();
-			comment.setRecipient((Comentable) tenant);
+			comment.setRecipient((Commentable) tenant);
 			comment.setSender(customerService.findActorByPrincial());
 			puedoComentar=commentService.validComment(comment);
 			}catch (Throwable oops) {

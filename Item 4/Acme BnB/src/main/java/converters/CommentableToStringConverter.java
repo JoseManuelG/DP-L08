@@ -4,20 +4,20 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import domain.Comentable;
+import domain.Commentable;
 
 @Component
 @Transactional
-public class ComentableToStringConverter implements Converter<Comentable, String> {
+public class CommentableToStringConverter implements Converter<Commentable, String> {
 
 	@Override
-	public String convert(Comentable comentable) {
+	public String convert(Commentable commentable) {
 		String result;
 
-		if (comentable== null)
+		if (commentable== null)
 			result = null;
 		else
-			result = String.valueOf(comentable.getId());
+			result = String.valueOf(commentable.getId());
 		
 		return result;
 	}

@@ -11,8 +11,8 @@ import services.CustomerService;
 import services.LessorService;
 import services.PropertyService;
 import services.SocialIdentityService;
-import domain.Comentable;
 import domain.Comment;
+import domain.Commentable;
 import domain.Lessor;
 
 @Controller
@@ -74,7 +74,7 @@ public class LessorController extends AbstractController {
 		Lessor lessor  =  lessorService.findOne(lessorId);
 		try{
 		Comment comment= commentService.create();
-		comment.setRecipient((Comentable) lessor);
+		comment.setRecipient((Commentable) lessor);
 		comment.setSender(customerService.findActorByPrincial());
 		puedoComentar=commentService.validComment(comment);
 		}catch (Throwable oops) {

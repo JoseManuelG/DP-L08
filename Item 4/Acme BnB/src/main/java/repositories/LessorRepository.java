@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import domain.Book;
 import domain.Lessor;
-import domain.Property;
 
 @Repository
 public interface LessorRepository extends JpaRepository<Lessor, Integer> {

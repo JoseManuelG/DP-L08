@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import repositories.ComentableRepository;
 import repositories.CommentRepository;
+import repositories.CommentableRepository;
 import security.Authority;
 import security.LoginService;
 import domain.Actor;
@@ -33,7 +33,7 @@ public class CommentService {
 	@Autowired
 	private LoginService		loginService;
 	@Autowired
-	private ComentableRepository comentableRepository;
+	private CommentableRepository commentableRepository;
 	
 	@Autowired
 	private ActorService		actorService;
@@ -102,7 +102,7 @@ public class CommentService {
 	
 	public Collection<Comment> findAllCommentsOfACustomer(Customer customer) {
 		Collection<Comment> comments;
-		comentableRepository.findAll();
+		commentableRepository.findAll();
 		comments = commentRepository.findCommentsByCustomerID(customer.getId());
 		return comments;
 	}
