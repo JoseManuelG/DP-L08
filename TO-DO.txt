@@ -11,8 +11,7 @@
 
 PROPERTY:
 ->Añadir a la vista de property/list el mensaje correspondiente arriba si se trata de una dashboard y boton para volver a la lista de lessors si es dashboard
-->Edit de property no funciona, el cancel tampoco
--> Registrar property tampoco funciona
+->Cancel de property no funciona
 -> Property no funciona el delete
 
 
@@ -104,3 +103,5 @@ EXTRAS:
 -> Modificar "welcome"(ARREGLADO)
 ->view de invoice usar <Jstl:out> en la linea 28 (ARREGLADO)
 ->Poner restricciones de html para que en campos de numeros solo entren numero y asi se quita el error de pete por mal convertidor. (AÑADIDO ERROR POR MAL CONVERTIDOR)
+->Edit de property no funciona(ARREGLADO)
+->Registrar property tampoco funciona(ARREGLADO)
