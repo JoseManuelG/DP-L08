@@ -11,11 +11,6 @@
 		Javi: Voto que no, no me parece necesario y sobrecarga la plantilla. En cualquier caso habría que dejar la plantilla sin fallos de 			compilacion y funcional.
 
 
-PROPERTY:
-->Añadir a la vista de property/list el mensaje correspondiente arriba si se trata de una dashboard y boton para volver a la lista de lessors si es dashboard
-
-
-
 COMMENTS:
 -> Cambiar nombres de las relaciones sender y receipment por customer y commentable.
 
@@ -43,19 +38,13 @@ B+ TREE:
 
 
 @SAFEHTML:
-	Attachment
-	AttributeValue
-	Audit
-	Configuration
+	Attachment(HECHO)
+	AttributeValue(HECHO)
+	Audit(HECHO)
+	Configuration(HECHO)
 	CreditCard (HECHO)
-	Finder
+	Finder(HECHO)
 	Property (HECHO)
-	Administrator (NO PROCEDE)
-	Commentable (NO PROCEDE)
-	Customer (NO PROCEDE)
-	DomainEntity (NO PROCEDE)
-	Lessor (NO PROCEDE)
-	Tenant (NO PROCEDE)
 	Actor (HECHO)
 	Attribute (HECHO)
 	Auditor (HECHO)
@@ -64,7 +53,15 @@ B+ TREE:
 	Invoice (HECHO)
 	SocialIdentity (HECHO)
 
+	Administrator (NO PROCEDE)
+	Commentable (NO PROCEDE)
+	Customer (NO PROCEDE)
+	DomainEntity (NO PROCEDE)
+	Lessor (NO PROCEDE)
+	Tenant (NO PROCEDE)
+
 EXTRAS:
+-> Añadir confirmaciones al borrar cosas
 -> Internacionalizar errores para que se muestre que regla de negocio ha fallado (como en books)
 -> Acceder en el A+ por https solo cuando un usuario ha hecho login.
 
@@ -108,3 +105,4 @@ EXTRAS:
 ->Registrar property tampoco funciona(ARREGLADO)
 ->Cancel de property no funciona(ARREGLADO)
 -> Property no funciona el delete(ARREGLADO)
+->Añadir a la vista de property/list el mensaje correspondiente arriba si se trata de una dashboard y boton para volver a la lista de lessors si es dashboard(ARREGLADO)

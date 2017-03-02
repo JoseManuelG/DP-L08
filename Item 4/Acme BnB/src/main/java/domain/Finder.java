@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -29,6 +30,7 @@ public class Finder extends DomainEntity {
 	private Date	cacheMoment;
 
 
+	@SafeHtml
 	@NotBlank
 	public String getDestination() {
 		return destination;
@@ -47,9 +49,6 @@ public class Finder extends DomainEntity {
 		this.minPrice = minPrice;
 	}
 
-	//TODO: Problema: en el dominio hemos puesto que como mínimo el valor de  
-	//		este atributo debe tomar el valor minPrice, pero debe ser una constante.
-	//		Solucion: Poner minimo 0 y controlarlo en servicios.
 	@Min(0)
 	public Double getMaxPrice() {
 		return maxPrice;
@@ -59,6 +58,7 @@ public class Finder extends DomainEntity {
 		this.maxPrice = maxPrice;
 	}
 
+	@SafeHtml
 	@NotNull
 	public String getKeyword() {
 		return keyword;

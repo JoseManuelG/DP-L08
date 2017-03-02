@@ -18,6 +18,7 @@ import services.LessorService;
 import services.PropertyService;
 import services.TenantService;
 import controllers.AbstractController;
+import domain.Lessor;
 
 @Controller
 @RequestMapping("/dashboard/administrator")
@@ -110,12 +111,15 @@ public class DashboardAdministratorController extends AbstractController {
 	@RequestMapping(value = "/propertiesOrderedByAudits", method = RequestMethod.GET)
 	public ModelAndView propertiesOrderedByAudits(@RequestParam(required = true) int lessorId) {
 		ModelAndView result;
+		Lessor lessor;
 
 		result = new ModelAndView("property/list");
+		lessor = lessorService.findOne(lessorId);
 
 		result.addObject("properties", propertyService.findPropertiesByLessorByNumberOfAudits(lessorId));
-
 		result.addObject("requestURI", "dashboard/administrator/propertiesOrderedByAudits.do?lessorId=" + lessorId);
+		result.addObject("lessor", lessor);
+		result.addObject("queryNumber", 1);
 
 		return result;
 	}
@@ -123,12 +127,15 @@ public class DashboardAdministratorController extends AbstractController {
 	@RequestMapping(value = "/propertiesOrderedByBooks", method = RequestMethod.GET)
 	public ModelAndView propertiesOrderedByBooks(@RequestParam(required = true) int lessorId) {
 		ModelAndView result;
+		Lessor lessor;
 
 		result = new ModelAndView("property/list");
+		lessor = lessorService.findOne(lessorId);
 
 		result.addObject("properties", propertyService.findPropertiesByLessorOrderedByRequestNumber(lessorId));
-
 		result.addObject("requestURI", "dashboard/administrator/propertiesOrderedByBooks.do?lessorId=" + lessorId);
+		result.addObject("lessor", lessor);
+		result.addObject("queryNumber", 2);
 
 		return result;
 	}
@@ -136,12 +143,15 @@ public class DashboardAdministratorController extends AbstractController {
 	@RequestMapping(value = "/propertiesOrderedByAcceptedBooks", method = RequestMethod.GET)
 	public ModelAndView propertiesOrderedByAcceptedBooks(@RequestParam(required = true) int lessorId) {
 		ModelAndView result;
+		Lessor lessor;
 
 		result = new ModelAndView("property/list");
+		lessor = lessorService.findOne(lessorId);
 
 		result.addObject("properties", propertyService.findPropertiesByLessorWithAcceptedBooks(lessorId));
-
 		result.addObject("requestURI", "dashboard/administrator/propertiesOrderedByAcceptedBooks.do?lessorId=" + lessorId);
+		result.addObject("lessor", lessor);
+		result.addObject("queryNumber", 3);
 
 		return result;
 	}
@@ -149,12 +159,15 @@ public class DashboardAdministratorController extends AbstractController {
 	@RequestMapping(value = "/propertiesOrderedByDeniedBooks", method = RequestMethod.GET)
 	public ModelAndView propertiesOrderedByDeniedBooks(@RequestParam(required = true) int lessorId) {
 		ModelAndView result;
+		Lessor lessor;
 
 		result = new ModelAndView("property/list");
+		lessor = lessorService.findOne(lessorId);
 
 		result.addObject("properties", propertyService.findPropertiesByLessorWithDenieBooks(lessorId));
-
 		result.addObject("requestURI", "dashboard/administrator/propertiesOrderedByDeniedBooks.do?lessorId=" + lessorId);
+		result.addObject("lessor", lessor);
+		result.addObject("queryNumber", 4);
 
 		return result;
 	}
@@ -162,12 +175,15 @@ public class DashboardAdministratorController extends AbstractController {
 	@RequestMapping(value = "/propertiesOrderedByPendingBooks", method = RequestMethod.GET)
 	public ModelAndView propertiesOrderedByPendingBooks(@RequestParam(required = true) int lessorId) {
 		ModelAndView result;
+		Lessor lessor;
 
 		result = new ModelAndView("property/list");
+		lessor = lessorService.findOne(lessorId);
 
 		result.addObject("properties", propertyService.findPropertiesByLessorWithPendingBooks(lessorId));
-
 		result.addObject("requestURI", "dashboard/administrator/propertiesOrderedByPendingBooks.do?lessorId=" + lessorId);
+		result.addObject("lessor", lessor);
+		result.addObject("queryNumber", 5);
 
 		return result;
 	}

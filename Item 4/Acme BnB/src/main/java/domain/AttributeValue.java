@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -17,6 +18,7 @@ public class AttributeValue extends DomainEntity {
 	private String	value;
 
 
+	@SafeHtml
 	@NotBlank
 	public String getValue() {
 		return this.value;

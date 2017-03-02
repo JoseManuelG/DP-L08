@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
@@ -20,6 +21,7 @@ public class Attachment extends DomainEntity {
 	private String	url;
 
 
+	@SafeHtml
 	public String getName() {
 		return this.name;
 	}
@@ -28,6 +30,7 @@ public class Attachment extends DomainEntity {
 		this.name = name;
 	}
 
+	@SafeHtml
 	@NotBlank
 	@URL
 	public String getUrl() {

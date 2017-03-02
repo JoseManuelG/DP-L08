@@ -9,10 +9,24 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 
 
-
+<jstl:if test="${lessor!=null}">
+	<p>
+		<spring:message code="property.dashboard.prefix"/> 
+		<jstl:out value="${lessor.name}"/> <jstl:out value="${lessor.surname}"/> 
+		<jstl:choose>
+			<jstl:when test="${queryNumber==1}"><spring:message code="property.dashboard.sufix1"/></jstl:when>
+			<jstl:when test="${queryNumber==2}"><spring:message code="property.dashboard.sufix2"/></jstl:when>
+			<jstl:when test="${queryNumber==3}"><spring:message code="property.dashboard.sufix3"/></jstl:when>
+			<jstl:when test="${queryNumber==4}"><spring:message code="property.dashboard.sufix4"/></jstl:when>
+			<jstl:when test="${queryNumber==5}"><spring:message code="property.dashboard.sufix5"/></jstl:when>
+			<jstl:otherwise/>
+		</jstl:choose>
+	</p>
+</jstl:if>
 
 
 <!-- Listing grid -->
@@ -63,6 +77,12 @@
 	<display:column property="address" title="${addressHeader}" sortable="false" />
 	
 </display:table>
+
+<jstl:if test="${lessor!=null}">
+	<p>
+		<acme:cancel url="dashboard/administrator/lessors.do" code="property.back"/>
+	</p>
+</jstl:if>
 
 <security:authorize access="hasRole('LESSOR')">
 	<a href="property/lessor/create.do">
