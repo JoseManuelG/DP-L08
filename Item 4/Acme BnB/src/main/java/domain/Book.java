@@ -17,6 +17,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -33,7 +34,7 @@ public class Book extends DomainEntity {
 	private String	propertyName;
 	private String	propertyAddress;
 
-
+	@SafeHtml
 	@NotBlank
 	public String getPropertyName() {
 		return propertyName;
@@ -42,7 +43,8 @@ public class Book extends DomainEntity {
 	public void setPropertyName(String propertyName) {
 		this.propertyName = propertyName;
 	}
-
+	
+	@SafeHtml
 	@NotBlank
 	public String getPropertyAddress() {
 		return propertyAddress;
@@ -82,6 +84,7 @@ public class Book extends DomainEntity {
 		this.smoker = smoker;
 	}
 
+	@SafeHtml
 	@NotBlank
 	@Pattern(regexp = "^PENDING$|^ACCEPTED$|^DENIED$")
 	public String getState() {

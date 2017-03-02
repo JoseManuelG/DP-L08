@@ -46,11 +46,9 @@ B+ TREE:
 	Attachment
 	AttributeValue
 	Audit
-	Book
 	Configuration
 	CreditCard
 	Finder
-	Invoice
 	Property
 	Administrator (NO PROCEDE)
 	Commentable (NO PROCEDE)
@@ -61,7 +59,9 @@ B+ TREE:
 	Actor (HECHO)
 	Attribute (HECHO)
 	Auditor (HECHO)
+	Book (HECHO)
 	Comment (HECHO)
+	Invoice (HECHO)
 	SocialIdentity (HECHO)
 
 EXTRAS:

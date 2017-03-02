@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -40,6 +41,7 @@ public class Invoice extends DomainEntity {
 		this.creationMoment = creationMoment;
 	}
 
+	@SafeHtml
 	@NotBlank
 	public String getVAT() {
 		return VAT;
@@ -49,6 +51,7 @@ public class Invoice extends DomainEntity {
 		this.VAT = VAT;
 	}
 
+	@SafeHtml
 	@NotBlank
 	public String getInformation() {
 		return information;
@@ -58,6 +61,7 @@ public class Invoice extends DomainEntity {
 		this.information = information;
 	}
 
+	@SafeHtml
 	@NotBlank
 	public String getDetails() {
 		return details;
