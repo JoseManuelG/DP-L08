@@ -17,7 +17,6 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<p><spring:message code="security.register" /></p>
 <form:form action="${requestURI}" modelAttribute="actorForm">
 	
     
