@@ -1,23 +1,29 @@
-﻿
-->Poner restricciones de html para que en campos de numeros solo entren numero y asi se quita el error de pete por mal convertidor.
-->Añadir a la vista de property/list el mensaje correspondiente arriba si se trata de una dashboard y boton para volver a la lista de lessors si es dashboard
-->cancel de editarPerfilTenant
-->Edit de property no funciona, el cancel tampoco
--> Registrar property tampoco funciona
--> Property no funciona el delete
-->CreditCard de lessor peudo poner una caducada.
-->Restriccion de negocio de No poder aceptar o denegar books si no tienes tarjeta de credito el lessor
-->Registrar audits en español el titulo está en español
--> Problemas con el view de lessor
-
-Del antiguo archivo "consideraciones":
+﻿UML:
 ->Falta pattern telefono (actor) por definir en UML
 ->a cacheMoment de finder y writingMoment de audit les falta Past en UML
 ->Añadir min(0) a fee del configuration en UML y java.
+
+GENERAL:
+-> Cambiar imagen de logo
+-> Modificar "welcome"
+->Poner restricciones de html para que en campos de numeros solo entren numero y asi se quita el error de pete por mal convertidor.
 ->b+ tree y @safehtml
-->Acabar terminos y meter tags en plantilla
-->Comprobar validez de tarjeta en varias ocasiones
 ->Comprobar que cumplimos todas las leyes bien
+->Acabar terminos y meter tags en plantilla
+
+PROPERTY:
+->Añadir a la vista de property/list el mensaje correspondiente arriba si se trata de una dashboard y boton para volver a la lista de lessors si es dashboard
+->Edit de property no funciona, el cancel tampoco
+-> Registrar property tampoco funciona
+-> Property no funciona el delete
+
+LESSOR/TENANT:
+-> Problemas con el view de lessor
+->cancel de editarPerfilTenant
+
+AUDITS:
+->Registrar audits en español el titulo está en español
+
 
 -------------------------------------------------------(ARREGLADO)--------------------------------------------------------------------
 
@@ -39,3 +45,6 @@ Del antiguo archivo "consideraciones":
 ->No Poder modificar archivos adjuntos una vez es publico el audit (ARREGLADO)
 -Delete de Tenant No funciona (ARREGLADO)
 ->El checkBox de registro no funciona (ARREGLADO)
+->CreditCard de lessor peudo poner una caducada. (ARREGLADO)
+->Restriccion de negocio de No poder aceptar o denegar books si no tienes tarjeta de credito el lessor (ARREGLADO)
+->Comprobar validez de tarjeta en varias ocasiones (ARREGLADO)

@@ -111,7 +111,8 @@ public class BookService {
 		Book book;
 
 		book = this.findOne(bookId);
-		
+
+		Assert.notNull(book.getLessor().getCreditCard(), "book.null.credit.card.error");
 		checkOwnerLessorIsPrincipal(book);
 		checkStateIsPending(book);
 		checkBookDate(book);

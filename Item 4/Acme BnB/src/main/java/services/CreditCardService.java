@@ -79,6 +79,7 @@ public class CreditCardService {
 		Lessor lessor = (Lessor) customerService.findActorByPrincial();
 		Assert.isTrue((lessor.getCreditCard() == null && creditCard.getId() == 0) || (lessor.getCreditCard().getId() == creditCard.getId()), "Un lessor no puede tener más de una credit card");
 		Assert.isTrue(!(bookService.existsCreditCardForAnyBook(creditCard)), "La credit card de un lessor no puede pertenecer a un book");
+		checkCreditCard(creditCard);
 		CreditCard result;
 		result = creditCardRepository.save(creditCard);
 		lessor.setCreditCard(result);
@@ -103,6 +104,7 @@ public class CreditCardService {
 		long today, cardDate, sevenDays;
 		Calendar calendar;
 
+		Assert.notNull(creditCard, "creditCard.null.error");
 		sevenDays = 7 * 24 * 60 * 60 * 100;
 		today = System.currentTimeMillis();
 		calendar = new GregorianCalendar(creditCard.getExpirationYear(),
