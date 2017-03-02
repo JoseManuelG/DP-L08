@@ -16,9 +16,6 @@ PROPERTY:
 -> Registrar property tampoco funciona
 -> Property no funciona el delete
 
-LESSOR/TENANT:
-
-
 
 COMMENTS:
 -> Cambiar nombres de las relaciones.

@@ -23,6 +23,9 @@ LESSOR/TENANT:
 COMMENTS:
 -> Cambiar nombres de las relaciones.
 
+EXTRAS:
+-> Internacionalizar errores para que se muestre que regla de negocio ha fallado (como en books)
+-> Acceder en el A+ por https solo cuando un usuario ha hecho login.
 
 
 
