@@ -25,9 +25,9 @@ public class AttributeValueService {
 	private AttributeValueRepository	attributeValueRepository;
 
 	//Supporting services---------------------------—
+	
 	@Autowired
 	private ActorService actorService;
-
 
 	//Constructors------------------------------------
 
@@ -63,7 +63,6 @@ public class AttributeValueService {
 		return result;
 	}
 
-	@SuppressWarnings("static-access")
 	public AttributeValue save(AttributeValue attributeValue) {
 		Assert.notNull(attributeValue,"El attributeValue no puede ser nulo");
 		
@@ -81,7 +80,6 @@ public class AttributeValueService {
 		return result;
 	}
 
-	@SuppressWarnings("static-access")
 	public void delete(AttributeValue attributeValue) {
 		Assert.notNull(attributeValue, "El attributeValueo no puede ser nulo");
 		Assert.isTrue(attributeValue.getId() != 0, "El attributeValueo debe estar en la base de datos");
@@ -99,6 +97,16 @@ public class AttributeValueService {
 	public Collection<AttributeValue> findAttributeValuesForAttribute(Attribute attribute) {
 		Collection<AttributeValue> result = attributeValueRepository.findAttributeValuesForAttributeId(attribute.getId());
 		return result;
+	}
+	public void deleteAttributeValuesForProperty(Property property){
+		Collection<AttributeValue> avs = attributeValueRepository.findAttributeValuesForPropertyId(property.getId());
+		if(!avs.isEmpty()){
+			for(AttributeValue av:avs){
+				av.setProperty(null);
+				av.setAttribute(null);
+				attributeValueRepository.delete(av);
+			}
+		}
 	}
 
 }

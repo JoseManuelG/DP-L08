@@ -136,7 +136,7 @@ public class Book extends DomainEntity {
 	}
 
 	@Valid
-	@ManyToOne
+	@ManyToOne(optional = true)
 	public Property getProperty() {
 		return property;
 	}

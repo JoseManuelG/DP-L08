@@ -147,6 +147,13 @@ public class AuditService {
 		return auditRepository.getMaximumAuditsPerProperty();
 	}
 
+	public void deleteAuditsForProperty(Property property) {
+		Collection<Audit> audits = auditRepository.findAuditsForPropertyId(property.getId());
+			for(Audit a:audits){
+				auditRepository.delete(a);
+			}
+	}
+
 	
 
 }

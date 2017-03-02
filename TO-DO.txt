@@ -13,7 +13,7 @@
 
 PROPERTY:
 ->Añadir a la vista de property/list el mensaje correspondiente arriba si se trata de una dashboard y boton para volver a la lista de lessors si es dashboard
--> Property no funciona el delete
+
 
 
 COMMENTS:
@@ -107,3 +107,4 @@ EXTRAS:
 ->Edit de property no funciona(ARREGLADO)
 ->Registrar property tampoco funciona(ARREGLADO)
 ->Cancel de property no funciona(ARREGLADO)
+-> Property no funciona el delete(ARREGLADO)

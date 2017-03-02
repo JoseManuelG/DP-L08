@@ -34,6 +34,12 @@ public class PropertyService {
 
 	@Autowired
 	private LessorService		lessorService;
+	
+	@Autowired
+	private BookService		bookService;
+	
+	@Autowired
+	private AuditService		auditService;
 
 
 	// Validator --------------------------------------------------------------------
@@ -85,6 +91,11 @@ public class PropertyService {
 		Assert.isTrue(property.getId() != 0, "La propiedad debe estar antes en la base de datos");
 		propertyRepository.exists(property.getId());
 		Assert.isTrue(lessorService.findByPrincipal().equals(property.getLessor()));
+		if(!property.getBooks().isEmpty())
+			bookService.removePropertyFromBooks(property.getBooks());
+		if(!property.getAudits().isEmpty())
+			auditService.deleteAuditsForProperty(property);
+		
 		Lessor lessor = property.getLessor();
 		Collection<Property> properties = lessor.getLessorProperties();
 		properties.remove(property);

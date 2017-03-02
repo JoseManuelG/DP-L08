@@ -294,5 +294,12 @@ public class BookService {
 		}
 		
 	}
+	public void removePropertyFromBooks(Collection<Book> books) {
+		for (Book b: books){
+			b.setProperty(null);
+			bookRepository.save(b);
+		}
+		
+	}
 
 }
