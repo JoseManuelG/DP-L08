@@ -24,7 +24,7 @@ public class HashPassword {
 		String line, hash;
 
 		try {
-			System.out.printf("HashPassword 1.8%n");
+			System.out.printf("HashPassword 1.9%n");
 			System.out.printf("----------------%n%n");
 			
 			encoder = new Md5PasswordEncoder();

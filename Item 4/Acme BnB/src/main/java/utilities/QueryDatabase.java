@@ -29,7 +29,7 @@ public class QueryDatabase {
 		databaseUtil = null;
 		
 		try {
-			System.out.printf("QueryDatabase 1.8%n");
+			System.out.printf("QueryDatabase 1.9%n");
 			System.out.printf("-----------------%n%n");
 			
 			System.out.printf("Initialising persistence context `%s'...%n", DatabaseConfig.PersistenceUnit);

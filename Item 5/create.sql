@@ -7,7 +7,8 @@ create user 'acme-user'@'%' identified by password '*4F10007AADA9EE3DBB2CC36575D
 create user 'acme-manager'@'%' identified by password '*FDB8CD304EB2317D10C95D797A4BD7492560F55F';  
 
 grant select, insert, update, delete  on `Acme-BnB`.* to 'acme-user'@'%';  
-grant select, insert, update, delete, create, drop, references, index, alter,  create temporary tables, lock tables, create view, create routine,  alter routine, execute, trigger, show view  on `Acme-BnB`.* to 'acme-manager'@'%';
+grant select, insert, update, delete, create, drop, references, index, alter,  create temporary tables, lock tables, create view, create routine,  alter routine, execute, trigger, show view  on `Acme-BnB`.* to 'acme-manager'@'%';  
+
 
 -- MySQL dump 10.13  Distrib 5.5.29, for Win64 (x86)
 --
@@ -226,7 +227,7 @@ CREATE TABLE `book` (
   `invoice_id` int(11) DEFAULT NULL,
   `lessor_id` int(11) DEFAULT NULL,
   `property_id` int(11) DEFAULT NULL,
-  `tenant_id` int(11) NOT NULL,
+  `tenant_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_5jt6qudjsn55s4yu0gacjfh55` (`creditCard_id`),
   KEY `FK_56ub9nkoltwomcor1cyn6f6rt` (`invoice_id`),
@@ -248,30 +249,6 @@ CREATE TABLE `book` (
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `comentable_comment`
---
-
-DROP TABLE IF EXISTS `comentable_comment`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `comentable_comment` (
-  `Comentable_id` int(11) NOT NULL,
-  `comments_id` int(11) NOT NULL,
-  UNIQUE KEY `UK_hrcw8cxqtqcmhbc9cirkf2m8u` (`comments_id`),
-  CONSTRAINT `FK_hrcw8cxqtqcmhbc9cirkf2m8u` FOREIGN KEY (`comments_id`) REFERENCES `comment` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `comentable_comment`
---
-
-LOCK TABLES `comentable_comment` WRITE;
-/*!40000 ALTER TABLE `comentable_comment` DISABLE KEYS */;
-/*!40000 ALTER TABLE `comentable_comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -301,6 +278,30 @@ CREATE TABLE `comment` (
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `commentable_comment`
+--
+
+DROP TABLE IF EXISTS `commentable_comment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `commentable_comment` (
+  `Commentable_id` int(11) NOT NULL,
+  `comments_id` int(11) NOT NULL,
+  UNIQUE KEY `UK_3wk0te5p2koudiwgpk79pm99m` (`comments_id`),
+  CONSTRAINT `FK_3wk0te5p2koudiwgpk79pm99m` FOREIGN KEY (`comments_id`) REFERENCES `comment` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `commentable_comment`
+--
+
+LOCK TABLES `commentable_comment` WRITE;
+/*!40000 ALTER TABLE `commentable_comment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `commentable_comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -449,10 +450,7 @@ CREATE TABLE `invoice` (
   `creationMoment` datetime DEFAULT NULL,
   `details` varchar(255) DEFAULT NULL,
   `information` varchar(255) DEFAULT NULL,
-  `tenant_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_fji1b494a8pf5kyolxxiclqsl` (`tenant_id`),
-  CONSTRAINT `FK_fji1b494a8pf5kyolxxiclqsl` FOREIGN KEY (`tenant_id`) REFERENCES `tenant` (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -593,6 +591,32 @@ LOCK TABLES `tenant` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tenant_invoice`
+--
+
+DROP TABLE IF EXISTS `tenant_invoice`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tenant_invoice` (
+  `Tenant_id` int(11) NOT NULL,
+  `invoices_id` int(11) NOT NULL,
+  UNIQUE KEY `UK_6urgxas7kdnthlmiwee75ih25` (`invoices_id`),
+  KEY `FK_fx2m8w5we9srt95mi3o4p4ncc` (`Tenant_id`),
+  CONSTRAINT `FK_fx2m8w5we9srt95mi3o4p4ncc` FOREIGN KEY (`Tenant_id`) REFERENCES `tenant` (`id`),
+  CONSTRAINT `FK_6urgxas7kdnthlmiwee75ih25` FOREIGN KEY (`invoices_id`) REFERENCES `invoice` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tenant_invoice`
+--
+
+LOCK TABLES `tenant_invoice` WRITE;
+/*!40000 ALTER TABLE `tenant_invoice` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tenant_invoice` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `useraccount`
 --
 
@@ -653,6 +677,6 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-28 19:07:13
+-- Dump completed on 2017-03-02 16:55:16
 
 commit;
