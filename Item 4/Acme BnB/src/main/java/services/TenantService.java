@@ -90,7 +90,7 @@ public class TenantService {
 		Assert.notNull(tenant, "tenant.error.null");
 
 		Assert.isTrue(tenantRepository.exists(tenant.getId()), "tenant.error.exists");
-		
+
 		bookService.removeTenant(tenant);
 		tenantRepository.delete(tenant);
 	}
@@ -128,7 +128,7 @@ public class TenantService {
 
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		UserAccount userAccount = new UserAccount();
-		userAccount.setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
+		userAccount.setPassword(actorForm.getUserAccount().getPassword());
 		userAccount.setUsername(actorForm.getUserAccount().getUsername());
 		Collection<Authority> authorities = new ArrayList<Authority>();
 		Authority authority = new Authority();
@@ -145,12 +145,13 @@ public class TenantService {
 		result.setUserAccount(userAccount);
 
 		validator.validate(result, binding);
+		userAccount.setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
 		return result;
 	}
 	public Tenant reconstruct(ActorForm actorForm, Tenant tenant, BindingResult binding) {
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		UserAccount userAccount = tenant.getUserAccount();
-		userAccount.setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
+		userAccount.setPassword(actorForm.getUserAccount().getPassword());
 		userAccount.setUsername(actorForm.getUserAccount().getUsername());
 
 		tenant.setName(actorForm.getName());
@@ -162,6 +163,7 @@ public class TenantService {
 		tenant.setUserAccount(userAccount);
 
 		validator.validate(tenant, binding);
+		userAccount.setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
 		return tenant;
 	}
 

@@ -89,7 +89,7 @@ public class AuditorService {
 
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		UserAccount userAccount = new UserAccount();
-		userAccount.setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
+		userAccount.setPassword(actorForm.getUserAccount().getPassword());
 		userAccount.setUsername(actorForm.getUserAccount().getUsername());
 		Collection<Authority> authorities = new ArrayList<Authority>();
 		Authority authority = new Authority();
@@ -107,13 +107,14 @@ public class AuditorService {
 		result.setUserAccount(userAccount);
 
 		validator.validate(result, binding);
+		userAccount.setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
 		return result;
 	}
 
 	public Auditor reconstruct(ActorForm actorForm, Auditor auditor, BindingResult binding) {
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		UserAccount userAccount = auditor.getUserAccount();
-		userAccount.setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
+		userAccount.setPassword(actorForm.getUserAccount().getPassword());
 		userAccount.setUsername(actorForm.getUserAccount().getUsername());
 
 		auditor.setName(actorForm.getName());
@@ -125,6 +126,7 @@ public class AuditorService {
 		auditor.setUserAccount(userAccount);
 
 		validator.validate(auditor, binding);
+		userAccount.setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
 		return auditor;
 	}
 
