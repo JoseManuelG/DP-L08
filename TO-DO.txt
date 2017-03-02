@@ -21,11 +21,11 @@ PROPERTY:
 -> Property no funciona el delete
 
 LESSOR/TENANT:
--> Problemas con el view de lessor
-->cancel de editarPerfilTenant
+-> Problemas con el view de lessor //no encontrados
+
 
 AUDITS:
-->Registrar audits en español el titulo está en español
+
 
 
 -------------------------------------------------------(ARREGLADO)--------------------------------------------------------------------
@@ -51,3 +51,5 @@ AUDITS:
 ->CreditCard de lessor peudo poner una caducada. (ARREGLADO)
 ->Restriccion de negocio de No poder aceptar o denegar books si no tienes tarjeta de credito el lessor (ARREGLADO)
 ->Comprobar validez de tarjeta en varias ocasiones (ARREGLADO)
+->cancel de editarPerfilTenant (ARREGLADO)
+->Registrar audits en español el titulo está en español (ARREGLADO)
