@@ -2,6 +2,7 @@
 -> Cambiar imagen de logo
 -> Comprobar en pre-production qué peta por tener el populate vacio
 ->Terminar informe de costes
+-> Revisar todos los requisitos del populate.xml
 -> Sincronizar plantilla 1.9 con 1.10 y proyectos 1.9 y 1.10
 -> Organizar controllers segun actor
 -> Hacer el war y cambiar el create.sql
@@ -15,50 +16,31 @@ COMMENTS:
 -> Cambiar nombres de las relaciones sender y receipment por customer y commentable.
 
 B+ TREE:
-	Actor(NO PROCEDE)
-	Administrator
-	Attachment
-	Attribute(NO PROCEDE)
+	JOSE:
+		Administrator
+		Attachment
+		Audit
+	ROLDAN:
+		Auditor
+		Book
+		Commentable
+	ACHA:
+		Configuration
+		Customer
+	JAVI:
+		Finder
+		Invoice
+	ARTURO:
+		Lessor
+		Tenant
 	AttributeValue(HECHO)
-	Audit
-	Auditor
-	Book
 	Comment(HECHO)
-	Commentable
-	Configuration
-	CreditCard
-	Customer
-	DomainEntity
-	Finder
-	Invoice
-	Lessor
-	Property
-	SocialIdentity(NO PROCEDE)
-	Tenant
-
-
-@SAFEHTML:
-	Attachment(HECHO)
-	AttributeValue(HECHO)
-	Audit(HECHO)
-	Configuration(HECHO)
-	CreditCard (HECHO)
-	Finder(HECHO)
 	Property (HECHO)
-	Actor (HECHO)
-	Attribute (HECHO)
-	Auditor (HECHO)
-	Book (HECHO)
-	Comment (HECHO)
-	Invoice (HECHO)
-	SocialIdentity (HECHO)
-
-	Administrator (NO PROCEDE)
-	Commentable (NO PROCEDE)
-	Customer (NO PROCEDE)
+	Actor(NO PROCEDE)
+	Attribute(NO PROCEDE)
+	CreditCard (NO PROCEDE)
 	DomainEntity (NO PROCEDE)
-	Lessor (NO PROCEDE)
-	Tenant (NO PROCEDE)
+	SocialIdentity(NO PROCEDE)
 
 EXTRAS:
 -> Añadir confirmaciones al borrar cosas
@@ -106,3 +88,25 @@ EXTRAS:
 ->Cancel de property no funciona(ARREGLADO)
 -> Property no funciona el delete(ARREGLADO)
 ->Añadir a la vista de property/list el mensaje correspondiente arriba si se trata de una dashboard y boton para volver a la lista de lessors si es dashboard(ARREGLADO)
+@SAFEHTML:
+	Attachment(HECHO)
+	AttributeValue(HECHO)
+	Audit(HECHO)
+	Configuration(HECHO)
+	CreditCard (HECHO)
+	Finder(HECHO)
+	Property (HECHO)
+	Actor (HECHO)
+	Attribute (HECHO)
+	Auditor (HECHO)
+	Book (HECHO)
+	Comment (HECHO)
+	Invoice (HECHO)
+	SocialIdentity (HECHO)
+
+	Administrator (NO PROCEDE)
+	Commentable (NO PROCEDE)
+	Customer (NO PROCEDE)
+	DomainEntity (NO PROCEDE)
+	Lessor (NO PROCEDE)
+	Tenant (NO PROCEDE)

@@ -39,11 +39,7 @@ public class ConfigurationService {
 	public Configuration findOne() {
 		Configuration result = null;
 		Collection<Configuration> configurations = configurationRepository.findAll();
-		//TODO: poner mas bonito.
-		for (Configuration configuration : configurations) {
-			result = configuration;
-			break;
-		}
+		result = configurations.iterator().next();
 		return result;
 	}
 
