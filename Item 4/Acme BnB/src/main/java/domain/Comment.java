@@ -49,6 +49,7 @@ public class Comment extends DomainEntity {
 	public void setText(String text) {
 		this.text = text;
 	}
+	@NotNull
 	@Range(min = 0, max = 5)
 	public int getStars() {
 		return stars;

@@ -38,7 +38,7 @@ public interface PropertyRepository extends JpaRepository<Property, Integer> {
 	public List<Property> findPropertiesByLessorIdWithPendingBooks(int lessorId);
 
 	//Returns every audit of a given property
-	@Query("select a from Audit a where a.property.id =?1 and a.draftMode=true")
+	@Query("select a from Audit a where a.property.id =?1 and a.draftMode=false")
 	public List<Audit> findAuditsByProperty(int id);
 
 }
