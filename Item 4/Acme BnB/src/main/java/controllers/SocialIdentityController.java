@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.validation.Valid;
 
@@ -41,14 +42,17 @@ public class SocialIdentityController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public @ResponseBody ModelAndView save() {
 		ModelAndView result= new ModelAndView("socialIdentity/create");
+		
 		SocialIdentity socialIdentity= socialIdentityService.create();
 		
+		socialIdentity.setActor(actorService.findByPrincipal());
 		result.addObject("socialIdentity",socialIdentity);
-		ArrayList<Authority> authorities = new ArrayList<Authority>();
-		authorities.addAll(actorService.findByPrincipal().getUserAccount().getAuthorities());
+		
 		//Esto se usa para crear la url del view de la personada logueada dado que no sabe el tipo de usuario que es.
-		String authority=authorities.get(0).getAuthority().toLowerCase();
-		result.addObject("typeActor",authority);
+		
+		Authority authority=actorService.findByPrincipal().getUserAccount().getAuthorities().iterator().next();
+		String authoritytext=authority.getAuthority().toLowerCase();
+		result.addObject("typeActor",authoritytext);
 		
 		return result;
 	
@@ -58,28 +62,30 @@ public class SocialIdentityController extends AbstractController {
 	public @ResponseBody ModelAndView save(int socialIdentityId) {
 		ModelAndView result= new ModelAndView("socialIdentity/edit");
 		SocialIdentity socialIdentity= socialIdentityService.findOne(socialIdentityId);
+	
+		
 		Actor actor = actorService.findByPrincipal();
 		Assert.isTrue(socialIdentity.getActor().equals(actor), "No puedes cambiar una SocialIdentity que no este asignada a usted");
 		result.addObject("socialIdentity",socialIdentity);
-		ArrayList<Authority> authorities = new ArrayList<Authority>();
-		authorities.addAll(socialIdentity.getActor().getUserAccount().getAuthorities());
 		//Esto se usa para crear la url del view de la personada logueada dado que no sabe el tipo de usuario que es.
-		String authority=authorities.get(0).getAuthority().toLowerCase();
-		result.addObject("typeActor",authority );
+		
+				Authority authority=actorService.findByPrincipal().getUserAccount().getAuthorities().iterator().next();
+				String authoritytext=authority.getAuthority().toLowerCase();
+				result.addObject("typeActor",authoritytext);
 		
 		return result;
 	
 	
 	}
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public @ResponseBody ModelAndView save(@Valid SocialIdentity socialIdentity, BindingResult binding) {
+	public @ResponseBody ModelAndView save( @Valid SocialIdentity socialIdentity, BindingResult binding) {
 		ModelAndView result;
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(socialIdentity);
 			System.out.println(binding.getAllErrors().toString());
 		} else {
 			try {
-				socialIdentity.setActor(actorService.findByPrincipal());
+		//		socialIdentity.setActor(actorService.findByPrincipal());
 				socialIdentityService.save(socialIdentity);
 				ArrayList<Authority> authorities = new ArrayList<Authority>();
 				Actor actor = actorService.findByPrincipal();
@@ -130,6 +136,11 @@ public class SocialIdentityController extends AbstractController {
 	protected ModelAndView createEditModelAndView(SocialIdentity socialIdentity, String message) {
 		ModelAndView result;
 		result = new ModelAndView("socialIdentity/edit");
+
+		Authority authority=actorService.findByPrincipal().getUserAccount().getAuthorities().iterator().next();
+		String authoritytext=authority.getAuthority().toLowerCase();
+		result.addObject("typeActor",authoritytext);
+		
 		result.addObject("socialIdentity", socialIdentity);
 		result.addObject("message", message);
 

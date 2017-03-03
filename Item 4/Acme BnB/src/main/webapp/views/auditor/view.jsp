@@ -37,7 +37,7 @@
 	<jstl:if test="${esMiPerfil}">
 			<spring:message code="property.edit.property" var="editHeader" />
 			<display:column title="${editHeader}">
-				<a href="socialIdentity/edit.do?socialIdentityId=${social.id}">
+				<a href="socialIdentity/edit.do?socialIdentityId=${socialIdentity.id}">
 				<spring:message	code="property.edit" />
 				</a>
 				

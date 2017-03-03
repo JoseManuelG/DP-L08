@@ -22,6 +22,7 @@ public class StringToActorConverter implements Converter<String, Actor> {
 
 		try {
 			id = Integer.valueOf(text);
+			actorRepository.findAll();
 			result = actorRepository.findOne(id);
 		} catch (Throwable oops) {
 			throw new IllegalArgumentException(oops);
