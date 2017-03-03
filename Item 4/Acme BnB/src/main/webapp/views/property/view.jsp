@@ -27,12 +27,12 @@
 <br>
 
 <jstl:if test="${!results.isEmpty()}">
-	<display:table pagesize="5" class="displaytag" name="attributeValues"  id="row">
+	<display:table pagesize="5" class="displaytag" name="attributeValues"  uid="attributeValue" requestURI="${requestURI}">
 		
 		<!-- Action links -->
 		<jstl:if test="${ esMiProperty}">
 		<display:column>
-			<a href="attributeValue/lessor/edit.do?attributeValueId=${row.id}">
+			<a href="attributeValue/lessor/edit.do?attributeValueId=${attributeValue.id}">
 				<spring:message	code="attributeValue.edit" />
 			</a>
 	
@@ -52,13 +52,13 @@
 			</jstl:if>
 </jstl:if>
 
-<display:table pagesize="5" class="displaytag" name="audits"  id="row">
+<display:table pagesize="5" class="displaytag" name="audits"  uid="audit" requestURI="${requestURI}">
 		
 		<!-- Action links -->
 		
 		<spring:message code="property.view.audit" var="auditHeader" />
 			<display:column title="${auditHeader}">
-			<a href="audit/view.do?auditId=${row.id}">
+			<a href="audit/view.do?auditId=${audit.id}">
 				<spring:message	code="audit.view" />
 			</a>
 	

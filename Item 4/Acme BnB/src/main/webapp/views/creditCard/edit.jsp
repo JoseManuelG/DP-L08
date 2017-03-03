@@ -23,8 +23,12 @@
 	<acme:textbox code="creditCard.number" path="number"/>
 	<acme:textbox code="creditCard.expirationMonth" path="expirationMonth"/>
 	<acme:textbox code="creditCard.expirationYear" path="expirationYear"/>
-	<acme:textbox code="creditCard.cvvCode" path="cvvCode"/>
-	
+	<form:label path="cvvCode">
+		<spring:message code="creditCard.cvvCode" />:
+	</form:label>
+	<form:input type="number" step="any" path="cvvCode"/>
+	<form:errors path="cvvCode" cssClass="error" />
+	<br/>	
 
 	
 	

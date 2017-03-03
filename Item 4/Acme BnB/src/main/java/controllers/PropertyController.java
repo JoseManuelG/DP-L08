@@ -82,6 +82,7 @@ public class PropertyController extends AbstractController {
 		result.addObject("auditorTieneAudit", auditorTieneAudit);
 		result.addObject("attributeValues", attributeValues);
 		result.addObject("esMiProperty", esMiProperty);
+		result.addObject("requestURI", "property/view.do?propertyId="+property.getId());
 		return result;
 	}
 	
