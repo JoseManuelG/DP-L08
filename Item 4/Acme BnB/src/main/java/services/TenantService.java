@@ -56,6 +56,7 @@ public class TenantService {
 		customerService.setCustomerCollections(result);
 		result.setBooks(new HashSet<Book>());
 		result.setFinder(finderService.create());
+		result.setInvoices(new HashSet<Invoice>());
 
 		return result;
 	}

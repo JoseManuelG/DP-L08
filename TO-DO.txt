@@ -1,15 +1,5 @@
 ﻿FALLOS:
 -> View profile y view property: titulos en las tablas.
-->Fallos de conversion( Meter string en Integer)
-	->Credit card: expiration et cvv
-	->Rate de property
-	->Stars de comment
-->Limitar fecha en books para ahorrar fallo en fechas estupidas(opcional)
-->No puedo registrar un tenant
-->Panic en book request, con el boton invoice
-->Añadir espaciados en perfil de tennant y lessor (creo q auditro tambien) Si esta vacio se ven juntos
-->Fallo de paginación en el view de property
-->En finder, ¿Añadir campo de texto encima de las columnas de los botones?
 
 	AUDITOR:
 
@@ -30,6 +20,7 @@
 		
 	SOCIAL IDENTITY
 	->Si se ponen todos los campos en vacío da un transaction error, en vez de validar los campos. Hay que revisar este formulario a fondo
+	-> Cancel desde /edit.do no funciona.
 	QUERIES:
 		3 - Devuelve 1 lessor y creo que debería devolver varios en caso de empate según esto
 					The lessors who have approved more requests
@@ -44,6 +35,10 @@
 		10b - Devuelve un tenant y debería devolver varios en caso de empate
 
 		No he podido testear las queries de audit porque no funciona
+
+->En finder, ¿Añadir campo de texto encima de las columnas de los botones?
+->Añadir espaciados en perfil de tennant y lessor (creo q auditro tambien) Si esta vacio se ven juntos
+->Limitar fecha en books para ahorrar fallo en fechas estupidas(opcional)
 
 GENERAL:
 -> Cambiar imagen de logo
@@ -116,6 +111,13 @@ EXTRAS:
 -> Al editar un perfil se puede esitar la contaseña del tenant easy. (ARREGLADO)
 -> Edit property desde lessor con campos a vacios no muestra errores. (ARREGLADO)
 -> Al comentar en mi profile vuelvo a el, pero sin poder editar nada (sin permisos) (ARREGLADO)
+->Fallos de conversion( Meter string en Integer)(ARREGLADO)
+	->Credit card: expiration et cvv(ARREGLADO)
+	->Rate de property(ARREGLADO)
+	->Stars de comment(ARREGLADO)
+->Panic en book request, con el boton invoice (ARREGLADO)
+->No puedo registrar un tenant (ARREGLADO)
+->Fallo de paginación en el view de property (ARREGLADO)
 
 B+ TREE:
 	Audit(HECHO)
