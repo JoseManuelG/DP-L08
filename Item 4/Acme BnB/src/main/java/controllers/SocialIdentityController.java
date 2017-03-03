@@ -2,6 +2,8 @@ package controllers;
 
 import java.util.ArrayList;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -70,7 +72,7 @@ public class SocialIdentityController extends AbstractController {
 	
 	}
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public @ResponseBody ModelAndView save(SocialIdentity socialIdentity, BindingResult binding) {
+	public @ResponseBody ModelAndView save(@Valid SocialIdentity socialIdentity, BindingResult binding) {
 		ModelAndView result;
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(socialIdentity);
