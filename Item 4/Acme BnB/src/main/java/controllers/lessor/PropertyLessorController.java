@@ -91,22 +91,23 @@ public class PropertyLessorController extends AbstractController {
 	// Save ---------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public @ResponseBody ModelAndView save(Property property, BindingResult binding) {
-		ModelAndView result;
+		ModelAndView result = null;
 		try {
+			if (binding.hasErrors()) {
+				System.out.println(binding.getAllErrors());
+				result = createEditModelAndView(property);
+			} else {
+				try {
+					propertyService.save(property);
+					result = new ModelAndView("redirect:../lessor/myProperties.do");
+				} catch (Throwable oops) {
+					result = createEditModelAndView(property, "property.commit.error");
+				}
+			}
 			property = propertyService.reconstruct(property, binding);	
 		} catch (TransactionSystemException e) {
 		}
-		if (binding.hasErrors()) {
-			System.out.println(binding.getAllErrors());
-			result = createEditModelAndView(property);
-		} else {
-			try {
-				propertyService.save(property);
-				result = new ModelAndView("redirect:../lessor/myProperties.do");
-			} catch (Throwable oops) {
-				result = createEditModelAndView(property, "property.commit.error");
-			}
-		}
+		
 
 		return result;
 	}
