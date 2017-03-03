@@ -9,7 +9,7 @@
 ->Acabar terminos y meter tags en plantilla (EN PROGRESO)
 ->DISCUSION: ¿SecurityController en plantilla o no?
 		Javi: Voto que no, no me parece necesario y sobrecarga la plantilla. En cualquier caso habría que dejar la plantilla sin fallos de 			compilacion y funcional.
-
+		Rolda:Voto que si, opino que casi siempre vamos a tener la opcion de registro en nuestro proyecto, entonces, veo innecesario tener que estar copiandolo una y otra vez del proyecto anterior, claramente recibiran modificaciones, pero cosas como el nombre, apellidos, email y cosas así siempre estarán, no estoy deacuerdo, con que una plantilla tiene que compilar y funcionar, es una plantilla.
 
 COMMENTS:
 -> Cambiar nombres de las relaciones sender y receipment por customer y commentable.
