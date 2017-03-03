@@ -25,21 +25,20 @@ B+ TREE:
 		Book
 		Commentable
 	ACHA:
-		Configuration
-		Customer
-	JAVI:
-		Finder
-		Invoice
 	ARTURO:
 		Lessor
 		Tenant
 	AttributeValue(HECHO)
 	Comment(HECHO)
+	Configuration(NO PROCEDE)
+	Customer(NO PROCEDE)
+	Finder (HECHO)
 	Property (HECHO)
 	Actor(NO PROCEDE)
 	Attribute(NO PROCEDE)
 	CreditCard (NO PROCEDE)
 	DomainEntity (NO PROCEDE)
+	Invoice (NO PROCEDE)
 	SocialIdentity(NO PROCEDE)
 
 EXTRAS:
