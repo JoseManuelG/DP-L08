@@ -21,9 +21,9 @@ B+ TREE:
 		Attachment(NO PROCEDE)
 		Audit(HECHO)
 	ROLDAN:
-		Auditor
-		Book
-		Commentable
+		Auditor(NO PROCEDE)
+		Book(HECHO)
+		Commentable(NO PROCEDE)
 	ACHA:
 		Configuration
 		Customer
