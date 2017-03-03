@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.TransactionSystemException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -120,15 +121,27 @@ public class SecurityController extends AbstractController {
 
 		if (aux.equals(Authority.AUDITOR)) {
 			auditor = auditorService.findActorByPrincial();
-			auditor = auditorService.reconstruct(actorForm, auditor, binding);
+			try {
+				auditor = auditorService.reconstruct(actorForm, auditor, binding);
+			} catch (TransactionSystemException e) {
+
+			}
 
 		} else if (aux.equals(Authority.LESSOR)) {
 			lessor = lessorService.findByPrincipal();
-			lessor = lessorService.reconstruct(actorForm, lessor, binding);
+			try {
+				lessor = lessorService.reconstruct(actorForm, lessor, binding);
+			} catch (TransactionSystemException e) {
+
+			}
 
 		} else if (aux.equals(Authority.TENANT)) {
 			tenant = tenantService.findByPrincipal();
-			tenant = tenantService.reconstruct(actorForm, tenant, binding);
+			try {
+				tenant = tenantService.reconstruct(actorForm, tenant, binding);
+			} catch (TransactionSystemException e) {
+
+			}
 		}
 
 		if (binding.hasErrors()) {
@@ -204,7 +217,6 @@ public class SecurityController extends AbstractController {
 			result = new ModelAndView("redirect:../" + aux + "/myProfile.do");
 		}
 
-		
 		return result;
 
 	}

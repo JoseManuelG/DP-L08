@@ -4,15 +4,12 @@
 -> Edit property desde lessor con campos a vacios no muestra errores.
 -> Edit property desde lessor vuelve a todas las properties en vez de a sus properties.
 -> Al comentar en mi profile vuelvo a el, pero sin poder editar nada (sin permisos)
--> Edit Perfil lessor con datos vacios peta.
-
 ->Fallos de conversion( Meter string en Integer)
 	->Credit card: expiration et cvv
 	->Rate de property
 	->Stars de comment
 ->Limitar fecha en books para ahorrar fallo en fechas estupidas(opcional)
 ->No puedo registrar un tenant
-->Al editar un perfil se puede esitar la contaseña del tenant easy
 ->Panic en book request, con el boton invoice
 ->Añadir espaciados en perfil de tennant y lessor (creo q auditro tambien) Si esta vacio se ven juntos
 ->Fallo de paginación en el view de property
@@ -44,13 +41,6 @@ EXTRAS:
 -> Acceder en el A+ por https solo cuando un usuario ha hecho login.
 
 AUDITOR:
-->Cuando fallas el pattern de telefono explota en auditor modificando el perfil.
-
-->Cuando no pones el username explota en auditor modificando el perfil.
-
-->Cuando no pones el name explota en auditor modificando el perfil.
-
-->explota si lo dejas entero en blanco.
 
 ->como auditor Pete al pasar pagina en view de property.
 
@@ -129,7 +119,12 @@ QUERIES:
 ->Cancel de property no funciona(ARREGLADO)
 -> Property no funciona el delete(ARREGLADO)
 ->Añadir a la vista de property/list el mensaje correspondiente arriba si se trata de una dashboard y boton para volver a la lista de lessors si es dashboard(ARREGLADO)
-
+->Cuando fallas el pattern de telefono explota en auditor modificando el perfil. (ARREGLADO)
+->Cuando no pones el username explota en auditor modificando el perfil. (ARREGLADO)
+->Cuando no pones el name explota en auditor modificando el perfil. (ARREGLADO)
+->explota si lo dejas entero en blanco. (ARREGLADO)
+-> Edit Perfil lessor con datos vacios peta. (ARREGLADO)
+-> Al editar un perfil se puede esitar la contaseña del tenant easy. (ARREGLADO)
 
 B+ TREE:
 	Audit(HECHO)

@@ -26,7 +26,7 @@
 	<br />
 	
 	<acme:textbox code="lessor.username" path="lessor.userAccount.username"/>
-	<acme:textbox code="lessor.password" path="lessor.userAccount.password"/>
+	<acme:textbox code="lessor.password" path=""/>
 	<acme:textbox code="lessor.name" path="lessor.name"/>
 	<acme:textbox code="lessor.surname" path="lessor.surname"/>
 	<acme:textbox code="lessor.email" path="lessor.email"/>
