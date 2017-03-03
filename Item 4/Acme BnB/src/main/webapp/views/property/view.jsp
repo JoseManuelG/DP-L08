@@ -25,6 +25,9 @@
 <br>
 <spring:message  code="property.address" />: <jstl:out value="${property.address}"/>
 <br>
+<br>
+<spring:message  code="property.attributes" />:
+<br>
 
 <jstl:if test="${!results.isEmpty()}">
 	<display:table pagesize="5" class="displaytag" name="attributeValues"  uid="attributeValue" requestURI="${requestURI}">
@@ -52,6 +55,8 @@
 			</jstl:if>
 </jstl:if>
 
+<spring:message  code="property.audits" />:
+<br>
 <display:table pagesize="5" class="displaytag" name="audits"  uid="audit" requestURI="${requestURI}">
 		
 		<!-- Action links -->

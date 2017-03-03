@@ -44,7 +44,9 @@
 	</a>
 	<br>
 </jstl:if>
-
+<br>
+<spring:message  code="lessor.properties" />:
+<br>
 <jstl:if test="${!properties.isEmpty()}">
 	<display:table pagesize="5" class="displaytag" name="properties"
 		requestURI="${requestURI}" id="row" uid="property">
@@ -84,7 +86,10 @@
 	      <spring:message  code="lessor.property.create" />
 	</a>
 </jstl:if>
-
+<br>
+<br>
+<spring:message  code="lessor.socialIdentities" />:
+<br>
 <jstl:if test="${!socialIdentities.isEmpty()}">
 	<display:table pagesize="5" class="displaytag1" name="socialIdentities"
 		requestURI="${requestURI}" id="row" uid="social">
@@ -120,6 +125,10 @@
 	      <spring:message  code="socialIdentity.create" />
 	</a>
 </jstl:if>
+<br>
+<br>
+<spring:message  code="lessor.comments" />:
+<br>
 <jstl:if test="${!comments.isEmpty()}">
 	<display:table pagesize="5" class="displaytag1" name="comments"
 		requestURI="${requestURI}" id="row" uid="comments">
