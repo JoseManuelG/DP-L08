@@ -75,10 +75,10 @@
 	</display:table>
 
 <security:authorize access="hasRole('AUDITOR')">
-		
+		<jstl:if test="${auditorTieneAudit}">
 			<a href="audit/auditor/create.do?propertyId=${property.id}">
 				<spring:message	code="audit.create" />
 			</a>
-		
+		</jstl:if>
 		</security:authorize>
 	

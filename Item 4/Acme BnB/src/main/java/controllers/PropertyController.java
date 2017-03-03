@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
+import services.AuditService;
 import services.PropertyService;
 import domain.Actor;
 import domain.AttributeValue;
 import domain.Audit;
+import domain.Auditor;
+import domain.Lessor;
 import domain.Property;
 
 @Controller
@@ -27,6 +30,9 @@ public class PropertyController extends AbstractController {
 	
 	@Autowired
 	ActorService actorService ;
+	
+	@Autowired
+	AuditService auditService ;
 	
 	// Constructors -----------------------------------------------------------
 	
@@ -54,23 +60,26 @@ public class PropertyController extends AbstractController {
 	public ModelAndView view(@RequestParam(required = true) Integer propertyId) {
 		ModelAndView result;
 		Boolean esMiProperty=false;
+		Boolean auditorTieneAudit=false;
 		result = new ModelAndView("property/view");
 		Property property  = propertyService.findOne(propertyId);
 		Collection<AttributeValue> attributeValues = property.getAttributeValues();
 		Collection<Audit> audits = propertyService.findAuditsByProperty(property);
-		
 		try{
-			
 			Actor actor = actorService.findByPrincipal();
-			esMiProperty=actor.equals(property.getLessor());
-			
-		
-		}catch( Throwable oops){
-			
+			if (actor instanceof Lessor){
+				esMiProperty=actor.equals(property.getLessor());
+			} else if (actor instanceof Auditor) {
+				auditorTieneAudit= auditService.checkUnique(property,(Auditor) actor);	
+			}
+		}catch (Throwable oops) {
+	
 		}
+			
 		
 		result.addObject("property", property);
 		result.addObject("audits", audits);
+		result.addObject("auditorTieneAudit", auditorTieneAudit);
 		result.addObject("attributeValues", attributeValues);
 		result.addObject("esMiProperty", esMiProperty);
 		return result;
