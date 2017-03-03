@@ -62,6 +62,34 @@ AUDITOR:
 
 ->Panic al intentar editar mi socialIdentity como auditor.
 
+->Register auditor: Si el username ya existe, da un transaction error, estaría bien poner explícitamente por que peta
+
+FINDER:
+->Si en el finder se hace una búsqueda con un parámetro(maxprice/minprice) y se le da a buscar y luego se  borra el parámetro y se le da a buscar de nuevo, aparece un commit error
+
+PROPERTY:
+->	Falta el siguiente requisito no funcional:
+		Wherever a catalogue of properties is shown, the user must be able to sort it according to
+		the number of requests that the corresponding properties have got
+		Se puede haer que en cada fila de la tabla se coja el size de books de la property y ponerlo en una columna nueva que tenga sortable=true
+		
+SOCIAL IDENTITY
+->Si se ponen todos los campos en vacío da un transaction error, en vez de validar los campos. Hay que revisar este formulario a fondo
+QUERIES:
+	3 - Devuelve 1 lessor y creo que debería devolver varios en caso de empate según esto
+				The lessors who have approved more requests
+	4 - Lo mismo que la anterior
+	5 - Lo mismo que la anterior
+	6 - Lo mismo que la anterior
+	7 - Lo mismo que la anterior
+	8 - Lo mismo que la anterior
+	9a - Devuelve un lessor y debería devolver varios en caso de empate
+	9b - Devuelve un lessor y debería devolver varios en caso de empate
+	10a - Devuelve un tenant y debería devolver varios en caso de empate
+	10b - Devuelve un tenant y debería devolver varios en caso de empate
+
+	No he podido testear las queries de audit porque no funciona
+	
 -------------------------------------------------------(ARREGLADO)--------------------------------------------------------------------
 
 ->hacer book con tarjeta de credito caducada, o que caduca en menos de 7 dias, se lo traga, si pongo que el dia es el 29 de febrero, salta un nullpointerException con trazaen la vista (ARREGLADO)
