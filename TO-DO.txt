@@ -32,7 +32,7 @@ B+ TREE:
 	Comment(HECHO)
 	Configuration(NO PROCEDE)
 	Customer(NO PROCEDE)
-	Finder (HECHO)
+	Finder (NO PROCEDE)
 	Property (HECHO)
 	Actor(NO PROCEDE)
 	Attribute(NO PROCEDE)
