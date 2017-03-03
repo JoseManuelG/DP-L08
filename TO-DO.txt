@@ -30,7 +30,22 @@ EXTRAS:
 -> Internacionalizar errores para que se muestre que regla de negocio ha fallado (como en books)
 -> Acceder en el A+ por https solo cuando un usuario ha hecho login.
 
+AUDITOR:
+->Cuando fallas el pattern de telefono explota en auditor modificando el perfil.
 
+->Cuando no pones el username explota en auditor modificando el perfil.
+
+->Cuando no pones el name explota en auditor modificando el perfil.
+
+->explota si lo dejas entero en blanco.
+
+->como auditor Pete al pasar pagina en view de property.
+
+->Error en al editar un audit desde la property cuando ya no esta en draft.
+
+->Como auditor los audits no se muestran en las properties.
+
+->Panic al intentar editar mi socialIdentity como auditor.
 
 -------------------------------------------------------(ARREGLADO)--------------------------------------------------------------------
 
