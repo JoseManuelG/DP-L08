@@ -1,4 +1,14 @@
-﻿GENERAL:
+﻿FALLOS:
+-> View property como lessor: paginacion de la tabla no funciona.
+-> View profile y view property: titulos en las tablas.
+-> View profile: salen los comentarios, pero no se sabe a qué se ha comentado.
+-> Edit property desde lessor con campos a vacios no muestra errores.
+-> Edit property desde lessor vuelve a todas las properties en vez de a sus properties.
+-> Comment, stars: Failed to convert property value of type java.lang.String to required type int for property stars; nested exception is java.lang.NumberFormatException: For input string: ""
+-> Al comentar en mi profile vuelvo a el, pero sin poder editar nada (sin permisos)
+-> Edit Perfil lessor con datos vacios peta.
+
+GENERAL:
 -> Cambiar imagen de logo
 -> Comprobar en pre-production qué peta por tener el populate vacio
 ->Terminar informe de costes
@@ -14,32 +24,6 @@
 
 COMMENTS:
 -> Cambiar nombres de las relaciones sender y receipment por customer y commentable.
-
-B+ TREE:
-	JOSE:
-		Administrator(NO PROCEDE)
-		Attachment(NO PROCEDE)
-		Audit(HECHO)
-	ROLDAN:
-		Auditor(NO PROCEDE)
-		Book(HECHO)
-		Commentable(NO PROCEDE)
-	ACHA:
-	ARTURO:
-		Lessor
-		Tenant
-	AttributeValue(HECHO)
-	Comment(HECHO)
-	Configuration(NO PROCEDE)
-	Customer(NO PROCEDE)
-	Finder (NO PROCEDE)
-	Property (HECHO)
-	Actor(NO PROCEDE)
-	Attribute(NO PROCEDE)
-	CreditCard (NO PROCEDE)
-	DomainEntity (NO PROCEDE)
-	Invoice (NO PROCEDE)
-	SocialIdentity(NO PROCEDE)
 
 EXTRAS:
 -> Añadir confirmaciones al borrar cosas
@@ -87,6 +71,31 @@ EXTRAS:
 ->Cancel de property no funciona(ARREGLADO)
 -> Property no funciona el delete(ARREGLADO)
 ->Añadir a la vista de property/list el mensaje correspondiente arriba si se trata de una dashboard y boton para volver a la lista de lessors si es dashboard(ARREGLADO)
+
+
+B+ TREE:
+	Audit(HECHO)
+	Book(HECHO)
+	AttributeValue(HECHO)
+	Comment(HECHO)
+	Property (HECHO)
+
+	Administrator(NO PROCEDE)
+	Attachment(NO PROCEDE)
+	Auditor(NO PROCEDE)
+	Commentable(NO PROCEDE)
+	Lessor(NO PROCEDE)
+	Tenant(NO PROCEDE)
+	Configuration(NO PROCEDE)
+	Customer(NO PROCEDE)
+	Finder (NO PROCEDE)
+	Actor(NO PROCEDE)
+	Attribute(NO PROCEDE)
+	CreditCard (NO PROCEDE)
+	DomainEntity (NO PROCEDE)
+	Invoice (NO PROCEDE)
+	SocialIdentity(NO PROCEDE)
+
 @SAFEHTML:
 	Attachment(HECHO)
 	AttributeValue(HECHO)
