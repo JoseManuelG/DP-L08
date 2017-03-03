@@ -76,6 +76,14 @@
 	<spring:message code="property.address" var="addressHeader" />
 	<display:column property="address" title="${addressHeader}" sortable="false" />
 	
+	<jstl:if test="${lessor==null}">
+		<spring:message code="property.number" var="numberHeader" />
+		<display:column title="${numberHeader}" sortable="true">
+			<jstl:out value="${row.books.size()}"/>
+		</display:column>
+	</jstl:if>
+	
+	
 </display:table>
 
 <jstl:if test="${lessor!=null}">
