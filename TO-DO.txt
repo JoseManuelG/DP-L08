@@ -8,6 +8,21 @@
 -> Al comentar en mi profile vuelvo a el, pero sin poder editar nada (sin permisos)
 -> Edit Perfil lessor con datos vacios peta.
 
+->Fallos de conversion( Meter string en Integer)
+	->Credit card: expiration et cvv
+	->Rate de property
+	->Stars de comment
+->Limitar fecha en books para ahorrar fallo en fechas estupidas(opcional)
+->No puedo registrar un tenant
+->Al editar un perfil se puede esitar la contaseña del tenant easy
+->Panic en book request, con el boton invoice
+->Añadir espaciados en perfil de tennant y lessor (creo q auditro tambien) Si esta vacio se ven juntos
+->Fallo de paginación en el view de property
+->En finder, ¿Añadir campo de texto encima de las columnas de los botones?
+
+
+
+
 GENERAL:
 -> Cambiar imagen de logo
 -> Comprobar en pre-production qué peta por tener el populate vacio
