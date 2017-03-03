@@ -23,9 +23,13 @@
 	<br />
 	<acme:textbox code="comment.text" path="text"/>
 	<br />
-	<acme:textbox code="comment.stars" path="stars"/>
-	<br />
-		
+	
+	<form:label path="stars">
+		<spring:message code="comment.stars" />:
+	</form:label>
+	<form:input type="number" step="any" path="stars"/>
+	<form:errors path="stars" cssClass="error" />
+	<br/>	
 	<acme:submit name="save" code="comment.save"/>
 	
 	<acme:cancel url='${requestURI}' code="comment.cancel"/>
