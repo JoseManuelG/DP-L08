@@ -15,15 +15,15 @@ COMMENTS:
 -> Cambiar nombres de las relaciones sender y receipment por customer y commentable.
 
 B+ TREE:
-	Actor
+	Actor(NO PROCEDE)
 	Administrator
 	Attachment
-	Attribute
-	AttributeValue
+	Attribute(NO PROCEDE)
+	AttributeValue(HECHO)
 	Audit
 	Auditor
 	Book
-	Comment
+	Comment(HECHO)
 	Commentable
 	Configuration
 	CreditCard
@@ -33,7 +33,7 @@ B+ TREE:
 	Invoice
 	Lessor
 	Property
-	SocialIdentity
+	SocialIdentity(NO PROCEDE)
 	Tenant
 
 

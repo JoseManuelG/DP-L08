@@ -9,5 +9,4 @@ import domain.Commentable;
 @Repository
 public interface CommentableRepository extends JpaRepository<Commentable, Integer> {
 
-
 }
