@@ -4,7 +4,6 @@
 -> View profile: salen los comentarios, pero no se sabe a qué se ha comentado.
 -> Edit property desde lessor con campos a vacios no muestra errores.
 -> Edit property desde lessor vuelve a todas las properties en vez de a sus properties.
--> Comment, stars: Failed to convert property value of type java.lang.String to required type int for property stars; nested exception is java.lang.NumberFormatException: For input string: ""
 -> Al comentar en mi profile vuelvo a el, pero sin poder editar nada (sin permisos)
 -> Edit Perfil lessor con datos vacios peta.
 
@@ -92,6 +91,7 @@ QUERIES:
 	
 -------------------------------------------------------(ARREGLADO)--------------------------------------------------------------------
 
+-> Comment, stars: Failed to convert property value of type java.lang.String to required type int for property stars; nested exception is java.lang.NumberFormatException: For input string: ""(ARREGLADO)
 ->hacer book con tarjeta de credito caducada, o que caduca en menos de 7 dias, se lo traga, si pongo que el dia es el 29 de febrero, salta un nullpointerException con trazaen la vista (ARREGLADO)
 ->Cancel de crearSocialIdentity(ARREGLADO)
 ->Comentar en Tenant(ARREGLADO)
