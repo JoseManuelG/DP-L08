@@ -13,13 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.ActorService;
 import services.AttachmentService;
 import services.AuditService;
 import controllers.AbstractController;
 import domain.Attachment;
 import domain.Audit;
-import domain.Auditor;
 
 @Controller
 @RequestMapping("/attachment")
@@ -31,8 +29,6 @@ public class AttachmentAuditorController extends AbstractController {
 	@Autowired
 	private AuditService auditService ;
 	
-	@Autowired
-	private ActorService actorService ;
 	
 	// List --------------------------------------------------------------------
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -56,7 +52,6 @@ public class AttachmentAuditorController extends AbstractController {
 		public ModelAndView create(@RequestParam int auditId) {
 			ModelAndView result;
 			Attachment attachment = attachmentService.create();
-			Auditor auditor= (Auditor) actorService.findByPrincipal();
 			Audit audit = auditService.findOne(auditId);
 			Collection<Attachment> attachments = audit.getAttachments();
 			attachment.setAudit(audit);

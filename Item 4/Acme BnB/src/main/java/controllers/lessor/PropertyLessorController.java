@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.TransactionSystemException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -91,13 +92,15 @@ public class PropertyLessorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public @ResponseBody ModelAndView save(Property property, BindingResult binding) {
 		ModelAndView result;
-		
+		try {
+			property = propertyService.reconstruct(property, binding);	
+		} catch (TransactionSystemException e) {
+		}
 		if (binding.hasErrors()) {
 			System.out.println(binding.getAllErrors());
 			result = createEditModelAndView(property);
 		} else {
 			try {
-				property = propertyService.reconstruct(property, binding);
 				propertyService.save(property);
 				result = new ModelAndView("redirect:../lessor/myProperties.do");
 			} catch (Throwable oops) {

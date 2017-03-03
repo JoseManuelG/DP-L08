@@ -189,19 +189,14 @@ public class PropertyService {
 		if(property.getId() == 0){
 			int lessorId = lessorService.findByPrincipal().getId();
 			result = this.create(lessorId);
-			result.setName(property.getName());
-			result.setRate(property.getRate());
-			result.setDescription(property.getDescription());
-			result.setAddress(property.getAddress());
-			validator.validate(result, bindingResult);
 		} else{
 			result = propertyRepository.findOne(property.getId());
-			result.setName(property.getName());
-			result.setRate(property.getRate());
-			result.setDescription(property.getDescription());
-			result.setAddress(property.getAddress());
-			validator.validate(result, bindingResult);
 		}
+		result.setName(property.getName());
+		result.setRate(property.getRate());
+		result.setDescription(property.getDescription());
+		result.setAddress(property.getAddress());
+		validator.validate(result, bindingResult);
 		return result;
 		
 	}

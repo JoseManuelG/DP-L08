@@ -1,9 +1,5 @@
 ﻿FALLOS:
 -> View profile y view property: titulos en las tablas.
--> View profile: salen los comentarios, pero no se sabe a qué se ha comentado.
--> Edit property desde lessor con campos a vacios no muestra errores.
--> Edit property desde lessor vuelve a todas las properties en vez de a sus properties.
--> Al comentar en mi profile vuelvo a el, pero sin poder editar nada (sin permisos)
 ->Fallos de conversion( Meter string en Integer)
 	->Credit card: expiration et cvv
 	->Rate de property
@@ -15,8 +11,39 @@
 ->Fallo de paginación en el view de property
 ->En finder, ¿Añadir campo de texto encima de las columnas de los botones?
 
+	AUDITOR:
 
+	->como auditor Pete al pasar pagina en view de property.
+	->Error en al editar un audit desde la property cuando ya no esta en draft.
+	->Como auditor los audits no se muestran en las properties.
+	->Panic al intentar editar mi socialIdentity como auditor.
+	->Register auditor: Si el username ya existe, da un transaction error, estaría bien poner explícitamente por que peta
 
+	FINDER:
+	->Si en el finder se hace una búsqueda con un parámetro(maxprice/minprice) y se le da a buscar y luego se  borra el parámetro y se le da a buscar de nuevo, aparece un commit error
+
+	PROPERTY:
+	->	Falta el siguiente requisito no funcional:
+			Wherever a catalogue of properties is shown, the user must be able to sort it according to
+			the number of requests that the corresponding properties have got
+			Se puede haer que en cada fila de la tabla se coja el size de books de la property y ponerlo en una columna nueva que tenga sortable=true
+		
+	SOCIAL IDENTITY
+	->Si se ponen todos los campos en vacío da un transaction error, en vez de validar los campos. Hay que revisar este formulario a fondo
+	QUERIES:
+		3 - Devuelve 1 lessor y creo que debería devolver varios en caso de empate según esto
+					The lessors who have approved more requests
+		4 - Lo mismo que la anterior
+		5 - Lo mismo que la anterior
+		6 - Lo mismo que la anterior
+		7 - Lo mismo que la anterior
+		8 - Lo mismo que la anterior
+		9a - Devuelve un lessor y debería devolver varios en caso de empate
+		9b - Devuelve un lessor y debería devolver varios en caso de empate
+		10a - Devuelve un tenant y debería devolver varios en caso de empate
+		10b - Devuelve un tenant y debería devolver varios en caso de empate
+
+		No he podido testear las queries de audit porque no funciona
 
 GENERAL:
 -> Cambiar imagen de logo
@@ -39,44 +66,6 @@ EXTRAS:
 -> Añadir confirmaciones al borrar cosas
 -> Internacionalizar errores para que se muestre que regla de negocio ha fallado (como en books)
 -> Acceder en el A+ por https solo cuando un usuario ha hecho login.
-
-AUDITOR:
-
-->como auditor Pete al pasar pagina en view de property.
-
-->Error en al editar un audit desde la property cuando ya no esta en draft.
-
-->Como auditor los audits no se muestran en las properties.
-
-->Panic al intentar editar mi socialIdentity como auditor.
-
-->Register auditor: Si el username ya existe, da un transaction error, estaría bien poner explícitamente por que peta
-
-FINDER:
-->Si en el finder se hace una búsqueda con un parámetro(maxprice/minprice) y se le da a buscar y luego se  borra el parámetro y se le da a buscar de nuevo, aparece un commit error
-
-PROPERTY:
-->	Falta el siguiente requisito no funcional:
-		Wherever a catalogue of properties is shown, the user must be able to sort it according to
-		the number of requests that the corresponding properties have got
-		Se puede haer que en cada fila de la tabla se coja el size de books de la property y ponerlo en una columna nueva que tenga sortable=true
-		
-SOCIAL IDENTITY
-->Si se ponen todos los campos en vacío da un transaction error, en vez de validar los campos. Hay que revisar este formulario a fondo
-QUERIES:
-	3 - Devuelve 1 lessor y creo que debería devolver varios en caso de empate según esto
-				The lessors who have approved more requests
-	4 - Lo mismo que la anterior
-	5 - Lo mismo que la anterior
-	6 - Lo mismo que la anterior
-	7 - Lo mismo que la anterior
-	8 - Lo mismo que la anterior
-	9a - Devuelve un lessor y debería devolver varios en caso de empate
-	9b - Devuelve un lessor y debería devolver varios en caso de empate
-	10a - Devuelve un tenant y debería devolver varios en caso de empate
-	10b - Devuelve un tenant y debería devolver varios en caso de empate
-
-	No he podido testear las queries de audit porque no funciona
 	
 -------------------------------------------------------(ARREGLADO)--------------------------------------------------------------------
 
@@ -125,6 +114,8 @@ QUERIES:
 ->explota si lo dejas entero en blanco. (ARREGLADO)
 -> Edit Perfil lessor con datos vacios peta. (ARREGLADO)
 -> Al editar un perfil se puede esitar la contaseña del tenant easy. (ARREGLADO)
+-> Edit property desde lessor con campos a vacios no muestra errores. (ARREGLADO)
+-> Al comentar en mi profile vuelvo a el, pero sin poder editar nada (sin permisos) (ARREGLADO)
 
 B+ TREE:
 	Audit(HECHO)

@@ -1,7 +1,5 @@
 package converters;
 
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
@@ -24,8 +22,9 @@ public class StringToCommentableConverter implements Converter<String, Commentab
 
 		try {
 			id = Integer.valueOf(text);
-			Collection<Commentable> recipient2 =  commentableRepository.findAll();
-
+			
+			commentableRepository.findAll();
+			
 			result = commentableRepository.findOne(id);
 		} catch (Throwable oops) {
 			throw new IllegalArgumentException(oops);

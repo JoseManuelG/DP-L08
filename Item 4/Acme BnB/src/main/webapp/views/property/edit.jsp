@@ -14,7 +14,6 @@
 <form:form action="property/lessor/edit.do" modelAttribute="property">
 	
 	<form:hidden path="id" />
-	<form:hidden path="version" />
 	
 	<acme:textbox code="property.name" path="name"/>
 	<acme:textbox code="property.rate" path="rate"/>

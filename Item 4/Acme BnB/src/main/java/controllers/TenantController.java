@@ -4,7 +4,6 @@ package controllers;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +15,6 @@ import services.CommentService;
 import services.CustomerService;
 import services.TenantService;
 import domain.Comment;
-import domain.Commentable;
-import domain.Customer;
 import domain.Tenant;
 
 @Controller
@@ -70,7 +67,7 @@ public class TenantController extends AbstractController {
 		//Bloque de botoneria de comentario Hecho por roldan -->
 		try{
 			Comment comment= commentService.create();
-			comment.setRecipient((Commentable) tenant);
+			comment.setRecipient(tenant);
 			comment.setSender(customerService.findActorByPrincial());
 			puedoComentar=commentService.validComment(comment);
 			}catch (Throwable oops) {
@@ -79,7 +76,7 @@ public class TenantController extends AbstractController {
 		result.addObject("puedoComentar",puedoComentar);
 		//<--
 		result.addObject("tenant", tenant);
-		result.addObject("comments", commentService.findAllCommentsOfACustomer((Customer) tenant));
+		result.addObject("comments", commentService.findAllCommentsOfACustomer(tenant));
 		result.addObject("requestURI", "tenant/view.do");
 		result.addObject("socialIdentities", tenant.getSocialIdentities());
 		result.addObject("esMiPerfil", false);
@@ -103,7 +100,6 @@ public class TenantController extends AbstractController {
 	public @ResponseBody
 	ModelAndView save(@Valid Tenant tenant, BindingResult binding) {
 		ModelAndView result;
-		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(tenant);
 		} else {

@@ -36,9 +36,6 @@ public class CommentService {
 	private CommentableRepository commentableRepository;
 	
 	@Autowired
-	private ActorService		actorService;
-	
-	@Autowired
 	private TenantService		tenantService;
 	
 	@Autowired

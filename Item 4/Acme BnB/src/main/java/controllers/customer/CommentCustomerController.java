@@ -94,7 +94,11 @@ public class CommentCustomerController extends AbstractController {
 					ArrayList<Authority> authorities=new ArrayList<Authority>();
 					authorities.addAll(	actor.getUserAccount().getAuthorities());
 					String aux= authorities.get(0).getAuthority().toLowerCase();
-					result = new ModelAndView("redirect:../../"+aux+"/view.do?"+aux+"Id="+actor.getId());
+					if (comment.getRecipient().equals(comment.getSender())){
+						result = new ModelAndView("redirect:../../"+aux+"/myProfile.do");
+					} else {
+						result = new ModelAndView("redirect:../../"+aux+"/view.do?"+aux+"Id="+actor.getId());
+					}
 				} catch (Throwable oops) {
 					result = createEditModelAndView(comment, "comment.commit.error");				
 				}
