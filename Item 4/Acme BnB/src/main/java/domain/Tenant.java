@@ -46,7 +46,7 @@ public class Tenant extends Customer {
 
 	@NotNull
 	@Valid
-	@OneToMany(cascade = CascadeType.REMOVE)
+	@OneToMany(cascade = CascadeType.ALL)
 	public Collection<Invoice> getInvoices() {
 		return invoices;
 	}

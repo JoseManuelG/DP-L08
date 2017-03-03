@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -79,7 +80,7 @@ public class Invoice extends DomainEntity {
 
 	@Valid
 	@NotNull
-	@OneToOne(optional = false, mappedBy = "invoice")
+	@OneToOne(optional = false, mappedBy = "invoice", cascade=CascadeType.PERSIST)
 	public Book getBook() {
 		return book;
 	}

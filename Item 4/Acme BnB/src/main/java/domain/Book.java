@@ -130,7 +130,7 @@ public class Book extends DomainEntity {
 	}
 
 	@Valid
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.ALL)
 	public Invoice getInvoice() {
 		return invoice;
 	}

@@ -47,8 +47,10 @@ public class InvoiceService {
 		Assert.isTrue(book.getState().equals("ACCEPTED"), "invoice.unaccepted.error");
 		maskedNumber = creditCardService.getMaskedCreditCardAsString(book.getCreditCard());
 		tenant = book.getTenant();
-		details = "Checkin: " + book.getCheckInDate() + ", " + "Checkout: " + book.getCheckOutDate() + ", " + "Address: " + book.getPropertyAddress() + ", " + "Credit Card: " + maskedNumber + ", " + "Amount: " + book.getTotalAmount()
-			+ "&euro;, ";
+		details = "Checkin: " + book.getCheckInDate() + ", " + "Checkout: " 
+			+ book.getCheckOutDate() + ", " + "Address: " + book.getPropertyAddress() + ", " 
+			+ "Credit Card: " + maskedNumber + ", " + "Amount: " + book.getTotalAmount()
+			+ " euros, ";
 		if (book.getSmoker()) {
 			details += "Smoker";
 		} else {
@@ -66,7 +68,7 @@ public class InvoiceService {
 		
 		result = bookService.addInvoice(book, result);
 		tenantService.addInvoice(tenant,result);
-
+		
 		return result;
 	}
 
