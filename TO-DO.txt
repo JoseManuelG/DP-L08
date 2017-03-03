@@ -17,9 +17,9 @@ COMMENTS:
 
 B+ TREE:
 	JOSE:
-		Administrator
-		Attachment
-		Audit
+		Administrator(NO PROCEDE)
+		Attachment(NO PROCEDE)
+		Audit(HECHO)
 	ROLDAN:
 		Auditor
 		Book
