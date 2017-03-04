@@ -19,6 +19,7 @@ import services.InvoiceService;
 import services.LessorService;
 import services.TenantService;
 import domain.Actor;
+import domain.Administrator;
 import domain.Auditor;
 import domain.Lessor;
 import domain.Tenant;
@@ -96,6 +97,11 @@ public class SecurityController extends AbstractController {
 	public ModelAndView edit() {
 		ModelAndView result = new ModelAndView("security/edit");
 		Actor actor = actorService.findByPrincipal();
+		Boolean isAdmin = false;
+		
+		if (actor instanceof Administrator){
+			isAdmin = true;
+		}
 		ActorForm actorForm = new ActorForm();
 		actorForm.setName(actor.getName());
 		actorForm.setSurname(actor.getSurname());
@@ -105,6 +111,7 @@ public class SecurityController extends AbstractController {
 
 		actorForm.setUserAccount(actor.getUserAccount());
 		result.addObject(actorForm);
+		result.addObject("isAdmin", isAdmin);
 
 		return result;
 	}
@@ -115,6 +122,9 @@ public class SecurityController extends AbstractController {
 		Tenant tenant = null;
 		Lessor lessor = null;
 		Auditor auditor = null;
+		Administrator administrator = null;
+		Boolean isAdmin = false;
+		
 		ArrayList<Authority> authorities = new ArrayList<Authority>();
 		authorities.addAll(actor.getUserAccount().getAuthorities());
 		String aux = authorities.get(0).getAuthority();
@@ -142,11 +152,19 @@ public class SecurityController extends AbstractController {
 			} catch (TransactionSystemException e) {
 
 			}
+		} else if (aux.equals(Authority.ADMINISTRATOR)) {
+			administrator = administratorService.findByPrincipal();
+			isAdmin = true;
+			try {
+				administrator = administratorService.reconstruct(actorForm, administrator, binding);
+			} catch (TransactionSystemException e) {
+			}
 		}
 
 		if (binding.hasErrors()) {
 			result = new ModelAndView("security/edit");
 			result.addObject("actorForm", actorForm);
+			result.addObject("isAdmin", isAdmin);
 			result.addObject("message", null);
 		} else {
 			try {
@@ -161,6 +179,10 @@ public class SecurityController extends AbstractController {
 				} else if (aux.equals("AUDITOR")) {
 
 					auditorService.save(auditor);
+
+				} else if (aux.equals("ADMINISTRATOR")) {
+
+					administratorService.save(administrator);
 
 				}
 
@@ -236,6 +258,9 @@ public class SecurityController extends AbstractController {
 		result.addObject("actorForm", actorForm);
 		result.addObject("message", message);
 
+		if (actorForm.getTypeOfActor().equals("ADMINISTRATOR")){
+			result.addObject("isAdmin", true);
+		}
 		return result;
 	}
 }

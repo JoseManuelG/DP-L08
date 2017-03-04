@@ -47,18 +47,19 @@
 				<ul>
 					<li class="arrow"></li>
 					<security:authorize access="hasRole('LESSOR')">
+						<li><a href="lessor/myProfile.do"><spring:message code="master.page.lessor.myProfile" /></a></li>
 						<li><a href="book/lessor/list.do"><spring:message code="master.page.lessor.request.books" /></a></li>
 						<li><a href="property/lessor/myProperties.do"><spring:message code="master.page.lessor.myProperties" /></a></li>
 						<li><a href="lessor/fee.do"><spring:message code="master.page.lessor.unpaid.fee" /></a></li>
-						<li><a href="lessor/myProfile.do"><spring:message code="master.page.lessor.myProfile" /></a></li>
 						<li><a href="creditCard/lessor/myCreditCard.do"><spring:message code="master.page.lessor.creditCard" /></a></li>
 					</security:authorize>
 					<security:authorize access="hasRole('TENANT')">
+						<li><a href="tenant/myProfile.do"><spring:message code="master.page.lessor.myProfile" /></a></li>
 						<li><a href="finder/tenant/finder.do"><spring:message code="master.page.tenant.finder" /></a></li>
 						<li><a href="book/tenant/list.do"><spring:message code="master.page.tenant.request.books" /></a></li>
-						<li><a href="tenant/myProfile.do"><spring:message code="master.page.lessor.myProfile" /></a></li>
 					</security:authorize>	
 					<security:authorize access="hasRole('ADMINISTRATOR')">
+						<li><a href="administrator/administrator/myProfile.do"><spring:message code="master.page.lessor.myProfile" /></a></li>
 						<li><a href="auditor/administrator/registerAuditor.do"><spring:message code="master.page.administrator.registerAuditor" /></a></li>
 						<li><a href="attribute/administrator/list.do"><spring:message code="master.page.administrator.attributes" /></a></li>
 						<li><a href="dashboard/administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>

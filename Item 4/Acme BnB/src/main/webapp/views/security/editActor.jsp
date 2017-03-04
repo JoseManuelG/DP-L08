@@ -37,7 +37,9 @@
 	
 	<acme:submit code="security.register.save" name="save"/>
 	
-	<acme:submit code="security.register.delete" name="delete"/>
+	<jstl:if test="${!isAdmin}">
+		<acme:submit code="security.register.delete" name="delete"/>
+	</jstl:if>
 	
 	<acme:cancel url="" code="security.register.cancel"/>
 	

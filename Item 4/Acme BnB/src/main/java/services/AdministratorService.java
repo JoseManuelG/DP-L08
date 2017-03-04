@@ -3,14 +3,18 @@ package services;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.AdministratorRepository;
 import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
+import forms.ActorForm;
 
 @Service
 @Transactional
@@ -21,6 +25,8 @@ public class AdministratorService {
 	private AdministratorRepository administratorRepository;
 	// Supporting Services --------------------------------------
 	
+	@Autowired
+	private Validator validator;
 	
 	// Simple CRUD methods --------------------------------------
 	public Administrator create() {
@@ -86,6 +92,25 @@ public class AdministratorService {
 		result = administratorRepository.findByUserAccountId(userAccount.getId());		
 
 		return result;
+	}
+
+	public Administrator reconstruct(ActorForm actorForm, Administrator administrator, BindingResult binding) {
+		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		UserAccount userAccount = administrator.getUserAccount();
+		userAccount.setPassword(actorForm.getUserAccount().getPassword());
+		userAccount.setUsername(actorForm.getUserAccount().getUsername());
+
+		administrator.setName(actorForm.getName());
+		administrator.setSurname(actorForm.getSurname());
+		administrator.setPicture(actorForm.getPicture());
+		administrator.setEmail(actorForm.getEmail());
+		administrator.setPhone(actorForm.getPhone());
+
+		administrator.setUserAccount(userAccount);
+
+		validator.validate(administrator, binding);
+		userAccount.setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
+		return administrator;
 	}
 
 }

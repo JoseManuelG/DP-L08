@@ -74,6 +74,8 @@
 		
 	<!-- ADMINISTRATOR -->
 	
+		<security:intercept-url pattern="/administrator/administrator/myProfile.do" access="hasRole('ADMINISTRATOR')" /> 
+	
 		<security:intercept-url pattern="/attribute/administrator/create.do" access="hasRole('ADMINISTRATOR')" /> 
 		<security:intercept-url pattern="/attribute/administrator/edit.do" access="hasRole('ADMINISTRATOR')" />  
 		<security:intercept-url pattern="/attribute/administrator/list.do" access="hasRole('ADMINISTRATOR')" /> 

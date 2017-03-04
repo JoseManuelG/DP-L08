@@ -81,6 +81,7 @@
 	</a>
 </jstl:if>
 <br>
+<jstl:if test="${comments != null}">
 <h2><spring:message  code="lessor.comments" />:</h2>
 	<display:table pagesize="5" class="displaytag1" name="comments"
 		requestURI="${requestURI}" id="row" uid="comments">
@@ -101,6 +102,7 @@
 
 
 	</display:table>
+</jstl:if>
 	<jstl:if test="${puedoComentar}">
 		<a href="comment/customer/create.do?customerId=${tenant.id }">
 	      <spring:message  code="comment.create" />

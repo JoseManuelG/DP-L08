@@ -1,7 +1,6 @@
 ﻿FALLOS EN GENERAL:
 	-> Reordenar la vista de registrarse.
 	-> En registro doble contraseña para confirmacion.
-	-> Perfil de administrator (ver y editar).
 	-> Comprobar en pre-production qué peta por tener el populate vacio
 	-> Terminar informe de costes
 	-> Revisar todos los requisitos del populate.xml
@@ -112,6 +111,7 @@ EXTRAS:
 -> Titulos en tablas de view profile en tenant y lessor. (ARREGLADO)
 -> Añadir espaciados en perfil de tenant y lessor (creo q auditro tambien) Si esta vacio se ven juntos (ARREGLADO)
 -> Redactar contrato para lessor y tenant. (ARREGLADO)
+-> Perfil de administrator (ver y editar). (ARREGLADO)
 
 B+ TREE:
 	Audit(HECHO)
