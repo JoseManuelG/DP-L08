@@ -47,10 +47,7 @@ public class InvoiceService {
 		Assert.isTrue(book.getState().equals("ACCEPTED"), "invoice.unaccepted.error");
 		maskedNumber = creditCardService.getMaskedCreditCardAsString(book.getCreditCard());
 		tenant = book.getTenant();
-		details = "Checkin: " + book.getCheckInDate() + ", " + "Checkout: " 
-			+ book.getCheckOutDate() + ", " + "Address: " + book.getPropertyAddress() + ", " 
-			+ "Credit Card: " + maskedNumber + ", " + "Amount: " + book.getTotalAmount()
-			+ " euros, ";
+		details = "Checkin: " + book.getCheckInDate() + ", " + "Checkout: " + book.getCheckOutDate() + ", " + "Address: " + book.getPropertyAddress() + ", " + "Credit Card: " + maskedNumber + ", " + "Amount: " + book.getTotalAmount() + " euros, ";
 		if (book.getSmoker()) {
 			details += "Smoker";
 		} else {
@@ -65,10 +62,10 @@ public class InvoiceService {
 		result.setBook(book);
 		result.setDetails(details);
 		result.setInformation(information);
-		
+
 		result = bookService.addInvoice(book, result);
-		tenantService.addInvoice(tenant,result);
-		
+		tenantService.addInvoice(tenant, result);
+
 		return result;
 	}
 
@@ -120,27 +117,27 @@ public class InvoiceService {
 		Assert.isTrue(owner.equals(principal));
 	}
 
-	public double getMinimumInvoicesPerTenant() {
+	public Integer getMinimumInvoicesPerTenant() {
 		//Dashboard-18
-		double res = invoiceRepository.getMinimumInvoicesPerTenant();
+		Integer res = invoiceRepository.getMinimumInvoicesPerTenant();
 		return res;
 	}
 
-	public double getAverageInvoicesPerTenant() {
+	public Double getAverageInvoicesPerTenant() {
 		//Dashboard-18
-		double res = invoiceRepository.getAverageInvoicesPerTenant();
+		Double res = invoiceRepository.getAverageInvoicesPerTenant();
 		return res;
 	}
 
-	public double getMaximumInvoicesPerTenant() {
+	public Integer getMaximumInvoicesPerTenant() {
 		//Dashboard-18
-		double res = invoiceRepository.getMaximumInvoicesPerTenant();
+		Integer res = invoiceRepository.getMaximumInvoicesPerTenant();
 		return res;
 	}
 
-	public double getTotalDueMoneyOfInvoices() {
+	public Double getTotalDueMoneyOfInvoices() {
 		//Dashboard-19
-		double res = invoiceRepository.getTotalDueMoneyOfInvoices();
+		Double res = invoiceRepository.getTotalDueMoneyOfInvoices();
 		return res;
 	}
 

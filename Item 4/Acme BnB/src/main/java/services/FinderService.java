@@ -73,17 +73,16 @@ public class FinderService {
 		if (finder.getMaxPrice() != null && finder.getMinPrice() != null) {
 			Assert.isTrue(finder.getMaxPrice() >= finder.getMinPrice());
 		}
-		if (finder.getMinPrice() == null){
+		if (finder.getMinPrice() == null) {
 			min = -1.0;
 		} else {
 			min = finder.getMinPrice();
 		}
-		if (finder.getMaxPrice() == null){
+		if (finder.getMaxPrice() == null) {
 			max = -1.0;
 		} else {
 			max = finder.getMaxPrice();
 		}
-		
 
 		old = finderRepository.findOne(finder.getId());
 
@@ -125,17 +124,17 @@ public class FinderService {
 		return result;
 	}
 
-	public double getAverageResultsPerFinder() {
+	public Double getAverageResultsPerFinder() {
 		//Dashboard-11
 		return finderRepository.getAverageResultsPerFinder();
 	}
 
-	public int getMinimumResultsPerFinder() {
+	public Integer getMinimumResultsPerFinder() {
 		//Dashboard-11
 		return finderRepository.getMinimumResultsPerFinder();
 	}
 
-	public int getMaximumResultsPerFinder() {
+	public Integer getMaximumResultsPerFinder() {
 		//Dashboard-11
 		return finderRepository.getMaximumResultsPerFinder();
 	}

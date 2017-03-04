@@ -21,17 +21,17 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 
 	//Dashboard-01/02
 	@Query("select count(b) from Book b where b.state='ACCEPTED'")
-	public double countAcceptedBooks();
+	public Double countAcceptedBooks();
 
 	//Dashboard-01/02
 	@Query("select count(b) from Book b where b.state='DENIED'")
-	public double countDeniedBooks();
-	
+	public Double countDeniedBooks();
+
 	//Returns the average number of requests for properties that have at least an audit record
 	@Query("select avg(p.books.size) from Property p where p.audits is not empty")
-	public double getAverageRequestsWithAudits();
-	
+	public Double getAverageRequestsWithAudits();
+
 	//Returns  the average number of requests for properties that do not have any audits
 	@Query("select avg(p.books.size) from Property p where p.audits is empty")
-	public double getAverageRequestsWithoutAudits();
+	public Double getAverageRequestsWithoutAudits();
 }

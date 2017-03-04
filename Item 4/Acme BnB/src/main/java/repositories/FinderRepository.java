@@ -24,14 +24,14 @@ public interface FinderRepository extends JpaRepository<Finder, Integer> {
 
 	//Dashboard-11
 	@Query("select avg(f.results.size) from Finder f")
-	double getAverageResultsPerFinder();
+	Double getAverageResultsPerFinder();
 
 	//Dashboard-11
 	@Query("select min(f.results.size) from Finder f")
-	int getMinimumResultsPerFinder();
+	Integer getMinimumResultsPerFinder();
 
 	//Dashboard-11
 	@Query("select max(f.results.size) from Finder f")
-	int getMaximumResultsPerFinder();
+	Integer getMaximumResultsPerFinder();
 
 }

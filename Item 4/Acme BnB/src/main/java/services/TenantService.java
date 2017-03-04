@@ -96,7 +96,7 @@ public class TenantService {
 		tenantRepository.delete(tenant);
 	}
 
-	public double count() {
+	public Long count() {
 		// Dasboard-02
 		return tenantRepository.count();
 	}
@@ -152,49 +152,94 @@ public class TenantService {
 	public Tenant reconstruct(ActorForm actorForm, Tenant tenant, BindingResult binding) {
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		Tenant result;
-		
+
 		result = new Tenant();
 		customerService.reconstruct(result, tenant, actorForm);
 
 		// Setear campos propios de tenant.
-		
+
 		result.setBooks(tenant.getBooks());
 		result.setInvoices(tenant.getInvoices());
 		result.setFinder(tenant.getFinder());
 
 		validator.validate(result, binding);
-		result.getUserAccount().setPassword(
-			encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
+		result.getUserAccount().setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
 		return result;
 	}
 
 	public Tenant getTenantWithMoreAcceptedBooks() {
 		//Dashboard-06
-		return tenantRepository.getTenantWithMoreAcceptedBooks().get(0);
+		Tenant tenant;
+		List<Tenant> tenants;
+
+		tenants = tenantRepository.getTenantWithMoreAcceptedBooks();
+
+		if (tenants.size() != 0) {
+			tenant = tenants.get(0);
+		} else {
+			tenant = null;
+		}
+		return tenant;
 	}
 
 	public Tenant getTenantWithMoreDeniedBooks() {
 		//Dashboard-07
-		return tenantRepository.getTenantWithMoreDeniedBooks().get(0);
+		Tenant tenant;
+		List<Tenant> tenants;
+
+		tenants = tenantRepository.getTenantWithMoreDeniedBooks();
+
+		if (tenants.size() != 0) {
+			tenant = tenants.get(0);
+		} else {
+			tenant = null;
+		}
+		return tenant;
 	}
 
 	public Tenant getTenantWithMorePendingBooks() {
 		//Dashboard-08
-		return tenantRepository.getTenantWithMorePendingBooks().get(0);
+		Tenant tenant;
+		List<Tenant> tenants;
+
+		tenants = tenantRepository.getTenantWithMorePendingBooks();
+
+		if (tenants.size() != 0) {
+			tenant = tenants.get(0);
+		} else {
+			tenant = null;
+		}
+		return tenant;
 	}
 
 	public Tenant getTenantWithMinAcceptedVersusTotalBooksRatio() {
 		//Dashboard-10
-		return tenantRepository.getTenantsByAcceptedVersusTotalBooksRatio().get(0);
-	}
-
-	public Tenant getTenantWithMaxAcceptedVersusTotalBooksRatio() {
-		//Dashboard-10
+		Tenant tenant;
 		List<Tenant> tenants;
 
 		tenants = tenantRepository.getTenantsByAcceptedVersusTotalBooksRatio();
 
-		return tenants.get(tenants.size() - 1);
+		if (tenants.size() != 0) {
+			tenant = tenants.get(0);
+		} else {
+			tenant = null;
+		}
+		return tenant;
+	}
+
+	public Tenant getTenantWithMaxAcceptedVersusTotalBooksRatio() {
+		//Dashboard-10
+		Tenant tenant;
+		List<Tenant> tenants;
+
+		tenants = tenantRepository.getTenantsByAcceptedVersusTotalBooksRatio();
+
+		if (tenants.size() != 0) {
+			tenant = tenants.get(tenants.size() - 1);
+		} else {
+			tenant = null;
+		}
+		return tenant;
 	}
 	public void addInvoice(Tenant tenant, Invoice result) {
 		tenant.getInvoices().add(result);

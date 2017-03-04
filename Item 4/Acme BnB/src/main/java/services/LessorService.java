@@ -95,7 +95,7 @@ public class LessorService {
 		lessorRepository.delete(lessor);
 	}
 
-	public long count() {
+	public Long count() {
 		//Dashboard-01
 		return lessorRepository.count();
 	}
@@ -177,51 +177,97 @@ public class LessorService {
 	public Lessor reconstruct(ActorForm actorForm, Lessor lessor, BindingResult binding) {
 		Lessor result;
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-		
+
 		result = new Lessor();
-		
+
 		customerService.reconstruct(result, lessor, actorForm);
 
 		// Setear campos propios de tenant.
-		
+
 		result.setBooks(lessor.getBooks());
 		result.setCreditCard(lessor.getCreditCard());
 		result.setLessorProperties(lessor.getLessorProperties());
 		result.setTotalFee(lessor.getTotalFee());
-		
+
 		validator.validate(result, binding);
-		result.getUserAccount().setPassword(
-			encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
+		result.getUserAccount().setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
 		return result;
 	}
 
 	public Lessor getLessorWithMoreAcceptedBooks() {
 		//Dashboard-03
-		return lessorRepository.getLessorWithMoreAcceptedBooks().get(0);
+		Lessor lessor;
+		List<Lessor> lessors;
+
+		lessors = lessorRepository.getLessorWithMoreAcceptedBooks();
+
+		if (lessors.size() != 0) {
+			lessor = lessors.get(0);
+		} else {
+			lessor = null;
+		}
+		return lessor;
 	}
 
 	public Lessor getLessorWithMoreDeniedBooks() {
 		//Dashboard-04
-		return lessorRepository.getLessorWithMoreDeniedBooks().get(0);
+		Lessor lessor;
+		List<Lessor> lessors;
+
+		lessors = lessorRepository.getLessorWithMoreDeniedBooks();
+
+		if (lessors.size() != 0) {
+			lessor = lessors.get(0);
+		} else {
+			lessor = null;
+		}
+		return lessor;
 	}
 
 	public Lessor getLessorWithMorePendingBooks() {
 		//Dashboard-05
-		return lessorRepository.getLessorWithMorePendingBooks().get(0);
+		Lessor lessor;
+
+		List<Lessor> lessors;
+
+		lessors = lessorRepository.getLessorWithMorePendingBooks();
+
+		if (lessors.size() != 0) {
+			lessor = lessors.get(0);
+		} else {
+			lessor = null;
+		}
+		return lessor;
 	}
 
 	public Lessor getLessorWithMinAcceptedVersusTotalBooksRatio() {
 		//Dashboard-09
-		return lessorRepository.getLessorsByAcceptedVersusTotalBooksRatio().get(0);
-	}
-
-	public Lessor getLessorWithMaxAcceptedVersusTotalBooksRatio() {
-		//Dashboard-09
+		Lessor lessor;
 		List<Lessor> lessors;
 
 		lessors = lessorRepository.getLessorsByAcceptedVersusTotalBooksRatio();
 
-		return lessors.get(lessors.size() - 1);
+		if (lessors.size() != 0) {
+			lessor = lessors.get(0);
+		} else {
+			lessor = null;
+		}
+		return lessor;
+	}
+
+	public Lessor getLessorWithMaxAcceptedVersusTotalBooksRatio() {
+		//Dashboard-09
+		Lessor lessor;
+		List<Lessor> lessors;
+
+		lessors = lessorRepository.getLessorsByAcceptedVersusTotalBooksRatio();
+
+		if (lessors.size() != 0) {
+			lessor = lessors.get(lessors.size() - 1);
+		} else {
+			lessor = null;
+		}
+		return lessor;
 	}
 
 }

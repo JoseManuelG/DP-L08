@@ -27,14 +27,14 @@ public interface AuditRepository extends JpaRepository<Audit, Integer> {
 
 	//Dashboard-21
 	@Query("select min(p.audits.size) from Property p")
-	public int getMinimumAuditsPerProperty();
+	public Integer getMinimumAuditsPerProperty();
 
 	//Dashboard-21
 	@Query("select avg(p.audits.size) from Property p")
-	public double getAverageAuditsPerProperty();
+	public Double getAverageAuditsPerProperty();
 
 	//Dashboard-21
 	@Query("select max(p.audits.size) from Property p")
-	public int getMaximumAuditsPerProperty();
+	public Integer getMaximumAuditsPerProperty();
 
 }

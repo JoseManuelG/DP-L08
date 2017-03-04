@@ -26,23 +26,23 @@ public class BookService {
 
 	// Managed Repository --------------------------------------
 	@Autowired
-	private BookRepository	bookRepository;
+	private BookRepository		bookRepository;
 
 	// Supporting Services --------------------------------------
 	@Autowired
-	private LessorService	lessorService;
+	private LessorService		lessorService;
 
 	@Autowired
-	private TenantService	tenantService;
+	private TenantService		tenantService;
 
 	@Autowired
-	private PropertyService	propertyService;
+	private PropertyService		propertyService;
 
 	@Autowired
-	private CreditCardService creditCardService;
-	
+	private CreditCardService	creditCardService;
+
 	@Autowired
-	private Validator		validator;
+	private Validator			validator;
 
 
 	// Simple CRUD methods --------------------------------------
@@ -79,12 +79,12 @@ public class BookService {
 		Book result;
 
 		Assert.notNull(book, "book.null.error");
-		
+
 		checkDayAfter(book);
 		checkOwnerTenantIsPrincipal(book);
 		checkBookDate(book);
 		creditCardService.checkCreditCard(book.getCreditCard());
-		
+
 		calculateTotalAmount(book);
 		result = bookRepository.save(book);
 		Assert.notNull(result, "book.commit.error");
@@ -117,7 +117,7 @@ public class BookService {
 		checkStateIsPending(book);
 		checkBookDate(book);
 		creditCardService.checkCreditCard(book.getLessor().getCreditCard());
-		
+
 		book.setState("ACCEPTED");
 		bookRepository.save(book);
 		lessorService.addFee();
@@ -158,7 +158,7 @@ public class BookService {
 	}
 
 	private void checkStateIsPending(Book book) {
-		Assert.isTrue(book.getState().equals("PENDING"),"book.pending.error");
+		Assert.isTrue(book.getState().equals("PENDING"), "book.pending.error");
 	}
 
 	public void checkOwnerLessorIsPrincipal(Book book) {
@@ -167,10 +167,10 @@ public class BookService {
 
 		Assert.notNull(book, "book.exists.error");
 		principal = lessorService.findByPrincipal();
-		Assert.notNull(principal,"book.principal.error");
+		Assert.notNull(principal, "book.principal.error");
 		owner = book.getLessor();
 
-		Assert.isTrue(owner.equals(principal),"book.principal.error");
+		Assert.isTrue(owner.equals(principal), "book.principal.error");
 	}
 
 	public void checkOwnerTenantIsPrincipal(Book book) {
@@ -179,45 +179,73 @@ public class BookService {
 
 		Assert.notNull(book, "book.exists.error");
 		principal = tenantService.findByPrincipal();
-		Assert.notNull(principal,"book.principal.error");
+		Assert.notNull(principal, "book.principal.error");
 		owner = book.getTenant();
 
-		Assert.isTrue(owner.equals(principal),"book.principal.error");
+		Assert.isTrue(owner.equals(principal), "book.principal.error");
 	}
 
-	public double getAverageAcceptedBooksPerLessor() {
+	public Double getAverageAcceptedBooksPerLessor() {
 		//Dashboard-01
-		double res;
+		Double res, c1;
+		Long c2;
 
-		res = bookRepository.countAcceptedBooks() / lessorService.count();
+		c1 = bookRepository.countAcceptedBooks();
+		c2 = lessorService.count();
 
+		if (c1 != null && c2 != 0) {
+			res = c1 / c2;
+		} else {
+			res = 0.;
+		}
 		return res;
 	}
 
-	public double getAverageDeniedBooksPerLessor() {
+	public Double getAverageDeniedBooksPerLessor() {
 		//Dashboard-01
-		double res;
+		Double res, c1;
+		Long c2;
 
-		res = bookRepository.countDeniedBooks() / lessorService.count();
+		c1 = bookRepository.countDeniedBooks();
+		c2 = lessorService.count();
 
+		if (c1 != null && c2 != 0) {
+			res = c1 / c2;
+		} else {
+			res = 0.;
+		}
 		return res;
 	}
 
-	public double getAverageAcceptedBooksPerTenant() {
+	public Double getAverageAcceptedBooksPerTenant() {
 		//Dashboard-02
-		double res;
+		Double res, c1;
+		Long c2;
 
-		res = bookRepository.countAcceptedBooks() / tenantService.count();
+		c1 = bookRepository.countAcceptedBooks();
+		c2 = tenantService.count();
 
+		if (c1 != null && c2 != 0) {
+			res = c1 / c2;
+		} else {
+			res = 0.;
+		}
 		return res;
 	}
 
-	public double getAverageDeniedBooksPerTenant() {
+	public Double getAverageDeniedBooksPerTenant() {
 		//Dashboard-02
-		double res;
+		Double res, c1;
+		Long c2;
 
-		res = bookRepository.countDeniedBooks() / tenantService.count();
+		c1 = bookRepository.countDeniedBooks();
+		c2 = tenantService.count();
 
+		if (c1 != null && c2 != 0) {
+			res = c1 / c2;
+		} else {
+			res = 0.;
+		}
 		return res;
 	}
 
@@ -230,8 +258,8 @@ public class BookService {
 
 		Assert.isTrue(checkOut - checkIn >= aDay, "book.checkDayAfter.error");
 	}
-	
-	private void checkBookDate (Book book){
+
+	private void checkBookDate(Book book) {
 		long checkIn, now;
 
 		checkIn = book.getCheckInDate().getTime();
@@ -251,11 +279,11 @@ public class BookService {
 		book.setTotalAmount(days * book.getProperty().getRate());
 	}
 
-	public double getAverageRequestsWithAuditsVersusNoAudits() {
+	public Double getAverageRequestsWithAuditsVersusNoAudits() {
 		//Dashboard-20
 		Double withAudits;
 		Double withoutAudits;
-		double res;
+		Double res;
 
 		withAudits = bookRepository.getAverageRequestsWithAudits();
 		withoutAudits = bookRepository.getAverageRequestsWithoutAudits();
@@ -269,37 +297,37 @@ public class BookService {
 	}
 	public Invoice addInvoice(Book book, Invoice invoice) {
 		Book result;
-		
+
 		book.setInvoice(invoice);
 		result = bookRepository.save(book);
-		
+
 		return result.getInvoice();
 	}
-	
+
 	public void removeTenant(Tenant tenant) {
-		
-		for (Book book : tenant.getBooks()){
+
+		for (Book book : tenant.getBooks()) {
 			book.setTenant(null);
 			bookRepository.save(book);
 		}
-		
+
 	}
 
 	public void removeLessor(Lessor lessor) {
-		
-		for (Book book : lessor.getBooks()){
+
+		for (Book book : lessor.getBooks()) {
 			book.setLessor(null);
 			book.setProperty(null);
 			bookRepository.save(book);
 		}
-		
+
 	}
 	public void removePropertyFromBooks(Collection<Book> books) {
-		for (Book b: books){
+		for (Book b : books) {
 			b.setProperty(null);
 			bookRepository.save(b);
 		}
-		
+
 	}
 
 }

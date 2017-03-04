@@ -44,30 +44,30 @@ public class ActorService {
 		actor.setSocialIdentities(new HashSet<SocialIdentity>());
 	}
 
-	public double getMinimumSocialIdentitiesPerActor() {
+	public Integer getMinimumSocialIdentitiesPerActor() {
 		//Dashboard-17
-		double res = actorRepository.getMinimumSocialIdentitiesPerActor();
+		Integer res = actorRepository.getMinimumSocialIdentitiesPerActor();
 		return res;
 	}
 
-	public double getAverageSocialIdentitiesPerActor() {
+	public Double getAverageSocialIdentitiesPerActor() {
 		//Dashboard-17
-		double res = actorRepository.getAverageSocialIdentitiesPerActor();
+		Double res = actorRepository.getAverageSocialIdentitiesPerActor();
 		return res;
 	}
 
-	public double getMaximumSocialIdentitiesPerActor() {
+	public Integer getMaximumSocialIdentitiesPerActor() {
 		//Dashboard-17
-		double res = actorRepository.getMaximumSocialIdentitiesPerActor();
+		Integer res = actorRepository.getMaximumSocialIdentitiesPerActor();
 		return res;
 	}
 
 	public void reconstruct(Actor result, Actor origin, ActorForm actorForm) {
 		UserAccount userAccount;
-		
+
 		userAccount = new UserAccount();
 		// Setear lo que viene del formulario:
-		
+
 		userAccount.setPassword(actorForm.getUserAccount().getPassword());
 		userAccount.setUsername(actorForm.getUserAccount().getUsername());
 
@@ -77,17 +77,17 @@ public class ActorService {
 		result.setPicture(actorForm.getPicture());
 		result.setEmail(actorForm.getEmail());
 		result.setPhone(actorForm.getPhone());
-		
+
 		// Setear lo que no viene del formulario:
-		
+
 		userAccount.setId(origin.getUserAccount().getId());
 		userAccount.setVersion(origin.getUserAccount().getVersion());
 		userAccount.setAuthorities(origin.getUserAccount().getAuthorities());
-		
+
 		result.setId(origin.getId());
 		result.setVersion(origin.getVersion());
 		result.setSocialIdentities(origin.getSocialIdentities());
-		
+
 	}
 
 }
