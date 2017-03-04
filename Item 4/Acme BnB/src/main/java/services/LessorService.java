@@ -189,7 +189,7 @@ public class LessorService {
 		result.setLessorProperties(lessor.getLessorProperties());
 		result.setTotalFee(lessor.getTotalFee());
 		
-		validator.validate(lessor, binding);
+		validator.validate(result, binding);
 		result.getUserAccount().setPassword(
 			encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
 		return result;

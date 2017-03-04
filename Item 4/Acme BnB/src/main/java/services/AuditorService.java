@@ -122,7 +122,7 @@ public class AuditorService {
 		result.setAudits(auditor.getAudits());
 		result.setCompanyName(auditor.getCompanyName());
 		
-		validator.validate(auditor, binding);
+		validator.validate(result, binding);
 		result.getUserAccount().setPassword(
 			encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
 		return auditor;
