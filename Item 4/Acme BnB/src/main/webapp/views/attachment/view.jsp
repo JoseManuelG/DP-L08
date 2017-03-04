@@ -30,7 +30,9 @@
 	<display:column property="name" title="${attachmentHeader}" sortable="true" />
 
 	<spring:message code="attachment.url" var="urlHeader" />
-	<display:column property="url" title="${urlHeader}" sortable="true" />
+	<display:column  title="${urlHeader}" sortable="true" >
+		<a href="${row.url}"><jstl:out value="${row.url}"/></a>
+	</display:column>
 
 </display:table>
 <br>

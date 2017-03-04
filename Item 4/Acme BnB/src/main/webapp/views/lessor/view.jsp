@@ -45,8 +45,7 @@
 	<br>
 </jstl:if>
 <br>
-<spring:message  code="lessor.properties" />:
-<br>
+<h2><spring:message  code="lessor.properties" />:</h2>
 <jstl:if test="${!properties.isEmpty()}">
 	<display:table pagesize="5" class="displaytag" name="properties"
 		requestURI="${requestURI}" id="row" uid="property">
@@ -88,15 +87,14 @@
 </jstl:if>
 <br>
 <br>
-<spring:message  code="lessor.socialIdentities" />:
-<br>
+<h2><spring:message  code="lessor.socialIdentities" />:</h2>
 <jstl:if test="${!socialIdentities.isEmpty()}">
 	<display:table pagesize="5" class="displaytag1" name="socialIdentities"
 		requestURI="${requestURI}" id="row" uid="social">
 
 		<!-- Action links -->
 		<jstl:if test="${esMiPerfil}">
-			<spring:message code="property.edit.property" var="editHeader" />
+			<spring:message code="socialIdentity.edit" var="editHeader" />
 			<display:column title="${editHeader}">
 				<a href="socialIdentity/edit.do?socialIdentityId=${social.id}">
 				<spring:message	code="property.edit" />
@@ -119,7 +117,6 @@
 
 	</display:table>
 </jstl:if>
-<br>
 <jstl:if test="${esMiPerfil}">
 			<a href=socialIdentity/create.do>
 	      <spring:message  code="socialIdentity.create" />
@@ -127,8 +124,7 @@
 </jstl:if>
 <br>
 <br>
-<spring:message  code="lessor.comments" />:
-<br>
+<h2><spring:message  code="lessor.comments" />:</h2>
 <jstl:if test="${!comments.isEmpty()}">
 	<display:table pagesize="5" class="displaytag1" name="comments"
 		requestURI="${requestURI}" id="row" uid="comments">
@@ -150,7 +146,6 @@
 
 	</display:table>
 	</jstl:if>
-	<br>
 <jstl:if test="${esMiPerfil}">
 	<a href="comment/customer/create.do?customerId=${lessor.id }">
 	      <spring:message  code="comment.create" />

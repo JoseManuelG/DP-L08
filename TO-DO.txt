@@ -1,33 +1,25 @@
 ﻿FALLOS EN GENERAL:
 	-> Cambiar imagen de logo
 	-> Comprobar en pre-production qué peta por tener el populate vacio
-	->Terminar informe de costes
+	-> Terminar informe de costes
 	-> Revisar todos los requisitos del populate.xml
 	-> Sincronizar plantilla 1.9 con 1.10 y proyectos 1.9 y 1.10
-	-> Organizar controllers segun actor
 	-> Hacer el war y cambiar el create.sql
-	->Comprobar que cumplimos todas las leyes bien (PREGUNTAR VIERNES POR CUANDO PONER CHECKBOX EN COMPRA) (EN PRINCIPIO EN NEW BOOK NEW CREDIT CARD)
-	->Acabar terminos y meter tags en plantilla (EN PROGRESO)
-	-> Nombres de tablas en view profile.
-	-> No deben aparecer los audits en el profile.
-	-> En registro doble contraseña para confirmacion-
+	-> Redactar contrato para lessor y tenant.
+	-> Acabar terminos y meter tags en plantilla (EN PROGRESO)
+	-> En registro doble contraseña para confirmacion.
 	-> Reordenar la vista de registrarse.
-	-> Imagenes tamaño predef.
-	-> Links como <a>
 	-> Para audit confirmar que se va a poner publico.
 	-> Confirmar en deletes.
 	-> Revisar indexado para .size y los (not null o is null)
 	-> Poner un texto para avisar donde crear attachment.
+	-> Perfil de administrator (ver y editar).
 
 	AUDITOR:
-	->Cuando no es auditor no debe salir draftMode en view de audit.
-	->Register auditor: Si el username ya existe, da un transaction error, estaría bien poner explícitamente por que peta
+	-> Cuando no es auditor no debe salir draftMode en view de audit.
+	-> Register auditor: Si el username ya existe, da un transaction error, estaría bien poner explícitamente por que peta
 
-	SOCIAL IDENTITY:
-	->Panic al intentar editar mi socialIdentity como auditor.
-	->Si se ponen todos los campos en vacío da un transaction error, en vez de validar los campos. Hay que revisar este formulario a fondo
-	-> Cancel desde /edit.do no funciona.
-	-> Quitar br (ya lo pone tag)
+	
 
 	QUERIES:
 		3 - Devuelve 1 lessor y creo que debería devolver varios en caso de empate según esto
@@ -44,8 +36,7 @@
 
 		No he podido testear las queries de audit porque no funciona
 
-->Añadir espaciados en perfil de tenant y lessor (creo q auditro tambien) Si esta vacio se ven juntos
-->Limitar fecha en books para ahorrar fallo en fechas estupidas(opcional)
+-> Limitar fecha en books para ahorrar fallo en fechas estupidas(opcional)
 
 
 
@@ -56,6 +47,7 @@ EXTRAS:
 -> Internacionalizar errores para que se muestre que regla de negocio ha fallado (como en books)
 -> Acceder en el A+ por https solo cuando un usuario ha hecho login.
 -> Arreglar url fea de tabla finder.
+-> Organizar controllers segun actor
 	
 -------------------------------------------------------(ARREGLADO)--------------------------------------------------------------------
 
@@ -121,6 +113,12 @@ EXTRAS:
 		Wherever a catalogue of properties is shown, the user must be able to sort it according to
 		the number of requests that the corresponding properties have got
 		Se puede haer que en cada fila de la tabla se coja el size de books de la property y ponerlo en una columna nueva que tenga 			sortable=true
+-> Imagenes tamaño predef. (ARREGLADO)
+-> Links como <a>. (ARREGLADO)
+-> Nombres de tablas en view profile. (ARREGLADO)
+-> No deben aparecer los audits en el profile. (ARREGLADO)
+-> Titulos en tablas de view profile en tenant y lessor. (ARREGLADO)
+-> Añadir espaciados en perfil de tenant y lessor (creo q auditro tambien) Si esta vacio se ven juntos (ARREGLADO)
 
 B+ TREE:
 	Audit(HECHO)

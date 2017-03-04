@@ -44,13 +44,15 @@
 	</a>
 </jstl:if>
 <br>
+<br>
+<h2><spring:message  code="lessor.socialIdentities" />:</h2>
 <jstl:if test="${!socialIdentities.isEmpty()}">
 	<display:table pagesize="5" class="displaytag1" name="socialIdentities"
 		requestURI="${requestURI}" id="row" uid="social">
 
 		<!-- Action links -->
 		<jstl:if test="${esMiPerfil}">
-			<spring:message code="property.edit.property" var="editHeader" />
+			<spring:message code="socialIdentity.edit" var="editHeader" />
 			<display:column title="${editHeader}">
 				<a href="socialIdentity/edit.do?socialIdentityId=${social.id}">
 				<spring:message	code="property.edit" />
@@ -78,7 +80,8 @@
 	      <spring:message  code="socialIdentity.create" />
 	</a>
 </jstl:if>
-
+<br>
+<h2><spring:message  code="lessor.comments" />:</h2>
 	<display:table pagesize="5" class="displaytag1" name="comments"
 		requestURI="${requestURI}" id="row" uid="comments">
 

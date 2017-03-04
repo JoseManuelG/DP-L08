@@ -30,12 +30,14 @@
 <br>
 <spring:message  code="auditor.companyName" />: <jstl:out value="${auditor.companyName}"/>
 <br>
-
+<a href="security/edit.do"><spring:message  code="auditor.edit" /></a>
+<br>
+<h2><spring:message  code="lessor.socialIdentities" />:</h2>
 <display:table pagesize="5" class="displaytag" keepStatus="false"
 	name="socialIdentities" requestURI="${requestURI}" id="row" uid="socialIdentity">
 	
 	<jstl:if test="${esMiPerfil}">
-			<spring:message code="property.edit.property" var="editHeader" />
+			<spring:message code="socialIdentity.edit" var="editHeader" />
 			<display:column title="${editHeader}">
 				<a href="socialIdentity/edit.do?socialIdentityId=${socialIdentity.id}">
 				<spring:message	code="property.edit" />
@@ -55,22 +57,10 @@
 	</display:column>
 	
 </display:table>
-<br/>
 <jstl:if test="${esMiPerfil}">
 	<a href=socialIdentity/create.do>
 	     <spring:message  code="socialIdentity.create" />
 	</a>
 </jstl:if>
-<br/>
-<display:table pagesize="5" class="displaytag" keepStatus="false"
-	name="audits" requestURI="${requestURI}" id="row" uid="audit">
-	
-	<acme:column sorteable="true" code="auditor.audit.writingMoment" path="writingMoment"/>
-	
-	<acme:column sorteable="false" code="auditor.socialIdentity.draftMode" path="draftMode"/>
-		
-</display:table>
-<br/>
-<a href="security/edit.do"><spring:message  code="auditor.edit" /></a>
 
 	
