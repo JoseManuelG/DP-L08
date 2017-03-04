@@ -36,7 +36,7 @@
 :
 <jstl:out value="${lessor.phone}" />
 <br>
-<img src=<jstl:out value="${lessor.picture}"/> />
+<acme:image url="${lessor.picture}"/>
 <br>
 <jstl:if test="${esMiPerfil}">
 			<a href=security/edit.do>
