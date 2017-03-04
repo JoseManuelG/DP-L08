@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import repositories.CustomerRepository;
 import security.LoginService;
 import domain.Customer;
+import forms.ActorForm;
 
 @Service
 @Transactional
@@ -15,6 +16,9 @@ public class CustomerService {
 
 	@Autowired
 	private CustomerRepository	customerRepository;
+	
+	@Autowired
+	private ActorService actorService;
 
 
 	public Customer findActorByPrincial() {
@@ -24,5 +28,11 @@ public class CustomerService {
 	}
 
 	public void setCustomerCollections(Customer customer) {
+	}
+
+	public void reconstruct(Customer result, Customer origin, ActorForm actorForm) {
+
+		actorService.reconstruct(result, origin, actorForm);
+		
 	}
 }

@@ -9,8 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import repositories.ActorRepository;
 import security.LoginService;
+import security.UserAccount;
 import domain.Actor;
 import domain.SocialIdentity;
+import forms.ActorForm;
 
 @Service
 @Transactional
@@ -58,6 +60,34 @@ public class ActorService {
 		//Dashboard-17
 		double res = actorRepository.getMaximumSocialIdentitiesPerActor();
 		return res;
+	}
+
+	public void reconstruct(Actor result, Actor origin, ActorForm actorForm) {
+		UserAccount userAccount;
+		
+		userAccount = new UserAccount();
+		// Setear lo que viene del formulario:
+		
+		userAccount.setPassword(actorForm.getUserAccount().getPassword());
+		userAccount.setUsername(actorForm.getUserAccount().getUsername());
+
+		result.setUserAccount(userAccount);
+		result.setName(actorForm.getName());
+		result.setSurname(actorForm.getSurname());
+		result.setPicture(actorForm.getPicture());
+		result.setEmail(actorForm.getEmail());
+		result.setPhone(actorForm.getPhone());
+		
+		// Setear lo que no viene del formulario:
+		
+		userAccount.setId(origin.getUserAccount().getId());
+		userAccount.setVersion(origin.getUserAccount().getVersion());
+		userAccount.setAuthorities(origin.getUserAccount().getAuthorities());
+		
+		result.setId(origin.getId());
+		result.setVersion(origin.getVersion());
+		result.setSocialIdentities(origin.getSocialIdentities());
+		
 	}
 
 }

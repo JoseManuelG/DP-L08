@@ -26,6 +26,9 @@ public class AdministratorService {
 	// Supporting Services --------------------------------------
 	
 	@Autowired
+	private ActorService actorService;
+	
+	@Autowired
 	private Validator validator;
 	
 	// Simple CRUD methods --------------------------------------
@@ -95,21 +98,16 @@ public class AdministratorService {
 	}
 
 	public Administrator reconstruct(ActorForm actorForm, Administrator administrator, BindingResult binding) {
+		Administrator result;
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-		UserAccount userAccount = administrator.getUserAccount();
-		userAccount.setPassword(actorForm.getUserAccount().getPassword());
-		userAccount.setUsername(actorForm.getUserAccount().getUsername());
-
-		administrator.setName(actorForm.getName());
-		administrator.setSurname(actorForm.getSurname());
-		administrator.setPicture(actorForm.getPicture());
-		administrator.setEmail(actorForm.getEmail());
-		administrator.setPhone(actorForm.getPhone());
-
-		administrator.setUserAccount(userAccount);
+		
+		result = new Administrator();
+		
+		actorService.reconstruct(result, administrator, actorForm);
 
 		validator.validate(administrator, binding);
-		userAccount.setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
+		result.getUserAccount().setPassword(
+			encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
 		return administrator;
 	}
 

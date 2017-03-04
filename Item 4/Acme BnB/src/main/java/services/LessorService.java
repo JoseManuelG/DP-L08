@@ -175,28 +175,23 @@ public class LessorService {
 		return result;
 	}
 	public Lessor reconstruct(ActorForm actorForm, Lessor lessor, BindingResult binding) {
-		Lessor result = lessor;
-
+		Lessor result;
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-		UserAccount userAccount = lessor.getUserAccount();
-		userAccount.setPassword(actorForm.getUserAccount().getPassword());
-		userAccount.setUsername(actorForm.getUserAccount().getUsername());
-		//		Collection<Authority> authorities = new ArrayList<Authority>();
-		//		Authority authority = new Authority();
-		//		authority.setAuthority(actorForm.getTypeOfActor());
-		//		authorities.add(authority);
-		//		userAccount.setAuthorities(authorities);
+		
+		result = new Lessor();
+		
+		customerService.reconstruct(result, lessor, actorForm);
 
-		lessor.setName(actorForm.getName());
-		lessor.setSurname(actorForm.getSurname());
-		lessor.setPicture(actorForm.getPicture());
-		lessor.setEmail(actorForm.getEmail());
-		lessor.setPhone(actorForm.getPhone());
-
-		lessor.setUserAccount(userAccount);
-
+		// Setear campos propios de tenant.
+		
+		result.setBooks(lessor.getBooks());
+		result.setCreditCard(lessor.getCreditCard());
+		result.setLessorProperties(lessor.getLessorProperties());
+		result.setTotalFee(lessor.getTotalFee());
+		
 		validator.validate(lessor, binding);
-		userAccount.setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
+		result.getUserAccount().setPassword(
+			encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
 		return result;
 	}
 

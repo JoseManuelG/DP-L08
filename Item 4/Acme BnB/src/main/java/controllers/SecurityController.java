@@ -31,17 +31,17 @@ public class SecurityController extends AbstractController {
 
 	//Services------------------------------------------------------------
 	@Autowired
-	TenantService			tenantService;
+	private TenantService			tenantService;
 	@Autowired
-	LessorService			lessorService;
+	private LessorService			lessorService;
 	@Autowired
-	ActorService			actorService;
+	private ActorService			actorService;
 	@Autowired
-	AdministratorService	administratorService;
+	private AdministratorService	administratorService;
 	@Autowired
-	AuditorService			auditorService;
+	private AuditorService			auditorService;
 	@Autowired
-	InvoiceService			invoiceService;
+	private InvoiceService			invoiceService;
 
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -147,11 +147,11 @@ public class SecurityController extends AbstractController {
 
 		} else if (aux.equals(Authority.TENANT)) {
 			tenant = tenantService.findByPrincipal();
-			try {
+//			try {
 				tenant = tenantService.reconstruct(actorForm, tenant, binding);
-			} catch (TransactionSystemException e) {
-
-			}
+//			} catch (TransactionSystemException e) {
+//
+//			}
 		} else if (aux.equals(Authority.ADMINISTRATOR)) {
 			administrator = administratorService.findByPrincipal();
 			isAdmin = true;
@@ -254,11 +254,14 @@ public class SecurityController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(ActorForm actorForm, String message) {
 		ModelAndView result;
+		Actor actor;
+		
+		actor = actorService.findByPrincipal();
 		result = new ModelAndView("security/register");
 		result.addObject("actorForm", actorForm);
 		result.addObject("message", message);
 
-		if (actorForm.getTypeOfActor().equals("ADMINISTRATOR")){
+		if (actor instanceof Administrator){
 			result.addObject("isAdmin", true);
 		}
 		return result;

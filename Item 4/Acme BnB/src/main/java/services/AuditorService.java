@@ -113,20 +113,18 @@ public class AuditorService {
 
 	public Auditor reconstruct(ActorForm actorForm, Auditor auditor, BindingResult binding) {
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-		UserAccount userAccount = auditor.getUserAccount();
-		userAccount.setPassword(actorForm.getUserAccount().getPassword());
-		userAccount.setUsername(actorForm.getUserAccount().getUsername());
+		Auditor result;
+		
+		result = new Auditor();
 
-		auditor.setName(actorForm.getName());
-		auditor.setSurname(actorForm.getSurname());
-		auditor.setPicture(actorForm.getPicture());
-		auditor.setEmail(actorForm.getEmail());
-		auditor.setPhone(actorForm.getPhone());
-
-		auditor.setUserAccount(userAccount);
-
+		actorService.reconstruct(result, auditor, actorForm);
+		
+		result.setAudits(auditor.getAudits());
+		result.setCompanyName(auditor.getCompanyName());
+		
 		validator.validate(auditor, binding);
-		userAccount.setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
+		result.getUserAccount().setPassword(
+			encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
 		return auditor;
 	}
 

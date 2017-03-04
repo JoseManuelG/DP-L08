@@ -151,21 +151,21 @@ public class TenantService {
 	}
 	public Tenant reconstruct(ActorForm actorForm, Tenant tenant, BindingResult binding) {
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-		UserAccount userAccount = tenant.getUserAccount();
-		userAccount.setPassword(actorForm.getUserAccount().getPassword());
-		userAccount.setUsername(actorForm.getUserAccount().getUsername());
+		Tenant result;
+		
+		result = new Tenant();
+		customerService.reconstruct(result, tenant, actorForm);
 
-		tenant.setName(actorForm.getName());
-		tenant.setSurname(actorForm.getSurname());
-		tenant.setPicture(actorForm.getPicture());
-		tenant.setEmail(actorForm.getEmail());
-		tenant.setPhone(actorForm.getPhone());
+		// Setear campos propios de tenant.
+		
+		result.setBooks(tenant.getBooks());
+		result.setInvoices(tenant.getInvoices());
+		result.setFinder(tenant.getFinder());
 
-		tenant.setUserAccount(userAccount);
-
-		validator.validate(tenant, binding);
-		userAccount.setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
-		return tenant;
+		validator.validate(result, binding);
+		result.getUserAccount().setPassword(
+			encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
+		return result;
 	}
 
 	public Tenant getTenantWithMoreAcceptedBooks() {
