@@ -7,7 +7,6 @@
 	-> Para audit confirmar que se va a poner publico.
 	-> Confirmar en deletes.
 	-> Hacer el war y cambiar el create.sql
-	-> Acabar terminos y meter tags en plantilla (EN PROGRESO)
 	-> Sincronizar plantilla 1.9 con 1.10 y proyectos 1.9 y 1.10
 	-> Poner un texto para avisar donde crear attachment.
 	-> Cambiar imagen de logo
@@ -112,6 +111,7 @@ EXTRAS:
 -> Añadir espaciados en perfil de tenant y lessor (creo q auditro tambien) Si esta vacio se ven juntos (ARREGLADO)
 -> Redactar contrato para lessor y tenant. (ARREGLADO)
 -> Perfil de administrator (ver y editar). (ARREGLADO)
+-> Acabar terminos y meter tags en plantilla (ARREGLADO)
 
 B+ TREE:
 	Audit(HECHO)
