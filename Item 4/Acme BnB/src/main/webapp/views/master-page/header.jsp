@@ -15,7 +15,7 @@
 
 <div>
 	<a href="<spring:url value='/' />">
-		<img src="images/logo.png" alt="Acme BnB Co., Inc." />
+		<img src="images/logo.png" height="150" alt="Acme BnB Co., Inc." />
 	</a>
 </div>
 

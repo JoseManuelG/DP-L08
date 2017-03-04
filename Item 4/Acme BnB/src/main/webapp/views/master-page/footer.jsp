@@ -19,7 +19,9 @@
 
 <hr />
 
-<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> Acme BnB Co., Inc.</b> | <a href="<spring:url value='/about/about.do'/>"><spring:message code="footer.about" /></a>
+<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> Acme BnB Co., Inc.</b> | 
+<a href="<spring:url value='/about/about.do'/>"><spring:message code="footer.about" /></a> | 
+<a href="<spring:url value='/law/terms-conditions.do'/>"><spring:message code="footer.terms" /></a>
 
 <jstl:if test="${!cookie['cookiesAccepted'].value}">
 		<div id="cookies-message">
