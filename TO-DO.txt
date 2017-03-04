@@ -7,8 +7,8 @@
 	-> Confirmar en deletes.
 	-> Hacer el war y cambiar el create.sql
 	-> Sincronizar plantilla 1.9 con 1.10 y proyectos 1.9 y 1.10
-	-> Poner un texto para avisar donde crear attachment.
 	-> Cuando no es auditor no debe salir draftMode en view de audit.
+	-> Recortar formulario de editar audit
 
 	QUERIES:
 		-> Revisar indexado para .size y los (not null o is null)
@@ -113,6 +113,7 @@ EXTRAS:
 -> Acabar terminos y meter tags en plantilla (ARREGLADO)
 -> Cambiar imagen de logo (ARREGLADO)
 -> Comprobar en pre-production qué peta en la dashboard por tener el populate vacio(ARREGLADO)
+-> Poner un texto para avisar donde crear attachment.(ARREGLADO)
 
 B+ TREE:
 	Audit(HECHO)

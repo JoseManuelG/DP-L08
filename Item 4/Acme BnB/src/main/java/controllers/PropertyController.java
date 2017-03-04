@@ -1,3 +1,4 @@
+
 package controllers;
 
 import java.util.Collection;
@@ -22,24 +23,25 @@ import domain.Property;
 @Controller
 @RequestMapping("/property")
 public class PropertyController extends AbstractController {
-	
+
 	// Services -------------------------------------------------------------
-	
+
 	@Autowired
-	PropertyService propertyService ;
-	
+	PropertyService	propertyService;
+
 	@Autowired
-	ActorService actorService ;
-	
+	ActorService	actorService;
+
 	@Autowired
-	AuditService auditService ;
-	
+	AuditService	auditService;
+
+
 	// Constructors -----------------------------------------------------------
-	
-	public PropertyController(){
+
+	public PropertyController() {
 		super();
 	}
-	
+
 	// List ---------------------------------------------------------------
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -50,40 +52,39 @@ public class PropertyController extends AbstractController {
 		result = new ModelAndView("property/list");
 		result.addObject("requestURI", "property/list.do");
 		result.addObject("properties", properties);
-		
+
 		return result;
 	}
-	
+
 	// View ---------------------------------------------------------------
-	
+
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public ModelAndView view(@RequestParam(required = true) Integer propertyId) {
 		ModelAndView result;
-		Boolean esMiProperty=false;
-		Boolean auditorTieneAudit=false;
+		Boolean esMiProperty = false;
+		Boolean auditorTieneAudit = false;
 		result = new ModelAndView("property/view");
-		Property property  = propertyService.findOne(propertyId);
+		Property property = propertyService.findOne(propertyId);
 		Collection<AttributeValue> attributeValues = property.getAttributeValues();
 		Collection<Audit> audits = propertyService.findAuditsByProperty(property);
-		try{
+		try {
 			Actor actor = actorService.findByPrincipal();
-			if (actor instanceof Lessor){
-				esMiProperty=actor.equals(property.getLessor());
+			if (actor instanceof Lessor) {
+				esMiProperty = actor.equals(property.getLessor());
 			} else if (actor instanceof Auditor) {
-				auditorTieneAudit= auditService.checkUnique(property,(Auditor) actor);	
+				auditorTieneAudit = auditService.checkUnique(property.getId(), (Auditor) actor);
 			}
-		}catch (Throwable oops) {
-	
+		} catch (Throwable oops) {
+
 		}
-			
-		
+
 		result.addObject("property", property);
 		result.addObject("audits", audits);
 		result.addObject("auditorTieneAudit", auditorTieneAudit);
 		result.addObject("attributeValues", attributeValues);
 		result.addObject("esMiProperty", esMiProperty);
-		result.addObject("requestURI", "property/view.do?propertyId="+property.getId());
+		result.addObject("requestURI", "property/view.do?propertyId=" + property.getId());
 		return result;
 	}
-	
+
 }

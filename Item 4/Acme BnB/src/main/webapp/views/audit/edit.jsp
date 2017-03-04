@@ -12,6 +12,8 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 
+<p><spring:message code="audit.howto.attachments" /></p>
+
 <form:form action="audit/auditor/edit.do" modelAttribute="audit">
 	
 		<form:hidden path="id" />

@@ -29,6 +29,9 @@ public class AuditService {
 	@Autowired
 	private ActorService	actorService;
 
+	@Autowired
+	private PropertyService	propertyService;
+
 
 	// Constructor --------------------------------------------------------------------
 
@@ -38,9 +41,22 @@ public class AuditService {
 
 	// Simple CRUD methods ------------------------------------------------------------
 
-	public Audit create() {
+	public Audit create(int propertyId) {
 		Audit result;
+		Auditor principal;
+		Property property;
+		Date currentMoment;
+
+		currentMoment = new Date(System.currentTimeMillis() - 100);
+		principal = (Auditor) actorService.findByPrincipal();
+		property = propertyService.findOne(propertyId);
+
 		result = new Audit();
+		result.setAuditor(principal);
+		result.setProperty(property);
+		result.setDraftMode(true);
+		result.setWritingMoment(currentMoment);
+
 		return result;
 	}
 
@@ -111,9 +127,9 @@ public class AuditService {
 		return result;
 	}
 
-	public boolean checkUnique(Property property, Auditor auditor) {
+	public boolean checkUnique(int propertyId, Auditor auditor) {
 		boolean result = false;
-		if (auditRepository.countAuditForauditorIdAndPropertyId(auditor.getId(), property.getId()) == 0) {
+		if (auditRepository.countAuditForauditorIdAndPropertyId(auditor.getId(), propertyId) == 0) {
 			result = true;
 		}
 		//Assert.notNull(auditRepository.findAuditsForauditorIdAndPropertyId(auditor.getId() ,property.getId()));
