@@ -59,7 +59,7 @@
 						<li><a href="book/tenant/list.do"><spring:message code="master.page.tenant.request.books" /></a></li>
 					</security:authorize>	
 					<security:authorize access="hasRole('ADMINISTRATOR')">
-						<li><a href="administrator/administrator/myProfile.do"><spring:message code="master.page.lessor.myProfile" /></a></li>
+						<li><a href="administrator/myProfile.do"><spring:message code="master.page.lessor.myProfile" /></a></li>
 						<li><a href="auditor/administrator/registerAuditor.do"><spring:message code="master.page.administrator.registerAuditor" /></a></li>
 						<li><a href="attribute/administrator/list.do"><spring:message code="master.page.administrator.attributes" /></a></li>
 						<li><a href="dashboard/administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
