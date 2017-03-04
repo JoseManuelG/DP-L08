@@ -254,16 +254,11 @@ public class SecurityController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(ActorForm actorForm, String message) {
 		ModelAndView result;
-		Actor actor;
 		
-		actor = actorService.findByPrincipal();
 		result = new ModelAndView("security/register");
 		result.addObject("actorForm", actorForm);
 		result.addObject("message", message);
 
-		if (actor instanceof Administrator){
-			result.addObject("isAdmin", true);
-		}
 		return result;
 	}
 }

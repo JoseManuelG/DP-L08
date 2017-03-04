@@ -16,10 +16,9 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<fieldset>
-	<p><spring:message code="law.terms.body1" /></p>
-	<p><spring:message code="law.terms.body2" /></p>
-	<h2 id="cookies-policy"><spring:message code="law.cookies.header" /></h2>
-	<p><spring:message code="law.cookies.body" /></p>
-</fieldset>
+<p><spring:message code="law.terms.body1.1" /> ${amount} <spring:message code="law.terms.body1.2" /></p>
+<p><spring:message code="law.terms.body2" /></p>
+<p><spring:message code="law.terms.body3" /></p>
+<h2 id="cookies-policy"><spring:message code="law.cookies.header" /></h2>
+<p><spring:message code="law.cookies.body" /></p>
 
