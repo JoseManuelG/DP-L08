@@ -22,7 +22,9 @@
 <br>
 <spring:message  code="audit.writingMoment" />: <jstl:out value="${audit.writingMoment}"/>
 <br>
-<spring:message  code="audit.draftMode" />: <jstl:out value="${audit.draftMode}"/>
+<security:authorize access="hasRole('AUDITOR')">
+	<spring:message  code="audit.draftMode" />: <jstl:out value="${audit.draftMode}"/>
+</security:authorize>
 <br>
 
 
