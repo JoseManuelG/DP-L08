@@ -17,12 +17,6 @@
 <form:form action="audit/auditor/edit.do" modelAttribute="audit">
 	
 		<form:hidden path="id" />
-		<form:hidden path="version" />
-		<form:hidden path="writingMoment" />
-		<form:hidden path="auditor" />
-		<form:hidden path="property" />	
-		<form:hidden path="attachments" />	
-		<form:hidden path="draftMode" />	
 		
 	<acme:textbox code="audit.text" path="text"/>
 	<br />

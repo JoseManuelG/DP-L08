@@ -9,6 +9,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.AuditRepository;
 import domain.Audit;
@@ -31,6 +33,9 @@ public class AuditService {
 
 	@Autowired
 	private PropertyService	propertyService;
+	
+	@Autowired
+	private Validator	validator;
 
 
 	// Constructor --------------------------------------------------------------------
@@ -85,7 +90,7 @@ public class AuditService {
 		Date currentTime = new Date(System.currentTimeMillis() - 100);
 		audit.setWritingMoment(currentTime);
 		audit.setDraftMode(false);
-		audit.getProperty().getAudits().remove(findOne(audit.getId()));
+//		audit.getProperty().getAudits().remove(findOne(audit.getId()));
 
 		result = auditRepository.save(audit);
 		return result;
@@ -103,7 +108,7 @@ public class AuditService {
 		Date currentTime = new Date(System.currentTimeMillis() - 100);
 		audit.setWritingMoment(currentTime);
 		audit.setDraftMode(true);
-		audit.getProperty().getAudits().remove(findOne(audit.getId()));
+//		audit.getProperty().getAudits().remove(findOne(audit.getId()));
 
 		result = auditRepository.save(audit);
 		return result;
@@ -128,11 +133,25 @@ public class AuditService {
 	}
 
 	public boolean checkUnique(int propertyId, Auditor auditor) {
-		boolean result = false;
-		if (auditRepository.countAuditForauditorIdAndPropertyId(auditor.getId(), propertyId) == 0) {
-			result = true;
-		}
+		boolean result;
+		
+		result = auditRepository
+			.countAuditForauditorIdAndPropertyId(auditor.getId(), propertyId) == 0;
+
 		//Assert.notNull(auditRepository.findAuditsForauditorIdAndPropertyId(auditor.getId() ,property.getId()));
+		return result;
+	}
+
+	public boolean checkUniqueOrDraft(int propertyId, Auditor auditor) {
+		boolean result;
+		Audit audit;
+		
+		audit = getAuditForPropertyAndAuditor(
+			propertyService.findOne(propertyId), auditor);
+		result = !(auditRepository
+			.countAuditForauditorIdAndPropertyId(auditor.getId(), propertyId) == 1 
+			&& !audit.getDraftMode());
+
 		return result;
 	}
 
@@ -167,6 +186,29 @@ public class AuditService {
 		for (Audit a : audits) {
 			auditRepository.delete(a);
 		}
+	}
+
+	public Audit reconstruct(Audit audit, BindingResult binding) {
+		Audit result, original;
+			
+		if (audit.getId() == 0){
+			result = create(audit.getProperty().getId());
+		} else {
+			original = findOne(audit.getId());
+			result = new Audit();
+			result.setAttachments(original.getAttachments());
+			result.setAuditor(original.getAuditor());
+			result.setDraftMode(original.getDraftMode());
+			result.setProperty(original.getProperty());
+			result.setId(original.getId());
+			result.setVersion(original.getVersion());
+			result.setWritingMoment(original.getWritingMoment());
+		}
+		result.setText(audit.getText());
+		
+		validator.validate(result,binding);
+		
+		return result;
 	}
 
 }

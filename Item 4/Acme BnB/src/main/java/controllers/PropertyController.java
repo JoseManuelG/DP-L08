@@ -67,16 +67,14 @@ public class PropertyController extends AbstractController {
 		Property property = propertyService.findOne(propertyId);
 		Collection<AttributeValue> attributeValues = property.getAttributeValues();
 		Collection<Audit> audits = propertyService.findAuditsByProperty(property);
-		try {
-			Actor actor = actorService.findByPrincipal();
-			if (actor instanceof Lessor) {
-				esMiProperty = actor.equals(property.getLessor());
-			} else if (actor instanceof Auditor) {
-				auditorTieneAudit = auditService.checkUnique(property.getId(), (Auditor) actor);
-			}
-		} catch (Throwable oops) {
-
+		
+		Actor actor = actorService.findByPrincipal();
+		if (actor instanceof Lessor) {
+			esMiProperty = actor.equals(property.getLessor());
+		} else if (actor instanceof Auditor) {
+			auditorTieneAudit = auditService.checkUniqueOrDraft(property.getId(), (Auditor) actor);
 		}
+
 
 		result.addObject("property", property);
 		result.addObject("audits", audits);

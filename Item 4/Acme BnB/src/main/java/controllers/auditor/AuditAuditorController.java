@@ -3,8 +3,6 @@ package controllers.auditor;
 
 import java.util.Collection;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -100,15 +98,18 @@ public class AuditAuditorController extends AbstractController {
 	// Save ---------------------------------------------------------------
 	@RequestMapping(value = "/auditor/edit", method = RequestMethod.POST, params = "save")
 	public @ResponseBody
-	ModelAndView save(@Valid Audit audit, BindingResult binding) {
+	ModelAndView save(Audit audit, BindingResult binding) {
 		ModelAndView result;
+		Audit auditResult;
+		
+		auditResult = auditService.reconstruct(audit,binding);
 		if (binding.hasErrors()) {
 			System.out.println(binding.getAllErrors());
-			result = createEditModelAndView(audit);
+			result = createEditModelAndView(auditResult);
 		} else {
 			try {
-				audit.getProperty().getAudits().remove(auditService.findOne(audit.getId()));
-				auditService.save(audit);
+//				audit.getProperty().getAudits().remove(auditService.findOne(auditResult.getId()));
+				auditService.save(auditResult);
 				result = new ModelAndView("redirect:../auditor/auditorlist.do");
 			} catch (Throwable oops) {
 				result = createEditModelAndView(audit, "audit.commit.error");
@@ -120,15 +121,18 @@ public class AuditAuditorController extends AbstractController {
 
 	@RequestMapping(value = "/auditor/edit", method = RequestMethod.POST, params = "draftsave")
 	public @ResponseBody
-	ModelAndView draftsave(@Valid Audit audit, BindingResult binding) {
+	ModelAndView draftsave(Audit audit, BindingResult binding) {
 		ModelAndView result;
+		Audit auditResult;
+		
+		auditResult = auditService.reconstruct(audit,binding);
 		if (binding.hasErrors()) {
 			System.out.println(binding.getAllErrors());
-			result = createEditModelAndView(audit);
+			result = createEditModelAndView(auditResult);
 		} else {
 			try {
-				audit.getProperty().getAudits().remove(auditService.findOne(audit.getId()));
-				auditService.saveDraft(audit);
+//				audit.getProperty().getAudits().remove(auditService.findOne(audit.getId()));
+				auditService.saveDraft(auditResult);
 				result = new ModelAndView("redirect:../auditor/auditorlist.do");
 			} catch (Throwable oops) {
 				result = createEditModelAndView(audit, "audit.commit.error");
@@ -142,9 +146,11 @@ public class AuditAuditorController extends AbstractController {
 	@RequestMapping(value = "/auditor/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(Audit audit, BindingResult binding) {
 		ModelAndView result;
+		Audit auditResult;
 
+		auditResult = auditService.reconstruct(audit,binding);
 		try {
-			auditService.delete(audit);
+			auditService.delete(auditResult);
 			result = new ModelAndView("redirect:../auditor/auditorlist.do");
 		} catch (Throwable oops) {
 			result = createEditModelAndView(audit, "audit.commit.error");
