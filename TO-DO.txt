@@ -1,6 +1,4 @@
 ﻿FALLOS EN GENERAL:
-	-> Reordenar la vista de registrarse.
-	-> En registro doble contraseña para confirmacion.
 	-> Terminar informe de costes
 	-> Revisar todos los requisitos del populate.xml
 	-> Hacer el war y cambiar el create.sql
@@ -100,6 +98,8 @@ EXTRAS:
 -> Confirmar en deletes.(ARREGLADO)
 -> Cuando no es auditor no debe salir draftMode en view de audit.(ARREGLADO)
 -> Un audit en draft no se puede ver si no eres el autor (ARREGLADO)
+-> Reordenar la vista de registrarse. (ARREGLADO)
+-> En registro doble contraseña para confirmacion. (ARREGLADO)
 
 B+ TREE:
 	Audit(HECHO)
