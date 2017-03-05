@@ -23,10 +23,10 @@
 		<spring:message code="security.register.typeOfActor" />
 	</form:label>
 	
-	<select id="typeOfActor" name="typeOfActor">
-    	<option value="LESSOR"><spring:message code="security.register.lessor" /></option>
-    	<option value="TENANT"><spring:message code="security.register.tenant" /></option>
-    </select>
+	<form:select id="typeOfActor" name="typeOfActor" path="typeOfActor">
+    	<form:option value="LESSOR"><spring:message code="security.register.lessor" /></form:option>
+    	<form:option value="TENANT"><spring:message code="security.register.tenant" /></form:option>
+    </form:select>
     <br />
 	<acme:textbox code="security.register.username" path="userAccount.username"/>
 	
