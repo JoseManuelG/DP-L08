@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 
 import repositories.FinderRepository;
 import domain.Finder;
+import domain.Lessor;
 import domain.Property;
 
 @Service
@@ -137,5 +138,27 @@ public class FinderService {
 	public Integer getMaximumResultsPerFinder() {
 		//Dashboard-11
 		return finderRepository.getMaximumResultsPerFinder();
+	}
+	
+	public void removeLessorProperties(Lessor lessor) {
+		Collection<Finder> finders;
+		
+		finders = findAll();
+		
+		for (Finder finder : finders){
+			finder.getResults().removeAll(lessor.getLessorProperties());
+			finderRepository.save(finder);
+		}
+	}
+	
+	public void removeProperty(Property property) {
+		Collection<Finder> finders;
+		
+		finders = finderRepository.findFindersFromProperty(property.getId());
+		
+		for (Finder finder : finders){
+			finder.getResults().remove(property);
+			finderRepository.save(finder);
+		}
 	}
 }

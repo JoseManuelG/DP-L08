@@ -5,7 +5,6 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.TransactionSystemException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -92,22 +91,19 @@ public class PropertyLessorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public @ResponseBody ModelAndView save(Property property, BindingResult binding) {
 		ModelAndView result = null;
-		try {
-			if (binding.hasErrors()) {
-				System.out.println(binding.getAllErrors());
-				result = createEditModelAndView(property);
-			} else {
-				try {
-					propertyService.save(property);
-					result = new ModelAndView("redirect:../lessor/myProperties.do");
-				} catch (Throwable oops) {
-					result = createEditModelAndView(property, "property.commit.error");
-				}
+		Property propertyResult;
+		propertyResult = propertyService.reconstruct(property, binding);	
+		if (binding.hasErrors()) {
+			System.out.println(binding.getAllErrors());
+			result = createEditModelAndView(propertyResult);
+		} else {
+			try {
+				propertyService.save(propertyResult);
+				result = new ModelAndView("redirect:../lessor/myProperties.do");
+			} catch (Throwable oops) {
+				result = createEditModelAndView(property, "property.commit.error");
 			}
-			property = propertyService.reconstruct(property, binding);	
-		} catch (TransactionSystemException e) {
 		}
-		
 
 		return result;
 	}

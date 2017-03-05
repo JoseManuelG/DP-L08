@@ -49,6 +49,9 @@ public class LessorService {
 	private BookService				bookService;
 
 	@Autowired
+	private FinderService			finderService;
+
+	@Autowired
 	private Validator				validator;
 
 
@@ -92,6 +95,7 @@ public class LessorService {
 		Assert.isTrue(principal.equals(lessor.getUserAccount()), "UserAccount no valido");
 
 		bookService.removeLessor(lessor);
+		finderService.removeLessorProperties(lessor);
 		lessorRepository.delete(lessor);
 	}
 

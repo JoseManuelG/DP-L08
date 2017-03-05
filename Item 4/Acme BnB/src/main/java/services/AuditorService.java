@@ -125,7 +125,7 @@ public class AuditorService {
 		validator.validate(result, binding);
 		result.getUserAccount().setPassword(
 			encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
-		return auditor;
+		return result;
 	}
 
 }

@@ -184,13 +184,21 @@ public class PropertyService {
 	}
 	
 	public Property reconstruct(Property property, BindingResult bindingResult){
-		Property result;
+		Property result, original;
 		
 		if(property.getId() == 0){
 			int lessorId = lessorService.findByPrincipal().getId();
 			result = this.create(lessorId);
 		} else{
-			result = propertyRepository.findOne(property.getId());
+			original = propertyRepository.findOne(property.getId());
+			result = new Property();
+			result.setAttributeValues(original.getAttributeValues());
+			result.setAudits(original.getAudits());
+			result.setBooks(original.getBooks());
+			result.setLastUpdate(original.getLastUpdate());
+			result.setId(original.getId());
+			result.setLessor(original.getLessor());
+			result.setVersion(original.getVersion());
 		}
 		result.setName(property.getName());
 		result.setRate(property.getRate());

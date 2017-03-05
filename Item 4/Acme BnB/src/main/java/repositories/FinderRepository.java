@@ -34,4 +34,7 @@ public interface FinderRepository extends JpaRepository<Finder, Integer> {
 	@Query("select max(f.results.size) from Finder f")
 	Integer getMaximumResultsPerFinder();
 
+	@Query("select f from Finder f where ?1 member of f.results")
+	Collection<Finder> findFindersFromProperty(int id);
+
 }
