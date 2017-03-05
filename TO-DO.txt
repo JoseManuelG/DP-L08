@@ -2,7 +2,6 @@
 	-> Reordenar la vista de registrarse.
 	-> En registro doble contraseña para confirmacion.
 	-> Terminar informe de costes
-	-> Revisar todos los requisitos del populate.xml
 	-> Hacer el war y cambiar el create.sql
 	-> Sincronizar plantilla 1.9 con 1.10 y proyectos 1.9 y 1.10
 	-> Recortar formulario de editar audit
@@ -100,6 +99,7 @@ EXTRAS:
 -> Confirmar en deletes.(ARREGLADO)
 -> Cuando no es auditor no debe salir draftMode en view de audit.(ARREGLADO)
 -> Un audit en draft no se puede ver si no eres el autor (ARREGLADO)
+-> Revisar todos los requisitos del populate.xml (ARREGLADO)
 
 B+ TREE:
 	Audit(HECHO)

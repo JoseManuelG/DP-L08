@@ -285,6 +285,12 @@
 		<property name="cacheMoment" value="11/14/2016 11:45"/>
 		<property name="results">
 			<list>
+				<ref bean="property1Lessor1"/>
+				<ref bean="property2Lessor1"/>
+				<ref bean="property3Lessor1"/>
+				<ref bean="property4Lessor1"/>
+				<ref bean="property5Lessor1"/>
+				<ref bean="property6Lessor1"/>
 			</list>
 		</property>
 	</bean>
@@ -297,6 +303,7 @@
 		<property name="cacheMoment" value="11/14/2016 11:45"/>
 		<property name="results">
 			<list>
+				<ref bean="property1Lessor1"/>
 			</list>
 		</property>
 	</bean>
@@ -585,6 +592,8 @@
 				<ref bean="book4Tenant1"/>
 				<ref bean="book5Tenant1"/>
 				<ref bean="book6Tenant1"/>
+				<ref bean="book7Tenant1"/>
+				<ref bean="bookWithoutTenant"/>
 			</list>
 		</property>
 		<property name="totalFee" value="0.0"/>
@@ -598,6 +607,7 @@
 		<property name="picture" value="http://cdn2.dibujos.net/dibujos/pintar/cara-1.png"/>
 		<property name="socialIdentities">
 			<list>
+				<ref bean="socialIdentity1Lessor2"/>
 			</list>
 		</property>	
 		<property name="userAccount" ref="userAccountLessor2"/>
@@ -758,6 +768,8 @@
 				<ref bean="book4Tenant1"/>
 				<ref bean="book5Tenant1"/>
 				<ref bean="book6Tenant1"/>
+				<ref bean="book7Tenant1"/>
+				<ref bean="book8Tenant1"/>
 			</list>
 		</property>
 		<property name="invoices">
@@ -1279,7 +1291,34 @@
 		<property name="cvvCode" value="325"/>
 	</bean>
 	
+	<bean id="creditCardBook7Tenant1" class="domain.CreditCard">
+		<property name="holderName" value="Billy"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="4485733078654607"/>
+		<property name="expirationMonth" value="06"/>
+		<property name="expirationYear" value="2018"/>
+		<property name="cvvCode" value="325"/>
+	</bean>
+	
+	<bean id="creditCardBook8Tenant1" class="domain.CreditCard">
+		<property name="holderName" value="Billy"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="4485733078654607"/>
+		<property name="expirationMonth" value="06"/>
+		<property name="expirationYear" value="2018"/>
+		<property name="cvvCode" value="325"/>
+	</bean>
+	
 	<bean id="creditCardBook1Tenant2" class="domain.CreditCard">
+		<property name="holderName" value="Pepe"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="4485733078654607"/>
+		<property name="expirationMonth" value="06"/>
+		<property name="expirationYear" value="2017"/>
+		<property name="cvvCode" value="100"/>
+	</bean>
+	
+	<bean id="creditCardBookWithoutTenant" class="domain.CreditCard">
 		<property name="holderName" value="Pepe"/>
 		<property name="brandName" value="VISA"/>
 		<property name="number" value="4485733078654607"/>
@@ -1410,6 +1449,51 @@
 		<property name="tenant" ref="tenant2"/>		
 		<property name="invoice"><null/></property>
 		<property name="lessor" ref="lessor2"/>
+	</bean>
+	
+	<bean id="book7Tenant1" class="domain.Book">
+		<property name="checkInDate" value="06/04/2016"/>
+		<property name="checkOutDate" value="06/06/2016"/>
+		<property name="smoker" value="false"/>
+		<property name="state" value="ACCEPTED"/>
+		<property name="totalAmount" value="200.0"/>
+		<property name="propertyName" value="Deleted property"/>
+		<property name="propertyAddress" value="Spain Seville, C\Piruleta nº10 1ºB"/>
+		<property name="creditCard" ref="creditCardBook7Tenant1"/>
+		<property name="property" ><null/></property>
+		<property name="tenant" ref="tenant1"/>		
+		<property name="invoice"><null/></property>
+		<property name="lessor" ref="lessor1"/>
+	</bean>
+	
+	<bean id="book8Tenant1" class="domain.Book">
+		<property name="checkInDate" value="06/04/2016"/>
+		<property name="checkOutDate" value="06/06/2016"/>
+		<property name="smoker" value="false"/>
+		<property name="state" value="ACCEPTED"/>
+		<property name="totalAmount" value="200.0"/>
+		<property name="propertyName" value="Deleted property and lessor"/>
+		<property name="propertyAddress" value="Spain Seville, C\Piruleta nº10 1ºA"/>
+		<property name="creditCard" ref="creditCardBook8Tenant1"/>
+		<property name="property" ><null/></property>
+		<property name="tenant" ref="tenant1"/>		
+		<property name="invoice"><null/></property>
+		<property name="lessor"><null/></property>
+	</bean>
+	
+	<bean id="bookWithoutTenant" class="domain.Book">
+		<property name="checkInDate" value="06/04/2016"/>
+		<property name="checkOutDate" value="06/06/2016"/>
+		<property name="smoker" value="false"/>
+		<property name="state" value="ACCEPTED"/>
+		<property name="totalAmount" value="200.0"/>
+		<property name="propertyName" value="Deleted property and tenant"/>
+		<property name="propertyAddress" value="Spain Seville, C\Piruleta nº10 1ºA"/>
+		<property name="creditCard" ref="creditCardBookWithoutTenant"/>
+		<property name="property" ><null/></property>
+		<property name="tenant" ><null/></property>	
+		<property name="invoice"><null/></property>
+		<property name="lessor" ref="lessor1"/>
 	</bean>
 	
 	<!-- Invoice 
@@ -1646,6 +1730,15 @@
 		<property name="recipient" ref="lessor1"/>
 	</bean>	
 	
+	<bean id="comment1Tenant2" class="domain.Comment">
+		<property name="title" value="Hello"/>
+		<property name="postMoment" value="01/22/2017 22:30"/>
+		<property name="text" value="Thanks for being my first client"/>
+		<property name="stars" value="5"/>
+		<property name="sender" ref="lessor2"/>
+		<property name="recipient" ref="tenant2"/>
+	</bean>	
+	
 	<!-- SocialIdentity 
 	
 	<bean id="" class="domain.SocialIdentity">
@@ -1697,6 +1790,13 @@
 		<property name="link" value="http://www.sample.com/"/>
 		<property name="socialNetwork" value="Sample"/>
 		<property name="actor" ref="lessor1"/>
+	</bean>
+	
+	<bean id="socialIdentity1Lessor2" class="domain.SocialIdentity">
+		<property name="nick" value="Joe"/>
+		<property name="link" value="http://www.sample.com/"/>
+		<property name="socialNetwork" value="Sample"/>
+		<property name="actor" ref="lessor2"/>
 	</bean>
 	
 	<!-- Configuration 	-->
