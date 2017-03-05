@@ -27,14 +27,17 @@
 	<acme:textbox code="audit.text" path="text"/>
 	<br />
 		
-	<acme:submit name="save" code="audit.save"/>
+	<button type="submit" name="save" class="btn btn-primary"
+			onclick="return confirm('<spring:message code="audit.confirm.save" />')">
+				<spring:message code="audit.save" />
+	</button>
 	
 	<acme:submit name="draftsave" code="audit.draftsave"/>
 	
 	<jstl:if test="${audit.id ne 0}">
 		<acme:submit name="delete" code="audit.delete"/>
-		
 	</jstl:if>
+	
 	<acme:cancel url="audit/auditor/auditorlist.do" code="audit.cancel"/>
-	<br>
+	
 </form:form>

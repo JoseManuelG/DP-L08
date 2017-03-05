@@ -3,29 +3,12 @@
 	-> En registro doble contraseña para confirmacion.
 	-> Terminar informe de costes
 	-> Revisar todos los requisitos del populate.xml
-	-> Para audit confirmar que se va a poner publico.
-	-> Confirmar en deletes.
 	-> Hacer el war y cambiar el create.sql
 	-> Sincronizar plantilla 1.9 con 1.10 y proyectos 1.9 y 1.10
 	-> Cuando no es auditor no debe salir draftMode en view de audit.
 	-> Recortar formulario de editar audit
+	-> Revisar indexado para .size y los (not null o is null) 
 
-	QUERIES:
-		-> Revisar indexado para .size y los (not null o is null)
-		
-		3 - Devuelve 1 lessor y creo que debería devolver varios en caso de empate según esto
-					The lessors who have approved more requests
-		4 - Lo mismo que la anterior
-		5 - Lo mismo que la anterior
-		6 - Lo mismo que la anterior
-		7 - Lo mismo que la anterior
-		8 - Lo mismo que la anterior
-		9a - Devuelve un lessor y debería devolver varios en caso de empate
-		9b - Devuelve un lessor y debería devolver varios en caso de empate
-		10a - Devuelve un tenant y debería devolver varios en caso de empate
-		10b - Devuelve un tenant y debería devolver varios en caso de empate
-
-		No he podido testear las queries de audit porque no funciona
 
 
 EXTRAS:
@@ -114,6 +97,8 @@ EXTRAS:
 -> Cambiar imagen de logo (ARREGLADO)
 -> Comprobar en pre-production qué peta en la dashboard por tener el populate vacio(ARREGLADO)
 -> Poner un texto para avisar donde crear attachment.(ARREGLADO)
+-> Para audit confirmar que se va a poner publico.(ARREGLADO)
+-> Confirmar en deletes.(ARREGLADO)
 
 B+ TREE:
 	Audit(HECHO)
@@ -160,3 +145,19 @@ B+ TREE:
 	DomainEntity (NO PROCEDE)
 	Lessor (NO PROCEDE)
 	Tenant (NO PROCEDE)
+
+
+QUERIES: 		
+	3 - Devuelve 1 lessor y creo que debería devolver varios en caso de empate según esto
+				The lessors who have approved more requests
+	4 - Lo mismo que la anterior
+	5 - Lo mismo que la anterior
+	6 - Lo mismo que la anterior
+	7 - Lo mismo que la anterior
+	8 - Lo mismo que la anterior
+	9a - Devuelve un lessor y debería devolver varios en caso de empate
+	b - Devuelve un lessor y debería devolver varios en caso de empate
+	10a - Devuelve un tenant y debería devolver varios en caso de empate
+	10b - Devuelve un tenant y debería devolver varios en caso de empate
+	
+(NO PROCEDE) Podria hacerse con java, no con queries ni con varias queries se podria, y para meter 8 fors de java (un por query de la dash) con varias cosas dentro de cada for, cosa que no es en lo más minimo eficiente se decidio (Dani, Javi, Gavira) que no era un cambio que rentase hacer
