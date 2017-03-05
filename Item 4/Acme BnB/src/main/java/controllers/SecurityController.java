@@ -48,7 +48,7 @@ public class SecurityController extends AbstractController {
 		ModelAndView result;
 
 		ActorForm actorForm = new ActorForm();
-		result = createEditModelAndView(actorForm);
+		result = createRegisterModelAndView(actorForm);
 
 		return result;
 	}
@@ -66,10 +66,12 @@ public class SecurityController extends AbstractController {
 			lessor = lessorService.reconstruct(actorForm, binding);
 		}
 		if (binding.hasErrors()) {
-			result = createEditModelAndView(actorForm);
+			result = createRegisterModelAndView(actorForm);
+		} else if (!actorForm.getUserAccount().getPassword()
+					.equals(actorForm.getConfirmPassword())) {
+			result = createRegisterModelAndView(actorForm, "security.password.error");
 		} else if (!((boolean) actorForm.getAcepted())) {
-
-			result = createEditModelAndView(actorForm, "security.terms.error");
+			result = createRegisterModelAndView(actorForm, "security.terms.error");
 		} else {
 			try {
 				if (actorForm.getTypeOfActor().equals("TENANT")) {
@@ -84,7 +86,7 @@ public class SecurityController extends AbstractController {
 
 				result = new ModelAndView("redirect:/");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(actorForm, "lessor.commit.error");
+				result = createRegisterModelAndView(actorForm, "lessor.commit.error");
 			}
 		}
 
@@ -94,85 +96,61 @@ public class SecurityController extends AbstractController {
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit() {
-		ModelAndView result = new ModelAndView("security/edit");
-		Actor actor = actorService.findByPrincipal();
-		Boolean isAdmin = false;
+		ModelAndView result;
+		Actor actor;
+		Boolean isAdmin;
+		ActorForm actorForm;
 		
-		if (actor instanceof Administrator){
-			isAdmin = true;
-		}
-		ActorForm actorForm = new ActorForm();
+		actor = actorService.findByPrincipal();
+		isAdmin = actor instanceof Administrator;
+		
+		actorForm = new ActorForm();
 		actorForm.setName(actor.getName());
 		actorForm.setSurname(actor.getSurname());
 		actorForm.setEmail(actor.getEmail());
 		actorForm.setPhone(actor.getPhone());
 		actorForm.setPicture(actor.getPicture());
-
 		actorForm.setUserAccount(actor.getUserAccount());
-		result.addObject(actorForm);
-		result.addObject("isAdmin", isAdmin);
+		
+		result = createEditModelAndView(actorForm, isAdmin);
 
 		return result;
 	}
+	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView edit(ActorForm actorForm, BindingResult binding) {
 		ModelAndView result;
-		Actor principal, actorResult = null;
-		Tenant tenant = null;
-		Lessor lessor = null;
-		Auditor auditor = null;
-		Administrator administrator = null;
-		Boolean isAdmin = false;
+		Actor principal, actorResult;
+		Boolean isAdmin;
 		String actorString;
-
+		
+		isAdmin = false;
 		principal = actorService.findByPrincipal();
 		if (principal instanceof Auditor) {
-			auditor = (Auditor) principal;
-//			try {
-				actorResult = auditorService.reconstruct(actorForm, auditor, binding);
-//			} catch (TransactionSystemException e) {
-
-//			}
-
+			actorResult = auditorService.reconstruct(actorForm, (Auditor) principal, binding);
 		} else if (principal instanceof Lessor) {
-			lessor = (Lessor) principal;
-//			try {
-				actorResult = lessorService.reconstruct(actorForm, lessor, binding);
-//			} catch (TransactionSystemException e) {
-
-//			}
-
+			actorResult = lessorService.reconstruct(actorForm, (Lessor) principal, binding);
 		} else if (principal instanceof Tenant) {
-			tenant = (Tenant) principal;
-//			try {
-				actorResult = tenantService.reconstruct(actorForm, tenant, binding);
-//			} catch (TransactionSystemException e) {
-//
-//			}
-		} else if (principal instanceof Administrator) {
-			administrator = (Administrator) principal;
+			actorResult = tenantService.reconstruct(actorForm, (Tenant) principal, binding);
+		} else {
 			isAdmin = true;
-//			try {
-				actorResult = administratorService.reconstruct(actorForm, administrator, binding);
-//			} catch (TransactionSystemException e) {
-//			}
+			actorResult = administratorService.reconstruct(actorForm, (Administrator) principal, binding);
 		}
 
 		if (binding.hasErrors()) {
 			result = new ModelAndView("security/edit");
-			result.addObject("actorForm", actorForm);
-			result.addObject("isAdmin", isAdmin);
-			result.addObject("message", null);
-		} else {
+			result = createEditModelAndView(actorForm, isAdmin);
+		} else if (!actorForm.getUserAccount().getPassword()
+					.equals(actorForm.getConfirmPassword())) {
+			result = createEditModelAndView(actorForm, isAdmin, "security.password.error");
+		}  else {
 			try {
 				actorService.save(actorResult);
-
+				actorString = principal.getClass().getSimpleName().toLowerCase();
+				result = new ModelAndView("redirect:../" + actorString + "/myProfile.do");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(actorForm, "lessor.commit.error");
+				result = createEditModelAndView(actorForm,isAdmin, "lessor.commit.error");
 			}
-			
-			actorString = principal.getClass().getSimpleName().toLowerCase();
-			result = new ModelAndView("redirect:../" + actorString + "/myProfile.do");
 		}
 
 		return result;
@@ -181,7 +159,7 @@ public class SecurityController extends AbstractController {
 	// Delete ---------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete() {
+	public ModelAndView delete(ActorForm actorForm) {
 		ModelAndView result;
 		Actor actor = actorService.findByPrincipal();
 		Tenant tenant = null;
@@ -217,8 +195,7 @@ public class SecurityController extends AbstractController {
 			result = new ModelAndView("redirect:/j_spring_security_logout");
 
 		} catch (Exception e) {
-			aux = aux.toLowerCase();
-			result = new ModelAndView("redirect:../" + aux + "/myProfile.do");
+			result = createEditModelAndView(actorForm, false, "lessor.commit.error");
 		}
 
 		return result;
@@ -226,19 +203,39 @@ public class SecurityController extends AbstractController {
 	}
 	// Ancillary methods ------------------------------------------------------
 
-	protected ModelAndView createEditModelAndView(ActorForm actorForm) {
+	protected ModelAndView createRegisterModelAndView(ActorForm actorForm) {
 		ModelAndView result;
 
-		result = createEditModelAndView(actorForm, null);
+		result = createRegisterModelAndView(actorForm, null);
 
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(ActorForm actorForm, String message) {
+	protected ModelAndView createRegisterModelAndView(ActorForm actorForm, String message) {
 		ModelAndView result;
 		
 		result = new ModelAndView("security/register");
 		result.addObject("actorForm", actorForm);
+		result.addObject("message", message);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(ActorForm actorForm, Boolean isAdmin) {
+		ModelAndView result;
+
+		result = createEditModelAndView(actorForm, isAdmin, null);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(ActorForm actorForm, Boolean isAdmin, String message) {
+		ModelAndView result;
+
+		
+		result = new ModelAndView("security/edit");
+		result.addObject(actorForm);
+		result.addObject("isAdmin", isAdmin);
 		result.addObject("message", message);
 
 		return result;

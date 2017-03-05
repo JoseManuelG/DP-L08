@@ -6,14 +6,13 @@ import security.UserAccount;
 public class ActorForm {
 
 	private String		typeOfActor;
-	//	private String	password;
+	private String		confirmPassword;
 	private String		name;
 	private String		surname;
 	private String		email;
 	private String		phone;
 	private String		picture;
 	private Boolean		acepted;
-	//	private String	userName;
 	private String		companyName;
 	private UserAccount	userAccount;
 
@@ -31,14 +30,15 @@ public class ActorForm {
 	public void setTypeOfActor(String typeOfActor) {
 		this.typeOfActor = typeOfActor;
 	}
+	
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
 
-	//	public String getPassword() {
-	//		return password;
-	//	}
-	//
-	//	public void setPassword(String password) {
-	//		this.password = password;
-	//	}
+	
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
 
 	public String getName() {
 		return name;

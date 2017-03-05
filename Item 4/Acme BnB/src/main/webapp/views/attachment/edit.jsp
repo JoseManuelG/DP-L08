@@ -33,15 +33,11 @@
 	<br />
 	<br />
 
-
-	<input type="submit" name="save"
-		value="<spring:message code="attachment.save" />" />&nbsp; 
+	<acme:submit name="save" code="attachment.save"/>
+	
 	<jstl:if test="${stepHint.id != 0}">
-		<input type="submit" name="delete"
-			value="<spring:message code="attachment.delete" />"
-			onclick="return confirm('<spring:message code="attachment.confirm.delete" />')" />&nbsp;
+		<acme:submit name="delete" code="attachment.delete"/>
 	</jstl:if>
-	<input type="button" name="cancel" value="<spring:message code="attachment.cancel" />"
-		onclick="javascript:window.location.href='audit/auditor/auditorlist.do'" />
-	<br />
+	
+	<acme:cancel url="audit/view.do?auditId=${attachment.audit.id}" code="attachment.cancel"/>
 </form:form>

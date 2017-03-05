@@ -28,12 +28,13 @@
     	<option value="TENANT"><spring:message code="security.register.tenant" /></option>
     </select>
     <br />
-    
-    <acme:textbox code="security.register.name" path="name"/>
-	
 	<acme:textbox code="security.register.username" path="userAccount.username"/>
 	
 	<acme:password code="security.password" path="userAccount.password"/>
+	
+	<acme:password code="security.confirm.password" path="confirmPassword"/>
+    
+    <acme:textbox code="security.register.name" path="name"/>
 	
 	<acme:textbox code="security.register.surname" path="surname"/>
 	
