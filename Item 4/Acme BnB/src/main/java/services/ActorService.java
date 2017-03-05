@@ -11,7 +11,11 @@ import repositories.ActorRepository;
 import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
+import domain.Administrator;
+import domain.Auditor;
+import domain.Lessor;
 import domain.SocialIdentity;
+import domain.Tenant;
 import forms.ActorForm;
 
 @Service
@@ -21,6 +25,18 @@ public class ActorService {
 	//Managed Repository--------------------------------------------------------------------
 	@Autowired
 	private ActorRepository	actorRepository;
+	
+	@Autowired
+	private LessorService lessorService;
+	
+	@Autowired
+	private TenantService tenantService;
+	
+	@Autowired 
+	private AuditorService auditorService;
+	
+	@Autowired
+	private AdministratorService administratorService;
 
 
 	//Supported Services--------------------------------------------------------------------
@@ -36,6 +52,19 @@ public class ActorService {
 	//Simple CRUD methods------------------------------------------------------------
 	public Actor findOne(int actorId) {
 		return actorRepository.findOne(actorId);
+	}
+
+	public void save(Actor actor) {
+		if (actor instanceof Tenant) {
+			tenantService.save((Tenant) actor);
+		} else if (actor instanceof Lessor) {
+			lessorService.save((Lessor) actor);
+		} else if (actor instanceof Auditor) {
+			auditorService.save((Auditor) actor);
+		} else if (actor instanceof Administrator) {
+			administratorService.save((Administrator) actor);
+		}
+		
 	}
 
 	// Other Business Methods -------------------------------------------------------------

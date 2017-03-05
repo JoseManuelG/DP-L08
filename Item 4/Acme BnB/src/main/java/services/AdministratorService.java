@@ -108,7 +108,7 @@ public class AdministratorService {
 		validator.validate(result, binding);
 		result.getUserAccount().setPassword(
 			encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
-		return administrator;
+		return result;
 	}
 
 }

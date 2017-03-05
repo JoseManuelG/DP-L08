@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.TransactionSystemException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -118,47 +117,45 @@ public class SecurityController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView edit(ActorForm actorForm, BindingResult binding) {
 		ModelAndView result;
-		Actor actor = actorService.findByPrincipal();
+		Actor principal, actorResult = null;
 		Tenant tenant = null;
 		Lessor lessor = null;
 		Auditor auditor = null;
 		Administrator administrator = null;
 		Boolean isAdmin = false;
-		
-		ArrayList<Authority> authorities = new ArrayList<Authority>();
-		authorities.addAll(actor.getUserAccount().getAuthorities());
-		String aux = authorities.get(0).getAuthority();
+		String actorString;
 
-		if (aux.equals(Authority.AUDITOR)) {
-			auditor = auditorService.findActorByPrincial();
-			try {
-				auditor = auditorService.reconstruct(actorForm, auditor, binding);
-			} catch (TransactionSystemException e) {
-
-			}
-
-		} else if (aux.equals(Authority.LESSOR)) {
-			lessor = lessorService.findByPrincipal();
-			try {
-				lessor = lessorService.reconstruct(actorForm, lessor, binding);
-			} catch (TransactionSystemException e) {
-
-			}
-
-		} else if (aux.equals(Authority.TENANT)) {
-			tenant = tenantService.findByPrincipal();
+		principal = actorService.findByPrincipal();
+		if (principal instanceof Auditor) {
+			auditor = (Auditor) principal;
 //			try {
-				tenant = tenantService.reconstruct(actorForm, tenant, binding);
+				actorResult = auditorService.reconstruct(actorForm, auditor, binding);
+//			} catch (TransactionSystemException e) {
+
+//			}
+
+		} else if (principal instanceof Lessor) {
+			lessor = (Lessor) principal;
+//			try {
+				actorResult = lessorService.reconstruct(actorForm, lessor, binding);
+//			} catch (TransactionSystemException e) {
+
+//			}
+
+		} else if (principal instanceof Tenant) {
+			tenant = (Tenant) principal;
+//			try {
+				actorResult = tenantService.reconstruct(actorForm, tenant, binding);
 //			} catch (TransactionSystemException e) {
 //
 //			}
-		} else if (aux.equals(Authority.ADMINISTRATOR)) {
-			administrator = administratorService.findByPrincipal();
+		} else if (principal instanceof Administrator) {
+			administrator = (Administrator) principal;
 			isAdmin = true;
-			try {
-				administrator = administratorService.reconstruct(actorForm, administrator, binding);
-			} catch (TransactionSystemException e) {
-			}
+//			try {
+				actorResult = administratorService.reconstruct(actorForm, administrator, binding);
+//			} catch (TransactionSystemException e) {
+//			}
 		}
 
 		if (binding.hasErrors()) {
@@ -168,29 +165,14 @@ public class SecurityController extends AbstractController {
 			result.addObject("message", null);
 		} else {
 			try {
-				if (aux.equals("TENANT")) {
-
-					tenantService.save(tenant);
-
-				} else if (aux.equals("LESSOR")) {
-
-					lessorService.save(lessor);
-
-				} else if (aux.equals("AUDITOR")) {
-
-					auditorService.save(auditor);
-
-				} else if (aux.equals("ADMINISTRATOR")) {
-
-					administratorService.save(administrator);
-
-				}
+				actorService.save(actorResult);
 
 			} catch (Throwable oops) {
 				result = createEditModelAndView(actorForm, "lessor.commit.error");
 			}
-			aux = aux.toLowerCase();
-			result = new ModelAndView("redirect:../" + aux + "/myProfile.do");
+			
+			actorString = principal.getClass().getSimpleName().toLowerCase();
+			result = new ModelAndView("redirect:../" + actorString + "/myProfile.do");
 		}
 
 		return result;
