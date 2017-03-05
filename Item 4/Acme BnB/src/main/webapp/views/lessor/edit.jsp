@@ -39,6 +39,6 @@
 	<jstl:if test="${actorForm.lessor.id ne 0}">
 		<acme:submit name="delete" code="lessor.delete"/>
 	</jstl:if>
-	<acme:cancel url="javascript:window.location.href='lessor/list.do'" code="lessor.cancel"/>
+	<acme:cancel url="lessor/myProfile.do" code="lessor.cancel"/>
 	<br>
 </form:form>

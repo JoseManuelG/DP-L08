@@ -39,6 +39,6 @@
 	
 	<acme:submit code="security.register.save" name="save"/>
 	
-	<acme:cancel url="javascript:window.location.href=''" code="security.register.cancel"/>
+	<acme:cancel url="" code="security.register.cancel"/>
 	
 </form:form>
