@@ -25,6 +25,8 @@
 <br>
 <spring:message  code="property.address" />: <jstl:out value="${property.address}"/>
 <br>
+<spring:message  code="property.lastUpdate" />: <jstl:out value="${property.lastUpdate}"/>
+<br>
 
 <h2><spring:message  code="property.attributes" />:</h2>
 

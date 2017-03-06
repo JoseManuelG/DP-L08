@@ -1510,7 +1510,7 @@
 	
 	<bean id="invoiceBook1Tenant1" class="domain.Invoice">
 		<property name="creationMoment" value="03/25/2016 08:15"/>
-		<property name="VAT" value="sample VAT"/>
+		<property name="VAT" value="21%"/>
 		<property name="information" value="sample information"/>
 		<property name="details" value="sample details"/>
 		<property name="book" ref="book1Tenant1"/>
@@ -1803,7 +1803,7 @@
 	
 	<bean id="configuration" class="domain.Configuration">
 		<property name="fee" value="1.0"/>
-		<property name="VAT" value="sample VAT"/>
+		<property name="VAT" value="21%"/>
 	</bean>
 	
 	

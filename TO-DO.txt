@@ -1,13 +1,11 @@
 TO DO:)
 
-	-> Añadirle al property o en columna o en view su lastEditDate
-	-> Cambiar traduccion de rate en property de calificacion a tarifa.
 	-> Meterle al admin formulario para configurar el fee
 	-> Cambiar VAT
-	-> Poner atributos como unicos.
-	-> Corregir ortografia mensaje de error de eliminar atributo en español si se esta usando.
 	-> Poner en el populate que todos los auditor tengan un audit a la propiedad 1 y comprobar que pagina bien.
+	
 	-> ¿Quitar del edit profile datos de la cuenta (user name y password)? En el requis. funcional pone "Change the information in his or her profile, ¿es parte del perfil los datos de sesión?. Eliminaría el inconveniente de quitar reestablecer password cada vez que se edita perfil.
+	(OPINION de Roldan: me parece un poco bruto, nose veo algo normal poder cambiar tu cuenta de usuario, pero si por ahorrar quebraderosde cabeza lo hacemos de esa manera, tampoco me disgusta, es un hecho que no es información del perfil)
 	-> ¿Meter numero de books en resultados del finder para poder ordenar?
 	-> Copiar security controller en plantilla o eliminar el que esta ahora en plantilla. 
 	-> Terminar informe de costes (ACHA)
@@ -29,7 +27,11 @@ EXTRAS:
 -> Comprobar en pre-production qué peta (fuera de dashboards) por tener el populate vacio
 	
 -------------------------------------------------------(ARREGLADO)--------------------------------------------------------------------
-	-> Cambiar traduccion en tabla de books de inquilino a arrendatario (tenant)(ARREGLADO)
+-> Corregir ortografia mensaje de error de eliminar atributo en español si se esta usando(ARREGLADO).
+-> Poner atributos como unicos.(ARREGLADO)
+-> Cambiar traduccion de rate en property de calificacion a tarifa.(ARREGLADO)
+-> Añadirle al property o en columna o en view su lastEditDate(ARREGLADO)
+-> Cambiar traduccion en tabla de books de inquilino a arrendatario (tenant)(ARREGLADO)
 -> Poner link para comentar de tenant a lessor en caso de que le haya hecho reserva (esta la logica pero falta el link).(ARREGLADO)
 -> En la lista de socialIdentities de AUDITOR (comprobar de otros actors) los links llevan todos a la pagina principal de Acme BnB 		en vez de a su correspondiente link.(ARREGLADO
 -> View property como lessor: paginacion de la tabla no funciona.(ARREGLADO)
