@@ -36,7 +36,7 @@ public interface TenantRepository extends JpaRepository<Tenant, Integer> {
 	List<Tenant> getTenantWithMorePendingBooks();
 
 	//Dashboard-10
-	@Query("select b.tenant from Book b where b.state='ACCEPTED' group by b.tenant order by 1.0*count(b)/b.tenant.books.size desc")
-	List<Tenant> getTenantsByAcceptedVersusTotalBooksRatio();
+	@Query("select b.tenant, 1.0*count(b)/b.tenant.books.size from Book b where b.state='ACCEPTED' group by b.tenant")
+	List<Object[]> getTenantsByAcceptedVersusTotalBooksRatio();
 
 }

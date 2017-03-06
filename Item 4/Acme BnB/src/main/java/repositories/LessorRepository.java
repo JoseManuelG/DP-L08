@@ -22,7 +22,7 @@ public interface LessorRepository extends JpaRepository<Lessor, Integer> {
 
 	@Query("select l.books from Lessor l where l.id = ?1")
 	Collection<Book> findAllBooksByPrincipal(int id);
-	
+
 	@Query("select count (b) from Book b where b.tenant.id = ?1 and b.lessor.id= ?2")
 	int findAllBooksByTennantAndLessor(int tenantId, int lessorId);
 
@@ -39,7 +39,7 @@ public interface LessorRepository extends JpaRepository<Lessor, Integer> {
 	List<Lessor> getLessorWithMorePendingBooks();
 
 	//Dashboard-09
-	@Query("select b.lessor from Book b where b.state='ACCEPTED' group by b.lessor order by 1.0*count(b)/b.lessor.books.size desc")
-	List<Lessor> getLessorsByAcceptedVersusTotalBooksRatio();
+	@Query("select b.lessor, 1.0*count(b)/b.lessor.books.size from Book b where b.state='ACCEPTED' group by b.lessor")
+	List<Object[]> getLessorsByAcceptedVersusTotalBooksRatio();
 
 }

@@ -247,14 +247,21 @@ public class LessorService {
 	public Lessor getLessorWithMinAcceptedVersusTotalBooksRatio() {
 		//Dashboard-09
 		Lessor lessor;
-		List<Lessor> lessors;
+		List<Object[]> lessors;
+		Double c;
 
 		lessors = lessorRepository.getLessorsByAcceptedVersusTotalBooksRatio();
 
+		lessor = null;
+
 		if (lessors.size() != 0) {
-			lessor = lessors.get(0);
-		} else {
-			lessor = null;
+			c = Double.MAX_VALUE;
+			for (Object[] o : lessors) {
+				if ((Double) o[1] < c) {
+					c = (Double) o[1];
+					lessor = (Lessor) o[0];
+				}
+			}
 		}
 		return lessor;
 	}
@@ -262,16 +269,22 @@ public class LessorService {
 	public Lessor getLessorWithMaxAcceptedVersusTotalBooksRatio() {
 		//Dashboard-09
 		Lessor lessor;
-		List<Lessor> lessors;
+		List<Object[]> lessors;
+		Double c;
 
 		lessors = lessorRepository.getLessorsByAcceptedVersusTotalBooksRatio();
 
+		lessor = null;
+
 		if (lessors.size() != 0) {
-			lessor = lessors.get(lessors.size() - 1);
-		} else {
-			lessor = null;
+			c = -1.0;
+			for (Object[] o : lessors) {
+				if ((Double) o[1] > c) {
+					c = (Double) o[1];
+					lessor = (Lessor) o[0];
+				}
+			}
 		}
 		return lessor;
 	}
-
 }

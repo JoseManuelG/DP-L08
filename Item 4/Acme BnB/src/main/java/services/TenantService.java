@@ -215,14 +215,20 @@ public class TenantService {
 	public Tenant getTenantWithMinAcceptedVersusTotalBooksRatio() {
 		//Dashboard-10
 		Tenant tenant;
-		List<Tenant> tenants;
+		List<Object[]> tenants;
+		Double c;
 
 		tenants = tenantRepository.getTenantsByAcceptedVersusTotalBooksRatio();
+		tenant = null;
 
 		if (tenants.size() != 0) {
-			tenant = tenants.get(0);
-		} else {
-			tenant = null;
+			c = Double.MAX_VALUE;
+			for (Object[] o : tenants) {
+				if ((Double) o[1] < c) {
+					c = (Double) o[1];
+					tenant = (Tenant) o[0];
+				}
+			}
 		}
 		return tenant;
 	}
@@ -230,14 +236,20 @@ public class TenantService {
 	public Tenant getTenantWithMaxAcceptedVersusTotalBooksRatio() {
 		//Dashboard-10
 		Tenant tenant;
-		List<Tenant> tenants;
+		List<Object[]> tenants;
+		Double c;
 
 		tenants = tenantRepository.getTenantsByAcceptedVersusTotalBooksRatio();
+		tenant = null;
 
 		if (tenants.size() != 0) {
-			tenant = tenants.get(tenants.size() - 1);
-		} else {
-			tenant = null;
+			c = -1.0;
+			for (Object[] o : tenants) {
+				if ((Double) o[1] > c) {
+					c = (Double) o[1];
+					tenant = (Tenant) o[0];
+				}
+			}
 		}
 		return tenant;
 	}
