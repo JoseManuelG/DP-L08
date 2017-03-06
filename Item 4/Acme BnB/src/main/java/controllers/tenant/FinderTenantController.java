@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -53,8 +51,11 @@ public class FinderTenantController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/finder", method = RequestMethod.POST, params = "save")
-	public ModelAndView search(@Valid Finder finder, BindingResult binding) {
+	public ModelAndView search(Finder finder, BindingResult binding) {
 		ModelAndView result;
+		Finder res;
+
+		res = finderService.reconstruct(finder, binding);
 		Collection<Property> results;
 		if (binding.hasErrors()) {
 			results = new ArrayList<Property>();
@@ -65,7 +66,7 @@ public class FinderTenantController extends AbstractController {
 			result.addObject("results", results);
 		} else {
 			try {
-				finderService.save(finder);
+				finderService.save(res);
 				result = finder();
 
 			} catch (Throwable oops) {

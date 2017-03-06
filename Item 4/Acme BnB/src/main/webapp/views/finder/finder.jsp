@@ -14,9 +14,6 @@
 <fieldset>
 	<form:form action="finder/tenant/finder.do" modelAttribute="finder">
 		<form:hidden path="id" />
-		<form:hidden path="version" />
-		<form:hidden path="results" />
-		<form:hidden path="cacheMoment" />
 
 		<acme:textbox code="finder.destination" path="destination"/>
 		<acme:textbox code="finder.minPrice" path="minPrice"/>

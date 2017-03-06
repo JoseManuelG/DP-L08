@@ -14,8 +14,6 @@
 <form:form action="${requestURI }" modelAttribute="configuration">
 	
 		<form:hidden path="id" />
-		<form:hidden path="version" />	
-		<form:hidden path="VAT" />	
 	
 	<acme:textbox code="configuration.fee" path="fee"/>
 	<br />

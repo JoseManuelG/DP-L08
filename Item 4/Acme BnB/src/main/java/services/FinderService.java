@@ -9,11 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.FinderRepository;
 import domain.Finder;
 import domain.Lessor;
 import domain.Property;
+import domain.Tenant;
 
 @Service
 @Transactional
@@ -26,6 +29,9 @@ public class FinderService {
 	// Supporting Services --------------------------------------
 	@Autowired
 	private ActorService		actorService;
+
+	@Autowired
+	private Validator			validator;
 
 
 	// Simple CRUD methods --------------------------------------
@@ -69,7 +75,7 @@ public class FinderService {
 		oneHourAgo = new Date(System.currentTimeMillis() - 3600000);
 		lastSearch = new Date(finder.getCacheMoment().getTime());
 
-		Assert.notNull(finder);
+		Assert.isTrue(((Tenant) actorService.findByPrincipal()).getFinder().getId() == finder.getId());
 
 		if (finder.getMaxPrice() != null && finder.getMinPrice() != null) {
 			Assert.isTrue(finder.getMaxPrice() >= finder.getMinPrice());
@@ -79,10 +85,9 @@ public class FinderService {
 
 		result = finder;
 
-		if (lastSearch.before(oneHourAgo) || 
-			!(finder.getDestination().equals(old.getDestination()) && finder.getKeyword().equals(old.getKeyword()) && 
-				(finder.getMaxPrice() == old.getMaxPrice() || (finder.getMaxPrice() != null && finder.getMaxPrice().equals(old.getMaxPrice()))) && 
-				(finder.getMinPrice() == old.getMinPrice() || (finder.getMinPrice() != null && finder.getMinPrice().equals(old.getMinPrice()))))) {
+		if (lastSearch.before(oneHourAgo)
+			|| !(finder.getDestination().equals(old.getDestination()) && finder.getKeyword().equals(old.getKeyword()) && (finder.getMaxPrice() == old.getMaxPrice() || (finder.getMaxPrice() != null && finder.getMaxPrice().equals(old.getMaxPrice()))) && (finder
+				.getMinPrice() == old.getMinPrice() || (finder.getMinPrice() != null && finder.getMinPrice().equals(old.getMinPrice()))))) {
 			result.setCacheMoment(new Date(System.currentTimeMillis() - 100));
 
 			if (finder.getMinPrice() == null) {
@@ -90,7 +95,7 @@ public class FinderService {
 			} else {
 				min = finder.getMinPrice();
 			}
-			
+
 			if (result.getMaxPrice() == null) {
 				results = finderRepository.searchPropertiesWithoutMaxPrice(result.getDestination(), result.getKeyword(), min);
 			} else {
@@ -139,26 +144,46 @@ public class FinderService {
 		//Dashboard-11
 		return finderRepository.getMaximumResultsPerFinder();
 	}
-	
+
 	public void removeLessorProperties(Lessor lessor) {
 		Collection<Finder> finders;
-		
+
 		finders = findAll();
-		
-		for (Finder finder : finders){
+
+		for (Finder finder : finders) {
 			finder.getResults().removeAll(lessor.getLessorProperties());
 			finderRepository.save(finder);
 		}
 	}
-	
+
 	public void removeProperty(Property property) {
 		Collection<Finder> finders;
-		
+
 		finders = finderRepository.findFindersFromProperty(property.getId());
-		
-		for (Finder finder : finders){
+
+		for (Finder finder : finders) {
 			finder.getResults().remove(property);
 			finderRepository.save(finder);
 		}
+	}
+	public Finder reconstruct(Finder finder, BindingResult binding) {
+		Finder res, old;
+
+		old = findOne(finder.getId());
+
+		res = create();
+
+		res.setCacheMoment(old.getCacheMoment());
+		res.setId(old.getId());
+		res.setResults(old.getResults());
+		res.setVersion(old.getVersion());
+		res.setMinPrice(finder.getMinPrice());
+		res.setMaxPrice(finder.getMaxPrice());
+		res.setKeyword(finder.getKeyword());
+		res.setDestination(finder.getDestination());
+
+		validator.validate(res, binding);
+
+		return res;
 	}
 }

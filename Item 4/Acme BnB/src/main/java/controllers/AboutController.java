@@ -10,13 +10,20 @@
 
 package controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ConfigurationService;
+
 @Controller
 @RequestMapping("/about")
 public class AboutController extends AbstractController {
+
+	@Autowired
+	private ConfigurationService	configurationService;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -31,8 +38,8 @@ public class AboutController extends AbstractController {
 		ModelAndView result;
 		String name, vat;
 
-		name = "name sample";
-		vat = "vat sample";
+		name = "Acme BnB";
+		vat = configurationService.findOne().getVAT();
 
 		result = new ModelAndView("about/about");
 

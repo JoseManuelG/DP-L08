@@ -8,6 +8,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.ConfigurationRepository;
 import domain.Configuration;
@@ -20,8 +22,11 @@ public class ConfigurationService {
 	@Autowired
 	private ConfigurationRepository	configurationRepository;
 
-
 	//Supporting Services --------------------------------------
+	@Autowired
+	private Validator				validator;
+
+
 	//Simple CRUD methods --------------------------------------
 	public Configuration create() {
 		Configuration result;
@@ -50,6 +55,22 @@ public class ConfigurationService {
 		Assert.isTrue(configuration.getFee() >= 0);
 		result = configurationRepository.save(configuration);
 		return result;
+	}
+	public Configuration reconstruct(Configuration configuration, BindingResult binding) {
+		Configuration res, old;
+
+		old = findOne();
+
+		res = create();
+
+		res.setFee(configuration.getFee());
+		res.setId(old.getId());
+		res.setVersion(old.getVersion());
+		res.setVAT(old.getVAT());
+
+		validator.validate(res, binding);
+
+		return res;
 	}
 
 	//other business methods --------------------------------------
