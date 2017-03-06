@@ -113,11 +113,13 @@ public class PropertyLessorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(Property property, BindingResult binding) {
 		ModelAndView result;
-		property = propertyService.reconstruct(property, binding);
+		Property propertyResult;
+		
+		propertyResult = propertyService.reconstruct(property, binding);
 		try {
 			Lessor lessor = (Lessor) customerService.findActorByPrincial();
 			property.setLessor(lessor);
-			propertyService.delete(property);
+			propertyService.delete(propertyResult);
 			result = new ModelAndView("redirect:../lessor/myProperties.do");
 		} catch (Throwable oops) {
 			result = createEditModelAndView(property, "property.commit.error");

@@ -34,18 +34,21 @@ public class PropertyService {
 
 	@Autowired
 	private LessorService		lessorService;
-	
+
 	@Autowired
-	private BookService		bookService;
-	
+	private BookService			bookService;
+
 	@Autowired
 	private AuditService		auditService;
 
+	@Autowired
+	private FinderService		finderService;
 
 	// Validator --------------------------------------------------------------------
 	@Autowired
-	private Validator validator;
-	
+	private Validator			validator;
+
+
 	// Constructor --------------------------------------------------------------------
 
 	public PropertyService() {
@@ -101,10 +104,10 @@ public class PropertyService {
 		properties.remove(property);
 		lessor.setLessorProperties(properties);
 		lessorService.save(lessor);
+		finderService.removeProperty(property);
 		propertyRepository.delete(property);
 
 	}
-
 	// Other Bussiness Methods --------------------------------------------------------
 
 	public Collection<Property> findPropertiesByLessor(Lessor lessor) {
@@ -182,14 +185,14 @@ public class PropertyService {
 
 		return propertyRepository.findAuditsByProperty(property.getId());
 	}
-	
-	public Property reconstruct(Property property, BindingResult bindingResult){
+
+	public Property reconstruct(Property property, BindingResult bindingResult) {
 		Property result, original;
-		
-		if(property.getId() == 0){
+
+		if (property.getId() == 0) {
 			int lessorId = lessorService.findByPrincipal().getId();
 			result = this.create(lessorId);
-		} else{
+		} else {
 			original = propertyRepository.findOne(property.getId());
 			result = new Property();
 			result.setAttributeValues(original.getAttributeValues());
@@ -206,7 +209,7 @@ public class PropertyService {
 		result.setAddress(property.getAddress());
 		validator.validate(result, bindingResult);
 		return result;
-		
+
 	}
 
 }

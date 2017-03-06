@@ -62,7 +62,7 @@ public class FinderService {
 
 	public Finder save(Finder finder) {
 		Finder result, old;
-		Double min, max;
+		Double min;
 		Collection<Property> results;
 		Date oneHourAgo, lastSearch;
 
@@ -74,23 +74,23 @@ public class FinderService {
 		if (finder.getMaxPrice() != null && finder.getMinPrice() != null) {
 			Assert.isTrue(finder.getMaxPrice() >= finder.getMinPrice());
 		}
-		if (finder.getMinPrice() == null) {
-			min = -1.0;
-		} else {
-			min = finder.getMinPrice();
-		}
-		if (finder.getMaxPrice() == null) {
-			max = -1.0;
-		} else {
-			max = finder.getMaxPrice();
-		}
 
 		old = finderRepository.findOne(finder.getId());
 
 		result = finder;
 
-		if (lastSearch.before(oneHourAgo) || !(finder.getDestination().equals(old.getDestination()) && finder.getKeyword().equals(old.getKeyword()) && max.equals(old.getMaxPrice()) && min.equals(old.getMinPrice()))) {
+		if (lastSearch.before(oneHourAgo) || 
+			!(finder.getDestination().equals(old.getDestination()) && finder.getKeyword().equals(old.getKeyword()) && 
+				(finder.getMaxPrice() == old.getMaxPrice() || (finder.getMaxPrice() != null && finder.getMaxPrice().equals(old.getMaxPrice()))) && 
+				(finder.getMinPrice() == old.getMinPrice() || (finder.getMinPrice() != null && finder.getMinPrice().equals(old.getMinPrice()))))) {
 			result.setCacheMoment(new Date(System.currentTimeMillis() - 100));
+
+			if (finder.getMinPrice() == null) {
+				min = 0.;
+			} else {
+				min = finder.getMinPrice();
+			}
+			
 			if (result.getMaxPrice() == null) {
 				results = finderRepository.searchPropertiesWithoutMaxPrice(result.getDestination(), result.getKeyword(), min);
 			} else {
