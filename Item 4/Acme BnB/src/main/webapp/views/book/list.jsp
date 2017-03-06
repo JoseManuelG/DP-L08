@@ -34,11 +34,11 @@
 	<security:authorize access="hasRole('LESSOR')">
 		<spring:message code="book.tenant" var="tenant" />
 		<display:column title="${tenant}" sortable="false">
-			<jstl:if test="${row.lessor != null}">
+			<jstl:if test="${row.tenant != null}">
 				<a href="tenant/view.do?tenantId=${row.tenant.id}">
 				<spring:message code="book.view"/></a>
 			</jstl:if>
-			<jstl:if test="${row.lessor == null}">
+			<jstl:if test="${row.tenant == null}">
 				<spring:message code="book.deleted"/>
 			</jstl:if>
 		</display:column>

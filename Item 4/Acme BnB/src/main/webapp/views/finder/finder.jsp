@@ -30,7 +30,7 @@
 <br/>
 
 <jstl:if test="${!results.isEmpty()}">
-	<display:table pagesize="5" class="displaytag" name="results" requestURI="${requestURI}" id="row">
+	<display:table excludedParams="*" pagesize="5" class="displaytag" name="results" requestURI="${requestURI}" id="row">
 		
 		<!-- Action links -->
 		
