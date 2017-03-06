@@ -3,14 +3,14 @@ Display a dashboard with the following information:
 01-The average number of accepted and denied requests per lessor. Dani -> book/lessor
 
 	select count(b) from Book b where b.state='ACCEPTED';
-	select count(b) from Book b where b.state=’DENIED’;
+	select count(b) from Book b where b.state='DENIED';
 	dividas entre:
 	select count(l) from Lessor l;
 
 02-The average number of accepted and denied requests per tenant. Dani -> book/tenant
 
 	select count(b) from Book b where b.state='ACCEPTED';
-	select count(b) from Book b where b.state=’DENIED’;
+	select count(b) from Book b where b.state='DENIED';
 	dividas entre:
 	select count(t) from Tenant t;
 	
@@ -46,13 +46,13 @@ Display a dashboard with the following information:
 	
 09-The lessor/s whose ratio of requested versus approved request/s is the maximum or the minimum. (Ratios must be rounded to one decimal place). Dani -> lessor
 
-	select b.lessor from Book b where b.state='ACCEPTED' group by b.lessor order by 1.0*count(b)/b.lessor.books.size desc;
-	El primero es el que tiene menor ratio, y el último el que mayor ratio tiene.
+	select b.lessor, 1.0*count(b)/b.lessor.books.size from Book b where b.state='ACCEPTED' group by b.lessor;
+	Buscar min y max por java.
 	
 10-The tenant/s whose ratio of requested versus approved request/s is the maximum or the minimum. (Ratios must be rounded to one decimal place). Dani -> tenant
 
-	select b.tenant from Book b where b.state='ACCEPTED' group by b.tenant order by 1.0*count(b)/b.tenant.books.size desc;
-	El primero es el que tiene menor ratio, y el último el que mayor ratio tiene.
+	select b.tenant, 1.0*count(b)/b.tenant.books.size from Book b where b.state='ACCEPTED' group by b.tenant;
+	Buscar min y max por java.
 	
 11-The average, the minimum, and the maximum number of results per finder. Dani -> finder
 
