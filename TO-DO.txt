@@ -1,6 +1,4 @@
 ﻿TO DO:
-
-	-> Meterle al admin formulario para configurar el fee
 	-> Copiar security controller en plantilla o eliminar el que esta ahora en plantilla. 
 	-> Terminar informe de costes (ACHA)
 	-> Hacer el war y cambiar el create.sql
@@ -22,6 +20,7 @@ EXTRAS:
 -> Comprobar en pre-production qué peta (fuera de dashboards) por tener el populate vacio
 	
 -------------------------------------------------------(ARREGLADO)--------------------------------------------------------------------
+-> Meterle al admin formulario para configurar el fee(ARREGLADO)
 -> Revisar indexado para .size y los (not null o is null) (ARREGLADO)
 -> Corregir ortografia mensaje de error de eliminar atributo en español si se esta usando(ARREGLADO).
 -> Poner atributos como unicos.(ARREGLADO)
