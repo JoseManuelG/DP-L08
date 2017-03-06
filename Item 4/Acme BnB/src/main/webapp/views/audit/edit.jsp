@@ -17,6 +17,7 @@
 <form:form action="audit/auditor/edit.do" modelAttribute="audit">
 	
 		<form:hidden path="id" />
+		<form:hidden path="property" />
 		
 	<acme:textbox code="audit.text" path="text"/>
 	<br />

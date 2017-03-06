@@ -138,7 +138,6 @@ public class SecurityController extends AbstractController {
 		}
 
 		if (binding.hasErrors()) {
-			result = new ModelAndView("security/edit");
 			result = createEditModelAndView(actorForm, isAdmin);
 		} else if (!actorForm.getUserAccount().getPassword()
 					.equals(actorForm.getConfirmPassword())) {

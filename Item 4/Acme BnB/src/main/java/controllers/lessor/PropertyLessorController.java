@@ -95,7 +95,7 @@ public class PropertyLessorController extends AbstractController {
 		propertyResult = propertyService.reconstruct(property, binding);	
 		if (binding.hasErrors()) {
 			System.out.println(binding.getAllErrors());
-			result = createEditModelAndView(propertyResult);
+			result = createEditModelAndView(property);
 		} else {
 			try {
 				propertyService.save(propertyResult);

@@ -3,6 +3,7 @@ package services;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 
 import javax.transaction.Transactional;
 
@@ -13,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.AuditRepository;
+import domain.Attachment;
 import domain.Audit;
 import domain.Auditor;
 import domain.Property;
@@ -61,6 +63,7 @@ public class AuditService {
 		result.setProperty(property);
 		result.setDraftMode(true);
 		result.setWritingMoment(currentMoment);
+		result.setAttachments(new HashSet<Attachment>());
 
 		return result;
 	}

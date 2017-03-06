@@ -105,7 +105,7 @@ public class AuditAuditorController extends AbstractController {
 		auditResult = auditService.reconstruct(audit,binding);
 		if (binding.hasErrors()) {
 			System.out.println(binding.getAllErrors());
-			result = createEditModelAndView(auditResult);
+			result = createEditModelAndView(audit);
 		} else {
 			try {
 //				audit.getProperty().getAudits().remove(auditService.findOne(auditResult.getId()));
@@ -128,7 +128,7 @@ public class AuditAuditorController extends AbstractController {
 		auditResult = auditService.reconstruct(audit,binding);
 		if (binding.hasErrors()) {
 			System.out.println(binding.getAllErrors());
-			result = createEditModelAndView(auditResult);
+			result = createEditModelAndView(audit);
 		} else {
 			try {
 //				audit.getProperty().getAudits().remove(auditService.findOne(audit.getId()));
