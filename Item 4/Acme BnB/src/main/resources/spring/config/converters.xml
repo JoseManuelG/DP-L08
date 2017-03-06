@@ -18,6 +18,10 @@
 	">
 
 	<util:list id="converters">
+
+		<bean class="converters.ConfigurationToStringConverter" /> 
+ 		<bean class="converters.StringToConfigurationConverter" />
+
 	
 		<bean class="converters.LessorToStringConverter" /> 
  		<bean class="converters.StringToLessorConverter" />

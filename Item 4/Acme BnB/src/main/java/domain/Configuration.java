@@ -4,6 +4,7 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
@@ -16,7 +17,7 @@ public class Configuration extends DomainEntity {
 	private double	fee;
 	private String	VAT;
 
-
+	@Min(0)
 	public double getFee() {
 		return this.fee;
 	}

@@ -62,6 +62,7 @@
 						<li><a href="administrator/myProfile.do"><spring:message code="master.page.lessor.myProfile" /></a></li>
 						<li><a href="auditor/administrator/registerAuditor.do"><spring:message code="master.page.administrator.registerAuditor" /></a></li>
 						<li><a href="attribute/administrator/list.do"><spring:message code="master.page.administrator.attributes" /></a></li>
+						<li><a href="configuration/administrator/edit.do"><spring:message code="master.page.administrator.fee" /></a></li>	
 						<li><a href="dashboard/administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
 						<li><a href="dashboard/administrator/lessors.do"><spring:message code="master.page.administrator.dashboard.lessors" /></a></li>
 						<li><a href="dashboard/administrator/attributes.do"><spring:message code="master.page.administrator.dashboard.attributes" /></a></li>
