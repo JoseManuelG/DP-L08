@@ -1,7 +1,13 @@
 ﻿TO DO:
 	-> Terminar informe de costes (ACHA)
 	-> Hacer el war y cambiar el create.sql
-	-> Revisar que se esta usando siempre que es posible objectForm o objeto recortado.
+	-> Sacar war del proyecto 1.10
+	-> Recortar:
+		->Atachment
+		->AttributeValue
+		->Audit
+		->Comment
+		->SocialIdentity
 
 
 EXTRAS:
