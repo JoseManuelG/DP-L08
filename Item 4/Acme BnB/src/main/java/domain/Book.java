@@ -25,7 +25,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Access(AccessType.PROPERTY)
 @Table(indexes = {
-		@Index(columnList = "state")})
+		@Index(columnList = "state"),
+		@Index(columnList = "invoice_id")})
 public class Book extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
