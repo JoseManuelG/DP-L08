@@ -260,6 +260,18 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccountAuditor7" class="security.UserAccount">
+		<property name="username" value="auditor7" />
+		<property name="password" value="cb22ac7c563939f50b8b44ec70dfecb4" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="AUDITOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Finder 
 	
 	<bean id="" class="domain.Finder">
@@ -449,6 +461,7 @@
 		<property name="audits">
 			<list>
 				<ref bean="audit1Auditor2"/>
+				<ref bean="audit2Auditor2"/>
 			</list>
 		</property>
 		<property name="companyName" value="Audiocasa"/>
@@ -467,6 +480,7 @@
 		<property name="userAccount" ref="userAccountAuditor3"/>
 		<property name="audits">
 			<list>
+				<ref bean="audit1Auditor3"/>
 			</list>
 		</property>
 		<property name="companyName" value="Casahogar"/>
@@ -485,6 +499,7 @@
 		<property name="userAccount" ref="userAccountAuditor4"/>
 		<property name="audits">
 			<list>
+				<ref bean="audit1Auditor4"/>
 			</list>
 		</property>
 		<property name="companyName" value="Telecasa"/>
@@ -503,6 +518,7 @@
 		<property name="userAccount" ref="userAccountAuditor5"/>
 		<property name="audits">
 			<list>
+				<ref bean="audit1Auditor5"/>
 			</list>
 		</property>
 		<property name="companyName" value="Fullhogar"/>
@@ -521,9 +537,28 @@
 		<property name="userAccount" ref="userAccountAuditor6"/>
 		<property name="audits">
 			<list>
+				<ref bean="audit1Auditor6"/>
 			</list>
 		</property>
 		<property name="companyName" value="Todocasas"/>
+	</bean>
+	
+	<bean id="auditor7" class="domain.Auditor">
+		<property name="name" value="Marta"/>
+		<property name="surname" value="Sánchez"/>
+		<property name="email" value="matsan@gmail.com"/>
+		<property name="phone" value="+348563"/>
+		<property name="picture" value="http://cdn.gocertify.com/images/Auditing%20team%20going%20over%20report.jpg"/>
+		<property name="socialIdentities">
+			<list>
+			</list>
+		</property>	
+		<property name="userAccount" ref="userAccountAuditor7"/>
+		<property name="audits">
+			<list>
+			</list>
+		</property>
+		<property name="companyName" value="Milcasas"/>
 	</bean>
 	
 	<!-- Lessor
@@ -641,10 +676,12 @@
 		<property name="creditCard"><null/></property>
 		<property name="lessorProperties">
 			<list>
+				<ref bean="property1Lessor3"/>
 			</list>
 		</property>
 		<property name="books">
 			<list>
+				<ref bean="book1Tenant3"/>
 			</list>
 		</property>
 		<property name="totalFee" value="0.0"/>
@@ -815,7 +852,8 @@
 		<property name="userAccount" ref="userAccountTenant3"/>
 		<property name="finder" ref="finderTenant3"/>
 		<property name="books">
-			<list>
+			<list>				
+				<ref bean="book1Tenant3"/>
 			</list>
 		</property>
 		<property name="invoices">
@@ -927,6 +965,11 @@
 		<property name="audits">
 			<list>
 				<ref bean="audit1Auditor1"/>
+				<ref bean="audit2Auditor2"/>
+				<ref bean="audit1Auditor3"/>
+				<ref bean="audit1Auditor4"/>
+				<ref bean="audit1Auditor5"/>
+				<ref bean="audit1Auditor6"/>
 			</list>
 		</property>
 		<property name="attributeValues">
@@ -1107,6 +1150,28 @@
 		<property name="lastUpdate" value="02/12/2017 16:35"/>
 	</bean>
 	
+	<bean id="property1Lessor3" class="domain.Property">
+		<property name="name" value="Property 1 l3"/>
+		<property name="rate" value="121.0"/>
+		<property name="description" value="A small and very comfortable apartment"/>	
+		<property name="address" value="Spain Seville, C\Piruleta nº30 3ºC"/>	
+		<property name="lessor" ref="lessor3"/>		
+		<property name="audits">
+			<list>
+			</list>
+		</property>
+		<property name="attributeValues">
+			<list>
+			</list>
+		</property>
+		<property name="books">
+			<list>
+				<ref bean="book1Tenant3"/>
+			</list>
+		</property>
+		<property name="lastUpdate" value="02/12/2017 15:35"/>
+	</bean>
+	
 	<!-- Audit 
 	
 	<bean id="" class="domain.Audit">
@@ -1127,7 +1192,7 @@
 	<bean id="audit1Auditor1" class="domain.Audit">
 		<property name="writingMoment" value="02/12/2017 16:35"/>
 		<property name="text" value="This property has a very good decoration"/>
-		<property name="draftMode" value="true"/>
+		<property name="draftMode" value="false"/>
 		<property name="auditor" ref="auditor1"/>		
 		<property name="property" ref="property1Lessor1"/>
 		<property name="attachments">
@@ -1211,6 +1276,66 @@
 		<property name="attachments">
 			<list>
 				<ref bean="attachment1Audit1Auditor2"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="audit2Auditor2" class="domain.Audit">
+		<property name="writingMoment" value="02/12/2017 16:35"/>
+		<property name="text" value="This property is located in the middle of the city"/>
+		<property name="draftMode" value="false"/>
+		<property name="auditor" ref="auditor2"/>		
+		<property name="property" ref="property1Lessor1"/>
+		<property name="attachments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="audit1Auditor3" class="domain.Audit">
+		<property name="writingMoment" value="02/12/2017 16:35"/>
+		<property name="text" value="This property is located in the middle of the city"/>
+		<property name="draftMode" value="false"/>
+		<property name="auditor" ref="auditor3"/>		
+		<property name="property" ref="property1Lessor1"/>
+		<property name="attachments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="audit1Auditor4" class="domain.Audit">
+		<property name="writingMoment" value="02/12/2017 16:35"/>
+		<property name="text" value="This property is located in the middle of the city"/>
+		<property name="draftMode" value="false"/>
+		<property name="auditor" ref="auditor4"/>		
+		<property name="property" ref="property1Lessor1"/>
+		<property name="attachments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="audit1Auditor5" class="domain.Audit">
+		<property name="writingMoment" value="02/12/2017 16:35"/>
+		<property name="text" value="This property is located in the middle of the city"/>
+		<property name="draftMode" value="false"/>
+		<property name="auditor" ref="auditor5"/>		
+		<property name="property" ref="property1Lessor1"/>
+		<property name="attachments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="audit1Auditor6" class="domain.Audit">
+		<property name="writingMoment" value="02/12/2017 16:35"/>
+		<property name="text" value="This property is located in the middle of the city"/>
+		<property name="draftMode" value="false"/>
+		<property name="auditor" ref="auditor6"/>		
+		<property name="property" ref="property1Lessor1"/>
+		<property name="attachments">
+			<list>
 			</list>
 		</property>
 	</bean>
@@ -1319,6 +1444,15 @@
 	</bean>
 	
 	<bean id="creditCardBookWithoutTenant" class="domain.CreditCard">
+		<property name="holderName" value="Pepe"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="4485733078654607"/>
+		<property name="expirationMonth" value="06"/>
+		<property name="expirationYear" value="2017"/>
+		<property name="cvvCode" value="100"/>
+	</bean>
+	
+	<bean id="creditCardBook1Tenant3" class="domain.CreditCard">
 		<property name="holderName" value="Pepe"/>
 		<property name="brandName" value="VISA"/>
 		<property name="number" value="4485733078654607"/>
@@ -1490,10 +1624,25 @@
 		<property name="propertyName" value="Deleted property and tenant"/>
 		<property name="propertyAddress" value="Spain Seville, C\Piruleta nº10 1ºA"/>
 		<property name="creditCard" ref="creditCardBookWithoutTenant"/>
-		<property name="property" ><null/></property>
-		<property name="tenant" ><null/></property>	
+		<property name="property"><null/></property>
+		<property name="tenant"><null/></property>	
 		<property name="invoice"><null/></property>
 		<property name="lessor" ref="lessor1"/>
+	</bean>
+	
+	<bean id="book1Tenant3" class="domain.Book">
+		<property name="checkInDate" value="06/04/2016"/>
+		<property name="checkOutDate" value="06/06/2016"/>
+		<property name="smoker" value="false"/>
+		<property name="state" value="ACCEPTED"/>
+		<property name="totalAmount" value="200.0"/>
+		<property name="propertyName" value="Property1 l3"/>
+		<property name="propertyAddress" value="Spain Seville, C\Piruleta nº10 3ºA"/>
+		<property name="creditCard" ref="creditCardBook1Tenant3"/>
+		<property name="property" ref="property1Lessor3"/>
+		<property name="tenant" ref="tenant3"/>		
+		<property name="invoice"><null/></property>
+		<property name="lessor" ref="lessor3"/>
 	</bean>
 	
 	<!-- Invoice 
@@ -1803,7 +1952,7 @@
 	
 	<bean id="configuration" class="domain.Configuration">
 		<property name="fee" value="1.0"/>
-		<property name="VAT" value="21%"/>
+		<property name="VAT" value="ESB123456789"/>
 	</bean>
 	
 	

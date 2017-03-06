@@ -50,6 +50,11 @@
 		
 		<acme:column sorteable="false" code="finder.property.address" path="address"/>
 		
+		<spring:message code="property.number" var="numberHeader" />
+		<display:column title="${numberHeader}" sortable="true">
+			<jstl:out value="${row.books.size()}"/>
+		</display:column>
+		
 		<display:column>
 			<a href="property/view.do?propertyId=${row.id}">
 				<spring:message	code="finder.display" />

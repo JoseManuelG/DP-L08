@@ -1,18 +1,14 @@
-TO DO:)
+﻿TO DO:
 
 	-> Meterle al admin formulario para configurar el fee
-	-> Cambiar VAT
-	-> Poner en el populate que todos los auditor tengan un audit a la propiedad 1 y comprobar que pagina bien.
-	
-	-> ¿Quitar del edit profile datos de la cuenta (user name y password)? En el requis. funcional pone "Change the information in his or her profile, ¿es parte del perfil los datos de sesión?. Eliminaría el inconveniente de quitar reestablecer password cada vez que se edita perfil.
-	(OPINION de Roldan: me parece un poco bruto, nose veo algo normal poder cambiar tu cuenta de usuario, pero si por ahorrar quebraderosde cabeza lo hacemos de esa manera, tampoco me disgusta, es un hecho que no es información del perfil)
-	-> ¿Meter numero de books en resultados del finder para poder ordenar?
 	-> Copiar security controller en plantilla o eliminar el que esta ahora en plantilla. 
 	-> Terminar informe de costes (ACHA)
 	-> Hacer el war y cambiar el create.sql
 	-> Sincronizar plantilla 1.9 con 1.10 y proyectos 1.9 y 1.10 (JAVI)
 	-> Revisar que se esta usando siempre que es posible objectForm o objeto recortado.
-
+	
+		-> ¿Quitar del edit profile datos de la cuenta (user name y password)? En el requis. funcional pone "Change the information in his or her profile, ¿es parte del perfil los datos de sesión?. Eliminaría el inconveniente de quitar reestablecer password cada vez que se edita perfil.
+(OPINION de Roldan: me parece un poco bruto, nose veo algo normal poder cambiar tu cuenta de usuario, pero si por ahorrar quebraderosde cabeza lo hacemos de esa manera, tampoco me disgusta, es un hecho que no es información del perfil)
 
 
 EXTRAS:
@@ -116,6 +112,9 @@ EXTRAS:
 -> En registro doble contraseña para confirmacion. (ARREGLADO)
 -> Revisar todos los requisitos del populate.xml(ARREGLADO)
 -> Recortar formulario de editar audit (ARREGLADO)
+-> ¿Meter numero de books en resultados del finder para poder ordenar?(ARREGLADO)
+-> Cambiar VAT(ARREGLADO)
+-> Poner en el populate que todos los auditor tengan un audit a la propiedad 1 y comprobar que pagina bien.(ARREGLADO)
 
 B+ TREE:
 	Audit(HECHO)

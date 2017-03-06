@@ -31,7 +31,7 @@
 <h2><spring:message  code="property.attributes" />:</h2>
 
 <jstl:if test="${!results.isEmpty()}">
-	<display:table pagesize="5" class="displaytag" name="attributeValues"  uid="attributeValue" requestURI="${requestURI}">
+	<display:table pagesize="5" excludedParams="*" class="displaytag" name="attributeValues"  uid="attributeValue" requestURI="${requestURI}">
 		
 		<!-- Action links -->
 		<jstl:if test="${ esMiProperty}">
@@ -57,7 +57,7 @@
 </jstl:if>
 
 <h2><spring:message  code="property.audits" />:</h2>
-<display:table pagesize="5" class="displaytag" name="audits"  uid="audit" requestURI="${requestURI}">
+<display:table pagesize="5" excludedParams="*" class="displaytag" name="audits"  uid="audit" requestURI="${requestURI}">
 		
 		<!-- Action links -->
 		
