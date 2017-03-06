@@ -52,6 +52,11 @@ Nótese que tanto el directorio indicado en keystoreFile como la contraseña usa
 
 Con estas configuraciones, y una vez desplegada nuestra aplicación como de costumbre, ya podemos entrar en ella através del protocolo https.
 
+\section{Otras consideraciones}
+Ya que lo único que hemos modificado o añadido son archivos que no pertenecen al proyecto o la plantilla, la plantilla expuesta en este item, 1.10, y su proyecto correspondiente, apenas sufre modificaciones con respecto a los de otros items. Lo único que se ha modificado en estos son los términos y condiciones, para exponer que se usa conexión segura.
+
+Por otro lado teníamos la posibilidad de quitar la entrada por http, pero hemos decidido dejarla por simplicidad. Otra opción algo más compleja hubiera sido redirigirla siempre a la https, y lo óptimo hubiera sido que se usara https en ciertas páginas, como cada vez que se establece una conexión con otro usuario, y http en páginas que no requirieran una conexión segura. No hemos explorado estas opciones por falta de tiempo, ya que hemos decidido invertir el tiempo que nos ha sobrado al terminar el proyecto en mejorar este en vez de mejorar este apartado.
+
 \section{Bibliografía}
 http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html
 \end{document}
