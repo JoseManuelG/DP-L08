@@ -1,6 +1,5 @@
 TO DO:)
-	-> Poner link para comentar de tenant a lessor en caso de que le haya hecho reserva (esta la logica pero falta el link).
-	-> Cambiar traduccion en tabla de books de inquilino a arrendatario (tenant)
+
 	-> Añadirle al property o en columna o en view su lastEditDate
 	-> Cambiar traduccion de rate en property de calificacion a tarifa.
 	-> Meterle al admin formulario para configurar el fee
@@ -30,7 +29,8 @@ EXTRAS:
 -> Comprobar en pre-production qué peta (fuera de dashboards) por tener el populate vacio
 	
 -------------------------------------------------------(ARREGLADO)--------------------------------------------------------------------
-
+	-> Cambiar traduccion en tabla de books de inquilino a arrendatario (tenant)(ARREGLADO)
+-> Poner link para comentar de tenant a lessor en caso de que le haya hecho reserva (esta la logica pero falta el link).(ARREGLADO)
 -> En la lista de socialIdentities de AUDITOR (comprobar de otros actors) los links llevan todos a la pagina principal de Acme BnB 		en vez de a su correspondiente link.(ARREGLADO
 -> View property como lessor: paginacion de la tabla no funciona.(ARREGLADO)
 -> Comment, stars: Failed to convert property value of type java.lang.String to required type int for property stars; nested exception is java.lang.NumberFormatException: For input string: ""(ARREGLADO)

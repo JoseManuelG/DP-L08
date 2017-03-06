@@ -146,7 +146,7 @@
 
 	</display:table>
 	</jstl:if>
-<jstl:if test="${esMiPerfil}">
+<jstl:if test="${puedoComentar}">
 	<a href="comment/customer/create.do?customerId=${lessor.id }">
 	      <spring:message  code="comment.create" />
 	</a>
