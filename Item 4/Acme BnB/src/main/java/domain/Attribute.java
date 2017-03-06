@@ -23,7 +23,7 @@ public class Attribute extends DomainEntity {
 	public String getName() {
 		return this.name;
 	}
-	@SafeHtml
+
 	public void setName(String name) {
 		this.name = name;
 	}
