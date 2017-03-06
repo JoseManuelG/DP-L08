@@ -1,6 +1,5 @@
 TO DO:)
 
-	-> Meterle al admin formulario para configurar el fee
 	-> Cambiar VAT
 	-> Poner en el populate que todos los auditor tengan un audit a la propiedad 1 y comprobar que pagina bien.
 	
@@ -26,6 +25,7 @@ EXTRAS:
 -> Comprobar en pre-production qué peta (fuera de dashboards) por tener el populate vacio
 	
 -------------------------------------------------------(ARREGLADO)--------------------------------------------------------------------
+-> Meterle al admin formulario para configurar el fee(ARREGLADO)
 -> Revisar indexado para .size y los (not null o is null) (ARREGLADO)
 -> Corregir ortografia mensaje de error de eliminar atributo en español si se esta usando(ARREGLADO).
 -> Poner atributos como unicos.(ARREGLADO)
