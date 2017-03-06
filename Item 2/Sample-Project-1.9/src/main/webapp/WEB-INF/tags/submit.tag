@@ -26,7 +26,18 @@
 <%@ attribute name="code" required="true" %>
 
 <%-- Definition --%>
+<jstl:choose>
+	<jstl:when test="${name=='delete'}">
+		<button type="submit" name="${name}" class="btn btn-primary"
+			onclick="return confirm('<spring:message code="confirm.delete" />')">
+				<spring:message code="${code}" />
+		</button>
+	</jstl:when>
+	<jstl:otherwise>
+		<button type="submit" name="${name}" class="btn btn-primary">
+			<spring:message code="${code}" />
+		</button>
+	</jstl:otherwise>
+</jstl:choose>
 
-<button type="submit" name="${name}" class="btn btn-primary">
-	<spring:message code="${code}" />
-</button>
+
