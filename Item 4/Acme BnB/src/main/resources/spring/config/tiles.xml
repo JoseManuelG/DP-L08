@@ -42,7 +42,7 @@
 		<value>/views/tenant/tiles.xml</value>	
 		<value>/views/comment/tiles.xml</value>		
 		<value>/views/dashboard/tiles.xml</value>	
-			
+		<value>/views/configuration/tiles.xml</value>		
 		
 	</util:list>
 
