@@ -62,7 +62,7 @@ public class ConfigurationController extends AbstractController {
 		} else {
 			try {
 				configurationService.save(configuration);
-				result = new ModelAndView("redirect:../");
+				result = new ModelAndView("redirect:../../");
 				
 		} catch (Throwable oops) {
 			result = createEditModelAndView(configuration, "configuration.commit.error");	
@@ -86,7 +86,7 @@ public class ConfigurationController extends AbstractController {
 		
 		result.addObject("configuration", configuration);
 		result.addObject("message", message);
-		result.addObject("requestURI","configuration/administrator/edit");
+		result.addObject("requestURI","configuration/administrator/edit.do");
 		return result;
 	}
 
