@@ -68,7 +68,7 @@
 			path="socialNetwork" />
 
 		<display:column>
-			<a href=<jstl:out value="${social.link}" />> <spring:message
+			<a href=<jstl:out value="${social.link}" />  target="_parent"> <spring:message
 					code="socialIdentity.link" />
 			</a>
 		</display:column>

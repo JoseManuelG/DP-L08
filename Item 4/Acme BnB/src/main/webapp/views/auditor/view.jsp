@@ -50,11 +50,11 @@
 	
 	<acme:column sorteable="false" code="auditor.socialIdentity.socialNetwork" path="socialNetwork"/>
 	
-	<display:column>
-			<a href=<jstl:out value="${social.link}" />>
-				<spring:message code="auditor.socialIdentity.link" />
+		<display:column>
+			<a href=<jstl:out value="${socialIdentity.link}"/> target="_parent"> 
+			<spring:message	code="socialIdentity.link" />
 			</a>
-	</display:column>
+		</display:column>
 	
 </display:table>
 <jstl:if test="${esMiPerfil}">
