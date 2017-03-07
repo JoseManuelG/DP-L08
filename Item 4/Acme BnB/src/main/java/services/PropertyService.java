@@ -84,6 +84,7 @@ public class PropertyService {
 	public Property save(Property property) {
 		Assert.notNull(property, "La propiedad no puede ser nula");
 		Assert.isTrue(lessorService.findByPrincipal().equals(property.getLessor()));
+		property.setLastUpdate(new Date(System.currentTimeMillis() - 100));
 		Property result;
 		result = propertyRepository.save(property);
 		return result;
