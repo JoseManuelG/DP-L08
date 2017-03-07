@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -28,6 +29,9 @@ public class AttributeValueService {
 	
 	@Autowired
 	private ActorService actorService;
+	
+	@Autowired
+	private PropertyService propertyService;
 
 	//Constructors------------------------------------
 
@@ -76,7 +80,7 @@ public class AttributeValueService {
 		
 		AttributeValue result;
 		result = attributeValueRepository.save(attributeValue);
-
+		propertyService.save(result.getProperty());
 		return result;
 	}
 
@@ -85,7 +89,9 @@ public class AttributeValueService {
 		Assert.isTrue(attributeValue.getId() != 0, "El attributeValueo debe estar en la base de datos");
 		Actor actor = actorService.findByPrincipal();
 		Assert.isTrue(actor.equals(attributeValue.getProperty().getLessor()), "Solo puedes editar tus propias propiedades");
+		propertyService.save(attributeValue.getProperty());
 		attributeValueRepository.delete(attributeValue);
+		
 	}
 
 	// Other bussiness methods ----------------------------------------------------------------------------------------
