@@ -1,13 +1,20 @@
 start transaction;
 
-create database `Acme-BnB`;  
-use `Acme-BnB`;  
+create database `Acme-BnB`;
 
-create user 'acme-user'@'%' identified by password '*4F10007AADA9EE3DBB2CC36575DFC6F4FDE27577';  
-create user 'acme-manager'@'%' identified by password '*FDB8CD304EB2317D10C95D797A4BD7492560F55F';  
+use `Acme-BnB`;
 
-grant select, insert, update, delete  on `Acme-BnB`.* to 'acme-user'@'%';  
-grant select, insert, update, delete, create, drop, references, index, alter,  create temporary tables, lock tables, create view, create routine,  alter routine, execute, trigger, show view  on `Acme-BnB`.* to 'acme-manager'@'%';  
+create user 'acme-user'@'%' identified by password '*4F10007AADA9EE3DBB2CC36575DFC6F4FDE27577';
+
+create user 'acme-manager'@'%' identified by password '*FDB8CD304EB2317D10C95D797A4BD7492560F55F';
+
+grant select, insert, update, delete 
+on `Acme-BnB`.* to 'acme-user'@'%';
+
+grant select, insert, update, delete, create, drop, references, index, alter, 
+create temporary tables, lock tables, create view, create routine,
+ alter routine, execute, trigger, show view 
+on `Acme-BnB`.* to 'acme-manager'@'%';
 
 
 -- MySQL dump 10.13  Distrib 5.5.29, for Win64 (x86)
@@ -98,7 +105,8 @@ CREATE TABLE `attribute` (
   `id` int(11) NOT NULL,
   `version` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UK_qihden3byku3gd2173l0qrlbn` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -126,7 +134,7 @@ CREATE TABLE `attributevalue` (
   `attribute_id` int(11) NOT NULL,
   `property_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_5cmva5mxf4bw1xngyghxewb57` (`attribute_id`),
+  UNIQUE KEY `UK_d5k57kvvfg1buy85kbhm2g5mj` (`attribute_id`,`property_id`),
   KEY `FK_3g7qm4aw02pu0667uen7w80s5` (`property_id`),
   CONSTRAINT `FK_3g7qm4aw02pu0667uen7w80s5` FOREIGN KEY (`property_id`) REFERENCES `property` (`id`),
   CONSTRAINT `FK_5cmva5mxf4bw1xngyghxewb57` FOREIGN KEY (`attribute_id`) REFERENCES `attribute` (`id`)
@@ -158,6 +166,7 @@ CREATE TABLE `audit` (
   `auditor_id` int(11) NOT NULL,
   `property_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `UK_o9wsypj4ex19pwlj23ej1gbnw` (`draftMode`),
   KEY `FK_il9mw2gmji4slnu1l80k8v0wq` (`auditor_id`),
   KEY `FK_t9nhphatrllwyc0auwipp79iv` (`property_id`),
   CONSTRAINT `FK_t9nhphatrllwyc0auwipp79iv` FOREIGN KEY (`property_id`) REFERENCES `property` (`id`),
@@ -230,7 +239,8 @@ CREATE TABLE `book` (
   `tenant_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_5jt6qudjsn55s4yu0gacjfh55` (`creditCard_id`),
-  KEY `FK_56ub9nkoltwomcor1cyn6f6rt` (`invoice_id`),
+  KEY `UK_beffhbtgmg3jnltr851o02c0m` (`state`),
+  KEY `UK_56ub9nkoltwomcor1cyn6f6rt` (`invoice_id`),
   KEY `FK_ldm6bc582u7eqey8hid9hm8kd` (`lessor_id`),
   KEY `FK_j9do03bra3ffimojrfwf1ppjs` (`property_id`),
   KEY `FK_fsqdkljh8ljqsjnwvycchn610` (`tenant_id`),
@@ -278,30 +288,6 @@ CREATE TABLE `comment` (
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `commentable_comment`
---
-
-DROP TABLE IF EXISTS `commentable_comment`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `commentable_comment` (
-  `Commentable_id` int(11) NOT NULL,
-  `comments_id` int(11) NOT NULL,
-  UNIQUE KEY `UK_3wk0te5p2koudiwgpk79pm99m` (`comments_id`),
-  CONSTRAINT `FK_3wk0te5p2koudiwgpk79pm99m` FOREIGN KEY (`comments_id`) REFERENCES `comment` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `commentable_comment`
---
-
-LOCK TABLES `commentable_comment` WRITE;
-/*!40000 ALTER TABLE `commentable_comment` DISABLE KEYS */;
-/*!40000 ALTER TABLE `commentable_comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -515,6 +501,10 @@ CREATE TABLE `property` (
   `rate` double NOT NULL,
   `lessor_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
+  KEY `UK_t5k1ifprai91p8g0lrefrhxam` (`address`),
+  KEY `UK_fpssij5tyjob0jiuktl2lak0a` (`rate`),
+  KEY `UK_4jaqs0het40jm6jmhi9fa7dmh` (`name`),
+  KEY `UK_l9w3ttj93etgbdonbwxlvijq4` (`description`),
   KEY `FK_rgsixsas2bu3gbpgvv61g16oy` (`lessor_id`),
   CONSTRAINT `FK_rgsixsas2bu3gbpgvv61g16oy` FOREIGN KEY (`lessor_id`) REFERENCES `lessor` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -677,6 +667,6 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-02 16:55:16
+-- Dump completed on 2017-03-07 17:29:45
 
 commit;

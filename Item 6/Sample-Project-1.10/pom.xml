@@ -18,7 +18,7 @@
 	<!-- Artifact identification and properties -->
 
 	<groupId>Design-and-Testing</groupId>
-	<artifactId>Sample-Project2</artifactId>
+	<artifactId>Sample-Project</artifactId>
 	<version>1.10</version>
 	<packaging>war</packaging>
 	

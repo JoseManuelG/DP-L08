@@ -213,4 +213,8 @@ public class PropertyService {
 
 	}
 
+	public Collection<Property> findAllOrdered() {
+		return propertyRepository.findAllOrdered();
+	}
+
 }

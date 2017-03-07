@@ -48,7 +48,7 @@ public class PropertyController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Property> properties;
-		properties = propertyService.findAll();
+		properties = propertyService.findAllOrdered();
 		result = new ModelAndView("property/list");
 		result.addObject("requestURI", "property/list.do");
 		result.addObject("properties", properties);

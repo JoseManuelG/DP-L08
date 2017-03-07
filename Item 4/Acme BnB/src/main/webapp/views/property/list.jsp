@@ -78,7 +78,7 @@
 	
 	<jstl:if test="${lessor==null}">
 		<spring:message code="property.number" var="numberHeader" />
-		<display:column title="${numberHeader}" sortable="true">
+		<display:column title="${numberHeader}" sortable="false">
 			<jstl:out value="${row.books.size()}"/>
 		</display:column>
 	</jstl:if>

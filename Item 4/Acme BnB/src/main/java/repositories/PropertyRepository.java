@@ -1,6 +1,7 @@
 
 package repositories;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,7 +15,7 @@ import domain.Property;
 public interface PropertyRepository extends JpaRepository<Property, Integer> {
 
 	//Find all the properties for a given lessor 
-	@Query("select l.lessorProperties from Lessor l where l.id=?1")
+	@Query("select p from Property p where p.lessor.id=?1 order by p.books.size desc")
 	public List<Property> findPropertiesByLessorId(int lessorId);
 
 	//Dashboard-12
@@ -40,5 +41,8 @@ public interface PropertyRepository extends JpaRepository<Property, Integer> {
 	//Returns every audit of a given property
 	@Query("select a from Audit a where a.property.id =?1 and a.draftMode=false")
 	public List<Audit> findAuditsByProperty(int id);
+
+	@Query("select p from Property p order by p.books.size desc")
+	public Collection<Property> findAllOrdered();
 
 }

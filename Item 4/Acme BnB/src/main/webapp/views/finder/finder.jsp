@@ -48,7 +48,7 @@
 		<acme:column sorteable="false" code="finder.property.address" path="address"/>
 		
 		<spring:message code="property.number" var="numberHeader" />
-		<display:column title="${numberHeader}" sortable="true">
+		<display:column title="${numberHeader}" sortable="false">
 			<jstl:out value="${row.books.size()}"/>
 		</display:column>
 		
