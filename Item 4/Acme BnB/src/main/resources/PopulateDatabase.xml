@@ -811,7 +811,7 @@
 		</property>
 		<property name="invoices">
 			<list>
-				<ref bean="invoiceBook1Tenant1"/>
+				<ref bean="invoiceBook3Tenant1"/>
 			</list>
 		</property>
 	</bean>
@@ -1491,7 +1491,7 @@
 		<property name="creditCard" ref="creditCardBook1Tenant1"/>
 		<property name="property" ref="property1Lessor1"/>	
 		<property name="tenant" ref="tenant1"/>		
-		<property name="invoice" ref="invoiceBook1Tenant1"/>
+		<property name="invoice"><null/></property>
 		<property name="lessor" ref="lessor1"/>
 	</bean>
 	
@@ -1521,7 +1521,7 @@
 		<property name="creditCard" ref="creditCardBook3Tenant1"/>
 		<property name="property" ref="property3Lessor1"/>
 		<property name="tenant" ref="tenant1"/>		
-		<property name="invoice"><null/></property>
+		<property name="invoice" ref="invoiceBook3Tenant1"/>
 		<property name="lessor" ref="lessor1"/>
 	</bean>
 	
@@ -1657,12 +1657,12 @@
 	
 	-->
 	
-	<bean id="invoiceBook1Tenant1" class="domain.Invoice">
+	<bean id="invoiceBook3Tenant1" class="domain.Invoice">
 		<property name="creationMoment" value="03/25/2016 08:15"/>
-		<property name="VAT" value="21%"/>
+		<property name="VAT" value="ESB123456789"/>
 		<property name="information" value="sample information"/>
 		<property name="details" value="sample details"/>
-		<property name="book" ref="book1Tenant1"/>
+		<property name="book" ref="book3Tenant1"/>
 	</bean>
 	
 	<!-- Attachment 
