@@ -88,10 +88,13 @@ public class BookTenantController extends AbstractController {
 		Invoice invoice;
 		
 		book = bookService.findOne(bookId);
-		
+		invoice = null;
 		try {
 			if (book.getInvoice() == null){
-				invoice = invoiceService.create(book);
+				try {
+					invoice = invoiceService.create(book);
+				} catch (TransactionSystemException e) {
+				}
 			} else {
 				bookService.checkOwnerTenantIsPrincipal(book);
 				invoice = book.getInvoice();
