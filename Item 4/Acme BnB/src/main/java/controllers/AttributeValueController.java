@@ -139,8 +139,15 @@ public class AttributeValueController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(AttributeValue attributeValue, String message) {
 		ModelAndView result;
-		result = new ModelAndView("attribute/administrator/edit");
-		result.addObject("attribute", attributeValue);
+		
+		
+		Collection<Attribute>attributes= attributeService.findAll();
+		for(AttributeValue aux:attributeValue.getProperty().getAttributeValues()){
+			attributes.remove(aux.getAttribute());
+		}
+		result = new ModelAndView("attributeValue/lessor/edit");
+		result.addObject("attributes", attributes);
+		result.addObject("attributeValue", attributeValue);
 		result.addObject("message", message);
 
 		return result;

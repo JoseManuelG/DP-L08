@@ -35,7 +35,10 @@
 	
 	<acme:column sorteable="true" code="audit.attachment.name" path="name"/>
 	
-	<acme:column sorteable="false" code="audit.attachment.url" path="url"/>
+	<spring:message code="audit.attachment.url" var="urlHeader"/>
+	<display:column sortable="false" title="${urlHeader}">
+		<a href="<jstl:out value="${attachment.url}"/>"><jstl:out value="${attachment.url}"/></a>
+	</display:column>
 	
 	<jstl:if test="${ esMiAudit && audit.draftMode}">
 		<display:column>

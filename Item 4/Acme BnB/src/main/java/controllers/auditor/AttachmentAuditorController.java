@@ -2,8 +2,6 @@ package controllers.auditor;
 
 import java.util.Collection;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -51,12 +49,12 @@ public class AttachmentAuditorController extends AbstractController {
 		@RequestMapping(value = "/auditor/create", method = RequestMethod.GET)
 		public ModelAndView create(@RequestParam int auditId) {
 			ModelAndView result;
-			Attachment attachment = attachmentService.create();
-			Audit audit = auditService.findOne(auditId);
-			Collection<Attachment> attachments = audit.getAttachments();
+			Attachment attachment;
+			Audit audit;
+			
+			audit = auditService.findOne(auditId);
+			attachment = attachmentService.create(audit);
 			attachment.setAudit(audit);
-			attachments.add(attachment);
-			audit.setAttachments(attachments);
 			result = createEditModelAndView(attachment);
 			return result;
 			
@@ -70,16 +68,20 @@ public class AttachmentAuditorController extends AbstractController {
 			result = createEditModelAndView(attachment);
 			return result;
 		}
+		
 		// Save ---------------------------------------------------------------
 		@RequestMapping(value = "/auditor/edit", method = RequestMethod.POST, params = "save")
-		public @ResponseBody ModelAndView save(@Valid Attachment attachment, BindingResult binding) {
+		public @ResponseBody ModelAndView save(Attachment attachment, BindingResult binding) {
 			ModelAndView result;
+			Attachment attachmentResult;
+			
+			attachmentResult = attachmentService.reconstruct(attachment, binding);
 			if (binding.hasErrors()) {
 				System.out.println(binding.getAllErrors());
 				result = createEditModelAndView(attachment);
 			} else {
 				try {
-					attachmentService.save(attachment);		
+					attachmentService.save(attachmentResult);		
 					result = new ModelAndView("redirect:../../audit/view.do?auditId="+attachment.getAudit().getId());
 				} catch (Throwable oops) {
 					result = createEditModelAndView(attachment, "attachment.commit.error");				

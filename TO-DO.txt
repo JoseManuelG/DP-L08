@@ -3,7 +3,7 @@
 	-> Hacer el war y cambiar el create.sql
 	-> Sacar war del proyecto 1.10
 	-> Recortar:
-		->Atachment
+		->Atachment (HECHO)
 		->AttributeValue
 		->Audit
 		->Comment

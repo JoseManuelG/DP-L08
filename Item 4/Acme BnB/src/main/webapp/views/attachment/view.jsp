@@ -31,7 +31,7 @@
 
 	<spring:message code="attachment.url" var="urlHeader" />
 	<display:column  title="${urlHeader}" sortable="true" >
-		<a href="${row.url}"><jstl:out value="${row.url}"/></a>
+		<a href="<jstl:out value="${row.url}"/>"><jstl:out value="${row.url}"/></a>
 	</display:column>
 
 </display:table>

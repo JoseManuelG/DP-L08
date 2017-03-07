@@ -8,6 +8,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.AttachmentRepository;
 import security.LoginService;
@@ -28,6 +30,9 @@ public class AttachmentService {
 	
 	@Autowired
 	private LoginService	loginService;
+	
+	@Autowired
+	private Validator validator;
 
 	// Constructor --------------------------------------------------------------------
 
@@ -37,9 +42,10 @@ public class AttachmentService {
 
 	// Simple CRUD methods ------------------------------------------------------------
 
-	public Attachment create() {
+	public Attachment create(Audit audit) {
 		Attachment result;
 		result = new Attachment();
+		result.setAudit(audit);
 		return result;
 	}
 
@@ -87,6 +93,25 @@ public class AttachmentService {
 	public Collection<Attachment> findAllAttachmentsByAudit(Audit audit) {
 		Collection<Attachment> result;
 		result = attachmentRepository.findAllAttachmentsByAuditId(audit.getId());
+		return result;
+	}
+
+	public Attachment reconstruct(Attachment attachment, BindingResult binding) {
+		Attachment result, original;
+		
+		if (attachment.getId()==0){
+			result = create(attachment.getAudit());
+		} else {
+			result = new Attachment();
+			original = findOne(attachment.getId());
+			result.setAudit(original.getAudit());
+			result.setVersion(original.getVersion());
+		}
+		result.setName(attachment.getName());
+		result.setUrl(attachment.getUrl());
+		
+		validator.validate(result, binding);
+		
 		return result;
 	}
 }

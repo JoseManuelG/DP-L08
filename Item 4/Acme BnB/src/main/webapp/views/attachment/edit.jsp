@@ -15,27 +15,15 @@
 <form:form action="attachment/auditor/edit.do" modelAttribute="attachment">
 	
 	<form:hidden path="id" />
-	<form:hidden path="version" />
 	<form:hidden path="audit" />
 	
-	<form:label path="name">
-		<spring:message code="attachment.name" />:
-	</form:label>
-	<form:input path="name" />
-		<form:errors cssClass="error" path="name" />
-	<br />
+	<acme:textbox code="attachment.name" path="name"/>
 	
-		<form:label path="url">
-		<spring:message code="attachment.url" />:
-	</form:label>
-	<form:input path="url" />
-		<form:errors cssClass="error" path="url" />
-	<br />
-	<br />
+	<acme:textbox code="attachment.url" path="url" />
 
 	<acme:submit name="save" code="attachment.save"/>
 	
-	<jstl:if test="${stepHint.id != 0}">
+	<jstl:if test="${attachment.id != 0}">
 		<acme:submit name="delete" code="attachment.delete"/>
 	</jstl:if>
 	
