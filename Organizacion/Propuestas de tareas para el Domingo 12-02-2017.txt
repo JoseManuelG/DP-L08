@@ -1,0 +1,26 @@
+Propuesta de tareas para el Domingo 12/02/2017
+	T.1:División de trabajo para empezar desarrollo->Asignado a Roldan
+
+	T.2:Elección de Entorno de gestión de tareas ->Asignado a Gavira
+	T.3:Realización de UMLs Comceptual y Dominio->Asignado Principalmente a Acha, pero trabajado por todos(solo Falta pegarle un repaso final).
+	T.4:Preparación de Servicio de repositorio de versiones-Asignado a Gavira(Terminado).
+	T.5:Comienzo de Redacción de Documento de Costes e Realización de plantilla del mismo.
+	T.6:Cambios para Project Example V1.9:
+
+		T.6.1->Una pagina vista para colocar el texto de "Terminos y Condiciones", ademas de añadir un Link(https://AcmeBnB/Terms&Conditions{modificable la direccion antes de ser aceptadas las tareas}) en el footer para acceder a ello ademas de añadir las pertinentes anotaciones a Security.XML para poder accerder a esa pagina.
+		T.6.2->Hacer una plantilla para registro, con los campos de Nombre,Apellidos,Email,Telefono  y un Link a la pagina de Terms&Conditions que se lance en una nueva ventana/pestaña, con un checkBox que sea oblitagotorio para poder continuar,{en Nuesto AcmePadThai hay una version que se puede utilizar para no comenzar de 0},Me gustaria tener plantilla de controller tambien.
+		T.6.3->Pagina "Conocenos" con los datos "nombre de compañia", "Numero VAT" y informacion sobre registro de comercio{esta ultima hay que invenstigar que datos son ncesarios}
+		T.6.4->Notificion de cookies, mi idea seria que saliera una de estas ventanas molestas de estas seguro que quieres salir, pero hablando sobre las cookies, no se como funcionaria para que solo saliera una vez por sesión, habria que investigarlo
+	
+Propuesta de Asignación de trabajo:
+	T1:Roldán->Compl: Por determinar
+	T2:Gavira->Compl:Subjetivo
+	T3:Acha->Compl:3-5
+	T4:Gavira->Compl:3(experiencia previa de Gavira)
+	T5:Acha(tiene experiencia previa)/Roldán->Compl:6-7
+	T6.1:Dani->Compl:3
+	T6.2:Arturo->Compl:5-7(contando el controlador)
+	T6.3:Dani->Compl:3
+	T6.4:Javi:6-7
+
+	Estimación de Complejidades de 1(facil) a 10(dificil)

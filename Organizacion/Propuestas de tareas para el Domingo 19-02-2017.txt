@@ -1,0 +1,33 @@
+Propuesta de tareas para el Miercoles 19/02/2017-División de requisitos funcionales:
+
+
+General:
+Registrarse como nuevo actor->Arturo
+Catalogo de Properties-> Gavira
+Editar Perfiles->Arturo
+Comentarios->Acha
+SocialIdentities->Roldán
+
+Lessors:
+Manage Properties->Gavira
+Aprove/Denied Books Request->Javi
+List of Requested Books->Javi
+See total fee->Javi
+
+Tenant:
+Configure finder->Dani
+Result of Finder->Dani
+Cachear Resultados del finder(no prioritario)->Dani
+
+Make a book request->Javi
+Browse my Request->Javi(yo pondria todo el historial, las terminadas y las que estan por aprobar/denegar)
+
+Admin:
+Manage attributes ->Roldán
+Register Audits->Arturo
+
+
+Auditor
+Write Audits->Acha(recuerda el tema del borrador)
+
+

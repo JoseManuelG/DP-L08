@@ -1,0 +1,179 @@
+﻿TO DO:
+	-> Recortar Comment
+	-> Cuando se crea modifica o elimina un attributeValue deun property, actualizar fecha de modificacion del property.
+	-> Terminar informe de costes (ACHA)
+	-> Hacer el war y cambiar el create.sql
+	-> Sacar war del proyecto 1.10
+
+
+EXTRAS:
+-> Comprobar en pre-production qué peta (fuera de dashboards) por tener el populate vacio
+-> Organizar controllers segun actor
+-> Internacionalizar errores para que se muestre que regla de negocio ha fallado (como en books)
+-> Registros: Si el username ya existe, da un transaction error, estaría bien poner explícitamente por que peta
+-> Cambiar nombres de las relaciones en comment de sender y receipment por customer y commentable.
+-> Acceder en el A+ por https solo cuando un usuario ha hecho login.
+-> Limitar fecha en books para ahorrar fallo en fechas estupidas(opcional)
+	
+-------------------------------------------------------(ARREGLADO)--------------------------------------------------------------------
+-> Meterle al admin formulario para configurar el fee(ARREGLADO)
+-> Revisar indexado para .size y los (not null o is null) (ARREGLADO)
+-> Corregir ortografia mensaje de error de eliminar atributo en español si se esta usando(ARREGLADO).
+-> Poner atributos como unicos.(ARREGLADO)
+-> Cambiar traduccion de rate en property de calificacion a tarifa.(ARREGLADO)
+-> Añadirle al property o en columna o en view su lastEditDate(ARREGLADO)
+-> Cambiar traduccion en tabla de books de inquilino a arrendatario (tenant)(ARREGLADO)
+-> Poner link para comentar de tenant a lessor en caso de que le haya hecho reserva (esta la logica pero falta el link).(ARREGLADO)
+-> En la lista de socialIdentities de AUDITOR (comprobar de otros actors) los links llevan todos a la pagina principal de Acme BnB 		en vez de a su correspondiente link.(ARREGLADO
+-> View property como lessor: paginacion de la tabla no funciona.(ARREGLADO)
+-> Comment, stars: Failed to convert property value of type java.lang.String to required type int for property stars; nested exception is java.lang.NumberFormatException: For input string: ""(ARREGLADO)
+->hacer book con tarjeta de credito caducada, o que caduca en menos de 7 dias, se lo traga, si pongo que el dia es el 29 de febrero, salta un nullpointerException con trazaen la vista (ARREGLADO)
+->Cancel de crearSocialIdentity(ARREGLADO)
+->Comentar en Tenant(ARREGLADO)
+->Nombre de auditors en ver una propiedad (la tabla audits)(ARREGLADO)
+->Traduccion de crear un commment en perfil lessor español(ARREGLADO)
+->titulos de als tablas de auditorList(ARREGLADO)
+->Quitar el boton de crear audits en al lista de audits(ARREGLADO)
+->Attributes de admin, poner el mensaje de no se ha podido borrar porque el attributo se está usando(ARREGLADO)
+->Boton Attributos del menu, en ingles que esté en ingles(ARREGLADO)
+->No hay boton en el menu para ver los audits (ARREGLADO)
+->botones de editar en audits publicos (ARREGLADO)
+->btones de modificar los archivosAdjuntos de un audit public (ARREGLADO)
+->No puedo guardar como un borrador ningun tipo de audit ya creado (ARREGLADO)
+->No ni guardar ni borrar ningun tipo de audit ya sea publico o no, que ya esté creado (ARREGLADO)
+->Texto de crear Audits, que ponga "Crear Audits" no solo "Crear" (ARREGLADO)
+->No Poder modificar archivos adjuntos una vez es publico el audit (ARREGLADO)
+-Delete de Tenant No funciona (ARREGLADO)
+->El checkBox de registro no funciona (ARREGLADO)
+->CreditCard de lessor peudo poner una caducada. (ARREGLADO)
+->Restriccion de negocio de No poder aceptar o denegar books si no tienes tarjeta de credito el lessor (ARREGLADO)
+->Comprobar validez de tarjeta en varias ocasiones (ARREGLADO)
+->cancel de editarPerfilTenant (ARREGLADO)
+->Registrar audits en español el titulo está en español (ARREGLADO)
+->Falta pattern telefono (actor) por definir en UML (ARREGLADO)
+->a cacheMoment de finder y writingMoment de audit les falta Past en UML (ARREGLADO)
+->Añadir min(0) a fee del configuration en UML y java. (ARREGLADO)
+-> Problemas con el view de lessor  (ARREGLADO)
+->tag de colum usar <Jstl:out> (NO PROCEDE)
+-> Cambiar nombre clase Comentable a Commentable (ARREGLADO)
+-> Modificar "welcome"(ARREGLADO)
+->view de invoice usar <Jstl:out> en la linea 28 (ARREGLADO)
+->Poner restricciones de html para que en campos de numeros solo entren numero y asi se quita el error de pete por mal convertidor. (AÑADIDO ERROR POR MAL CONVERTIDOR)
+->Edit de property no funciona(ARREGLADO)
+->Registrar property tampoco funciona(ARREGLADO)
+->Cancel de property no funciona(ARREGLADO)
+-> Property no funciona el delete(ARREGLADO)
+->Añadir a la vista de property/list el mensaje correspondiente arriba si se trata de una dashboard y boton para volver a la lista de lessors si es dashboard(ARREGLADO)
+->Cuando fallas el pattern de telefono explota en auditor modificando el perfil. (ARREGLADO)
+->Cuando no pones el username explota en auditor modificando el perfil. (ARREGLADO)
+->Cuando no pones el name explota en auditor modificando el perfil. (ARREGLADO)
+->explota si lo dejas entero en blanco. (ARREGLADO)
+-> Edit Perfil lessor con datos vacios peta. (ARREGLADO)
+-> Al editar un perfil se puede esitar la contaseña del tenant easy. (ARREGLADO)
+-> Edit property desde lessor con campos a vacios no muestra errores. (ARREGLADO)
+-> Al comentar en mi profile vuelvo a el, pero sin poder editar nada (sin permisos) (ARREGLADO)
+->Fallos de conversion( Meter string en Integer)(ARREGLADO)
+	->Credit card: expiration et cvv(ARREGLADO)
+	->Rate de property(ARREGLADO)
+	->Stars de comment(ARREGLADO)
+->Panic en book request, con el boton invoice (ARREGLADO)
+->No puedo registrar un tenant (ARREGLADO)
+->Fallo de paginación en el view de property (ARREGLADO)
+-> View profile y view property: titulos en las tablas. (ARREGLADO)
+->como auditor Pete al pasar pagina en view de property. (ARREGLADO)
+->Error en al editar un audit desde la property cuando ya no esta en draft. (NO PROCEDE)
+->Si en el finder se hace una búsqueda con un parámetro(maxprice/minprice) y se le da a buscar y luego se  borra el parámetro y se le da a buscar de nuevo, aparece un commit error (ARREGLAO)
+->	Falta el siguiente requisito no funcional: (ARREGLADO)
+		Wherever a catalogue of properties is shown, the user must be able to sort it according to
+		the number of requests that the corresponding properties have got
+		Se puede haer que en cada fila de la tabla se coja el size de books de la property y ponerlo en una columna nueva que tenga 			sortable=true
+-> Imagenes tamaño predef. (ARREGLADO)
+-> Links como <a>. (ARREGLADO)
+-> Nombres de tablas en view profile. (ARREGLADO)
+-> No deben aparecer los audits en el profile. (ARREGLADO)
+-> Titulos en tablas de view profile en tenant y lessor. (ARREGLADO)
+-> Añadir espaciados en perfil de tenant y lessor (creo q auditro tambien) Si esta vacio se ven juntos (ARREGLADO)
+-> Redactar contrato para lessor y tenant. (ARREGLADO)
+-> Perfil de administrator (ver y editar). (ARREGLADO)
+-> Acabar terminos y meter tags en plantilla (ARREGLADO)
+-> Cambiar imagen de logo (ARREGLADO)
+-> Comprobar en pre-production qué peta en la dashboard por tener el populate vacio(ARREGLADO)
+-> Poner un texto para avisar donde crear attachment.(ARREGLADO)
+-> Para audit confirmar que se va a poner publico.(ARREGLADO)
+-> Confirmar en deletes.(ARREGLADO)
+-> Cuando no es auditor no debe salir draftMode en view de audit.(ARREGLADO)
+-> Un audit en draft no se puede ver si no eres el autor (ARREGLADO)
+-> Reordenar la vista de registrarse. (ARREGLADO)
+-> En registro doble contraseña para confirmacion. (ARREGLADO)
+-> Revisar todos los requisitos del populate.xml(ARREGLADO)
+-> Recortar formulario de editar audit (ARREGLADO)
+-> ¿Meter numero de books en resultados del finder para poder ordenar?(ARREGLADO)
+-> Cambiar VAT(ARREGLADO)
+-> Poner en el populate que todos los auditor tengan un audit a la propiedad 1 y comprobar que pagina bien.(ARREGLADO)
+-> ¿Quitar del edit profile datos de la cuenta (user name y password)? En el requis. funcional pone "Change the information in his or her profile, ¿es parte del perfil los datos de sesión?. Eliminaría el inconveniente de quitar reestablecer password cada vez que se edita perfil. (Hemos quedado que NO PROCEDE)
+(OPINION de Roldan: me parece un poco bruto, nose veo algo normal poder cambiar tu cuenta de usuario, pero si por ahorrar quebraderosde cabeza lo hacemos de esa manera, tampoco me disgusta, es un hecho que no es información del perfil)
+-> Copiar security controller en plantilla o eliminar el que esta ahora en plantilla. (ELIMINADO)
+-> Sincronizar plantilla 1.9 con 1.10 y proyectos 1.9 y 1.10 (ARREGLADO)
+-> Arreglar url fea de tabla finder. (ARREGLADO)
+
+B+ TREE:
+	Audit(HECHO)
+	Book(HECHO)
+	AttributeValue(HECHO)
+	Comment(HECHO)
+	Property (HECHO)
+
+	Administrator(NO PROCEDE)
+	Attachment(NO PROCEDE)
+	Auditor(NO PROCEDE)
+	Commentable(NO PROCEDE)
+	Lessor(NO PROCEDE)
+	Tenant(NO PROCEDE)
+	Configuration(NO PROCEDE)
+	Customer(NO PROCEDE)
+	Finder (NO PROCEDE)
+	Actor(NO PROCEDE)
+	Attribute(NO PROCEDE)
+	CreditCard (NO PROCEDE)
+	DomainEntity (NO PROCEDE)
+	Invoice (NO PROCEDE)
+	SocialIdentity(NO PROCEDE)
+
+@SAFEHTML:
+	Attachment(HECHO)
+	AttributeValue(HECHO)
+	Audit(HECHO)
+	Configuration(HECHO)
+	CreditCard (HECHO)
+	Finder(HECHO)
+	Property (HECHO)
+	Actor (HECHO)
+	Attribute (HECHO)
+	Auditor (HECHO)
+	Book (HECHO)
+	Comment (HECHO)
+	Invoice (HECHO)
+	SocialIdentity (HECHO)
+
+	Administrator (NO PROCEDE)
+	Commentable (NO PROCEDE)
+	Customer (NO PROCEDE)
+	DomainEntity (NO PROCEDE)
+	Lessor (NO PROCEDE)
+	Tenant (NO PROCEDE)
+
+
+QUERIES: 		
+	3 - Devuelve 1 lessor y creo que debería devolver varios en caso de empate según esto
+				The lessors who have approved more requests
+	4 - Lo mismo que la anterior
+	5 - Lo mismo que la anterior
+	6 - Lo mismo que la anterior
+	7 - Lo mismo que la anterior
+	8 - Lo mismo que la anterior
+	9a - Devuelve un lessor y debería devolver varios en caso de empate
+	b - Devuelve un lessor y debería devolver varios en caso de empate
+	10a - Devuelve un tenant y debería devolver varios en caso de empate
+	10b - Devuelve un tenant y debería devolver varios en caso de empate
+	
+(NO PROCEDE) Podria hacerse con java, no con queries ni con varias queries se podria, y para meter 8 fors de java (un por query de la dash) con varias cosas dentro de cada for, cosa que no es en lo más minimo eficiente se decidio (Dani, Javi, Gavira) que no era un cambio que rentase hacer
