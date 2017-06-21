@@ -68,6 +68,7 @@ public abstract class Actor extends Commentable {
 	}
 	@SafeHtml
 	@URL
+	@NotBlank
 	public String getPicture() {
 		return picture;
 	}
