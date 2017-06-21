@@ -42,10 +42,10 @@ public class CreditCardLessorController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		CreditCard creditCard = creditCardService.create();
-		Lessor lessor = (Lessor) customerService.findActorByPrincial();
+		final CreditCard creditCard = this.creditCardService.create();
+		final Lessor lessor = (Lessor) this.customerService.findActorByPrincial();
 		lessor.setCreditCard(creditCard);
-		result = createEditModelAndView(creditCard);
+		result = this.createEditModelAndView(creditCard);
 		return result;
 
 	}
@@ -55,14 +55,13 @@ public class CreditCardLessorController extends AbstractController {
 	public ModelAndView view() {
 		ModelAndView result;
 		result = new ModelAndView("creditCard/lessor/view");
-		Lessor lessor = (Lessor) customerService.findActorByPrincial();
+		final Lessor lessor = (Lessor) this.customerService.findActorByPrincial();
 		if (lessor.getCreditCard() != null) {
-			CreditCard creditCard = creditCardService.copy(lessor.getCreditCard());
-			creditCardService.maskCreditCard(creditCard);
+			final CreditCard creditCard = this.creditCardService.copy(lessor.getCreditCard());
+			this.creditCardService.maskCreditCard(creditCard);
 			result.addObject("creditCard", creditCard);
-		} else {
+		} else
 			result.addObject("editable", Boolean.FALSE);
-		}
 		return result;
 	}
 	// Edit ---------------------------------------------------------------
@@ -70,8 +69,8 @@ public class CreditCardLessorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit() {
 		ModelAndView result;
-		Lessor lessor = (Lessor) customerService.findActorByPrincial();
-		result = createEditModelAndView(lessor.getCreditCard());
+		final Lessor lessor = (Lessor) this.customerService.findActorByPrincial();
+		result = this.createEditModelAndView(lessor.getCreditCard());
 		return result;
 	}
 
@@ -79,19 +78,18 @@ public class CreditCardLessorController extends AbstractController {
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public @ResponseBody
-	ModelAndView save(@Valid CreditCard creditCard, BindingResult binding) {
+	ModelAndView save(@Valid final CreditCard creditCard, final BindingResult binding) {
 		ModelAndView result;
 		if (binding.hasErrors()) {
 			System.out.println(binding.getAllErrors());
-			result = createEditModelAndView(creditCard);
-		} else {
+			result = this.createEditModelAndView(creditCard);
+		} else
 			try {
-				creditCardService.saveForLessor(creditCard);
+				this.creditCardService.saveForLessor(creditCard);
 				result = new ModelAndView("redirect:../lessor/myCreditCard.do");
-			} catch (Throwable oops) {
-				result = createEditModelAndView(creditCard, "creditCard.commit.error");
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(creditCard, oops.getMessage());
 			}
-		}
 
 		return result;
 	}
@@ -99,16 +97,16 @@ public class CreditCardLessorController extends AbstractController {
 	// Delete ----------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(@Valid CreditCard creditCard, BindingResult binding) {
+	public ModelAndView delete(@Valid final CreditCard creditCard, final BindingResult binding) {
 		ModelAndView result;
 
 		Assert.notNull(creditCard);
 		System.out.println(binding);
 		try {
-			creditCardService.delete(creditCard);
+			this.creditCardService.delete(creditCard);
 			result = new ModelAndView("redirect:../lessor/myCreditCard.do");
-		} catch (Throwable oops) {
-			result = createEditModelAndView(creditCard, "creditCard.commit.error");
+		} catch (final Throwable oops) {
+			result = this.createEditModelAndView(creditCard, "creditCard.commit.error");
 		}
 
 		return result;
@@ -116,15 +114,15 @@ public class CreditCardLessorController extends AbstractController {
 
 	// Ancillary methods ------------------------------------------------------
 
-	protected ModelAndView createEditModelAndView(CreditCard creditCard) {
+	protected ModelAndView createEditModelAndView(final CreditCard creditCard) {
 		ModelAndView result;
 
-		result = createEditModelAndView(creditCard, null);
+		result = this.createEditModelAndView(creditCard, null);
 
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(CreditCard creditCard, String message) {
+	protected ModelAndView createEditModelAndView(final CreditCard creditCard, final String message) {
 		ModelAndView result;
 		result = new ModelAndView("creditCard/lessor/edit");
 		result.addObject("creditCard", creditCard);
