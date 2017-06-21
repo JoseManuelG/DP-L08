@@ -49,8 +49,16 @@
 	<acme:column sorteable="true" code="book.checkin" path="checkInDate"/>
 	
 	<acme:column sorteable="true" code="book.checkout" path="checkOutDate"/>
-	
-	<acme:column sorteable="true" code="book.smoker" path="smoker"/>
+		
+	<spring:message code="book.smoker" var="smoker" />
+	<display:column title="${smoker}" sortable="false">
+		<jstl:if test="${row.smoker}">
+			<spring:message code="book.smokerYes"/>
+		</jstl:if>
+		<jstl:if test="${not row.smoker}">
+			<spring:message code="book.smokerNo"/>
+		</jstl:if>
+	</display:column>
 	
 	<acme:column sorteable="true" code="book.state" path="state"/>
 	
