@@ -657,6 +657,7 @@
 		<property name="books">
 			<list>
 				<ref bean="book1Tenant2"/>
+				<ref bean="book2Tenant2"/>
 			</list>
 		</property>
 		<property name="totalFee" value="0.0"/>
@@ -831,6 +832,7 @@
 		<property name="books">
 			<list>
 				<ref bean="book1Tenant2"/>
+				<ref bean="book2Tenant2"/>
 			</list>
 		</property>
 		<property name="invoices">
@@ -1145,6 +1147,7 @@
 		</property>
 		<property name="books">
 			<list>
+				<ref bean="book2Tenant2"/>
 			</list>
 		</property>
 		<property name="lastUpdate" value="02/12/2017 16:35"/>
@@ -1443,6 +1446,15 @@
 		<property name="cvvCode" value="100"/>
 	</bean>
 	
+	<bean id="creditCardBook2Tenant2" class="domain.CreditCard">
+		<property name="holderName" value="Pepe"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="4485733078654607"/>
+		<property name="expirationMonth" value="06"/>
+		<property name="expirationYear" value="2017"/>
+		<property name="cvvCode" value="100"/>
+	</bean>
+	
 	<bean id="creditCardBookWithoutTenant" class="domain.CreditCard">
 		<property name="holderName" value="Pepe"/>
 		<property name="brandName" value="VISA"/>
@@ -1579,6 +1591,21 @@
 		<property name="propertyName" value="Property 2 l2"/>
 		<property name="propertyAddress" value="Spain Seville, C\Piruleta nº30 1ºB"/>
 		<property name="creditCard" ref="creditCardBook1Tenant2"/>
+		<property name="property" ref="property1Lessor2"/>
+		<property name="tenant" ref="tenant2"/>		
+		<property name="invoice"><null/></property>
+		<property name="lessor" ref="lessor2"/>
+	</bean>
+	
+	<bean id="book2Tenant2" class="domain.Book">
+		<property name="checkInDate" value="06/04/2020"/>
+		<property name="checkOutDate" value="06/06/2022"/>
+		<property name="smoker" value="false"/>
+		<property name="state" value="ACCEPTED"/>
+		<property name="totalAmount" value="200.0"/>
+		<property name="propertyName" value="Property 2 l2"/>
+		<property name="propertyAddress" value="Spain Seville, C\Piruleta nº30 1ºB"/>
+		<property name="creditCard" ref="creditCardBook2Tenant2"/>
 		<property name="property" ref="property1Lessor2"/>
 		<property name="tenant" ref="tenant2"/>		
 		<property name="invoice"><null/></property>
