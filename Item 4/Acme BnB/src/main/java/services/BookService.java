@@ -46,7 +46,7 @@ public class BookService {
 
 
 	// Simple CRUD methods --------------------------------------
-	public Book create(Property property, Tenant tenant) {
+	public Book create(final Property property, final Tenant tenant) {
 		Book result;
 
 		result = new Book();
@@ -62,123 +62,123 @@ public class BookService {
 	public Collection<Book> findAll() {
 		Collection<Book> result;
 
-		result = bookRepository.findAll();
+		result = this.bookRepository.findAll();
 
 		return result;
 	}
 
-	public Book findOne(int bookId) {
+	public Book findOne(final int bookId) {
 		Book result;
 
-		result = bookRepository.findOne(bookId);
+		result = this.bookRepository.findOne(bookId);
 
 		return result;
 	}
 
-	public Book save(Book book) {
+	public Book save(final Book book) {
 		Book result;
 
 		Assert.notNull(book, "book.null.error");
 
-		checkDayAfter(book);
-		checkOwnerTenantIsPrincipal(book);
-		checkBookDate(book);
-		creditCardService.checkCreditCard(book.getCreditCard());
+		this.checkDayAfter(book);
+		this.checkOwnerTenantIsPrincipal(book);
+		this.checkBookDate(book);
+		this.creditCardService.checkCreditCard(book.getCreditCard());
 
-		calculateTotalAmount(book);
-		result = bookRepository.save(book);
+		this.calculateTotalAmount(book);
+		result = this.bookRepository.save(book);
 		Assert.notNull(result, "book.commit.error");
 
 		return result;
 	}
-	public void delete(Book book) {
+	public void delete(final Book book) {
 		Assert.notNull(book, "book.null.error");
 
-		Assert.isTrue(bookRepository.exists(book.getId()), "book.exists.error");
+		Assert.isTrue(this.bookRepository.exists(book.getId()), "book.exists.error");
 
-		bookRepository.delete(book);
+		this.bookRepository.delete(book);
 	}
 
 	// Other business methods --------------------------------------
 
-	public boolean existsCreditCardForAnyBook(CreditCard creditCard) {
+	public boolean existsCreditCardForAnyBook(final CreditCard creditCard) {
 		boolean result = false;
-		result = bookRepository.existsCreditCardForAnyBook(creditCard.getId());
+		result = this.bookRepository.existsCreditCardForAnyBook(creditCard.getId());
 		return result;
 	}
 
-	public void acceptBook(int bookId) {
+	public void acceptBook(final int bookId) {
 		Book book;
 
 		book = this.findOne(bookId);
 
 		Assert.notNull(book.getLessor().getCreditCard(), "book.null.credit.card.error");
-		checkOwnerLessorIsPrincipal(book);
-		checkStateIsPending(book);
-		checkBookDate(book);
-		creditCardService.checkCreditCard(book.getLessor().getCreditCard());
+		this.checkOwnerLessorIsPrincipal(book);
+		this.checkStateIsPending(book);
+		this.checkBookDate(book);
+		this.creditCardService.checkCreditCard(book.getLessor().getCreditCard());
 
 		book.setState("ACCEPTED");
-		bookRepository.save(book);
-		lessorService.addFee();
+		this.bookRepository.save(book);
+		this.lessorService.addFee();
 
 	}
 
-	public void denyBook(int bookId) {
+	public void denyBook(final int bookId) {
 		Book book;
 
 		book = this.findOne(bookId);
-		checkOwnerLessorIsPrincipal(book);
-		checkStateIsPending(book);
+		this.checkOwnerLessorIsPrincipal(book);
+		this.checkStateIsPending(book);
 
 		book.setState("DENIED");
-		bookRepository.save(book);
+		this.bookRepository.save(book);
 	}
 
-	public Book reconstruct(BookForm bookForm, BindingResult bindingResult) {
+	public Book reconstruct(final BookForm bookForm, final BindingResult bindingResult) {
 		Book book;
 		Property property;
 		Tenant tenant;
 
-		property = propertyService.findOne(bookForm.getPropertyId());
-		tenant = tenantService.findByPrincipal();
+		property = this.propertyService.findOne(bookForm.getPropertyId());
+		tenant = this.tenantService.findByPrincipal();
 
 		book = this.create(property, tenant);
 		book.setCheckInDate(bookForm.getCheckInDate());
 		book.setCheckOutDate(bookForm.getCheckOutDate());
 		book.setCreditCard(bookForm.getCreditCard());
 		book.setSmoker(bookForm.getSmoker());
-		validator.validate(book, bindingResult);
+		this.validator.validate(book, bindingResult);
 		return book;
 	}
 
-	public Collection<Book> findBooksForProperty(Property property) {
-		Collection<Book> result = bookRepository.findBooksForPropertyId(property.getId());
+	public Collection<Book> findBooksForProperty(final Property property) {
+		final Collection<Book> result = this.bookRepository.findBooksForPropertyId(property.getId());
 		return result;
 	}
 
-	private void checkStateIsPending(Book book) {
+	private void checkStateIsPending(final Book book) {
 		Assert.isTrue(book.getState().equals("PENDING"), "book.pending.error");
 	}
 
-	public void checkOwnerLessorIsPrincipal(Book book) {
+	public void checkOwnerLessorIsPrincipal(final Book book) {
 		Actor principal;
 		Lessor owner;
 
 		Assert.notNull(book, "book.exists.error");
-		principal = lessorService.findByPrincipal();
+		principal = this.lessorService.findByPrincipal();
 		Assert.notNull(principal, "book.principal.error");
 		owner = book.getLessor();
 
 		Assert.isTrue(owner.equals(principal), "book.principal.error");
 	}
 
-	public void checkOwnerTenantIsPrincipal(Book book) {
+	public void checkOwnerTenantIsPrincipal(final Book book) {
 		Actor principal;
 		Tenant owner;
 
 		Assert.notNull(book, "book.exists.error");
-		principal = tenantService.findByPrincipal();
+		principal = this.tenantService.findByPrincipal();
 		Assert.notNull(principal, "book.principal.error");
 		owner = book.getTenant();
 
@@ -190,14 +190,13 @@ public class BookService {
 		Double res, c1;
 		Long c2;
 
-		c1 = bookRepository.countAcceptedBooks();
-		c2 = lessorService.count();
+		c1 = this.bookRepository.countAcceptedBooks();
+		c2 = this.lessorService.count();
 
-		if (c1 != null && c2 != 0) {
+		if (c1 != null && c2 != 0)
 			res = c1 / c2;
-		} else {
+		else
 			res = 0.;
-		}
 		return res;
 	}
 
@@ -206,14 +205,13 @@ public class BookService {
 		Double res, c1;
 		Long c2;
 
-		c1 = bookRepository.countDeniedBooks();
-		c2 = lessorService.count();
+		c1 = this.bookRepository.countDeniedBooks();
+		c2 = this.lessorService.count();
 
-		if (c1 != null && c2 != 0) {
+		if (c1 != null && c2 != 0)
 			res = c1 / c2;
-		} else {
+		else
 			res = 0.;
-		}
 		return res;
 	}
 
@@ -222,14 +220,13 @@ public class BookService {
 		Double res, c1;
 		Long c2;
 
-		c1 = bookRepository.countAcceptedBooks();
-		c2 = tenantService.count();
+		c1 = this.bookRepository.countAcceptedBooks();
+		c2 = this.tenantService.count();
 
-		if (c1 != null && c2 != 0) {
+		if (c1 != null && c2 != 0)
 			res = c1 / c2;
-		} else {
+		else
 			res = 0.;
-		}
 		return res;
 	}
 
@@ -238,18 +235,17 @@ public class BookService {
 		Double res, c1;
 		Long c2;
 
-		c1 = bookRepository.countDeniedBooks();
-		c2 = tenantService.count();
+		c1 = this.bookRepository.countDeniedBooks();
+		c2 = this.tenantService.count();
 
-		if (c1 != null && c2 != 0) {
+		if (c1 != null && c2 != 0)
 			res = c1 / c2;
-		} else {
+		else
 			res = 0.;
-		}
 		return res;
 	}
 
-	private void checkDayAfter(Book book) {
+	private void checkDayAfter(final Book book) {
 		long checkIn, checkOut, aDay;
 
 		checkIn = book.getCheckInDate().getTime();
@@ -259,7 +255,7 @@ public class BookService {
 		Assert.isTrue(checkOut - checkIn >= aDay, "book.checkDayAfter.error");
 	}
 
-	private void checkBookDate(Book book) {
+	private void checkBookDate(final Book book) {
 		long checkIn, now;
 
 		checkIn = book.getCheckInDate().getTime();
@@ -268,13 +264,13 @@ public class BookService {
 		Assert.isTrue(checkIn > now, "book.checkDate.error");
 	}
 
-	private void calculateTotalAmount(Book book) {
+	private void calculateTotalAmount(final Book book) {
 		int days;
 		long out, in;
 
 		out = book.getCheckOutDate().getTime();
 		in = book.getCheckInDate().getTime();
-		days = (int) (out - in) / (1000 * 60 * 60 * 24);
+		days = (int) ((out - in) / (1000 * 60 * 60 * 24));
 
 		book.setTotalAmount(days * book.getProperty().getRate());
 	}
@@ -285,47 +281,46 @@ public class BookService {
 		Double withoutAudits;
 		Double res;
 
-		withAudits = bookRepository.getAverageRequestsWithAudits();
-		withoutAudits = bookRepository.getAverageRequestsWithoutAudits();
+		withAudits = this.bookRepository.getAverageRequestsWithAudits();
+		withoutAudits = this.bookRepository.getAverageRequestsWithoutAudits();
 
-		if (withAudits == null || withoutAudits == null || withoutAudits == 0.0) {
+		if (withAudits == null || withoutAudits == null || withoutAudits == 0.0)
 			res = 0.0;
-		} else {
+		else
 			res = withAudits / withoutAudits;
-		}
 		return res;
 	}
-	public Invoice addInvoice(Book book, Invoice invoice) {
+	public Invoice addInvoice(final Book book, final Invoice invoice) {
 		Book result;
 
 		book.setInvoice(invoice);
-		result = bookRepository.save(book);
+		result = this.bookRepository.save(book);
 
 		return result.getInvoice();
 	}
 
-	public void removeTenant(Tenant tenant) {
+	public void removeTenant(final Tenant tenant) {
 
-		for (Book book : tenant.getBooks()) {
+		for (final Book book : tenant.getBooks()) {
 			book.setTenant(null);
-			bookRepository.save(book);
+			this.bookRepository.save(book);
 		}
 
 	}
 
-	public void removeLessor(Lessor lessor) {
+	public void removeLessor(final Lessor lessor) {
 
-		for (Book book : lessor.getBooks()) {
+		for (final Book book : lessor.getBooks()) {
 			book.setLessor(null);
 			book.setProperty(null);
-			bookRepository.save(book);
+			this.bookRepository.save(book);
 		}
 
 	}
-	public void removePropertyFromBooks(Collection<Book> books) {
-		for (Book b : books) {
+	public void removePropertyFromBooks(final Collection<Book> books) {
+		for (final Book b : books) {
 			b.setProperty(null);
-			bookRepository.save(b);
+			this.bookRepository.save(b);
 		}
 
 	}
