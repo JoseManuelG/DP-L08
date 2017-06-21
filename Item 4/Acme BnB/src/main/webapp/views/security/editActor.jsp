@@ -42,6 +42,6 @@
 		<acme:submit code="security.register.delete" name="delete"/>
 	</jstl:if>
 	
-	<acme:cancel url="" code="security.register.cancel"/>
+	<acme:cancel url="${url}" code="security.register.cancel"/>
 	
 </form:form>

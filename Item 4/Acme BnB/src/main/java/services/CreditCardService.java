@@ -87,8 +87,8 @@ public class CreditCardService {
 		return result;
 
 	}
-	
-	public void delete(CreditCard creditCard){
+
+	public void delete(CreditCard creditCard) {
 		Assert.notNull(creditCard, "La tarjeta de crédito no puede ser nula");
 		Lessor lessor = (Lessor) customerService.findActorByPrincial();
 		Assert.isTrue(lessor.getCreditCard().getId() == creditCard.getId(), "La tarjeta de crédito debe pertenecer al lessor");
@@ -107,25 +107,25 @@ public class CreditCardService {
 		Assert.notNull(creditCard, "creditCard.null.error");
 		sevenDays = 7 * 24 * 60 * 60 * 100;
 		today = System.currentTimeMillis();
-		calendar = new GregorianCalendar(creditCard.getExpirationYear(),
-			creditCard.getExpirationMonth(), 1);
+		calendar = new GregorianCalendar(creditCard.getExpirationYear(), creditCard.getExpirationMonth(), 1);
 		cardDate = calendar.getTimeInMillis();
-		
+
 		Assert.isTrue(cardDate > today + sevenDays, "creditCard.expired.error");
 	}
 
 	public String getMaskedCreditCardAsString(CreditCard creditCard) {
 		String number, mask;
-		
+
 		number = creditCard.getNumber();
 		mask = "";
-		if (number.length()<=4){
+		if (number.length() <= 4) {
 			mask = number;
 		} else {
-			for (int i=0; i<number.length()-4; i++){
+			mask = number.substring(0, 4);
+			for (int i = 4; i < number.length() - 4; i++) {
 				mask += "*";
 			}
-			mask += number.substring(number.length()-4);
+			mask += number.substring(number.length() - 4);
 		}
 
 		return mask;
@@ -136,8 +136,22 @@ public class CreditCardService {
 	}
 
 	public void maskCreditCardsFromBooks(Collection<Book> books) {
-		for (Book book : books){
+		for (Book book : books) {
 			maskCreditCard(book.getCreditCard());
 		}
+	}
+
+	public CreditCard copy(CreditCard creditCard) {
+		CreditCard result = this.create();
+		result.setBrandName(creditCard.getBrandName());
+		result.setCvvCode(creditCard.getCvvCode());
+		result.setExpirationMonth(creditCard.getExpirationMonth());
+		result.setExpirationYear(creditCard.getExpirationYear());
+		result.setHolderName(creditCard.getHolderName());
+		result.setNumber(creditCard.getNumber());
+		result.setId(creditCard.getId());
+		result.setVersion(creditCard.getVersion());
+
+		return result;
 	}
 }

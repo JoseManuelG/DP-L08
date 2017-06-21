@@ -32,7 +32,7 @@
 	</definition>
 	
 	<definition name="property/lessor/create" extends="master.page">	
-		<put-attribute name="title" value="NNueva propiedad" />
+		<put-attribute name="title" value="Nueva propiedad" />
 		<put-attribute name="body" value="/views/property/edit.jsp" />
 	</definition>
 

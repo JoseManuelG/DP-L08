@@ -67,8 +67,7 @@ public class SecurityController extends AbstractController {
 		}
 		if (binding.hasErrors()) {
 			result = createRegisterModelAndView(actorForm);
-		} else if (!actorForm.getUserAccount().getPassword()
-					.equals(actorForm.getConfirmPassword())) {
+		} else if (!actorForm.getUserAccount().getPassword().equals(actorForm.getConfirmPassword())) {
 			result = createRegisterModelAndView(actorForm, "security.password.error");
 		} else if (!((boolean) actorForm.getAcepted())) {
 			result = createRegisterModelAndView(actorForm, "security.terms.error");
@@ -98,12 +97,22 @@ public class SecurityController extends AbstractController {
 	public ModelAndView edit() {
 		ModelAndView result;
 		Actor actor;
-		Boolean isAdmin;
+		Boolean isAdmin = false;
 		ActorForm actorForm;
-		
+
 		actor = actorService.findByPrincipal();
-		isAdmin = actor instanceof Administrator;
-		
+		String url = "";
+		if (actor instanceof Tenant)
+			url = "tenant/myProfile.do";
+		else if (actor instanceof Lessor)
+			url = "lessor/myProfile.do";
+		else if (actor instanceof Auditor)
+			url = "auditor/myProfile.do";
+		else if (actor instanceof Administrator) {
+			url = "administrator/myProfile.do";
+			isAdmin = true;
+		}
+
 		actorForm = new ActorForm();
 		actorForm.setName(actor.getName());
 		actorForm.setSurname(actor.getSurname());
@@ -111,19 +120,19 @@ public class SecurityController extends AbstractController {
 		actorForm.setPhone(actor.getPhone());
 		actorForm.setPicture(actor.getPicture());
 		actorForm.setUserAccount(actor.getUserAccount());
-		
-		result = createEditModelAndView(actorForm, isAdmin);
 
+		result = createEditModelAndView(actorForm, isAdmin);
+		result.addObject("url", url);
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView edit(ActorForm actorForm, BindingResult binding) {
 		ModelAndView result;
 		Actor principal, actorResult;
 		Boolean isAdmin;
 		String actorString;
-		
+
 		isAdmin = false;
 		principal = actorService.findByPrincipal();
 		if (principal instanceof Auditor) {
@@ -139,16 +148,15 @@ public class SecurityController extends AbstractController {
 
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(actorForm, isAdmin);
-		} else if (!actorForm.getUserAccount().getPassword()
-					.equals(actorForm.getConfirmPassword())) {
+		} else if (!actorForm.getUserAccount().getPassword().equals(actorForm.getConfirmPassword())) {
 			result = createEditModelAndView(actorForm, isAdmin, "security.password.error");
-		}  else {
+		} else {
 			try {
 				actorService.save(actorResult);
 				actorString = principal.getClass().getSimpleName().toLowerCase();
 				result = new ModelAndView("redirect:../" + actorString + "/myProfile.do");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(actorForm,isAdmin, "lessor.commit.error");
+				result = createEditModelAndView(actorForm, isAdmin, "lessor.commit.error");
 			}
 		}
 
@@ -212,7 +220,7 @@ public class SecurityController extends AbstractController {
 
 	protected ModelAndView createRegisterModelAndView(ActorForm actorForm, String message) {
 		ModelAndView result;
-		
+
 		result = new ModelAndView("security/register");
 		result.addObject("actorForm", actorForm);
 		result.addObject("message", message);
@@ -231,7 +239,6 @@ public class SecurityController extends AbstractController {
 	protected ModelAndView createEditModelAndView(ActorForm actorForm, Boolean isAdmin, String message) {
 		ModelAndView result;
 
-		
 		result = new ModelAndView("security/edit");
 		result.addObject(actorForm);
 		result.addObject("isAdmin", isAdmin);

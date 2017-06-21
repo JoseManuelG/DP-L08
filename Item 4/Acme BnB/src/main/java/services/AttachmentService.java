@@ -25,14 +25,14 @@ public class AttachmentService {
 	@Autowired
 	private AttachmentRepository	attachmentRepository;
 
-
 	// Supporting Services ------------------------------------------------------------
-	
+
 	@Autowired
-	private LoginService	loginService;
-	
+	private LoginService			loginService;
+
 	@Autowired
-	private Validator validator;
+	private Validator				validator;
+
 
 	// Constructor --------------------------------------------------------------------
 
@@ -65,14 +65,14 @@ public class AttachmentService {
 	@SuppressWarnings("static-access")
 	public Attachment save(Attachment attachment) {
 		Attachment result;
-		
+
 		Assert.notNull(attachment, "El attachment no puede ser nulo");
 		Assert.isTrue(loginService.getPrincipal().equals(attachment.getAudit().getAuditor().getUserAccount()));
 		Assert.isTrue(attachment.getAudit().getDraftMode());
 		result = attachmentRepository.save(attachment);
 		return result;
 	}
-	
+
 	@SuppressWarnings("static-access")
 	public void delete(Attachment attachment) {
 		Assert.notNull(attachment, "El attachment no puede ser nulo");
@@ -85,11 +85,8 @@ public class AttachmentService {
 
 	}
 
-	
-
 	// Other Bussiness Methods --------------------------------------------------------
 
-	
 	public Collection<Attachment> findAllAttachmentsByAudit(Audit audit) {
 		Collection<Attachment> result;
 		result = attachmentRepository.findAllAttachmentsByAuditId(audit.getId());
@@ -98,20 +95,21 @@ public class AttachmentService {
 
 	public Attachment reconstruct(Attachment attachment, BindingResult binding) {
 		Attachment result, original;
-		
-		if (attachment.getId()==0){
+
+		if (attachment.getId() == 0) {
 			result = create(attachment.getAudit());
 		} else {
 			result = new Attachment();
 			original = findOne(attachment.getId());
 			result.setAudit(original.getAudit());
+			result.setId(original.getId());
 			result.setVersion(original.getVersion());
 		}
 		result.setName(attachment.getName());
 		result.setUrl(attachment.getUrl());
-		
+
 		validator.validate(result, binding);
-		
+
 		return result;
 	}
 }

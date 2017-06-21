@@ -26,7 +26,7 @@ public class TenantController extends AbstractController {
 	@Autowired
 	private TenantService	tenantService;
 	@Autowired
-	private CommentService commentService;
+	private CommentService	commentService;
 	@Autowired
 	private CustomerService	customerService;
 
@@ -47,12 +47,12 @@ public class TenantController extends AbstractController {
 		Tenant tenant = tenantService.findByPrincipal();
 
 		result.addObject("tenant", tenant);
-		result.addObject("comments", commentService.findAllCommentsOfACustomer( tenant));
+		result.addObject("comments", commentService.findAllCommentsOfACustomer(tenant));
 		result.addObject("socialIdentities", tenant.getSocialIdentities());
 		result.addObject("requestURI", "tenant/myProfile.do");
 		result.addObject("esMiPerfil", true);
 		//Bloque de botoneria de comentario Hecho por roldan -->
-		result.addObject("puedoComentar",true);
+		result.addObject("puedoComentar", true);
 		//<---
 		return result;
 	}
@@ -63,17 +63,17 @@ public class TenantController extends AbstractController {
 		result = new ModelAndView("tenant/view");
 		boolean puedoComentar = false;
 		Tenant tenant = tenantService.findOne(tenantId);
-		
+
 		//Bloque de botoneria de comentario Hecho por roldan -->
-		try{
-			Comment comment= commentService.create();
+		try {
+			Comment comment = commentService.create();
 			comment.setRecipient(tenant);
 			comment.setSender(customerService.findActorByPrincial());
-			puedoComentar=commentService.validComment(comment);
-			}catch (Throwable oops) {
-				puedoComentar=false;
-			}
-		result.addObject("puedoComentar",puedoComentar);
+			puedoComentar = commentService.validComment(comment);
+		} catch (Throwable oops) {
+			puedoComentar = false;
+		}
+		result.addObject("puedoComentar", puedoComentar);
 		//<--
 		result.addObject("tenant", tenant);
 		result.addObject("comments", commentService.findAllCommentsOfACustomer(tenant));
