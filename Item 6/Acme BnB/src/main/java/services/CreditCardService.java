@@ -105,7 +105,7 @@ public class CreditCardService {
 		Calendar calendar;
 
 		Assert.notNull(creditCard, "creditCard.null.error");
-		sevenDays = 7 * 24 * 60 * 60 * 100;
+		sevenDays = 7 * 24 * 60 * 60 * 1000;
 		today = System.currentTimeMillis();
 		calendar = new GregorianCalendar(creditCard.getExpirationYear(),
 			creditCard.getExpirationMonth(), 1);

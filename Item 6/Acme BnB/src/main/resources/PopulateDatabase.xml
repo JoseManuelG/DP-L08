@@ -1358,7 +1358,7 @@
 		<property name="brandName" value="VISA"/>
 		<property name="number" value="4485733078654607"/>
 		<property name="expirationMonth" value="05"/>
-		<property name="expirationYear" value="2020"/>
+		<property name="expirationYear" value="2017"/>
 		<property name="cvvCode" value="788"/>
 	</bean>
 	
@@ -1481,8 +1481,8 @@
 	-->
 	
 	<bean id="book1Tenant1" class="domain.Book">
-		<property name="checkInDate" value="03/20/2017"/>
-		<property name="checkOutDate" value="03/22/2017"/>
+		<property name="checkInDate" value="03/20/2018"/>
+		<property name="checkOutDate" value="03/22/2018"/>
 		<property name="smoker" value="false"/>
 		<property name="state" value="PENDING"/>
 		<property name="totalAmount" value="60.0"/>
