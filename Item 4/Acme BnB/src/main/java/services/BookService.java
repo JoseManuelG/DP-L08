@@ -274,7 +274,7 @@ public class BookService {
 
 		out = book.getCheckOutDate().getTime();
 		in = book.getCheckInDate().getTime();
-		days = (int) (out - in) / (1000 * 60 * 60 * 24);
+		days = (int) ((out - in) / (1000 * 60 * 60 * 24));
 
 		book.setTotalAmount(days * book.getProperty().getRate());
 	}
