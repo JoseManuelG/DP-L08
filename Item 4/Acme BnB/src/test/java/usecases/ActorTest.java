@@ -16,12 +16,29 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import security.Authority;
 import security.UserAccount;
+import services.ActorService;
+import services.BookService;
+import services.CommentService;
 import services.LessorService;
+import services.PropertyService;
+import services.SocialIdentityService;
 import services.TenantService;
 import services.UserAccountService;
 import utilities.AbstractTest;
+import domain.Actor;
 import domain.Lessor;
+import domain.SocialIdentity;
 import domain.Tenant;
+
+/*
+ * SampleTest.java
+ * 
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the
+ * TDG Licence, a copy of which you may download from
+ * http://www.tdg-seville.info/License.html
+ */
 
 @ContextConfiguration(locations = {
 	"classpath:spring/junit.xml"
@@ -30,14 +47,54 @@ import domain.Tenant;
 @Transactional
 public class ActorTest extends AbstractTest {
 
+	// System under test ------------------------------------------------------
+
 	@Autowired
-	private LessorService		lessorService;
+	private TenantService			tenantService;
+
 	@Autowired
-	private TenantService		tenantService;
+	private SocialIdentityService	socialIdentityService;
+
 	@Autowired
-	private UserAccountService	userAccountService;
+	private PropertyService			propertyService;
+
+	@Autowired
+	private BookService				bookService;
+
+	@Autowired
+	private CommentService			commentService;
+
+	@Autowired
+	private ActorService			actorService;
+
+	@Autowired
+	private LessorService			lessorService;
+
+	@Autowired
+	private UserAccountService		userAccountService;
 
 
+	// Tests ------------------------------------------------------------------
+
+	@Test
+	public void createSocialIdentityPositiveTest() {
+		this.createSocialIdentitytemplate("tenant1", "http://www.test.com", "myNick", "testNet", null);
+	}
+
+	@Test
+	public void createSocialIdentityNegativeTest() {
+		this.createSocialIdentitytemplate("tenant1", "noURL", "myNick", "testNet", ConstraintViolationException.class);
+	}
+
+	@Test
+	public void editSocialIdentityPositiveTest() {
+		this.editSocialIdentitytemplate("lessor1", 123, "http://www.test.com", "myNick", "testNet", null);
+	}
+
+	@Test
+	public void editSocialIdentityNegativeTest() {
+		this.editSocialIdentitytemplate("lessor1", 123, "http://www.test.com", "", "testNet", ConstraintViolationException.class);
+	}
 	//Caso de uso de registrarse como lessor
 	//test positivo
 	@Test
@@ -119,6 +176,7 @@ public class ActorTest extends AbstractTest {
 	@Test
 	public void registerTenant9() {
 		this.templateRegisterTenant("name", "surname", "email@email.com", "123456789", "http://www.photo.com", "auditorTest", null, ConstraintViolationException.class);
+
 	}
 
 	// Ancillary methods ------------------------------------------------------
@@ -154,12 +212,34 @@ public class ActorTest extends AbstractTest {
 			this.lessorService.save(lessor);
 			this.lessorService.flush();
 
-			this.unauthenticate();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
 		this.checkExceptions(expected, caught);
 	}
+	protected void createSocialIdentitytemplate(final String actor, final String link, final String nick, final String socialNetwork, final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+		try {
+			this.authenticate("tenant1");
+			SocialIdentity socialIdentity;
+			Actor principal;
+
+			socialIdentity = this.socialIdentityService.create();
+			principal = this.actorService.findByPrincipal();
+			socialIdentity.setActor(principal);
+			socialIdentity.setLink(link);
+			socialIdentity.setNick(nick);
+			socialIdentity.setSocialNetwork(socialNetwork);
+			this.socialIdentityService.save(socialIdentity);
+			this.socialIdentityService.flush();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		this.checkExceptions(expected, caught);
+	}
+
 	protected void templateRegisterTenant(final String name, final String surname, final String email, final String phone, final String picture, final String userAccountName, final String password, final Class<?> expected) {
 		Class<?> caught;
 		Tenant tenant;
@@ -190,7 +270,29 @@ public class ActorTest extends AbstractTest {
 			this.tenantService.save(tenant);
 			this.tenantService.flush();
 
-			this.unauthenticate();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		this.checkExceptions(expected, caught);
+	}
+
+	protected void editSocialIdentitytemplate(final String actor, final int id, final String link, final String nick, final String socialNetwork, final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+		try {
+			this.authenticate("tenant1");
+			SocialIdentity socialIdentity;
+			Actor principal;
+
+			socialIdentity = this.socialIdentityService.findOne(id);
+			principal = this.actorService.findByPrincipal();
+			socialIdentity.setActor(principal);
+			socialIdentity.setLink(link);
+			socialIdentity.setNick(nick);
+			socialIdentity.setSocialNetwork(socialNetwork);
+			this.socialIdentityService.save(socialIdentity);
+			this.socialIdentityService.flush();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
