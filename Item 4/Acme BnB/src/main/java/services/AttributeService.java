@@ -102,4 +102,8 @@ public class AttributeService {
 		return result;
 	}
 
+	public void flush() {
+		attributeRepository.flush();
+	}
+
 }

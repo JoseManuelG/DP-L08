@@ -127,4 +127,8 @@ public class AuditorService {
 		return result;
 	}
 
+	public void flush() {
+		auditorRepository.flush();
+	}
+
 }
