@@ -217,4 +217,8 @@ public class PropertyService {
 		return this.propertyRepository.findAllOrdered();
 	}
 
+	public void flush() {
+		this.propertyRepository.flush();
+	}
+
 }

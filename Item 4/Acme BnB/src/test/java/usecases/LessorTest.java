@@ -8,7 +8,10 @@
 
 package usecases;
 
+import java.util.Date;
+
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,9 +21,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import services.ActorService;
 import services.BookService;
+import services.CommentService;
 import services.LessorService;
 import services.PropertyService;
 import utilities.AbstractTest;
+import domain.Comment;
 import domain.Property;
 
 @ContextConfiguration(locations = {
@@ -35,11 +40,13 @@ public class LessorTest extends AbstractTest {
 	@Autowired
 	private LessorService	lessorService;
 	@Autowired
-	private ActorService	actorService;
-	@Autowired
 	private PropertyService	propertyService;
 	@Autowired
 	private BookService		bookService;
+	@Autowired
+	private CommentService	commentService;
+	@Autowired
+	private ActorService	actorService;
 
 
 	// Tests ------------------------------------------------------------------
@@ -126,6 +133,36 @@ public class LessorTest extends AbstractTest {
 	public void DeniedBook2() {
 		this.templateDeniedBook("Lessor4", 83, IllegalArgumentException.class);
 	}
+	//Comentar
+	@Test
+	public void CommentProfile1() {
+		this.templateCommentProfile("Lessor1", 35, "Test1", "Test1", 0, null);
+	}
+
+	//Comentar
+	@Test
+	public void CommentProfile2() {
+		this.templateCommentProfile("Lessor1", 35, "", "Test1", 0, IllegalArgumentException.class);
+	}
+
+	//Comentar
+	@Test
+	public void CommentProfile3() {
+		this.templateCommentProfile("Lessor1", 35, "Test1", "", 0, IllegalArgumentException.class);
+	}
+
+	//Comentar
+	@Test
+	public void CommentProfile4() {
+		this.templateCommentProfile("Lessor1", 35, "Test1", "Test1", -1, IllegalArgumentException.class);
+	}
+
+	//Comentar
+	@Test
+	public void CommentProfile5() {
+		this.templateCommentProfile("Lessor1", 35, "Test1", "Test1", 6, ConstraintViolationException.class);
+	}
+
 	// Ancillary methods ------------------------------------------------------
 
 	protected void templateRegisterProperty(final String username, final String name, final String description, final String address, final int rate, final Class<?> expected) {
@@ -144,6 +181,7 @@ public class LessorTest extends AbstractTest {
 			property = this.propertyService.save(property);
 
 			this.unauthenticate();
+			this.propertyService.flush();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
@@ -164,6 +202,7 @@ public class LessorTest extends AbstractTest {
 			this.propertyService.save(property);
 
 			this.unauthenticate();
+			this.propertyService.flush();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
@@ -177,6 +216,7 @@ public class LessorTest extends AbstractTest {
 			this.authenticate(username);
 			this.bookService.acceptBook(bookId);
 			this.unauthenticate();
+			this.bookService.flush();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
@@ -190,6 +230,32 @@ public class LessorTest extends AbstractTest {
 			this.authenticate(username);
 			this.bookService.denyBook(bookId);
 			this.unauthenticate();
+			this.bookService.flush();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		this.checkExceptions(expected, caught);
+	}
+
+	protected void templateCommentProfile(final String username, final int profileToComment, final String title, final String text, final int stars, final Class<?> expected) {
+		Class<?> caught;
+		Comment comment;
+		caught = null;
+		try {
+			this.authenticate(username);
+			comment = this.commentService.create();
+
+			comment.setRecipient(this.lessorService.findOne(profileToComment));
+			comment.setSender(this.lessorService.findByPrincipal());
+			comment.setStars(stars);
+			comment.setText(text);
+			comment.setTitle(title);
+			comment.setPostMoment(new Date(System.currentTimeMillis() - 1000));
+
+			this.commentService.save(comment);
+
+			this.unauthenticate();
+			this.bookService.flush();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
