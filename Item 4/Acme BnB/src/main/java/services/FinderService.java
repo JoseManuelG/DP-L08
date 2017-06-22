@@ -186,4 +186,8 @@ public class FinderService {
 
 		return res;
 	}
+	public void flush() {
+		finderRepository.flush();
+
+	}
 }

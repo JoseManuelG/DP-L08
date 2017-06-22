@@ -258,4 +258,7 @@ public class TenantService {
 		tenantRepository.save(tenant);
 
 	}
+	public void flush() {
+		tenantRepository.flush();
+	}
 }

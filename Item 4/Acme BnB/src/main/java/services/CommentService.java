@@ -26,20 +26,20 @@ public class CommentService {
 	//Managed Repository-----------------------------
 
 	@Autowired
-	private CommentRepository	commentRepository;
+	private CommentRepository		commentRepository;
 
 	//Supporting services-----------------------------
 
 	@Autowired
-	private LoginService		loginService;
+	private LoginService			loginService;
 	@Autowired
-	private CommentableRepository commentableRepository;
-	
+	private CommentableRepository	commentableRepository;
+
 	@Autowired
-	private TenantService		tenantService;
-	
+	private TenantService			tenantService;
+
 	@Autowired
-	private LessorService		lessorService;
+	private LessorService			lessorService;
 
 
 	//Constructors------------------------------------
@@ -94,81 +94,83 @@ public class CommentService {
 		return result;
 	}
 
-	
 	//Other bussiness methods------------------------
-	
+
 	public Collection<Comment> findAllCommentsOfACustomer(Customer customer) {
 		Collection<Comment> comments;
 		commentableRepository.findAll();
 		comments = commentRepository.findCommentsByCustomerID(customer.getId());
 		return comments;
 	}
-	
-	public boolean lessorValidToBeCommentedByTenant(Lessor lessor, Tenant tenant){
-		boolean result= false;
-		if(lessorService.lessorHaveBooksWithTenant(tenant, lessor)){
-			result=true;
+
+	public boolean lessorValidToBeCommentedByTenant(Lessor lessor, Tenant tenant) {
+		boolean result = false;
+		if (lessorService.lessorHaveBooksWithTenant(tenant, lessor)) {
+			result = true;
 		}
 		return result;
 	}
-	
-	public boolean tenantValidToBeCommentedByLessor(Lessor lessor, Tenant tenant){
-		boolean result= false;
-		if(tenantService.tenantHaveBooksWithLessor(tenant, lessor)){
-			result=true;
+
+	public boolean tenantValidToBeCommentedByLessor(Lessor lessor, Tenant tenant) {
+		boolean result = false;
+		if (tenantService.tenantHaveBooksWithLessor(tenant, lessor)) {
+			result = true;
 		}
 		return result;
 	}
-	
-	public boolean validAutoComment(Comment comment){
-		boolean result= false;
-		if(comment.getSender().equals(comment.getRecipient())){
-			result=true;
+
+	public boolean validAutoComment(Comment comment) {
+		boolean result = false;
+		if (comment.getSender().equals(comment.getRecipient())) {
+			result = true;
 		}
 		return result;
-		
+
 	}
-	
-	public boolean validComment(Comment comment){
-		boolean result=false;
+
+	public boolean validComment(Comment comment) {
+		boolean result = false;
 		//si se comenta a si mismo se autoValida
-		if(validAutoComment(comment)){
-			result=true;
-		}else{
-			
-			Actor sender= comment.getSender();
+		if (validAutoComment(comment)) {
+			result = true;
+		} else {
+
+			Actor sender = comment.getSender();
 			Actor recipient = (Actor) comment.getRecipient();
-			
-			ArrayList<Authority> authoritySender =new ArrayList<Authority>();
-			ArrayList<Authority> authorityRecipient =new ArrayList<Authority>();
-			
-			
-			authoritySender.addAll(sender.getUserAccount().getAuthorities());		
-			authorityRecipient.addAll(recipient.getUserAccount().getAuthorities());		
-			
-			switch(authoritySender.get(0).getAuthority()){
-				case (Authority.LESSOR):
-					switch(authorityRecipient.get(0).getAuthority()){
-					case (Authority.TENANT):
-						result=tenantValidToBeCommentedByLessor((Lessor)sender,(Tenant)recipient);
-						break;
-					}
-				break;
+
+			ArrayList<Authority> authoritySender = new ArrayList<Authority>();
+			ArrayList<Authority> authorityRecipient = new ArrayList<Authority>();
+
+			authoritySender.addAll(sender.getUserAccount().getAuthorities());
+			authorityRecipient.addAll(recipient.getUserAccount().getAuthorities());
+
+			switch (authoritySender.get(0).getAuthority()) {
+			case (Authority.LESSOR):
+				switch (authorityRecipient.get(0).getAuthority()) {
 				case (Authority.TENANT):
-					switch(authorityRecipient.get(0).getAuthority()){
-					case (Authority.LESSOR):
-						result=lessorValidToBeCommentedByTenant((Lessor)recipient,(Tenant)sender);
-						break;
-					}
+					result = tenantValidToBeCommentedByLessor((Lessor) sender, (Tenant) recipient);
+					break;
+				}
 				break;
-					
-			
+			case (Authority.TENANT):
+				switch (authorityRecipient.get(0).getAuthority()) {
+				case (Authority.LESSOR):
+					result = lessorValidToBeCommentedByTenant((Lessor) recipient, (Tenant) sender);
+					break;
+				}
+				break;
+
 			}
-			
+
 		}
-		
+
 		return result;
-		
+
+	}
+
+	public void flush() {
+		this.commentRepository.flush();
+
 	}
 
 }
