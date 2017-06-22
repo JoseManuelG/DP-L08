@@ -17,6 +17,7 @@ import java.util.Date;
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
 
+import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,6 @@ import utilities.AbstractTest;
 import domain.Book;
 import domain.Comment;
 import domain.Finder;
-import domain.Invoice;
 import domain.Property;
 import domain.Tenant;
 
@@ -90,14 +90,14 @@ public class TenantTest extends AbstractTest {
 	@Test
 	public void RegisterPositiveTest() {
 
-		this.template2("test1", "test1", "test@acme.com", "test1", "tested", "testPhone", null);
+		this.template2("test1", "test1", "test@acme.com", "test1", "tested", "+34908900", null);
 	}
 
 	// Registro sin password
 	@Test
 	public void RegisterNegativeTest() {
 
-		this.template2("test1", "", "test@acme.com", "test1", "tested", "testPhone", ConstraintViolationException.class);
+		this.template2("test1", "", "test@acme.com", "test1", "tested", "+34908900", ConstraintViolationException.class);
 	}
 
 	// Make a request for a property.
@@ -110,7 +110,7 @@ public class TenantTest extends AbstractTest {
 	// Invalid property
 	@Test
 	public void RequestNegativeTest() {
-		this.template3("tenant1", -1, ConstraintViolationException.class);
+		this.template3("tenant1", -1, NullPointerException.class);
 	}
 
 	// Post comments to his own profile or to the profile of any lessor whose properties he or she has requested.
@@ -123,7 +123,7 @@ public class TenantTest extends AbstractTest {
 	// Bad user
 	@Test
 	public void CommentNegativeTest() {
-		this.template4("tenant1", -1, "text", null);
+		this.template4("tenant1", -1, "text", IllegalArgumentException.class);
 	}
 
 	// Ancillary methods ------------------------------------------------------
@@ -156,7 +156,6 @@ public class TenantTest extends AbstractTest {
 			final UserAccount userAccount = new UserAccount();
 			final Collection<Authority> authorities = new ArrayList<Authority>();
 			final Authority authority = new Authority();
-			Finder finder = this.finderService.create();
 
 			authority.setAuthority("TENANT");
 			authorities.add(authority);
@@ -165,12 +164,10 @@ public class TenantTest extends AbstractTest {
 			customer.getUserAccount().setUsername(userName);
 			customer.getUserAccount().setPassword(password);
 			customer.setEmail(email);
-			customer.setBooks(new ArrayList<Book>());
-			customer.setInvoices(new ArrayList<Invoice>());
+			customer.setPicture("http://www.jose.com");
 			customer.setName(name);
 			customer.setSurname(surname);
 			customer.setPhone(phone);
-			customer.setFinder(finder);
 			this.tenantService.save(customer);
 			this.tenantService.flush();
 		} catch (final Throwable oops) {
@@ -188,6 +185,13 @@ public class TenantTest extends AbstractTest {
 			Tenant tenan = this.tenantService.findByPrincipal();
 			Property properti = this.propertyService.findOne(property);
 			Book book = this.bookService.create(properti, tenan);
+			DateTime dateTime = new DateTime(System.currentTimeMillis());
+			Date checkInDate = dateTime.plusDays(1).toDate();
+			Date checkOutDate = dateTime.plusDays(3).toDate();
+			book.setCheckInDate(checkInDate);
+			book.setCheckOutDate(checkOutDate);
+			book.setCreditCard(properti.getLessor().getCreditCard());
+			book.getCreditCard().setExpirationYear(2020);
 			this.bookService.save(book);
 			this.bookService.flush();
 
@@ -209,6 +213,7 @@ public class TenantTest extends AbstractTest {
 			comment.setSender(tenant);
 			comment.setStars(5);
 			comment.setTitle(string2);
+			comment.setText(string2);
 			comment.setPostMoment(new Date(System.currentTimeMillis()));
 			this.commentService.save(comment);
 			this.commentService.flush();
