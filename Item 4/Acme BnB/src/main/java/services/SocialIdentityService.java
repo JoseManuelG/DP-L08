@@ -90,6 +90,11 @@ public class SocialIdentityService {
 		public List<Property> findSocialIdentitiesByLessorId(Lessor  lessor) {
 			return socialIdentityRepository.findSocialIdentitiesByLessorId(lessor.getId());
 		}
+
+		public void flush() {
+			socialIdentityRepository.flush();
+			
+		}
 			
 		
 }
