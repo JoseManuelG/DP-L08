@@ -35,9 +35,9 @@ public class AuditService {
 
 	@Autowired
 	private PropertyService	propertyService;
-	
+
 	@Autowired
-	private Validator	validator;
+	private Validator		validator;
 
 
 	// Constructor --------------------------------------------------------------------
@@ -48,15 +48,15 @@ public class AuditService {
 
 	// Simple CRUD methods ------------------------------------------------------------
 
-	public Audit create(int propertyId) {
+	public Audit create(final int propertyId) {
 		Audit result;
 		Auditor principal;
 		Property property;
 		Date currentMoment;
 
 		currentMoment = new Date(System.currentTimeMillis() - 100);
-		principal = (Auditor) actorService.findByPrincipal();
-		property = propertyService.findOne(propertyId);
+		principal = (Auditor) this.actorService.findByPrincipal();
+		property = this.propertyService.findOne(propertyId);
 
 		result = new Audit();
 		result.setAuditor(principal);
@@ -70,134 +70,132 @@ public class AuditService {
 
 	public Collection<Audit> findAll() {
 		Collection<Audit> result;
-		result = auditRepository.findAll();
+		result = this.auditRepository.findAll();
 		Assert.notNull(result);
 		return result;
 	}
 
-	public Audit findOne(int auditId) {
+	public Audit findOne(final int auditId) {
 		Audit result;
-		result = auditRepository.findOne(auditId);
+		result = this.auditRepository.findOne(auditId);
 		return result;
 	}
 
-	public Audit save(Audit audit) {
+	public Audit save(final Audit audit) {
 		Audit result;
 
 		Assert.notNull(audit, "El audit no puede ser nulo");
-		Assert.isTrue(actorService.findByPrincipal().equals(audit.getAuditor()));
-		if (audit.getId() != 0) {
+		Assert.isTrue(this.actorService.findByPrincipal().equals(audit.getAuditor()));
+		if (audit.getId() != 0)
 			Assert.isTrue(audit.getDraftMode());
-		}
 
-		Date currentTime = new Date(System.currentTimeMillis() - 100);
+		final Date currentTime = new Date(System.currentTimeMillis() - 100);
 		audit.setWritingMoment(currentTime);
 		audit.setDraftMode(false);
-//		audit.getProperty().getAudits().remove(findOne(audit.getId()));
+		//		audit.getProperty().getAudits().remove(findOne(audit.getId()));
 
-		result = auditRepository.save(audit);
+		result = this.auditRepository.save(audit);
 		return result;
 	}
 
-	public Audit saveDraft(Audit audit) {
+	public Audit saveDraft(final Audit audit) {
 		Audit result;
 
 		Assert.notNull(audit, "El audit no puede ser nulo");
-		Assert.isTrue(actorService.findByPrincipal().equals(audit.getAuditor()));
-		if (audit.getId() != 0) {
+		Assert.isTrue(this.actorService.findByPrincipal().equals(audit.getAuditor()));
+		if (audit.getId() != 0)
 			Assert.isTrue(audit.getDraftMode());
-		}
 
-		Date currentTime = new Date(System.currentTimeMillis() - 100);
+		final Date currentTime = new Date(System.currentTimeMillis() - 100);
 		audit.setWritingMoment(currentTime);
 		audit.setDraftMode(true);
-//		audit.getProperty().getAudits().remove(findOne(audit.getId()));
+		//		audit.getProperty().getAudits().remove(findOne(audit.getId()));
 
-		result = auditRepository.save(audit);
+		result = this.auditRepository.save(audit);
 		return result;
 	}
 
-	public void delete(Audit audit) {
+	public void delete(final Audit audit) {
 		Assert.notNull(audit, "El audit no puede ser nulo");
 		Assert.isTrue(audit.getId() != 0, "El audit debe estar antes en la base de datos");
 		Assert.isTrue(audit.getDraftMode());
-		auditRepository.exists(audit.getId());
-		Assert.isTrue(actorService.findByPrincipal().equals(audit.getAuditor()));
-		audit.getProperty().getAudits().remove(findOne(audit.getId()));
-		auditRepository.delete(audit);
+		this.auditRepository.exists(audit.getId());
+		Assert.isTrue(this.actorService.findByPrincipal().equals(audit.getAuditor()));
+		audit.getProperty().getAudits().remove(this.findOne(audit.getId()));
+		this.auditRepository.delete(audit);
+
+	}
+
+	public void flush() {
+		this.auditRepository.flush();
 
 	}
 
 	// Other Bussiness Methods --------------------------------------------------------
 
-	public Collection<Audit> findAuditsForProperty(Property property) {
-		Collection<Audit> result = auditRepository.findAuditsForPropertyId(property.getId());
+	public Collection<Audit> findAuditsForProperty(final Property property) {
+		final Collection<Audit> result = this.auditRepository.findAuditsForPropertyId(property.getId());
 		return result;
 	}
 
-	public boolean checkUnique(int propertyId, Auditor auditor) {
+	public boolean checkUnique(final int propertyId, final Auditor auditor) {
 		boolean result;
-		
-		result = auditRepository
-			.countAuditForauditorIdAndPropertyId(auditor.getId(), propertyId) == 0;
+
+		result = this.auditRepository.countAuditForauditorIdAndPropertyId(auditor.getId(), propertyId) == 0;
 
 		//Assert.notNull(auditRepository.findAuditsForauditorIdAndPropertyId(auditor.getId() ,property.getId()));
 		return result;
 	}
 
-	public boolean checkUniqueOrDraft(int propertyId, Auditor auditor) {
+	public boolean checkUniqueOrDraft(final int propertyId, final Auditor auditor) {
 		boolean result;
 		Audit audit;
-		
-		audit = getAuditForPropertyAndAuditor(
-			propertyService.findOne(propertyId), auditor);
-		result = !(auditRepository
-			.countAuditForauditorIdAndPropertyId(auditor.getId(), propertyId) == 1 
-			&& !audit.getDraftMode());
+
+		audit = this.getAuditForPropertyAndAuditor(this.propertyService.findOne(propertyId), auditor);
+		result = !(this.auditRepository.countAuditForauditorIdAndPropertyId(auditor.getId(), propertyId) == 1 && !audit.getDraftMode());
 
 		return result;
 	}
 
-	public Audit getAuditForPropertyAndAuditor(Property property, Auditor auditor) {
+	public Audit getAuditForPropertyAndAuditor(final Property property, final Auditor auditor) {
 		Audit result;
-		result = auditRepository.findAuditForauditorIdAndPropertyId(auditor.getId(), property.getId());
+		result = this.auditRepository.findAuditForauditorIdAndPropertyId(auditor.getId(), property.getId());
 		return result;
 	}
 
-	public Collection<Audit> findAuditsForAuditor(Auditor auditor) {
-		Collection<Audit> result = auditRepository.findAuditsForauditorId(auditor.getId());
+	public Collection<Audit> findAuditsForAuditor(final Auditor auditor) {
+		final Collection<Audit> result = this.auditRepository.findAuditsForauditorId(auditor.getId());
 		return result;
 	}
 
 	public Integer getMinimumAuditsPerProperty() {
 		//Dashboard-21
-		return auditRepository.getMinimumAuditsPerProperty();
+		return this.auditRepository.getMinimumAuditsPerProperty();
 	}
 
 	public Double getAverageAuditsPerProperty() {
 		//Dashboard-21
-		return auditRepository.getAverageAuditsPerProperty();
+		return this.auditRepository.getAverageAuditsPerProperty();
 	}
 
 	public Integer getMaximumAuditsPerProperty() {
 		//Dashboard-21
-		return auditRepository.getMaximumAuditsPerProperty();
+		return this.auditRepository.getMaximumAuditsPerProperty();
 	}
 
-	public void deleteAuditsForProperty(Property property) {
-		Collection<Audit> audits = auditRepository.findAuditsForPropertyId(property.getId());
-		for (Audit a : audits) {
-			auditRepository.delete(a);
-		}
+	public void deleteAuditsForProperty(final Property property) {
+		final Collection<Audit> audits = this.auditRepository.findAuditsForPropertyId(property.getId());
+		for (final Audit a : audits)
+			this.auditRepository.delete(a);
 	}
 
-	public Audit reconstruct(Audit audit, BindingResult binding) {
+	public Audit reconstruct(final Audit audit, final BindingResult binding) {
 		Audit result, original;
-			
-		if (audit.getId() == 0){
-			result = create(audit.getProperty().getId());
-		} else {
-			original = findOne(audit.getId());
+
+		if (audit.getId() == 0)
+			result = this.create(audit.getProperty().getId());
+		else {
+			original = this.findOne(audit.getId());
 			result = new Audit();
 			result.setAttachments(original.getAttachments());
 			result.setAuditor(original.getAuditor());
@@ -208,9 +206,9 @@ public class AuditService {
 			result.setWritingMoment(original.getWritingMoment());
 		}
 		result.setText(audit.getText());
-		
-		validator.validate(result,binding);
-		
+
+		this.validator.validate(result, binding);
+
 		return result;
 	}
 

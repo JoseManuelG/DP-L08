@@ -40,59 +40,59 @@ public class AuditorService {
 	public Auditor create() {
 		Auditor result;
 		result = new Auditor();
-		actorService.setActorCollections(result);
+		this.actorService.setActorCollections(result);
 		result.setAudits(new ArrayList<Audit>());
 		return result;
 	}
 	public Collection<Auditor> findAll() {
 		Collection<Auditor> result;
-		result = auditorRepository.findAll();
+		result = this.auditorRepository.findAll();
 		Assert.notNull(result);
 		return result;
 	}
 
-	public Auditor findOne(int auditorId) {
+	public Auditor findOne(final int auditorId) {
 		Auditor result;
 
-		result = auditorRepository.findOne(auditorId);
+		result = this.auditorRepository.findOne(auditorId);
 
 		return result;
 	}
 
-	public Auditor save(Auditor auditor) {
+	public Auditor save(final Auditor auditor) {
 		Auditor result;
 
 		Assert.notNull(auditor, "auditor.error.null");
-		result = auditorRepository.save(auditor);
+		result = this.auditorRepository.save(auditor);
 		Assert.notNull(result, "auditor.error.commit");
 
 		return result;
 	}
 
-	public void delete(Auditor auditor) {
+	public void delete(final Auditor auditor) {
 		Assert.notNull(auditor, "auditor.error.null");
 
-		Assert.isTrue(auditorRepository.exists(auditor.getId()), "auditor.error.exists");
+		Assert.isTrue(this.auditorRepository.exists(auditor.getId()), "auditor.error.exists");
 
-		auditorRepository.delete(auditor);
+		this.auditorRepository.delete(auditor);
 	}
 
 	// Other business methods --------------------------------------
 
 	public Auditor findActorByPrincial() {
 		Auditor result;
-		result = auditorRepository.findByUserAccountId(LoginService.getPrincipal().getId());
+		result = this.auditorRepository.findByUserAccountId(LoginService.getPrincipal().getId());
 		return result;
 	}
-	public Auditor reconstruct(ActorForm actorForm, BindingResult binding) {
-		Auditor result = create();
+	public Auditor reconstruct(final ActorForm actorForm, final BindingResult binding) {
+		final Auditor result = this.create();
 
-		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-		UserAccount userAccount = new UserAccount();
+		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		final UserAccount userAccount = new UserAccount();
 		userAccount.setPassword(actorForm.getUserAccount().getPassword());
 		userAccount.setUsername(actorForm.getUserAccount().getUsername());
-		Collection<Authority> authorities = new ArrayList<Authority>();
-		Authority authority = new Authority();
+		final Collection<Authority> authorities = new ArrayList<Authority>();
+		final Authority authority = new Authority();
 		authority.setAuthority("AUDITOR");
 		authorities.add(authority);
 		userAccount.setAuthorities(authorities);
@@ -106,25 +106,24 @@ public class AuditorService {
 
 		result.setUserAccount(userAccount);
 
-		validator.validate(result, binding);
+		this.validator.validate(result, binding);
 		userAccount.setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
 		return result;
 	}
 
-	public Auditor reconstruct(ActorForm actorForm, Auditor auditor, BindingResult binding) {
-		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+	public Auditor reconstruct(final ActorForm actorForm, final Auditor auditor, final BindingResult binding) {
+		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		Auditor result;
-		
+
 		result = new Auditor();
 
-		actorService.reconstruct(result, auditor, actorForm);
-		
+		this.actorService.reconstruct(result, auditor, actorForm);
+
 		result.setAudits(auditor.getAudits());
 		result.setCompanyName(auditor.getCompanyName());
-		
-		validator.validate(result, binding);
-		result.getUserAccount().setPassword(
-			encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
+
+		this.validator.validate(result, binding);
+		result.getUserAccount().setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
 		return result;
 	}
 
