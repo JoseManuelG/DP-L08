@@ -287,4 +287,8 @@ public class LessorService {
 		}
 		return lessor;
 	}
+	
+	public void flush() {
+		this.lessorRepository.flush();
+	}
 }
